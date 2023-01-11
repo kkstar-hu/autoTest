@@ -13,8 +13,8 @@ from Commons.yamlread import read_yaml
 # @pytest.mark.skipif
 @pytest.mark.parametrize("input", read_yaml('immediata_plan.yaml'))
 @allure.title('1、近期计划')
-@allure.story('0.数据准备')
-# @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'DirectLiftingProcess', 'direct_liftin_process.yaml')))
+@allure.story('1.驳船流程功能准备')
+# @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'06_DirectLiftingProcess', 'direct_liftin_process.yaml')))
 def testImmediatePlan(driver,input):
     """近期计划"""
     menu = GtosMenu(driver)
@@ -26,8 +26,8 @@ def testImmediatePlan(driver,input):
 # @pytest.mark.skipif
 @pytest.mark.parametrize("input", read_yaml('immediata_plan.yaml'))
 @allure.title('2、桥吊资源分配')
-@allure.story('0.数据准备')
-# @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'DirectLiftingProcess', 'direct_liftin_process.yaml')))
+@allure.story('1.驳船流程功能准备')
+# @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'06_DirectLiftingProcess', 'direct_liftin_process.yaml')))
 def testBridgeCraneDistribution(driver,input):
     """桥吊资源分配"""
     menu = GtosMenu(driver)
@@ -39,8 +39,8 @@ def testBridgeCraneDistribution(driver,input):
 # @pytest.mark.skipif
 @pytest.mark.parametrize("input", read_yaml('immediata_plan.yaml'))
 @allure.title('3、航次挂靠港')
-@allure.story('0.数据准备')
-# @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'DirectLiftingProcess', 'direct_liftin_process.yaml')))
+@allure.story('1.驳船流程功能准备')
+# @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'06_DirectLiftingProcess', 'direct_liftin_process.yaml')))
 def testVoyage_Attached(driver,input):
     """航次挂靠港"""
     menu = GtosMenu(driver)
@@ -52,8 +52,8 @@ def testVoyage_Attached(driver,input):
 # @pytest.mark.skipif
 @pytest.mark.parametrize("input", read_yaml('immediata_plan.yaml'))
 @allure.title('4、堆存计划-道口进')
-@allure.story('0.数据准备')
-# @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'DirectLiftingProcess', 'direct_liftin_process.yaml')))
+@allure.story('1.驳船流程功能准备')
+# @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'06_DirectLiftingProcess', 'direct_liftin_process.yaml')))
 def testStockpiling_Planning_into(driver,input):
     """堆存计划-道口进"""
     menu = GtosMenu(driver)
@@ -64,8 +64,8 @@ def testStockpiling_Planning_into(driver,input):
 # @pytest.mark.skipif
 @pytest.mark.parametrize("input", read_yaml('immediata_plan.yaml'))
 @allure.title('5、堆存计划-卸船')
-@allure.story('0.数据准备')
-# @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'DirectLiftingProcess', 'direct_liftin_process.yaml')))
+@allure.story('1.驳船流程功能准备')
+# @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'06_DirectLiftingProcess', 'direct_liftin_process.yaml')))
 def testStockpiling_Planning_out(driver, input):
     """堆存计划-卸船"""
     stockpiling = Stockpiling_Planning(driver)
@@ -75,8 +75,8 @@ def testStockpiling_Planning_out(driver, input):
 # @pytest.mark.skipif
 @pytest.mark.parametrize("input", read_yaml('immediata_plan.yaml'))
 @allure.title('5、堆存计划-卸船')
-@allure.story('0.数据准备')
-# @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'DirectLiftingProcess', 'direct_liftin_process.yaml')))
+@allure.story('1.驳船流程功能准备')
+# @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'06_DirectLiftingProcess', 'direct_liftin_process.yaml')))
 def testShip_operation(driver, input):
     """无结构靠泊、吊桥分配"""
     menu = GtosMenu(driver)

@@ -12,8 +12,8 @@ from GTOS.PageObject.Mechanical_Control.Job_Order_Monitoring import Job_Order_Mo
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('discharging_process.yaml'))
 @allure.title('1、新增舱单')
-@allure.story('1.卸船流程')
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'DischargingProcess', 'discharging_process.yaml')))
+@allure.story('2.卸船流程')
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'02_DischargingProcess', 'discharging_process.yaml')))
 def testManifest(driver,input):
     """新增舱单资料"""
     menu = GtosMenu(driver)
@@ -24,8 +24,8 @@ def testManifest(driver,input):
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('discharging_process.yaml'))
 @allure.title('2、新增舱单箱')
-@allure.story('1.卸船流程')
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'DischargingProcess', 'discharging_process.yaml')))
+@allure.story('2.卸船流程')
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'02_DischargingProcess', 'discharging_process.yaml')))
 def testManifest_box(driver, input):
     """新增舱单箱资料"""
     manifest = Manifest(driver)
@@ -36,8 +36,8 @@ def testManifest_box(driver, input):
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('discharging_process.yaml'))
 @allure.title('3、无结构监控发箱')
-@allure.story('1.卸船流程')
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'DischargingProcess', 'discharging_process.yaml')))
+@allure.story('2.卸船流程')
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'02_DischargingProcess', 'discharging_process.yaml')))
 def testSend_box(driver, input):
     """无结构船舶发箱"""
     menu = GtosMenu(driver)
@@ -49,8 +49,8 @@ def testSend_box(driver, input):
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('discharging_process.yaml'))
 @allure.title('4、工作指令操作')
-@allure.story('1.卸船流程')
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'DischargingProcess', 'discharging_process.yaml')))
+@allure.story('2.卸船流程')
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'02_DischargingProcess', 'discharging_process.yaml')))
 def testCharge_Car(driver, input):
     """工作指令--改配集卡"""
     menu = GtosMenu(driver)
