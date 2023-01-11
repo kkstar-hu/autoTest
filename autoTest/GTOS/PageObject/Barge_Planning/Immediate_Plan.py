@@ -1,6 +1,7 @@
 import time
 import pytest_check as check
 from Base.basepage import BasePage
+from Commons.Controls.el_table import ELtable
 from GTOS.Controls.text import Gtos_text
 from GTOS.Config import config
 from GTOS.Controls.Gtos_table import Gtos_table
@@ -17,6 +18,20 @@ class Immediate_plan(BasePage):
         self.logger.info('步骤1：切换驳船计划')
         self.click('xpath',"//div[contains(text(),'驳船船期计划')]")
 
+    def Add_Plan(self, input):
+        self.click('xpath', "//span[contains(text(),'新增')]")
+        textInput = Gtos_text(self.driver)
+        textInput.select_by_label("船舶代码", input["船舶代码"])
+        textInput.input_by_label("抵港时间",input["抵港时间"])
+        self.click('xpath', "//span[contains(text(),'确定')]")
+        textInput.input_by_label("离港时间",input["离港时间"])
+        self.click('xpath', "(//span[contains(text(),'确定')])[2]")
+        eltable=ELtable(self.driver,2)
+        eltable.input_text("航次",input["出口航次"])
+        eltable.input_select("航次类型", input["航次类型"])
+
+
+    '''
     def Add_Plan(self,input):
         """
         新增船期
@@ -63,7 +78,7 @@ class Immediate_plan(BasePage):
         self.click('x',"//span[text()='确报船期']")
         self.click('x',"//span[text()='保 存']")
         check.equal(tablecheck.get_value('船期状态'),'确报')
-
+    '''
 
 
     def Immediate_plan_process(self,input):

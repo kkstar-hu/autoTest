@@ -55,3 +55,28 @@ class ELtable(BasePage):
             self.click("xpath","//div[@class='itemFooter']//button//span[text()='取消']")
             raise Exception("定位不到元素")
 
+    def input_text(self, header, value, row=1):
+        try:
+            classValueHeader = self.get_attribute_info("xpath",
+                                                       f"(//table[@class='el-table__header'])[{self.index}]//thead/tr/th/div[text()='{header}']//parent::th",
+                                                       "class")
+            classValue = classValueHeader.split(" ")[0]
+            self.input("xpath",
+                           f"(//table[starts-with(@class,'el-table__body')])[{self.index}]//tr[{row}]/td[contains(@class,'"+classValue+"')]//input",
+                           value)
+        except NoSuchElementException:
+            raise Exception("定位不到元素")
+
+    def input_select(self, header, value, row=1):
+        try:
+            classValueHeader = self.get_attribute_info("xpath",
+                                                       f"(//table[@class='el-table__header'])[{self.index}]//thead/tr/th/div[text()='{header}']//parent::th",
+                                                       "class")
+            classValue = classValueHeader.split(" ")[0]
+            self.click("xpath",
+                           f"(//table[starts-with(@class,'el-table__body')])[{self.index}]//tr[{row}]/td[contains(@class,'"+classValue+"')]//input")
+            self.click("xpath",
+                       f"//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]//span[text()='{value}']")
+        except NoSuchElementException:
+            raise Exception("定位不到元素")
+
