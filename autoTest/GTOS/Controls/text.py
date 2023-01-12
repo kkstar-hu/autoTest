@@ -1,3 +1,5 @@
+import time
+
 from selenium.common import NoSuchElementException
 from selenium.webdriver import ActionChains
 
@@ -6,14 +8,6 @@ from Commons.Controls.text import text
 
 
 class Gtos_text(BasePage):
-    #label:输入标签名，value：输入值
-
-    def search_input_by_label(self,label,value):
-        try:
-            self.input("xpath",f"//form[@class='el-form common-search__form']//label[contains(text(),'{label}')]//following-sibling::div//input",value)
-        except NoSuchElementException:
-            raise Exception("定位不到元素")
-
     def search_select_by_label(self, label, value):
         try:
             self.input_no_clear("xpath",f"//label[contains(text(),'{label}')]//following-sibling::div//input",value)
@@ -21,13 +15,6 @@ class Gtos_text(BasePage):
                        f"//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]//span[contains(text(),'{value}')]")
         except NoSuchElementException:
             raise Exception("定位不到元素")
-
-    def search_input_by_number(self, label, value,index=1):
-        try:
-            self.input_by_index("xpath",f"//form[@class='el-form common-search__form']//label[contains(text(),'{label}')]//following-sibling::div//input",value,index)
-        except NoSuchElementException:
-            raise Exception("定位不到元素")
-
 
     def input_noclear_placeholder_click(self, name, value,index = 1):
         try:
@@ -79,6 +66,14 @@ class Gtos_text(BasePage):
     def select_by_label(self, label, value):
         try:
             self.click("xpath",f"//label[contains(text(),'{label}')]//following-sibling::div//input")
+            self.click("xpath",f"//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]//span[text()='{value}']")
+        except NoSuchElementException:
+            raise Exception("定位不到元素")
+
+    def select_by_label_time(self, label, value):
+        try:
+            self.click("xpath",f"//label[contains(text(),'{label}')]//following-sibling::div//input")
+            time.sleep(0.5)
             self.click("xpath",f"//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]//span[text()='{value}']")
         except NoSuchElementException:
             raise Exception("定位不到元素")
