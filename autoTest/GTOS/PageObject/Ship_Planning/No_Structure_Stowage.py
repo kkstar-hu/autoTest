@@ -43,7 +43,7 @@ class No_Structure_Stowage(BasePage):
     def search(self,input):
         self.logger.info('步骤1：输入船名航次')
         Gtextinput = Gtos_text(self.driver)
-        Gtextinput.search_select_by_label('出口船名航次', input['出口船名航次'])
+        Gtextinput.search_select_by_label('出口船名航次', config.outportNumber)
         self.logger.info('步骤2：检索')
         self.click('xpath', "//span[text()='检索']")
 

@@ -60,12 +60,18 @@ class Immediate_plan(BasePage):
         textInput = Gtos_text(self.driver)
         actualarriveDay = DataTime.Get_Date_X_Number_Of_Days(2)
         actuallarriveTime = actualarriveDay + " 00:00:00"
-        textInput.input_by_label("实际抵港时间", actuallarriveTime)
         self.click('x', "//span[text()='确报船期']")
+        textInput.input_by_label("实际抵港时间", actuallarriveTime)
         self.click('x', "//span[text()='保 存']")
         tablecheck = Gtos_table(self.driver, 2)
         check.equal(tablecheck.get_value('船期状态'), '确报')
         check.equal(tablecheck.get_value('确报时间'), actuallarriveTime)
+
+    #点击确认进箱
+    def SureInBox(self):
+        self.click('id', "confirmintocntr")
+        self.click('x', "(//span[@class='el-switch__core'])[2]")
+        self.click('x', "//span[text()='保 存']")
 
     #验证靠泊信息
     def check_alongside_info(self,input):

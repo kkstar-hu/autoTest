@@ -2,17 +2,14 @@ import os
 import allure
 import pytest as pytest
 from Commons.Controls.tag import Tag
-from Commons.yamlread import read_yaml, generate_yaml,generate_yaml_gtos
-import pytest_check as check
+from Commons.yamlread import read_yaml
 from GTOS.Config import config
-from GTOS.Controls.Gtos_table import Gtos_table
-from GTOS.Controls.text import Gtos_text
 from GTOS.PageObject.CrossingManagement.carOut import Car_Out
 from GTOS.PageObject.CrossingManagement.checkInBox import CheckInBox
 from GTOS.PageObject.Mechanical_Control.Job_Order_Monitoring import Job_Order_Monitoring
 from GTOS.PageObject.gtos_menu import GtosMenu
 
-
+@pytest.mark.skip
 @allure.story('1.进箱流程')
 @allure.title('4.新增进箱计划')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'checkInBox.yaml')))

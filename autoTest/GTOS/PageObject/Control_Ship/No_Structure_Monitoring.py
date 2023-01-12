@@ -18,7 +18,7 @@ class NO_Structure_Monitoring(BasePage):
         """
         self.logger.info('步骤1：输入航名航次')
         textinput = Gtos_text(self.driver)
-        textinput.search_select_by_label('船名航次',input['船名航次'])
+        textinput.search_select_by_label('船名航次',config.outportNumber)
         self.logger.info('步骤2：检索')
         self.click('xpath',"//span[text()='检索']")
 

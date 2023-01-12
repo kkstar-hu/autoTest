@@ -49,7 +49,7 @@ class Manifest(BasePage):
 
     def search(self, input):
         Gtextinput = Gtos_text(self.driver)
-        Gtextinput.input_noclear_placeholder_click('请输入关键词', input['出口船名航次'])
+        Gtextinput.search_select_by_label('请输入关键词', config.outportNumber)
         Gtextinput.input_by_label('箱号', config.boxNumber)
         self.logger.info('步骤2：检索')
         self.click('xpath', "//span[text()='检索']")

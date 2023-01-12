@@ -1,5 +1,6 @@
 import pytest_check as check
 from Base.basepage import BasePage
+from GTOS.Config import config
 from GTOS.Controls.Gtos_table import Gtos_table
 from GTOS.Controls.text import Gtos_text
 
@@ -27,7 +28,7 @@ class CheckInBox(BasePage):
         self.logger.info('步骤1:输入进箱信息')
         textInput = Gtos_text(self.driver)
         #航民航次
-        textInput.select_by_label("出口航次", input['出口航次'])
+        textInput.select_by_label("出口航次", config.outportNumber)
         textInput.select_by_label("装货港", input['装货港'])
         textInput.select_by_label("卸货港", input['卸货港'])
         textInput.select_by_label("目的港", input['目的港'])
@@ -54,8 +55,6 @@ class CheckInBox(BasePage):
         #特殊信息
         textInput.select_by_label("工原残标志", input['工原残标志'])
         textInput.select_by_label("残损代码", input['残损代码'])
-        #textInput.input_by_label("温度", input['温度'])
-        #textInput.select_by_label("温度单位", input['温度单位'])
         textInput.select_by_label_exact("超限", input['超限'])
         if input["危类"]!=None:
             textInput.select_by_label("危类", input['危类'])
@@ -125,7 +124,7 @@ class CheckInBox(BasePage):
         self.click("x", "//span[text()='车架类型：']//following-sibling::div//input")
         self.click("x", "//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]//span[contains(text(),'自卸架')]")
         self.input("x", "//span[text()='车架号：']//following-sibling::div/input", input['车架号'])
-        if self.elementExist("x","//button/span[text()='B01']"):
+        if self.elementExist("x","//button[@class='el-button el-tooltip el-button--warning el-button--mini is-circle']"):
             pass
         else:
             self.click("x", "//span[text()='进口道口号：']//following-sibling::div//input")
