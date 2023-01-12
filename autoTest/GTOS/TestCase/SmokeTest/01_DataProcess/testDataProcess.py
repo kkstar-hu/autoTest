@@ -20,7 +20,10 @@ def testImmediatePlan(driver,input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("泊位策划,近期计划")
     plan = Immediate_plan(driver)
-    plan.Immediate_plan_process(input)
+    plan.switch_Barge()
+    plan.Add_Plan(input)
+    plan.checkPlan()
+    plan.Sure_ShipPlan()
     Tag(driver).closeChoiceTag('近期计划')
 
 # @pytest.mark.skipif
