@@ -15,7 +15,8 @@ class No_Structure_Stowage(BasePage):
         """
         self.logger.info('步骤1：输入船名航次')
         Gtextinput = Gtos_text(self.driver)
-        Gtextinput.input_noclear_placeholder_click('请输入关键词', input['出口船名航次'])
+        # Gtextinput.input_noclear_placeholder_click('请输入关键词', input['出口船名航次'])
+        Gtextinput.search_select_by_label('出口船名航次', config.outportNumber)
         self.logger.info('步骤2：检索')
         self.click('xpath',"//span[text()='检索']")
         self.logger.info('步骤3：校验内容')

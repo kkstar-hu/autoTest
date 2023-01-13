@@ -3,6 +3,7 @@ import os
 import allure
 import pytest
 from Commons.Controls.tag import Tag
+from GTOS.Config import config
 from GTOS.PageObject.CrossingManagement.checkOutBox import CheckOutBox
 from GTOS.PageObject.Mechanical_Control.Job_Order_Monitoring import Job_Order_Monitoring
 from GTOS.PageObject.gtos_menu import GtosMenu
@@ -22,7 +23,7 @@ def testPacking(driver,input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("计划受理,安排计划,提箱受理")
     packing = Packing_up(driver)
-    packing.packing_process(input)
+    packing.packing_process(input,config.boxNumber)
     Tag(driver).closeChoiceTag('提箱受理')
 
 # @pytest.mark.skipif
@@ -35,7 +36,7 @@ def testPackingManagement(driver,input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("计划受理,计划管理")
     planmanegement = PlanManagement(driver)
-    planmanegement.process(input)
+    planmanegement.process(config.boxNumber)
     Tag(driver).closeChoiceTag('计划管理')
 
 # @pytest.mark.skipif
@@ -61,7 +62,7 @@ def testSend_box(driver, input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("机械控制,作业指令监控")
     charge_car = Job_Order_Monitoring(driver)
-    charge_car.Job_SendBoxOrder(input)
+    charge_car.Job_SendBoxOrder(input,config.boxNumber)
     Tag(driver).closeChoiceTag('作业指令监控')
 
 # @pytest.mark.parametrize("input", read_yaml('packing_process.yaml'))
@@ -73,7 +74,7 @@ def testCar_Out(driver, input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("道口管理,车辆出场")
     car_out = Car_Out(driver)
-    car_out.process(input)
+    car_out.process(input,config.boxNumber)
     Tag(driver).closeChoiceTag('车辆出场')
 
 

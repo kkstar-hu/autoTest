@@ -11,7 +11,7 @@ class Car_Out(BasePage):
     """
     车辆出场
     """
-    def input_values(self,input):
+    def input_values(self,input,boxnumber):
         """
         输入车辆，箱号
         """
@@ -19,7 +19,7 @@ class Car_Out(BasePage):
         textInput = Gtos_text(self.driver)
         textInput.select_by_label("集卡号", input["车牌"])
         self.get_element('xpath', "//input[@placeholder='请输入集卡号']").send_keys(input["集卡编号"])
-        self.get_element('xpath', "//input[@placeholder='请输入箱号']").send_keys(config.boxNumber)
+        self.get_element('xpath', "//input[@placeholder='请输入箱号']").send_keys(boxnumber)
         self.click('xpath', "(//div[@class='el-select el-select--small nzctos-select-wrap'])[2]")
         self.click('xpath', "//li//span[text()='B06']")
 
@@ -49,19 +49,19 @@ class Car_Out(BasePage):
 
 
 
-    def process(self,input):
+    def process(self,input,boxnumber):
         """
         流程
         """
-        self.input_values(input)
+        self.input_values(input,boxnumber)
         self.retrieve()
         self.confirm_out_picking()
 
 
-    def process_loading(self,input):
+    def process_loading(self,input,boxnumber):
         """
         流程
         """
-        self.input_values(input)
+        self.input_values(input,boxnumber)
         self.retrieve()
         self.confirm_out_loadingAndLifting()

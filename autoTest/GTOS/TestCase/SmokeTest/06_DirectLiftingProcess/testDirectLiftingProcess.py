@@ -2,6 +2,7 @@ import os
 import allure
 import pytest
 from Commons.Controls.tag import Tag
+from GTOS.Config import config
 from GTOS.PageObject.Control_Ship.No_Structure_Monitoring import NO_Structure_Monitoring
 from GTOS.PageObject.CrossingManagement.StraightLoad_StraightLif_tManagement import StraightLoad_StraightLift_Management
 from GTOS.PageObject.DataManagement.ImportInformation_manifest import Manifest
@@ -21,7 +22,7 @@ def testManifest(driver,input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("资料管理,进口资料,舱单")
     manifest = Manifest(driver)
-    manifest.AddManifest(input)
+    manifest.AddManifest(input,config.boxNumberTwo)
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('direct_liftin_process.yaml'))
@@ -31,14 +32,14 @@ def testManifest(driver,input):
 def testManifest_box(driver, input):
     """新增舱单箱资料"""
     manifest = Manifest(driver)
-    manifest.AddBox(input)
+    manifest.AddBox(input,config.boxNumberTwo)
     manifest.choice_ship()
     Tag(driver).closeChoiceTag('舱单')
 
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('direct_liftin_process.yaml'))
-@allure.title('3、生产直提计划')
+@allure.title('3、生成直提计划')
 @allure.story('7.直提流程')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'06_DirectLiftingProcess', 'direct_liftin_process.yaml')))
 def testPacking(driver,input):
@@ -46,7 +47,7 @@ def testPacking(driver,input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("计划受理,安排计划,提箱受理")
     packing = Packing_up(driver)
-    packing.straight_process(input)
+    packing.straight_process(input,config.boxNumberTwo)
     Tag(driver).closeChoiceTag('提箱受理')
 
 # @pytest.mark.skipif
@@ -59,7 +60,7 @@ def testDirectLoading(driver,input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("道口管理,直装/直提管理")
     loading = StraightLoad_StraightLift_Management(driver)
-    loading.process_lifting(input)
+    loading.process_lifting(input,config.boxNumberTwo)
     Tag(driver).closeChoiceTag('直装/直提管理')
 
 # @pytest.mark.skipif
@@ -72,7 +73,7 @@ def testLifting(driver, input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("船舶监控,无结构船舶监控")
     send_box = NO_Structure_Monitoring(driver)
-    send_box.choice_lifting(input)
+    send_box.choice_lifting(input,config.boxNumberTwo)
     Tag(driver).closeChoiceTag('无结构船舶监控')
 
 # @pytest.mark.skipif
@@ -85,7 +86,7 @@ def testOrder(driver, input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("机械控制,作业指令监控")
     charge_car = Job_Order_Monitoring(driver)
-    charge_car.lifting_Order(input)
+    charge_car.lifting_Order(input,config.boxNumberTwo)
     Tag(driver).closeChoiceTag('作业指令监控')
 
 
@@ -99,7 +100,7 @@ def testCar_Out(driver, input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("道口管理,车辆出场")
     car_out = Car_Out(driver)
-    car_out.process_loading(input)
+    car_out.process_loading(input,config.boxNumberTwo)
     Tag(driver).closeChoiceTag('车辆出场')
 
 

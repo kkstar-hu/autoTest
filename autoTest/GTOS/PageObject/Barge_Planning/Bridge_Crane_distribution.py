@@ -16,7 +16,8 @@ class Bridge_Crane_Distribution(BasePage):
         """
         self.logger.info('步骤1：选择船名航次')
         textInput = Gtos_text(self.driver)
-        textInput.search_select_by_label('船名航次',input['船名航次1'])
+        # textInput.search_select_by_label('船名航次',input['船名航次1'])
+        textInput.search_select_by_label('船名航次',config.importNumber)
 
     def Retrieval(self):
         """

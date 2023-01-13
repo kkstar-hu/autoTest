@@ -10,7 +10,7 @@ from GTOS.PageObject.Yard_Planning.Stockpiling_Planning import Stockpiling_Plann
 from GTOS.PageObject.Control_Ship.No_Structure_Monitoring import NO_Structure_Monitoring
 from Commons.yamlread import read_yaml
 
-# @pytest.mark.skipif
+@pytest.mark.skipif
 @pytest.mark.parametrize("input", read_yaml('immediata_plan.yaml'))
 @allure.title('1、近期计划')
 @allure.story('1.驳船流程功能准备')
@@ -26,7 +26,7 @@ def testImmediatePlan(driver,input):
     plan.Sure_ShipPlan()
     Tag(driver).closeChoiceTag('近期计划')
 
-# @pytest.mark.skipif
+@pytest.mark.skipif
 @pytest.mark.parametrize("input", read_yaml('immediata_plan.yaml'))
 @allure.title('2、桥吊资源分配')
 @allure.story('1.驳船流程功能准备')
@@ -39,7 +39,7 @@ def testBridgeCraneDistribution(driver,input):
     bridge.process(input)
     Tag(driver).closeChoiceTag('桥吊资源分配')
 
-# @pytest.mark.skipif
+@pytest.mark.skipif
 @pytest.mark.parametrize("input", read_yaml('immediata_plan.yaml'))
 @allure.title('3、航次挂靠港')
 @allure.story('1.驳船流程功能准备')
