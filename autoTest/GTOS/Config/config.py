@@ -17,6 +17,10 @@ importNumber="I123"
 global outportNumber
 outportNumber="E123"
 
+global bigshipimportNumber
+global bigshipoutportNumber
+bigshipimportNumber="I0001"
+bigshipoutportNumber="1000E"
 #提箱预约号
 global Number
 #船舶名称
