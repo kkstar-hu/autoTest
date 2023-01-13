@@ -24,6 +24,7 @@ def testImmediatePlan(driver,input):
     plan.Add_Plan(input)
     plan.checkPlan()
     plan.Sure_ShipPlan()
+    plan.SureInBox()
     Tag(driver).closeChoiceTag('近期计划')
 
 # @pytest.mark.skipif

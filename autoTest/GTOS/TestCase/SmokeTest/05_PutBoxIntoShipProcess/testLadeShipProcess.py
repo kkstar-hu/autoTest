@@ -20,7 +20,7 @@ def testCheckInBox(driver,input):
     Load=Manifest(driver)
     Load.search(input)
     Load.permitthrough(input)
-@pytest.mark.skip
+
 @allure.story('5.装船流程')
 @allure.title('2.无结构船舶配载')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'loadship.yaml')))
@@ -55,6 +55,8 @@ def testship_order(driver, input):
     work = Job_Order_Monitoring(driver)
     work.Retrieve(input,config.boxNumber)
     work.order_info_check(input)
+    work.charge_car("C305")
+    work.send_box(input)
     work.LadeShip_confirm(input)
     Tag(driver).closeChoiceTag('作业指令监控')
 
