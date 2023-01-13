@@ -24,17 +24,18 @@ class Packing_up(BasePage):
         self.logger.info('步骤1：选择计划类型')
         self.click('xpath',f"//span[text()='{input['贸易类型']}箱直提计划']")
 
-    def select_value(self,input):
+    def select_value(self,boxnumber):
         """
         选择进口船、提单号
         """
         self.logger.info('步骤2：输入航名航次')
         Gtextinput = Gtos_text(self.driver)
-        Gtextinput.select_by_label('进口船',input['进口船'])
-        Gtextinput.input_by_placeholder('提单号',config.boxNumber)
+        # Gtextinput.select_by_label('进口船',input['进口船'])
+        Gtextinput.search_select_by_label('进口船',config.importNumber)
+        Gtextinput.input_by_placeholder('提单号',boxnumber)
 
 
-    def retrieve(self,input):
+    def retrieve(self,input,boxnumber):
         """
         检索
         """
@@ -42,7 +43,7 @@ class Packing_up(BasePage):
         textclick = Gtos_text(self.driver)
         textclick.no_elements_click('检索')
         tablecheck = Gtos_table(self.driver,2)
-        check.equal(tablecheck.get_value('箱号'),config.boxNumber)
+        check.equal(tablecheck.get_value('箱号'),boxnumber)
         check.equal(tablecheck.get_value('海关放行'),'未放')
         check.equal(tablecheck.get_value('贸易类型'),input['贸易类型'])
         check.equal(tablecheck.get_value('尺寸'),input['尺寸'])
@@ -70,7 +71,7 @@ class Packing_up(BasePage):
         tablecheck = Gtos_table(self.driver, 2)
         check.equal(tablecheck.get_value('海关放行'), '放行')
 
-    def generation_plan(self,input):
+    def generation_plan(self):
         """
         生成计划
         """
@@ -102,27 +103,27 @@ class Packing_up(BasePage):
         self.check_alert('内贸箱直提计划生成计划成功')
 
 
-    def packing_process(self,input):
+    def packing_process(self,input,boxnumber):
         """
         提箱受理流程
         """
         self.choice_tree(input)
-        self.select_value(input)
-        self.retrieve(input)
+        self.select_value(boxnumber)
+        self.retrieve(input,boxnumber)
         self.tick_off_box()
         self.customs_release()
-        self.generation_plan(input)
+        self.generation_plan()
         self.save()
 
-    def straight_process(self,input):
+    def straight_process(self,input,boxnumber):
         """
         直提受理流程
         """
         self.choice_tree_straight(input)
-        self.select_value(input)
-        self.retrieve(input)
+        self.select_value(boxnumber)
+        self.retrieve(input,boxnumber)
         self.tick_off_box()
         self.customs_release()
-        self.generation_plan(input)
+        self.generation_plan()
         self.save_straight()
 

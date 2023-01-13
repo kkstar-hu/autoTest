@@ -7,14 +7,15 @@ class PlanManagement(BasePage):
     """
     计划受理--计划管理
     """
-    def select_value(self,input):
+    def select_value(self,boxnumber):
         """
         输入船名航次
         """
         self.logger.info('步骤1：输入船名航次')
         textinput = Gtos_text(self.driver)
-        textinput.input_noclear_placeholder_click('请输入关键词',input['船名航次'])
-        textinput.input_by_label('箱号',config.boxNumber)
+        # textinput.input_noclear_placeholder_click('请输入关键词',input['船名航次'])
+        textinput.search_select_by_label('船名航次',config.importNumber)
+        textinput.input_by_label('箱号',boxnumber)
 
     def retrieve(self):
         """
@@ -58,14 +59,11 @@ class PlanManagement(BasePage):
                 return config.Number
 
 
-
-
-
-    def process(self,input):
+    def process(self,boxnumber):
         """
         流程
         """
-        self.select_value(input)
+        self.select_value(boxnumber)
         self.retrieve()
         self.viewing_Plan()
 

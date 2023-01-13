@@ -15,7 +15,8 @@ class Voyage_Attached(BasePage):
         """
         self.logger.info('步骤1：选择船名航次')
         textInput = Gtos_text(self.driver)
-        textInput.search_select_by_label('船名航次',input['船名航次2'])
+        # textInput.search_select_by_label('船名航次',input['船名航次2'])
+        textInput.search_select_by_label('船名航次',config.outportNumber)
 
     def Retrieval(self):
         """

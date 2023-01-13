@@ -13,13 +13,15 @@ class Manifest(BasePage):
     """
     进口资料
     """
-    def AddManifest(self,input):
+    def AddManifest(self,input,boxnumber):
         """
         新增舱单
         """
         self.logger.info('步骤1：输入船名航次')
         Gtextinput = Gtos_text(self.driver)
-        Gtextinput.input_noclear_placeholder_click('请输入关键词',input['进口船名航次'])
+        # Gtextinput.input_noclear_placeholder_click('请输入关键词',input['进口船名航次'])
+        # Gtextinput.input_noclear_placeholder_click('请输入关键词',config.importNumber)
+        Gtextinput.search_select_by_label('进口船名航次',config.importNumber)
         self.logger.info('步骤2：检索')
         self.click('xpath',"//span[text()='检索']")
         try:
@@ -29,7 +31,7 @@ class Manifest(BasePage):
             self.click("xpath","(//div[@id='add'])[1]")
             time.sleep(1)
             textinput = Gtos_text(self.driver)
-            textinput.input_by_label('提单号',config.boxNumber)
+            textinput.input_by_label('提单号',boxnumber)
             textinput.select_by_label('卸货港',input['卸货港'])
             textinput.select_by_label('目的港',input['目的港'])
             self.logger.info('步骤4：保存，关闭新增页面')
@@ -37,12 +39,12 @@ class Manifest(BasePage):
             self.close()
             self.check_alert('新增成功')
             self.logger.info('步骤5：校验字段')
-            row = self.rows_value()
+            row = self.rows_value(boxnumber)
             tablecheck = Gtos_table(self.driver)
             tablecheck.tick_off_box(row)
-            em = self.get_element('xpath',f"//div[text()='{config.boxNumber}']")
+            em = self.get_element('xpath',f"//div[text()='{boxnumber}']")
             ActionChains(self.driver).move_to_element(em).click().perform()
-            check.equal(tablecheck.get_value('提单号',row), config.boxNumber)
+            check.equal(tablecheck.get_value('提单号',row), boxnumber)
             check.equal(tablecheck.get_value('总箱数',row), '0')
             check.equal(tablecheck.get_value('卸货港',row), input['卸货港'])
             check.equal(tablecheck.get_value('目的港',row), input['目的港'])
@@ -52,7 +54,7 @@ class Manifest(BasePage):
 
 
 
-    def AddBox(self,input):
+    def AddBox(self,input,boxnumber):
         """
         新增舱单箱
         """
@@ -60,7 +62,7 @@ class Manifest(BasePage):
             self.logger.info('步骤1：新增舱单箱信息')
             textinput = Gtos_text(self.driver)
             self.click("xpath","(//div[@id='add'])[2]")
-            textinput.input_by_label('箱号',config.boxNumber)
+            textinput.input_by_label('箱号',boxnumber)
             textinput.select_by_label('尺寸',input['尺寸'])
             textinput.select_by_label('箱型','00')
             textinput.select_by_label('箱高',input['箱高'])
@@ -79,7 +81,7 @@ class Manifest(BasePage):
             self.cancel()
         self.logger.info('步骤4：校验字段')
         tablecheck = Gtos_table(self.driver,2)
-        check.equal(tablecheck.get_value('箱号'),config.boxNumber)
+        check.equal(tablecheck.get_value('箱号'),boxnumber)
         check.equal(tablecheck.get_value('贸易类型'),input['贸易类型'])
         check.equal(tablecheck.get_value('尺寸'),input['尺寸'])
         check.equal(tablecheck.get_value('箱型'),input['箱型'])
@@ -132,7 +134,7 @@ class Manifest(BasePage):
         a = sum(pax_name,[])  #将 嵌套的列表合并成一个列表
         return a
 
-    def rows_value(self,index=1):
+    def rows_value(self,boxnumber,index=1):
         """
         获取内容，用于check
         """
@@ -158,7 +160,7 @@ class Manifest(BasePage):
                 b.append(i)
                 a = sum(b,[])
         for y in a :
-            if y == config.boxNumber:
+            if y == boxnumber:
                 row = a[a.index(y)-1]
                 return int(row)
         #return a  返回所有数据

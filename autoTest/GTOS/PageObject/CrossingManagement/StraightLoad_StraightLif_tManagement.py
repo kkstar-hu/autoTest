@@ -17,7 +17,8 @@ class StraightLoad_StraightLift_Management(BasePage):
         """
         self.logger.info('步骤1：输入数据')
         textInput = Gtos_text(self.driver)
-        textInput.select_by_label("船名航次", input["船名航次"])
+        # textInput.select_by_label("船名航次", input["船名航次"])
+        textInput.select_by_label("船名航次", config.outportNumber)
         textInput.input_by_label('箱号',config.boxNumber)
         self.logger.info('步骤2：检索')
         self.click('xpath',"//span[text()='检索']")
@@ -35,19 +36,20 @@ class StraightLoad_StraightLift_Management(BasePage):
         check.equal(tablecheck.get_value('配载'),'Y')
 
 
-    def lifting_value(self,input):
+    def lifting_value(self,input,boxnumber):
         """
         直提内容
         """
         self.logger.info('步骤1：输入数据')
         textInput = Gtos_text(self.driver)
-        textInput.select_by_label("船名航次", input["船名航次"])
-        textInput.input_by_label('箱号',config.boxNumber)
+        # textInput.select_by_label("船名航次", input["船名航次"])
+        textInput.select_by_label("船名航次", config.importNumber)
+        textInput.input_by_label('箱号',boxnumber)
         self.logger.info('步骤2：检索')
         self.click('xpath',"//span[text()='检索']")
         self.logger.info('步骤3：校验内容')
         tablecheck = Gtos_table(self.driver,2)
-        check.equal(tablecheck.get_value('箱号'), config.boxNumber)
+        check.equal(tablecheck.get_value('箱号'),boxnumber)
         check.equal(tablecheck.get_value('报道标志'),'N')
         check.equal(tablecheck.get_value('尺寸'),input['尺寸'])
         check.equal(tablecheck.get_value('箱型'),input['箱型'])
@@ -66,7 +68,7 @@ class StraightLoad_StraightLift_Management(BasePage):
         textInput.select_by_label('前后标志','A')
         textInput.input_by_label('联系方式','13155542223')
         textInput.select_by_label('进场道口号', 'B01')
-        self.click('xpath', "(//span[contains(text(),'确认')])[6]")
+        self.click('xpath', "(//span[contains(text(),'确认')])[17]")
         self.check_alert('报道完成')
         self.logger.info('步骤5：校验字段变化')
         tablecheck = Gtos_table(self.driver)
@@ -88,7 +90,7 @@ class StraightLoad_StraightLift_Management(BasePage):
         textInput.select_by_label('前后标志','A')
         textInput.input_by_label('联系方式','13155542223')
         textInput.select_by_label('进场道口号', 'B01')
-        self.click('xpath', "(//span[contains(text(),'确认')])[6]")
+        self.click('xpath', "(//span[contains(text(),'确认')])[17]")
         self.check_alert('报道完成')
         self.logger.info('步骤5：校验字段变化')
         tablecheck = Gtos_table(self.driver,2)
@@ -115,10 +117,10 @@ class StraightLoad_StraightLift_Management(BasePage):
         self.loading_value(input)
         self.loading_report(input)
 
-    def process_lifting(self,input):
+    def process_lifting(self,input,boxnumber):
         """
         直提流程
         """
         self.switch_lift()
-        self.lifting_value(input)
+        self.lifting_value(input,boxnumber)
         self.lifting_report(input)

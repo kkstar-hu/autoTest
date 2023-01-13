@@ -18,18 +18,19 @@ class NO_Structure_Monitoring(BasePage):
         """
         self.logger.info('步骤1：输入航名航次')
         textinput = Gtos_text(self.driver)
-        textinput.search_select_by_label('船名航次',config.outportNumber)
+        # textinput.search_select_by_label('船名航次',input['船名航次'])
+        textinput.search_select_by_label('船名航次',config.importNumber)
         self.logger.info('步骤2：检索')
         self.click('xpath',"//span[text()='检索']")
 
-    def SendBox_check_values(self,input):
+    def SendBox_check_values(self,input,boxnumber):
         """
         校验
         """
         self.logger.info('步骤3：校验内容')
         row = self.rows_value(3)
         tablecheck = Gtos_table(self.driver,3)
-        check.is_in(tablecheck.get_value('箱号',row).replace(' ','').replace('\n',''),config.boxNumber)
+        check.is_in(tablecheck.get_value('箱号',row).replace(' ','').replace('\n',''),boxnumber)
         check.equal(tablecheck.get_value('卸货港',row), input['卸货港'])
         check.equal(tablecheck.get_value('作业状态',row), '可作业')
         check.equal(tablecheck.get_value('箱状态',row),input['箱状态'])
@@ -41,12 +42,12 @@ class NO_Structure_Monitoring(BasePage):
         check.equal(tablecheck.get_value('持箱人',row),input['持箱人'])
 
 
-    def Send_Box(self,input):
+    def Send_Box(self,input,boxnumber):
         """
         发箱
         """
         self.Retrieve(input)
-        self.SendBox_check_values(input)
+        self.SendBox_check_values(input,boxnumber)
         self.logger.info('步骤1：勾选后发箱')
         row = self.rows_value(3)
         tablecheck = Gtos_table(self.driver, 3)
@@ -114,7 +115,7 @@ class NO_Structure_Monitoring(BasePage):
         check.equal(tablecheck.get_value('作业状态',row), '等待作业')
 
 
-    def choice_lifting(self,input):
+    def choice_lifting(self,input,boxnumber):
         """
         选择直提
         """
@@ -125,14 +126,14 @@ class NO_Structure_Monitoring(BasePage):
         tablecheck = Gtos_table(self.driver, 5)
         tablecheck.tick_off_box(row)
         self.logger.info('步骤2：校验数据')
-        check.is_in(tablecheck.get_value('箱号',row),config.boxNumber)
+        check.is_in(tablecheck.get_value('箱号',row),boxnumber)
         check.equal(tablecheck.get_value('报道',row),'Y')
         check.equal(tablecheck.get_value('集卡',row),input['车牌']+input['集卡编号'])
         check.equal(tablecheck.get_value('作业状态',row), '可作业')
         check.equal(tablecheck.get_value('尺寸',row),input['尺寸'])
         check.equal(tablecheck.get_value('箱型',row),input['箱型'])
         check.equal(tablecheck.get_value('冷箱',row),'N')
-        check.equal(tablecheck.get_value('提单号',row),config.boxNumber)
+        check.equal(tablecheck.get_value('提单号',row),boxnumber)
         check.equal(tablecheck.get_value('箱货总重(吨)',row),str(format(float(input['箱货总重']) * float(0.001),'.3f')))
         self.logger.info('步骤3：允许直装')
         self.click('xpath', "(//span[contains(text(),'允许直提')])[1]")
@@ -202,6 +203,6 @@ class NO_Structure_Monitoring(BasePage):
                     return int(row)
         if index == 6 or index == 5 :
             for y in a:
-                if y == config.boxNumber:
+                if y == config.boxNumberTwo:
                     row = a[a.index(y)-1]
                     return int(row)

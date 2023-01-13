@@ -2,6 +2,7 @@ import os
 import allure
 import pytest
 from Commons.Controls.tag import Tag
+from GTOS.Config import config
 from GTOS.PageObject.gtos_menu import GtosMenu
 from Commons.yamlread import read_yaml
 from GTOS.PageObject.DataManagement.ImportInformation_manifest import Manifest
@@ -19,7 +20,7 @@ def testManifest(driver,input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("资料管理,进口资料,舱单")
     manifest = Manifest(driver)
-    manifest.AddManifest(input)
+    manifest.AddManifest(input,config.boxNumber)
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('discharging_process.yaml'))
@@ -29,7 +30,7 @@ def testManifest(driver,input):
 def testManifest_box(driver, input):
     """新增舱单箱资料"""
     manifest = Manifest(driver)
-    manifest.AddBox(input)
+    manifest.AddBox(input,config.boxNumber)
     manifest.choice_ship()
     Tag(driver).closeChoiceTag('舱单')
 
@@ -43,7 +44,7 @@ def testSend_box(driver, input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("船舶监控,无结构船舶监控")
     send_box = NO_Structure_Monitoring(driver)
-    send_box.Send_Box(input)
+    send_box.Send_Box(input,config.boxNumber)
     Tag(driver).closeChoiceTag('无结构船舶监控')
 
 # @pytest.mark.skipif
@@ -56,7 +57,7 @@ def testCharge_Car(driver, input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("机械控制,作业指令监控")
     charge_car = Job_Order_Monitoring(driver)
-    charge_car.Job_DischargingOrder(input)
+    charge_car.Job_DischargingOrder(input,config.boxNumber)
     Tag(driver).closeChoiceTag('作业指令监控')
 
 
