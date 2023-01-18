@@ -12,7 +12,7 @@ from GTOS.PageObject.gtos_menu import GtosMenu
 
 @allure.story('1.进箱流程')
 @allure.title('4.新增进箱计划')
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'checkInBox.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'04_EnterBoxProcess','checkInBox.yaml')))
 def testCheckInBox(driver,input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("道口管理,办理进箱手续V1")
@@ -25,7 +25,7 @@ def testCheckInBox(driver,input):
 
 @allure.story('2.堆场收箱')
 @allure.title('4.新增进箱计划')
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'checkInBox.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'04_EnterBoxProcess','checkInBox.yaml')))
 def testReceive_box(driver, input):
     """工作指令-堆场收箱"""
     menu = GtosMenu(driver)
@@ -39,7 +39,7 @@ def testReceive_box(driver, input):
 
 @allure.story('3.车辆出场')
 @allure.title('4.新增进箱计划')
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'checkInBox.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'04_EnterBoxProcess','checkInBox.yaml')))
 def testCar_Out(driver, input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("道口管理,车辆出场")

@@ -13,7 +13,7 @@ from GTOS.PageObject.gtos_menu import GtosMenu
 @pytest.mark.skip
 @allure.story('5.装船流程')
 @allure.title('1.装船箱放行')
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'loadship.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'05_PutBoxIntoShipProcess','loadship.yaml')))
 def testCheckInBox(driver,input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("资料管理,出口资料，装船箱放行")
@@ -23,7 +23,7 @@ def testCheckInBox(driver,input):
 
 @allure.story('5.装船流程')
 @allure.title('2.无结构船舶配载')
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'loadship.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'05_PutBoxIntoShipProcess','loadship.yaml')))
 def testship_stowage(driver, input):
     """无结构配载"""
     menu = GtosMenu(driver)
@@ -35,7 +35,7 @@ def testship_stowage(driver, input):
 
 @allure.story('5.装船流程')
 @allure.title('3.无结构船舶监控')
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'loadship.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'05_PutBoxIntoShipProcess','loadship.yaml')))
 def testship_monitor(driver, input):
     """无结构船舶监控"""
     menu = GtosMenu(driver)
@@ -47,7 +47,7 @@ def testship_monitor(driver, input):
     Monitor.LadeShip_Send_Box()
 @allure.story('5.装船流程')
 @allure.title('4.作业指令监控')
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'loadship.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'05_PutBoxIntoShipProcess','loadship.yaml')))
 def testship_order(driver, input):
     """作业指令监控"""
     menu = GtosMenu(driver)
