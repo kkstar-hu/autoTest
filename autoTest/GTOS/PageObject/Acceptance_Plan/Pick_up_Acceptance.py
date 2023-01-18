@@ -82,6 +82,7 @@ class Packing_up(BasePage):
         self.click('xpath',"//span[text()='生成计划']")
         textinput = Gtos_text(self.driver)
         textinput.select_by_label('申请人','ATL')
+        textinput.select_by_label('返场类型','不返场')
 
 
     def save(self):
