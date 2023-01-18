@@ -4,12 +4,15 @@ host="http://10.166.0.155/app/#/login"
 #进场计划箱号
 global boxNumber
 boxNumber=CommonGenerator.generate_spec("JXNU",7)
-# boxNumber="JXNU3096482"
+# boxNumber="JXNU2356708"
 
 global boxNumberTwo
-boxNumberTwo=CommonGenerator.generate_spec("CXNU",7)
-boxNumberTwo ='CXNU2943708'
+boxNumberTwo=CommonGenerator.generate_spec("ZTXZ",7)
+# boxNumberTwo ='JXNU2356708'
 
+global boxNumberThree
+boxNumberThree=CommonGenerator.generate_spec("ZZXZ",7)
+# boxNumberThree ='ZZXZ1683790'
 #进口航次
 global importNumber
 importNumber="I123"

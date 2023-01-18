@@ -9,7 +9,7 @@ class No_Structure_Stowage(BasePage):
     """
     无结构船舶配载
     """
-    def Retrieve(self,input):
+    def Retrieve(self,input,boxnumber):
         """
         输入船名航次
         """
@@ -25,9 +25,9 @@ class No_Structure_Stowage(BasePage):
         tablecheck.tick_off_box(row)
         check.equal(tablecheck.get_value('配载',row), '未配')
         check.equal(tablecheck.get_value('放行',row), '放行')
-        check.equal(tablecheck.get_value('箱号',row), config.boxNumber)
+        check.equal(tablecheck.get_value('箱号',row), boxnumber)
         check.equal(tablecheck.get_value('尺寸',row),input['尺寸'])
-        check.equal(tablecheck.get_value('箱型',row),input['箱型'])
+        check.equal(tablecheck.get_value('箱型',row),'GP')
         check.equal(tablecheck.get_value('箱高',row),input['箱高'])
         check.equal(tablecheck.get_value('持箱人',row),input['持箱人'])
         check.equal(tablecheck.get_value('箱货总重',row),input['箱货总重'])

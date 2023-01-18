@@ -11,7 +11,7 @@ class StraightLoad_StraightLift_Management(BasePage):
     """
     直装/直提
     """
-    def loading_value(self,input):
+    def loading_value(self,input,boxnumber):
         """
         直装内容
         """
@@ -19,18 +19,18 @@ class StraightLoad_StraightLift_Management(BasePage):
         textInput = Gtos_text(self.driver)
         # textInput.select_by_label("船名航次", input["船名航次"])
         textInput.select_by_label("船名航次", config.outportNumber)
-        textInput.input_by_label('箱号',config.boxNumber)
+        textInput.input_by_label('箱号',boxnumber)
         self.logger.info('步骤2：检索')
         self.click('xpath',"//span[text()='检索']")
         self.logger.info('步骤3：校验内容')
         tablecheck = Gtos_table(self.driver)
-        check.equal(tablecheck.get_value('箱号'), config.boxNumber)
+        check.equal(tablecheck.get_value('箱号'), boxnumber)
         check.equal(tablecheck.get_value('报道标志'),'N')
         check.equal(tablecheck.get_value('尺寸'),input['尺寸'])
-        check.equal(tablecheck.get_value('箱型'),input['箱型'])
+        check.equal(tablecheck.get_value('箱型'),'GP')
         check.equal(tablecheck.get_value('箱高'),input['箱高'])
         check.equal(tablecheck.get_value('持箱人'),input['持箱人'])
-        check.equal(tablecheck.get_value('提单号'),config.boxNumber)
+        check.equal(tablecheck.get_value('提单号'),boxnumber)
         check.equal(tablecheck.get_value('码头放行'),'放行')
         check.equal(tablecheck.get_value('海关放行'),'放行')
         check.equal(tablecheck.get_value('配载'),'Y')
@@ -110,11 +110,11 @@ class StraightLoad_StraightLift_Management(BasePage):
 
 
 
-    def process_loading(self,input):
+    def process_loading(self,input,boxnumber):
         """
         直装流程
         """
-        self.loading_value(input)
+        self.loading_value(input,boxnumber)
         self.loading_report(input)
 
     def process_lifting(self,input,boxnumber):

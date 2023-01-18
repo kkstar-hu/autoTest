@@ -89,7 +89,7 @@ class NO_Structure_Monitoring(BasePage):
         check.equal(tablecheck.get_value_by_rowid(rowid, '目的港'), input['目的港'])
         check.equal(tablecheck.get_value_by_rowid(rowid, '作业状态'), '提交作业')
 
-    def choice_loading(self,input):
+    def choice_loading(self,input,boxnumber):
         """
         选择直装
         """
@@ -100,14 +100,14 @@ class NO_Structure_Monitoring(BasePage):
         tablecheck = Gtos_table(self.driver, 6)
         tablecheck.tick_off_box(row)
         self.logger.info('步骤2：校验数据')
-        check.is_in(tablecheck.get_value('箱号',row),config.boxNumber)
+        check.is_in(tablecheck.get_value('箱号',row),boxnumber)
         check.equal(tablecheck.get_value('报道',row),'Y')
         check.equal(tablecheck.get_value('集卡',row),input['车牌']+input['集卡编号'])
         check.equal(tablecheck.get_value('作业状态',row), '提交作业')
         check.equal(tablecheck.get_value('尺寸',row),input['尺寸'])
-        check.equal(tablecheck.get_value('箱型',row),input['箱型'])
+        check.equal(tablecheck.get_value('箱型',row),'GP')
         check.equal(tablecheck.get_value('冷箱',row),'N')
-        check.equal(tablecheck.get_value('提单号',row),config.boxNumber)
+        check.equal(tablecheck.get_value('提单号',row),boxnumber)
         check.equal(tablecheck.get_value('箱货总重(吨)',row),str(format(float(input['箱货总重']) * float(0.001),'.3f')))
         self.logger.info('步骤3：允许直装')
         self.click('xpath', "(//span[contains(text(),'允许直装')])[1]")
@@ -201,8 +201,13 @@ class NO_Structure_Monitoring(BasePage):
                 if y == '可作业':
                     row = a[a.index(y)-9]
                     return int(row)
-        if index == 6 or index == 5 :
+        if  index == 5 :
             for y in a:
                 if y == config.boxNumberTwo:
+                    row = a[a.index(y)-1]
+                    return int(row)
+        if  index == 6 :
+            for y in a:
+                if y == config.boxNumberThree:
                     row = a[a.index(y)-1]
                     return int(row)

@@ -27,7 +27,7 @@ class InBox_Acceptance(BasePage):
         # Gtextinput.select_by_placeholder('请选择',input['船名航次'])
         Gtextinput.select_by_placeholder('请选择',config.outportNumber)
 
-    def addPlan(self,input):
+    def addPlan(self,input,boxnumber):
         """
         新增进场计划
         """
@@ -36,7 +36,7 @@ class InBox_Acceptance(BasePage):
             self.click('xpath',"(//span[text()='新增'])[1]")
             self.waitloading()
             Gtextinput = Gtos_text(self.driver)
-            Gtextinput.input_by_label('箱号', config.boxNumber)
+            Gtextinput.input_by_label('箱号', boxnumber)
             Gtextinput.input_by_label('铅封号', 'A123')
             Gtextinput.select_by_label('尺寸', input['尺寸'])
             Gtextinput.select_by_label('箱型', input['箱型'])
@@ -49,11 +49,11 @@ class InBox_Acceptance(BasePage):
             self.check_alert('保存成功')
             tablecheck = Gtos_table(self.driver)
             self.logger.info('步骤4：校验字段')
-            check.equal(tablecheck.get_value('箱号'), config.boxNumber)
+            check.equal(tablecheck.get_value('箱号'), boxnumber)
             check.equal(tablecheck.get_value('贸易类型'), '内贸')
             check.equal(tablecheck.get_value('铅封号'), 'A123')
             check.equal(tablecheck.get_value('尺寸'), input['尺寸'])
-            check.equal(tablecheck.get_value('箱型'), input['箱型'])
+            check.equal(tablecheck.get_value('箱型'), 'GP')
             check.equal(tablecheck.get_value('持箱人'), input['持箱人'])
             check.equal(tablecheck.get_value('箱高'), input['箱高'])
             check.equal(tablecheck.get_value('箱货总重'), input['箱货总重'])
@@ -62,7 +62,7 @@ class InBox_Acceptance(BasePage):
         except:
             self.cancel()
 
-    def Add_value(self):
+    def Add_value(self,boxnumber):
         """
         新增货信息
         """
@@ -71,12 +71,13 @@ class InBox_Acceptance(BasePage):
             self.click('xpath', "(//span[text()='新增'])[2]")
             time.sleep(1)
             Gtextinput = Gtos_text(self.driver)
-            Gtextinput.input_by_label('提单号', config.boxNumber)
+            Gtextinput.input_by_label('提单号', boxnumber)
+            Gtextinput.textarea_by_label('货名','石头')
             self.save()
             self.check_alert('保存成功')
             tablecheck = Gtos_table(self.driver,2)
             self.logger.info('步骤6：校验字段')
-            check.equal(tablecheck.get_value('提单号'), config.boxNumber)
+            check.equal(tablecheck.get_value('提单号'), boxnumber)
         except:
             self.cancel()
 
@@ -94,12 +95,12 @@ class InBox_Acceptance(BasePage):
         self.check_alert('计划保存成功')
 
 
-    def process(self,input):
+    def process(self,input,boxnumber):
         """
         进箱直提受理流程
         """
         self.choice_tree_straight(input)
         self.select_value(input)
-        self.addPlan(input)
-        self.Add_value()
+        self.addPlan(input,boxnumber)
+        self.Add_value(boxnumber)
         self.build_plan()

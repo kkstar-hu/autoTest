@@ -74,13 +74,13 @@ class Job_Order_Monitoring(BasePage):
         check.equal(tablecheck.get_value('持箱人'), input['持箱人'])
 
 
-    def order_loading_check(self,input):
+    def order_loading_check(self,input,boxnumber):
         """
         直装查验
         """
         self.logger.info('步骤3：校验内容')
         tablecheck = Gtos_table(self.driver)
-        check.is_in(tablecheck.get_value('箱号').replace(' ', '').replace('\n', ''), config.boxNumber)
+        check.is_in(tablecheck.get_value('箱号').replace(' ', '').replace('\n', ''), boxnumber)
         if self.hasInput(input,'作业路'):
             check.equal(tablecheck.get_value('作业路'), input['作业路'])
         if self.hasInput(input, '操作过程'):
@@ -306,12 +306,12 @@ class Job_Order_Monitoring(BasePage):
         self.order_info_check(input)
         self.shipping_confirmation()
 
-    def loading_PackingboxOrder(self,input):
+    def loading_PackingboxOrder(self,input,boxmunber):
         """
         直装
         """
         self.Retrieve_loading(input)
-        self.order_loading_check(input)
+        self.order_loading_check(input,boxmunber)
         self.shipping_confirmation()
 
 
