@@ -15,7 +15,6 @@ class Voyage_Attached(BasePage):
         """
         self.logger.info('步骤1：选择船名航次')
         textInput = Gtos_text(self.driver)
-        # textInput.search_select_by_label('船名航次',input['船名航次2'])
         textInput.search_select_by_label('船名航次',config.outportNumber)
 
     def Retrieval(self):
@@ -32,14 +31,11 @@ class Voyage_Attached(BasePage):
         self.logger.info('步骤3：新增挂靠港')
         self.click('x',"(//span[text()='新增'])[1]")
         textInput = Gtos_text(self.driver)
-        # textInput.search_select_by_label('港口代码','CNWHA')
-        # textInput.input_noclear_placeholder_click('请选择','CNWHA')
         textInput.click('x',"(//input[@placeholder='请选择'])[1]")
         textInput.click('x',"//span[text()='CNWHA']")
-        # textInput.input_no_clear('x',"(//input[@placeholder='请选择'])[1]",'CNWHA')
-        # textInput.click('x',"(//span[text()='CNWHA'])[1]")
         textInput.click('x',"//span[text()='保 存']")
-        self.check_alert('')
+        check.equal(self.get_text("xpath","//div[@role='alert']//h2"),"保存成功")
+
 
     def process(self,input):
         """

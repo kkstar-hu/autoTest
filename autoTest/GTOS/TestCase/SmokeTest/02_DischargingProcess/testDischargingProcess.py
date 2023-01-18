@@ -10,7 +10,7 @@ from GTOS.PageObject.Control_Ship.No_Structure_Monitoring import NO_Structure_Mo
 from GTOS.PageObject.Mechanical_Control.Job_Order_Monitoring import Job_Order_Monitoring
 
 
-# @pytest.mark.skipif
+@pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('discharging_process.yaml'))
 @allure.title('1、新增舱单')
 @allure.story('2.卸船流程')

@@ -4,6 +4,7 @@ import pytest_check as check
 from selenium.webdriver import ActionChains
 
 from Base.basepage import BasePage
+from Commons.DateTime import DataTime
 from GTOS.Controls.text import Gtos_text
 from GTOS.Config import config
 from GTOS.Controls.Gtos_table import Gtos_table
@@ -148,6 +149,18 @@ class NO_Structure_Monitoring(BasePage):
         self.logger.info('步骤3：校验字段')
         tablecheck = Gtos_table(self.driver)
         check.equal(tablecheck.get_value('靠泊状态'),'未靠')
+        check.equal(tablecheck.get_value('船舶代码'), input['船舶代码'])
+        check.equal(tablecheck.get_value('船舶中文名'), input['船舶中文名称'])
+        check.equal(tablecheck.get_value('进口航次'), config.importNumber)
+        check.equal(tablecheck.get_value('出口航次'), config.outportNumber)
+        arriveDay = DataTime.Get_Current_Date()
+        arriveTime = arriveDay + " 00:00:00"
+        leaveDay = DataTime.Get_Date_X_Number_Of_Days(20)
+        leaveTime = leaveDay + " 00:00:00"
+        check.equal(tablecheck.get_value('计划靠泊时间'), arriveTime)
+        check.equal(tablecheck.get_value('计划离泊时间'), leaveTime)
+        check.equal(tablecheck.get_value('计划泊位'), '01')
+        check.equal(tablecheck.get_value('实际泊位'), '01')
         self.logger.info('步骤4：靠泊确认')
         self.click('x',"//span[text()='靠泊确认']")
         self.click('x',"//input[@placeholder='靠泊时间']")

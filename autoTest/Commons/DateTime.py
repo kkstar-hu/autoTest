@@ -11,7 +11,7 @@ class DataTime(object):
         return datetime.now().strftime(date_format)
 
     @staticmethod
-    def Get_Current_Date(date_format="%Y/%m/%d"):
+    def Get_Current_Date(date_format="%Y-%m-%d"):
         """Get the current date with date format
 
         Example:
@@ -75,7 +75,7 @@ class DataTime(object):
         # self.com.verify(time.strftime("%H:%M"), str(t)[0:5])
 
     @staticmethod
-    def Get_Date_X_Number_Of_Days(numdays, format="%Y/%m/%d"):
+    def Get_Date_X_Number_Of_Days(numdays, format="%Y-%m-%d"):
         """
         Takes a number of days and returns a date with format
         that represents today minus that number of days.

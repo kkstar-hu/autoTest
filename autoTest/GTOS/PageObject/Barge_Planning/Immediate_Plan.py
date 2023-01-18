@@ -49,6 +49,7 @@ class Immediate_plan(BasePage):
         textInput.select_by_label('船尾揽桩',input["船尾揽桩"])
         textInput.select_by_label_time('船头揽桩',input["船头揽桩"])
         textInput.click('x',"//span[contains(text(),'保 存')]")
+        check.equal(self.get_text("xpath", "//div[@role='alert']//h2"), "添加成功")
 
     def checkPlan(self):
         self.click('x', "//span[text()='检索']")
@@ -58,11 +59,13 @@ class Immediate_plan(BasePage):
         check.equal(tablecheck.get_value_by_rowid(rowid, '靠泊状态'), '未靠')
     def Sure_ShipPlan(self):
         textInput = Gtos_text(self.driver)
-        actualarriveDay = DataTime.Get_Date_X_Number_Of_Days(2)
+        actualarriveDay = DataTime.Get_Current_Date()
         actuallarriveTime = actualarriveDay + " 00:00:00"
         self.click('x', "//span[text()='确报船期']")
         textInput.input_by_label("实际抵港时间", actuallarriveTime)
+        self.click('xpath', "//span[contains(text(),'确定')]")
         self.click('x', "//span[text()='保 存']")
+        check.equal(self.get_text("xpath", "//div[@role='alert']//h2"), "保存成功")
         tablecheck = Gtos_table(self.driver, 2)
         check.equal(tablecheck.get_value('船期状态'), '确报')
         check.equal(tablecheck.get_value('确报时间'), actuallarriveTime)
@@ -72,6 +75,7 @@ class Immediate_plan(BasePage):
         self.click('id', "confirmintocntr")
         self.click('x', "(//span[@class='el-switch__core'])[2]")
         self.click('x', "//span[text()='保 存']")
+        check.equal(self.get_text("xpath", "//div[@role='alert']//h2"), "保存成功")
 
     #验证靠泊信息
     def check_alongside_info(self,input):
