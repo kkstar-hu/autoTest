@@ -13,8 +13,9 @@ boxNumberTwo ='JXNU1001'
 global boxNumberThree
 #boxNumberThree=CommonGenerator.generate_spec("ZZXZ",7)
 boxNumberThree ='JXNU1002'
+
 global outBoxNumber
-outBoxNumber="I107"
+outBoxNumber="JXNU1009"
 
 #进口航次
 global importNumber
@@ -30,8 +31,10 @@ bigshipoutportNumber="1000E"
 #提箱预约号
 global Number
 
-takeNumber="1014" #进箱提单号
 username="admin"
 password="ctos@12345"
 showname="管理员"
 createName="8541/祁洲海"
+
+global takeNumber
+takeNumber=CommonGenerator.generate_spec("TD", 4)
