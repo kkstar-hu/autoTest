@@ -70,6 +70,15 @@ class Gtos_text(BasePage):
         except NoSuchElementException:
             raise Exception("定位不到元素")
 
+    def multi_select_by_label(self, label, value):
+        try:
+            self.click("xpath", f"//label[contains(text(),'{label}')]//following-sibling::div//input")
+            for x in value.split(","):
+                self.click("xpath",
+                           f"//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]//span[text()='{x}']")
+        except NoSuchElementException:
+            raise Exception("定位不到元素")
+
     def select_by_label_time(self, label, value):
         try:
             self.click("xpath",f"//label[contains(text(),'{label}')]//following-sibling::div//input")

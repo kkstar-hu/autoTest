@@ -17,7 +17,7 @@ class Job_Order_Monitoring(BasePage):
         """
         self.logger.info('步骤1：作业指令，输入航名航次')
         textinput = Gtos_text(self.driver)
-        textinput.search_select_by_label('作业路类型',input['作业路类型'])
+        textinput.multi_select_by_label('作业路类型',input['作业路类型'])
         textinput.search_select_by_label('船名航次',shipNumber)
         if boxnumber!=None:
             textinput.input_by_label("箱号",boxnumber)
