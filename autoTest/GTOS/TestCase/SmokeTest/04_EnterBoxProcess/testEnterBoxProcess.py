@@ -2,6 +2,7 @@ import os
 import allure
 import pytest as pytest
 from Commons.Controls.tag import Tag
+from Commons.RandomFunction import CommonGenerator
 from Commons.yamlread import read_yaml
 from GTOS.Config import config
 from GTOS.PageObject.CrossingManagement.carOut import Car_Out
@@ -17,9 +18,10 @@ def testCheckInBox(driver,input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("道口管理,办理进箱手续V1")
     checkInBox = CheckInBox(driver)
-    checkInBox.search(input,config.boxNumber)
+    checkInBox.search(input,config.outBoxNumber)
     checkInBox.input_checkin_info(input)
-    checkInBox.addgoodsinfo(input,config.takeNumber)
+    takeNumber=CommonGenerator.generate_spec("TD", 4)
+    checkInBox.addgoodsinfo(input,takeNumber)
     checkInBox.input_info(input)
     checkInBox.confirm_button(input)
 
@@ -31,8 +33,8 @@ def testReceive_box(driver, input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("机械控制,作业指令监控")
     work = Job_Order_Monitoring(driver)
-    work.Retrieve(input,config.boxNumber)
-    work.order_info_check(input)
+    work.Retrieve(input,config.outportNumber)
+    work.order_info_check(input,config.outBoxNumber)
     work.closed_box(input)
     Tag(driver).closeChoiceTag('作业指令监控')
 
@@ -44,7 +46,7 @@ def testCar_Out(driver, input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("道口管理,车辆出场")
     car_out = Car_Out(driver)
-    car_out.process_loading(input)
+    car_out.process_loading(input,config.outBoxNumber)
     Tag(driver).closeChoiceTag('车辆出场')
 
 

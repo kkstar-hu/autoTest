@@ -11,34 +11,18 @@ class Job_Order_Monitoring(BasePage):
     作业指令监控
     """
 
-    def Retrieve(self,input,boxnumber=None):
+    def Retrieve(self,input,shipNumber,boxnumber=None):
         """
         输入内容，检索
         """
         self.logger.info('步骤1：作业指令，输入航名航次')
         textinput = Gtos_text(self.driver)
         textinput.search_select_by_label('作业路类型',input['作业路类型'])
-        # textinput.search_select_by_label('船名航次',input['作业船名航次'])
-        textinput.search_select_by_label('船名航次',config.importNumber)
+        textinput.search_select_by_label('船名航次',shipNumber)
         if boxnumber!=None:
             textinput.input_by_label("箱号",boxnumber)
         self.logger.info('步骤2：检索')
         self.click('xpath',"//span[text()='检索']")
-
-    def Retrieve_loading(self,input,boxnumber=None):
-        """
-        输入内容，检索
-        """
-        self.logger.info('步骤1：作业指令，输入航名航次')
-        textinput = Gtos_text(self.driver)
-        textinput.search_select_by_label('作业路类型',input['作业路类型'])
-        # textinput.search_select_by_label('船名航次',input['作业船名航次'])
-        textinput.search_select_by_label('船名航次',config.outportNumber)
-        if boxnumber!=None:
-            textinput.input_by_label("箱号",boxnumber)
-        self.logger.info('步骤2：检索')
-        self.click('xpath',"//span[text()='检索']")
-
 
 
     def order_info_check(self,input,boxnumber):
@@ -59,10 +43,14 @@ class Job_Order_Monitoring(BasePage):
         check.equal(tablecheck.get_value('作业状态'), '等待作业')
         if self.hasInput(input, '集卡编号'):
             check.equal(tablecheck.get_value('拖运机械'), input['车牌'] + input['集卡编号'])
-        if self.hasInput(input, '集卡编号'):
+        if self.hasInput(input, '当前位置'):
             check.equal(tablecheck.get_value('当前位置'),input['车牌']+input['集卡编号'])
-        if self.hasInput(input, '集卡编号'):
+        if self.hasInput(input, '当前位置系统'):
+            check.equal(tablecheck.get_value('当前位置'), boxPosition)
+        if self.hasInput(input, '起始位置'):
             check.equal(tablecheck.get_value('起始位置'),input['车牌']+input['集卡编号'])
+        if self.hasInput(input, '起始位置系统'):
+            check.equal(tablecheck.get_value('起始位置'), boxPosition)
         check.equal(tablecheck.get_value('尺寸'), input['尺寸'])
         if self.hasInput(input, '箱型check'):
             check.equal(tablecheck.get_value('箱型'), input['箱型check'])
@@ -71,71 +59,6 @@ class Job_Order_Monitoring(BasePage):
         if self.hasInput(input, '箱货总重(吨)'):
             check.equal(tablecheck.get_value('箱货总重(吨)'), str(format(float(input['箱货总重']) * float(0.001), '.3f')))
         check.equal(tablecheck.get_value('持箱人'), input['持箱人'])
-
-
-    def order_loading_check(self,input,boxnumber):
-        """
-        直装查验
-        """
-        self.logger.info('步骤3：校验内容')
-        tablecheck = Gtos_table(self.driver)
-        check.is_in(tablecheck.get_value('箱号').replace(' ', '').replace('\n', ''), boxnumber)
-        if self.hasInput(input,'作业路'):
-            check.equal(tablecheck.get_value('作业路'), input['作业路'])
-        if self.hasInput(input, '操作过程'):
-            check.equal(tablecheck.get_value('操作过程'), input['操作过程'])
-        if self.hasInput(input, '作业方式'):
-            check.equal(tablecheck.get_value('作业方式'), input['作业方式'])
-        check.equal(tablecheck.get_value('箱状态'), 'OF')
-        check.equal(tablecheck.get_value('卸货港'), input['卸货港'])
-        check.equal(tablecheck.get_value('作业状态'), '等待作业')
-        if self.hasInput(input, '集卡编号'):
-            check.equal(tablecheck.get_value('拖运机械'), input['车牌'] + input['集卡编号'])
-        if self.hasInput(input, '集卡编号'):
-            check.equal(tablecheck.get_value('当前位置'),input['车牌']+input['集卡编号'])
-        if self.hasInput(input, '集卡编号'):
-            check.equal(tablecheck.get_value('起始位置'),input['车牌']+input['集卡编号'])
-        check.equal(tablecheck.get_value('尺寸'), input['尺寸'])
-        if self.hasInput(input, '箱型check'):
-            check.equal(tablecheck.get_value('箱型'), input['箱型check'])
-        if self.hasInput(input, '箱高check'):
-            check.equal(tablecheck.get_value('箱高'), input['箱高check'])
-        if self.hasInput(input, '箱货总重(吨)'):
-            check.equal(tablecheck.get_value('箱货总重(吨)'), str(format(float(input['箱货总重']) * float(0.001), '.3f')))
-        check.equal(tablecheck.get_value('持箱人'), input['持箱人'])
-
-
-    def order_Take_check(self,input,boxnumber):
-        """
-        在场箱提货查验
-        """
-        self.logger.info('步骤3：校验内容')
-        tablecheck = Gtos_table(self.driver)
-        check.is_in(tablecheck.get_value('箱号').replace(' ', '').replace('\n', ''),boxnumber)
-        if self.hasInput(input,'作业路'):
-            check.equal(tablecheck.get_value('作业路'), input['作业路'])
-        if self.hasInput(input, '操作过程'):
-            check.equal(tablecheck.get_value('操作过程'), input['操作过程'])
-        if self.hasInput(input, '作业方式'):
-            check.equal(tablecheck.get_value('作业方式'), input['作业方式'])
-        check.equal(tablecheck.get_value('箱状态'), input['箱状态'])
-        check.equal(tablecheck.get_value('卸货港'), input['卸货港'])
-        check.equal(tablecheck.get_value('作业状态'), '等待作业')
-        if self.hasInput(input, '集卡编号'):
-            check.equal(tablecheck.get_value('拖运机械'), input['车牌'] + input['集卡编号'])
-        if self.hasInput(input, '集卡编号'):
-            check.equal(tablecheck.get_value('当前位置'),boxPosition)
-        if self.hasInput(input, '集卡编号'):
-            check.equal(tablecheck.get_value('起始位置'),boxPosition)
-        check.equal(tablecheck.get_value('尺寸'), input['尺寸'])
-        if self.hasInput(input, '箱型check'):
-            check.equal(tablecheck.get_value('箱型'), input['箱型check'])
-        if self.hasInput(input, '箱高check'):
-            check.equal(tablecheck.get_value('箱高'), input['箱高check'])
-        if self.hasInput(input, '箱货总重(吨)'):
-            check.equal(tablecheck.get_value('箱货总重(吨)'), str(format(float(input['箱货总重']) * float(0.001), '.3f')))
-        check.equal(tablecheck.get_value('持箱人'), input['持箱人'])
-
 
     def order_Direct_lifting_check(self,input,boxnumber):
         """

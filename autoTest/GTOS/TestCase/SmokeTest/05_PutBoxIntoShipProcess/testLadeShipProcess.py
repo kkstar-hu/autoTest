@@ -53,7 +53,7 @@ def testship_order(driver, input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("机械控制,作业指令监控")
     work = Job_Order_Monitoring(driver)
-    work.Retrieve(input,config.boxNumber)
+    work.Retrieve(input,config.outBoxNumber)
     work.order_info_check(input)
     work.charge_car("C305")
     work.send_box(input)
