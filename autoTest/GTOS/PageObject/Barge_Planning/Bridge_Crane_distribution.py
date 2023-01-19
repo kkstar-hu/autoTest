@@ -46,8 +46,9 @@ class Bridge_Crane_Distribution(BasePage):
         tablecheck.click('x',"//label//span[text()='B109']")
         tablecheck.click('x',"//span[text()='保 存']")
         check.equal(self.get_text("xpath","//div[@role='alert']//h2"),"保存成功")
-        check.equal(tablecheck.get_value('桥吊号'), 'B109')
-        check.equal(tablecheck.get_value('吊桥计划开始时间'), self.arriveTime)
-        check.equal(tablecheck.get_value('吊桥计划结束时间'), self.leaveTime)
+        tablecheck2 = Gtos_table(self.driver, 4)
+        check.equal(tablecheck2.get_value('桥吊号'), 'B109')
+        check.equal(tablecheck2.get_value('吊桥计划开始时间'), self.arriveTime)
+        check.equal(tablecheck2.get_value('吊桥计划结束时间'), self.leaveTime)
 
 

@@ -12,6 +12,10 @@ class Immediate_plan(BasePage):
     """
     驳船策划--近期计划
     """
+    arriveDay = DataTime.Get_Current_Date()
+    arriveTime = arriveDay + " 00:00:00"
+    leaveDay = DataTime.Get_Date_X_Number_Of_Days(20)
+    leaveTime = leaveDay + " 00:00:00"
     def switch_Barge(self):
         """
         切换驳船计划
@@ -23,13 +27,9 @@ class Immediate_plan(BasePage):
         self.click('xpath', "//span[contains(text(),'新增')]")
         textInput = Gtos_text(self.driver)
         textInput.select_by_label("船舶代码", input["船舶代码"])
-        arriveDay=DataTime.Get_Current_Date()
-        arriveTime=arriveDay+" 00:00:00"
-        leaveDay=DataTime.Get_Date_X_Number_Of_Days(20)
-        leaveTime=leaveDay+" 00:00:00"
-        textInput.input_by_label("抵港时间",arriveTime)
+        textInput.input_by_label("抵港时间",self.arriveTime)
         self.click('xpath', "//span[contains(text(),'确定')]")
-        textInput.input_by_label("离港时间",leaveTime)
+        textInput.input_by_label("离港时间",self.leaveTime)
         self.click('xpath', "(//span[contains(text(),'确定')])[2]")
         eltable=ELtable(self.driver,2)
         eltable.input_text("航次",config.outportNumber)
@@ -79,16 +79,24 @@ class Immediate_plan(BasePage):
 
     #验证靠泊信息
     def check_alongside_info(self,input):
-        check.equal(self.get_text_value(self,"计划靠泊时间"), input["计划靠泊时间"])
-        check.equal(self.get_text_value(self, "计划离泊时间"), input["计划离泊时间"])
-        check.equal(self.get_text_value(self, "计划靠泊泊位"), input["计划靠泊泊位"])
-        check.equal(self.get_text_value(self, "计划靠泊吃水"), input["计划靠泊吃水"])
-        check.equal(self.get_text_value(self, "计划起始尺码"), input["计划起始尺码"])
-        check.equal(self.get_text_value(self, "计划终止尺码"), input["计划终止尺码"])
-        check.equal(self.get_text_value(self, "实际靠泊时间"), input["实际靠泊时间"])
+        tablecheck = Gtos_table(self.driver, 2)
+        rowid = tablecheck.select_row("进口航次", config.importNumber)
+        check.equal(self.get_text_value("计划靠泊时间"), self.arriveTime)
+        check.equal(self.get_text_value("计划离泊时间"), self.leaveTime)
+        check.equal(self.get_text_value("计划靠泊泊位"), "01")
+        check.equal(self.get_text_value("计划靠泊吃水"), "0")
+        check.equal(self.get_text_value("计划起始尺码"), input["起始尺码"])
+        check.equal(self.get_text_value("计划终止尺码"), "270")
+        createTime = DataTime.GetTime()
+        check.less(DataTime.get_dif_time(self.get_text_value("实际靠泊时间"), createTime), 600)
+        check.equal(self.get_text_value("实际靠泊吃水"), "0")
+        check.equal(self.get_text_value("实际起始尺码"), input["起始尺码"])
+        check.equal(self.get_text_value("实际终止尺码"), "270")
+        check.equal(self.get_text_value("船头揽桩"), input["船头揽桩"])
+        check.equal(self.get_text_value("船尾揽桩"), input["船尾揽桩"])
 
     #靠泊信息获取值方法
     def get_text_value(self,label):
-        return self.get_text_index("xpath",f"//div[contains(text(),'{label}')]//following-sibling::div")
+        return self.get_text("xpath",f"//div[contains(text(),'{label}')]//following-sibling::div")
 
 
