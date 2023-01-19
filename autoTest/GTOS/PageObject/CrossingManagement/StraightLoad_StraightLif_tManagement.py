@@ -17,7 +17,6 @@ class StraightLoad_StraightLift_Management(BasePage):
         """
         self.logger.info('步骤1：输入数据')
         textInput = Gtos_text(self.driver)
-        # textInput.select_by_label("船名航次", input["船名航次"])
         textInput.select_by_label("船名航次", config.outportNumber)
         textInput.input_by_label('箱号',boxnumber)
         self.logger.info('步骤2：检索')
@@ -42,7 +41,6 @@ class StraightLoad_StraightLift_Management(BasePage):
         """
         self.logger.info('步骤1：输入数据')
         textInput = Gtos_text(self.driver)
-        # textInput.select_by_label("船名航次", input["船名航次"])
         textInput.select_by_label("船名航次", config.importNumber)
         textInput.input_by_label('箱号',boxnumber)
         self.logger.info('步骤2：检索')

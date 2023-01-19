@@ -20,7 +20,6 @@ class Stockpiling_Planning(BasePage):
         self.logger.info('步骤1：选择计划类型，船名航次')
         textInput = Gtos_text(self.driver)
         textInput.search_select_by_label('计划类型','道口进')
-        # textInput.search_select_by_label('船名航次',input['堆存道口进'])
         textInput.search_select_by_label('船名航次',config.outportNumber)
 
     def select_values_out(self,input):

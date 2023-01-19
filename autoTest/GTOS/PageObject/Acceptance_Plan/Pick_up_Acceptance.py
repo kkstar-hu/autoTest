@@ -1,3 +1,4 @@
+import time
 
 import pytest_check as check
 from Base.basepage import BasePage
@@ -30,7 +31,6 @@ class Packing_up(BasePage):
         """
         self.logger.info('步骤2：输入航名航次')
         Gtextinput = Gtos_text(self.driver)
-        # Gtextinput.select_by_label('进口船',input['进口船'])
         Gtextinput.search_select_by_label('进口船',config.importNumber)
         Gtextinput.input_by_placeholder('提单号',boxnumber)
 
@@ -77,6 +77,7 @@ class Packing_up(BasePage):
         """
         tablecheck = Gtos_table(self.driver)
         tablecheck.tick_off_box(1)
+        time.sleep(1)
         tablecheck.tick_off_box(1)
         self.logger.info('步骤7：生成计划')
         self.click('xpath',"//span[text()='生成计划']")

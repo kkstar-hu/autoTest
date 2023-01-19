@@ -15,7 +15,6 @@ class No_Structure_Stowage(BasePage):
         """
         self.logger.info('步骤1：输入船名航次')
         Gtextinput = Gtos_text(self.driver)
-        # Gtextinput.input_noclear_placeholder_click('请输入关键词', input['出口船名航次'])
         Gtextinput.search_select_by_label('出口船名航次', config.outportNumber)
         self.logger.info('步骤2：检索')
         self.click('xpath',"//span[text()='检索']")
@@ -97,6 +96,6 @@ class No_Structure_Stowage(BasePage):
                 b.append(i)
                 a = sum(b,[])
         for y in a :
-            if y == '未配':
-                row = a[a.index(y)-1]
+            if y == config.boxNumberThree:
+                row = a[a.index(y)-4]
                 return int(row)
