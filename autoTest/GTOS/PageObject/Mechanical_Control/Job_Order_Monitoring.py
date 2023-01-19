@@ -11,7 +11,6 @@ class Job_Order_Monitoring(BasePage):
     作业指令监控
     """
 
-
     def Retrieve(self,input,boxnumber=None):
         """
         输入内容，检索
@@ -125,9 +124,9 @@ class Job_Order_Monitoring(BasePage):
         if self.hasInput(input, '集卡编号'):
             check.equal(tablecheck.get_value('拖运机械'), input['车牌'] + input['集卡编号'])
         if self.hasInput(input, '集卡编号'):
-            check.equal(tablecheck.get_value('当前位置'),config.boxPosition)
+            check.equal(tablecheck.get_value('当前位置'),boxPosition)
         if self.hasInput(input, '集卡编号'):
-            check.equal(tablecheck.get_value('起始位置'),config.boxPosition)
+            check.equal(tablecheck.get_value('起始位置'),boxPosition)
         check.equal(tablecheck.get_value('尺寸'), input['尺寸'])
         if self.hasInput(input, '箱型check'):
             check.equal(tablecheck.get_value('箱型'), input['箱型check'])
@@ -196,7 +195,8 @@ class Job_Order_Monitoring(BasePage):
         textclick.no_elements_click('卸船确认')
         textclick.input_noclear_placeholder_click('请选择','HAS',5)
         a = Gtos_table(self.driver)
-        config.boxPosition = a.get_body_values('收箱位')
+        global boxPosition
+        boxPosition= a.get_body_values('收箱位')
         self.close_alert(f"{a.get_body_values('收箱位')},获取收箱位成功！")
         textclick.click('xpath',"(//span[text()='保存'])[3]")
         self.check_alert('卸船确认成功')

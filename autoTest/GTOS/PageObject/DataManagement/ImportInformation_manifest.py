@@ -3,7 +3,6 @@ import time
 import pytest_check as check
 from selenium.webdriver import Keys, ActionChains
 from Base.basepage import BasePage
-from Commons.Controls.text import text
 from GTOS.Controls.text import Gtos_text
 from GTOS.Config import config
 from GTOS.Controls.Gtos_table import Gtos_table
@@ -19,8 +18,6 @@ class Manifest(BasePage):
         """
         self.logger.info('步骤1：输入船名航次')
         Gtextinput = Gtos_text(self.driver)
-        # Gtextinput.input_noclear_placeholder_click('请输入关键词',input['进口船名航次'])
-        # Gtextinput.input_noclear_placeholder_click('请输入关键词',config.importNumber)
         Gtextinput.search_select_by_label('进口船名航次',config.importNumber)
         self.logger.info('步骤2：检索')
         self.click('xpath',"//span[text()='检索']")
