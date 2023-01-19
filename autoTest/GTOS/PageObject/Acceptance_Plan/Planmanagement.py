@@ -13,7 +13,6 @@ class PlanManagement(BasePage):
         """
         self.logger.info('步骤1：输入船名航次')
         textinput = Gtos_text(self.driver)
-        # textinput.input_noclear_placeholder_click('请输入关键词',input['船名航次'])
         textinput.search_select_by_label('船名航次',config.importNumber)
         textinput.input_by_label('箱号',boxnumber)
 

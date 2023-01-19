@@ -24,7 +24,6 @@ class InBox_Acceptance(BasePage):
         """
         self.logger.info('步骤2：输入航名航次')
         Gtextinput = Gtos_text(self.driver)
-        # Gtextinput.select_by_placeholder('请选择',input['船名航次'])
         Gtextinput.select_by_placeholder('请选择',config.outportNumber)
 
     def addPlan(self,input,boxnumber):
