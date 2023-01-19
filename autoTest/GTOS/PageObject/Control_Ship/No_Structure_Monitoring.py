@@ -64,22 +64,22 @@ class NO_Structure_Monitoring(BasePage):
 
         self.logger.info('步骤1：勾选后发箱')
         table = Gtos_table(self.driver,4)
-        table.check2("箱号", config.boxNumber)
+        table.check2("箱号", config.outBoxNumber)
         self.click('id',"shipmentconfirm")
         self.check_alert('发箱成功')
         self.logger.info('步骤2：校验内容')
-        rowid = table.select_row("箱号", config.boxNumber)
+        rowid = table.select_row2("箱号", config.outBoxNumber)
         check.equal(table.get_value_by_rowid(rowid,'作业状态'), '等待作业')
 
     def clickLadeShipTag(self):
         self.click("xpath", "//div[@class='panel-header__left']//div[text()=' 装船 ']")
-    def LadeShip_check_values(self,input):
+    def LadeShip_check_values(self,input,boxNumber):
         """
         校验
         """
         self.logger.info('步骤3：校验内容')
         tablecheck = Gtos_table(self.driver,4)
-        rowid = tablecheck.select_row2("箱号", config.boxNumber)
+        rowid = tablecheck.select_row2("箱号", boxNumber)
         check.equal(tablecheck.get_value_by_rowid(rowid, '尺寸'), input['尺寸'])
         check.equal(tablecheck.get_value_by_rowid(rowid, '箱型'), input['箱型'])
         check.equal(tablecheck.get_value_by_rowid(rowid, '箱高'), input['箱高'])
@@ -215,11 +215,11 @@ class NO_Structure_Monitoring(BasePage):
                     return int(row)
         if  index == 5 :
             for y in a:
-                if y == config.boxNumberTwo:
+                if y == config.outBoxNumberTwo:
                     row = a[a.index(y)-1]
                     return int(row)
         if  index == 6 :
             for y in a:
-                if y == config.boxNumberThree:
+                if y == config.outBoxNumberThree:
                     row = a[a.index(y)-1]
                     return int(row)

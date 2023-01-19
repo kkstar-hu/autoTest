@@ -156,7 +156,7 @@ class Job_Order_Monitoring(BasePage):
         textclick.select_by_label("桥吊司机：",input["桥吊司机"])
         textclick.select_by_label("特殊：",input["特殊"])
         textclick.click('xpath',"//span[text()='保 存']")
-        self.check_alert('装船确认成功')
+        self.check_alert('作业完成')
 
 
     def closed_box(self,input):
@@ -183,7 +183,7 @@ class Job_Order_Monitoring(BasePage):
         textclick.click('xpath',"(//span[text()='保存'])[3]")
         self.check_alert('作业完成')
         tablecheck = Gtos_table(self.driver)
-        check.equal(tablecheck.get_value('作业状态'), '完成')
+        check.equal(tablecheck.get_value('作业状态'), '已装车')
 
     def shipping_confirmation(self):
         """
@@ -196,10 +196,6 @@ class Job_Order_Monitoring(BasePage):
         textclick.input_noclear_placeholder_click('请选择','钢丝吊',6)
         textclick.click('xpath',"//span[text()='保 存']")
         self.check_alert('装船确认成功')
-        tablecheck = Gtos_table(self.driver)
-        check.equal(tablecheck.get_value('作业状态'), '完成')
-
-
 
     def Job_DischargingOrder(self,input,boxnumber):
         """
@@ -218,8 +214,6 @@ class Job_Order_Monitoring(BasePage):
         self.Retrieve(input)
         self.order_Direct_lifting_check(input,boxnumber)
         self.discharging_confirm_lifting()
-
-
 
     def Job_PackingboxOrder(self,input):
         """

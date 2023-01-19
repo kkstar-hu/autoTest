@@ -5,6 +5,7 @@ from Commons.Controls.tag import Tag
 from Commons.RandomFunction import CommonGenerator
 from Commons.yamlread import read_yaml
 from GTOS.Config import config
+from GTOS.Config.config import takeNumber
 from GTOS.PageObject.CrossingManagement.carOut import Car_Out
 from GTOS.PageObject.CrossingManagement.checkInBox import CheckInBox
 from GTOS.PageObject.Mechanical_Control.Job_Order_Monitoring import Job_Order_Monitoring
@@ -20,7 +21,6 @@ def testCheckInBox(driver,input):
     checkInBox = CheckInBox(driver)
     checkInBox.search(input,config.outBoxNumber)
     checkInBox.input_checkin_info(input)
-    takeNumber=CommonGenerator.generate_spec("TD", 4)
     checkInBox.addgoodsinfo(input,takeNumber)
     checkInBox.input_info(input)
     checkInBox.confirm_button(input)
