@@ -83,6 +83,8 @@ class GoInPlan_BoxNumber(BasePage):
         self.check_alert(input["addplanalert"])
         tableCheckfixed = Table(self.driver,5)
         check.equal(tableCheckfixed.get_value("箱号"), boxNumber)
+        self.logger.info('添加箱号为：'+tableCheckfixed.get_value("箱号"))
+        print('添加箱号为：'+tableCheckfixed.get_value("箱号"))
         tableCheck = Table(self.driver, 4)
         check.equal(tableCheck.get_value("尺寸"), input['尺寸'])
         check.is_in(tableCheck.get_value("持箱人"), input['持箱人'])
