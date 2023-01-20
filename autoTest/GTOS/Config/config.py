@@ -6,21 +6,25 @@ global boxNumber
 #boxNumber=CommonGenerator.generate_spec("JXNU",7)
 boxNumber="JXNU100"
 
+#直提流程
 global boxNumberTwo
 #boxNumberTwo=CommonGenerator.generate_spec("ZTXZ",7)
-boxNumberTwo ='JXNU1001'
+boxNumberTwo ='JXNU1010'
 
 global boxNumberThree
 #boxNumberThree=CommonGenerator.generate_spec("ZZXZ",7)
-boxNumberThree ='JXNU1002'
+boxNumberThree ='JXNU1011'
 
+#进箱、装箱流程
 global outBoxNumber
 outBoxNumber="JXNU1009"
 
 #进口航次
+#importNumber=CommonGenerator.generate_spec("I",4)
 global importNumber
 importNumber="I107"
 #出口航次
+#outportNumber=CommonGenerator.generate_spec("I",4)
 global outportNumber
 outportNumber="E107"
 

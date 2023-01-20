@@ -55,6 +55,8 @@ class Immediate_plan(BasePage):
         self.click('x', "//span[text()='检索']")
         tablecheck = Gtos_table(self.driver, 2)
         rowid=tablecheck.select_row("进口航次",config.importNumber)
+        self.logger.info('进口航次号为：'+tablecheck.get_value_by_rowid(rowid,'进口航次'))
+        self.logger.info('出口航次号为：'+tablecheck.get_value_by_rowid(rowid,'出口航次'))
         check.equal(tablecheck.get_value_by_rowid(rowid,'船期状态'), '预报')
         check.equal(tablecheck.get_value_by_rowid(rowid, '靠泊状态'), '未靠')
     def Sure_ShipPlan(self):

@@ -11,14 +11,15 @@ class Job_Order_Monitoring(BasePage):
     作业指令监控
     """
 
-    def Retrieve(self,input,shipNumber,boxnumber=None):
+    def Retrieve(self,input,shipNumber=None,boxnumber=None):
         """
         输入内容，检索
         """
         self.logger.info('步骤1：作业指令，输入航名航次')
         textinput = Gtos_text(self.driver)
         textinput.multi_select_by_label('作业路类型',input['作业路类型'])
-        textinput.search_select_by_label('船名航次',shipNumber)
+        if shipNumber != None:
+            textinput.search_select_by_label('船名航次',shipNumber)
         if boxnumber!=None:
             textinput.input_by_label("箱号",boxnumber)
         self.logger.info('步骤2：检索')
@@ -211,7 +212,7 @@ class Job_Order_Monitoring(BasePage):
         """
         直提卸船确认
         """
-        self.Retrieve(input)
+        self.Retrieve(input,boxnumber=boxnumber)
         self.order_Direct_lifting_check(input,boxnumber)
         self.discharging_confirm_lifting()
 
@@ -227,8 +228,8 @@ class Job_Order_Monitoring(BasePage):
         """
         直装
         """
-        self.Retrieve_loading(input)
-        self.order_loading_check(input,boxmunber)
+        self.Retrieve(input,boxnumber=boxmunber)
+        self.order_info_check(input,boxmunber)
         self.shipping_confirmation()
 
 
