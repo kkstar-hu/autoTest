@@ -14,13 +14,13 @@ class Stockpiling_Planning(BasePage):
     堆存计划
     """
 
-    def search(self, type,number):
+    def search(self,type,number):
         """
         选择计划类型，船名航次,道口进
         """
         self.logger.info('步骤1：选择计划类型，船名航次')
         textInput = Gtos_text(self.driver)
-        textInput.search_select_by_label('计划类型', type)
+        textInput.select_by_label('计划类型', type)
         textInput.search_select_by_label('船名航次', number)
         self.click('x', "(//span[text()='检索'])[1]")
 

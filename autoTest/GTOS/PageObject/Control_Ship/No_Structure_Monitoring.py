@@ -46,7 +46,7 @@ class NO_Structure_Monitoring(BasePage):
         """
         发箱
         """
-        self.Retrieve(input)
+        self.Retrieve()
         self.SendBox_check_values(input,boxnumber)
         self.logger.info('步骤1：勾选后发箱')
         row = self.rows_value(3)
@@ -93,7 +93,7 @@ class NO_Structure_Monitoring(BasePage):
         """
         选择直装
         """
-        self.Retrieve(input)
+        self.Retrieve()
         self.click('xpath',"//div[contains(text(),'直装')]")
         self.logger.info('步骤1：勾选数据')
         tablecheck = Gtos_table(self.driver, 6)
@@ -119,7 +119,7 @@ class NO_Structure_Monitoring(BasePage):
         """
         选择直提
         """
-        self.Retrieve(input)
+        self.Retrieve()
         self.click('xpath',"//div[contains(text(),'直提')]")
         self.logger.info('步骤1：勾选数据')
         tablecheck = Gtos_table(self.driver, 5)
@@ -144,7 +144,7 @@ class NO_Structure_Monitoring(BasePage):
         """
         靠泊，桥吊操作
         """
-        self.Retrieve(input)
+        self.Retrieve()
         self.logger.info('步骤3：校验字段')
         tablecheck = Gtos_table(self.driver)
         check.equal(tablecheck.get_value('靠泊状态'),'未靠')
