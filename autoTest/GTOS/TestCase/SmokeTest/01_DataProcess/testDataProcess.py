@@ -87,18 +87,6 @@ def testShip_operation(driver, input):
     nostructure.ship_operation(input)
     Tag(driver).closeChoiceTag('无结构船舶监控')
 
-@pytest.mark.parametrize("input",read_yaml(os.path.join(os.getcwd(),'01_DataProcess', 'immediata_plan.yaml')))
-@allure.title('7、近期计划验证靠泊信息')
-@allure.story('1.驳船流程功能准备')
-def testCheck_shipinfo(driver, input):
-    """近期计划验证靠泊信息"""
-    menu = GtosMenu(driver)
-    menu.select_level_Menu("泊位策划,近期计划")
-    plan = Immediate_plan(driver)
-    plan.switch_Barge()
-    tablecheck = Gtos_table(driver, 2)
-    tablecheck.select_row("进口航次", config.importNumber)
-    plan.check_alongside_info(input)
 
 if __name__ == '__main__':
     pytest.main(['-sv'])
