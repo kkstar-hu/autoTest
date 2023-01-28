@@ -86,7 +86,7 @@ def testOrder(driver, input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("机械控制,作业指令监控")
     charge_car = Job_Order_Monitoring(driver)
-    charge_car.lifting_Order(input,config.boxNumberTwo)
+    charge_car.lifting_Order(input,config.importNumber,config.boxNumberTwo)
     Tag(driver).closeChoiceTag('作业指令监控')
 
 

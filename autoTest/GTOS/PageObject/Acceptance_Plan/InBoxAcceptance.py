@@ -38,7 +38,7 @@ class InBox_Acceptance(BasePage):
             Gtextinput.input_by_label('箱号', boxnumber)
             Gtextinput.input_by_label('铅封号', 'A123')
             Gtextinput.select_by_label('尺寸', input['尺寸'])
-            Gtextinput.select_by_label('箱型', input['箱型'])
+            Gtextinput.select_by_label('箱型', input['箱型1'])
             Gtextinput.select_by_label('箱高', input['箱高'])
             Gtextinput.select_by_label('持箱人', input['持箱人'])
             Gtextinput.input_by_label('箱货总重', input['箱货总重'])

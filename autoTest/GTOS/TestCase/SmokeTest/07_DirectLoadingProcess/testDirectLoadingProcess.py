@@ -88,7 +88,7 @@ def testOrder(driver, input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("机械控制,作业指令监控")
     charge_car = Job_Order_Monitoring(driver)
-    charge_car.loading_PackingboxOrder(input,config.boxNumberThree)
+    charge_car.loading_PackingboxOrder(input,config.outportNumber,config.boxNumberThree)
     Tag(driver).closeChoiceTag('作业指令监控')
 
 @allure.title('7、车辆出场')

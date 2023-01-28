@@ -129,7 +129,7 @@ class Gtos_table(BasePage):
     def get_body_values(self,name):
         try:
             em = self.get_element('xpath',
-                              f"(//div[@class='nzctos-v-dialog__body'])//label[@class='el-form-item__label' and contains(text(),'{name}')]/following::div[@class='el-form-item__content']//span")
+                              f"(//div[@class='nzctos-v-dialog__body'])//label[@class='el-form-item__label' and contains(text(),'{name}')]/following-sibling::div[@class='el-form-item__content']")
         except NoSuchElementException:
             raise Exception("定位不到元素")
 

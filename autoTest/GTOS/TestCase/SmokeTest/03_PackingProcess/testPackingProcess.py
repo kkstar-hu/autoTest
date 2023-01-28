@@ -62,9 +62,10 @@ def testSend_box(driver, input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("机械控制,作业指令监控")
     charge_car = Job_Order_Monitoring(driver)
-    charge_car.Job_SendBoxOrder(input,config.boxNumber)
+    charge_car.Job_SendBoxOrder(input,config.importNumber,config.boxNumber)
     Tag(driver).closeChoiceTag('作业指令监控')
 
+# @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('packing_process.yaml'))
 @allure.title('5、车辆出场')
 @allure.story('3.提箱流程')

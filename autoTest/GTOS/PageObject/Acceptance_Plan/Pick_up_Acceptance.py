@@ -77,7 +77,7 @@ class Packing_up(BasePage):
         """
         tablecheck = Gtos_table(self.driver)
         tablecheck.tick_off_box(1)
-        time.sleep(1)
+        time.sleep(1.5)
         tablecheck.tick_off_box(1)
         self.logger.info('步骤7：生成计划')
         self.click('xpath',"//span[text()='生成计划']")
