@@ -202,7 +202,7 @@ class Job_Order_Monitoring(BasePage):
         """
         工作指令卸船操作流程
         """
-        self.Retrieve(input)
+        self.Retrieve(input,config.importNumber,config.boxNumber)
         self.order_info_check(input,boxnumber)
         self.charge_car('A303')
         self.discharging_confirm()
@@ -212,7 +212,7 @@ class Job_Order_Monitoring(BasePage):
         """
         直提卸船确认
         """
-        self.Retrieve(input,boxnumber=boxnumber)
+        self.Retrieve(input,None,boxnumber=boxnumber)
         self.order_Direct_lifting_check(input,boxnumber)
         self.discharging_confirm_lifting()
 
@@ -220,7 +220,7 @@ class Job_Order_Monitoring(BasePage):
         """
         工作指令-提箱流程-装船确认
         """
-        self.Retrieve(input)
+        self.Retrieve(input,config.importNumber,config.boxNumber)
         self.order_info_check(input)
         self.shipping_confirmation()
 
@@ -228,7 +228,7 @@ class Job_Order_Monitoring(BasePage):
         """
         直装
         """
-        self.Retrieve(input,boxnumber=boxmunber)
+        self.Retrieve(input,None,boxnumber=boxmunber)
         self.order_info_check(input,boxmunber)
         self.shipping_confirmation()
 
@@ -239,7 +239,7 @@ class Job_Order_Monitoring(BasePage):
         """
         工作指令-堆场发箱
         """
-        self.Retrieve(input)
-        self.order_Take_check(input,boxmunber)
+        self.Retrieve(input,config.importNumber,config.boxNumber)
+        self.order_info_check(input,boxmunber)
         self.send_box(input)
 
