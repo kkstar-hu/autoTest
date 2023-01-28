@@ -55,10 +55,10 @@ def testship_order(driver, input):
     work = Job_Order_Monitoring(driver)
     work.Retrieve(input,config.outportNumber,config.outBoxNumber)
     work.order_info_check(input,config.outBoxNumber)
-    work.charge_car("C305")
+    work.charge_car("C305",input)
     work.send_box(input)
     work.LadeShip_confirm(input)
-    Tag(driver).closeChoiceTag('作业指令监控')
+    Tag(driver).closeTag('作业指令监控')
 
 if __name__ == '__main__':
     #pytest.main(['-vs'])

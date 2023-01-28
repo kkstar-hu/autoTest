@@ -32,7 +32,7 @@ def testManifest_box(driver, input):
     manifest = Manifest(driver)
     manifest.AddBox(input,config.boxNumber)
     manifest.choice_ship()
-    Tag(driver).closeChoiceTag('舱单')
+    Tag(driver).closeTag('舱单')
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('discharging_process.yaml'))
@@ -45,7 +45,7 @@ def testSend_box(driver, input):
     menu.select_level_Menu("船舶监控,无结构船舶监控")
     send_box = NO_Structure_Monitoring(driver)
     send_box.Send_Box(input,config.boxNumber)
-    Tag(driver).closeChoiceTag('无结构船舶监控')
+    Tag(driver).closeTag('无结构船舶监控')
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('discharging_process.yaml'))
@@ -58,7 +58,7 @@ def testCharge_Car(driver, input):
     menu.select_level_Menu("机械控制,作业指令监控")
     charge_car = Job_Order_Monitoring(driver)
     charge_car.Job_DischargingOrder(input,config.importNumber,config.boxNumber)
-    Tag(driver).closeChoiceTag('作业指令监控')
+    Tag(driver).closeTag('作业指令监控')
 
 
 if __name__ == '__main__':

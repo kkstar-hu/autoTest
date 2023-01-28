@@ -34,7 +34,7 @@ def testManifest_box(driver, input):
     manifest = Manifest(driver)
     manifest.AddBox(input,config.boxNumberTwo)
     manifest.choice_ship()
-    Tag(driver).closeChoiceTag('舱单')
+    Tag(driver).closeTag('舱单')
 
 
 # @pytest.mark.skipif
@@ -48,7 +48,7 @@ def testPacking(driver,input):
     menu.select_level_Menu("计划受理,安排计划,提箱受理")
     packing = Packing_up(driver)
     packing.straight_process(input,config.boxNumberTwo)
-    Tag(driver).closeChoiceTag('提箱受理')
+    Tag(driver).closeTag('提箱受理')
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('direct_liftin_process.yaml'))
@@ -61,7 +61,7 @@ def testDirectLoading(driver,input):
     menu.select_level_Menu("道口管理,直装/直提管理")
     loading = StraightLoad_StraightLift_Management(driver)
     loading.process_lifting(input,config.boxNumberTwo)
-    Tag(driver).closeChoiceTag('直装/直提管理')
+    Tag(driver).closeTag('直装/直提管理')
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('direct_liftin_process.yaml'))
@@ -74,7 +74,7 @@ def testLifting(driver, input):
     menu.select_level_Menu("船舶监控,无结构船舶监控")
     send_box = NO_Structure_Monitoring(driver)
     send_box.choice_lifting(input,config.boxNumberTwo)
-    Tag(driver).closeChoiceTag('无结构船舶监控')
+    Tag(driver).closeTag('无结构船舶监控')
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('direct_liftin_process.yaml'))
@@ -87,7 +87,7 @@ def testOrder(driver, input):
     menu.select_level_Menu("机械控制,作业指令监控")
     charge_car = Job_Order_Monitoring(driver)
     charge_car.lifting_Order(input,config.importNumber,config.boxNumberTwo)
-    Tag(driver).closeChoiceTag('作业指令监控')
+    Tag(driver).closeTag('作业指令监控')
 
 
 # @pytest.mark.skipif
@@ -101,7 +101,7 @@ def testCar_Out(driver, input):
     menu.select_level_Menu("道口管理,车辆出场")
     car_out = Car_Out(driver)
     car_out.process_loading(input,config.boxNumberTwo)
-    Tag(driver).closeChoiceTag('车辆出场')
+    Tag(driver).closeTag('车辆出场')
 
 
 

@@ -11,14 +11,17 @@ class Job_Order_Monitoring(BasePage):
     作业指令监控
     """
 
-    def Retrieve(self,input,shipname,boxnumber=None):
+    def Retrieve(self,input,shipname=None,boxnumber=None):
         """
         输入内容，检索
         """
         self.logger.info('步骤1：作业指令，输入航名航次')
         textinput = Gtos_text(self.driver)
-        textinput.search_select_by_label('作业路类型',input['作业路类型'])
-        textinput.search_select_by_label('船名航次',shipname)
+        textinput.multi_select_by_label('作业路类型',input['作业路类型'])
+        if shipname!=None:
+            textinput.search_select_by_label('船名航次',shipname)
+        if boxnumber!=None:
+            textinput.input_by_label("箱号",boxnumber)
         self.logger.info('步骤2：检索')
         self.click('xpath',"//span[text()='检索']")
 
