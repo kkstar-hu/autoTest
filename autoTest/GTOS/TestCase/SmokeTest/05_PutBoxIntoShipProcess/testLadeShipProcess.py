@@ -10,7 +10,7 @@ from GTOS.PageObject.Mechanical_Control.Job_Order_Monitoring import Job_Order_Mo
 from GTOS.PageObject.Ship_Planning.No_Structure_Stowage import No_Structure_Stowage
 from GTOS.PageObject.gtos_menu import GtosMenu
 
-@pytest.mark.skip
+# @pytest.mark.skip
 @allure.story('5.装船流程')
 @allure.title('1.装船箱放行')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'05_PutBoxIntoShipProcess','loadship.yaml')))
