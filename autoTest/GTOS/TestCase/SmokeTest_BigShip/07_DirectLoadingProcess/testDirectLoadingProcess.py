@@ -2,6 +2,7 @@ import os
 import allure
 import pytest
 from Commons.Controls.tag import Tag
+from GTOS.Config import config
 from GTOS.PageObject.Control_Ship.No_Structure_Monitoring import NO_Structure_Monitoring
 from GTOS.PageObject.CrossingManagement.carOut import Car_Out
 from GTOS.PageObject.Mechanical_Control.Job_Order_Monitoring import Job_Order_Monitoring
@@ -86,7 +87,7 @@ def testOrder(driver, input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("机械控制,作业指令监控")
     charge_car = Job_Order_Monitoring(driver)
-    charge_car.Job_PackingboxOrder(input)
+    charge_car.Job_PackingboxOrder(input,config.importNumber,config.boxNumber)
     Tag(driver).closeChoiceTag('作业指令监控')
 
 @allure.title('7、车辆出场')

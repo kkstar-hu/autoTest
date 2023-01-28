@@ -31,6 +31,7 @@ class NO_Structure_Monitoring(BasePage):
         row = self.rows_value(3)
         tablecheck = Gtos_table(self.driver,3)
         check.is_in(tablecheck.get_value('箱号',row).replace(' ','').replace('\n',''),boxnumber)
+        check.equal(tablecheck.get_value('装货港',row), input['装货港'])
         check.equal(tablecheck.get_value('卸货港',row), input['卸货港'])
         check.equal(tablecheck.get_value('作业状态',row), '可作业')
         check.equal(tablecheck.get_value('箱状态',row),input['箱状态'])
