@@ -63,7 +63,7 @@ def testStockpiling_Planning_into(driver,input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("堆场策划,堆存,堆存计划")
     stockpiling = Stockpiling_Planning(driver)
-    stockpiling.process_into(input)
+    stockpiling.process_into()
 
 # @pytest.mark.skipif
 @pytest.mark.parametrize("input",read_yaml(os.path.join(os.getcwd(),'01_DataProcess','immediata_plan.yaml')))
@@ -72,7 +72,7 @@ def testStockpiling_Planning_into(driver,input):
 def testStockpiling_Planning_out(driver, input):
     """堆存计划-卸船"""
     stockpiling = Stockpiling_Planning(driver)
-    stockpiling.process_out(input)
+    stockpiling.process_out()
     Tag(driver).closeChoiceTag('堆存计划')
 
 # @pytest.mark.skipif
@@ -90,7 +90,7 @@ def testShip_operation(driver, input):
 @pytest.mark.parametrize("input",read_yaml(os.path.join(os.getcwd(),'01_DataProcess', 'immediata_plan.yaml')))
 @allure.title('7、近期计划验证靠泊信息')
 @allure.story('1.驳船流程功能准备')
-def testShip_operation(driver, input):
+def testCheck_shipinfo(driver, input):
     """近期计划验证靠泊信息"""
     menu = GtosMenu(driver)
     menu.select_level_Menu("泊位策划,近期计划")

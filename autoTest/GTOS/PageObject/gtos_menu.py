@@ -24,6 +24,7 @@ class GtosMenu(Menu):
     def select_level_Menu(self,name):
         try:
             menuName=self.get_text("xpath","//div[@id='tags-view-container']//span[starts-with(@class,'tags-view-item active')]").strip()
+            time.sleep(0.5)
             if menuName in name:
                 return
             elif "," in name:

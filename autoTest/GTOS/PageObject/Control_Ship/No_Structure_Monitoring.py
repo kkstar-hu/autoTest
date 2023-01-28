@@ -13,7 +13,7 @@ class NO_Structure_Monitoring(BasePage):
     """
     无结构船舶监控
     """
-    def Retrieve(self,input):
+    def Retrieve(self):
         """
         输入内容，检索
         """
@@ -183,6 +183,21 @@ class NO_Structure_Monitoring(BasePage):
         check.equal(tablecheck1.get_value('状态'),'开工')
 
 
+    #吊桥完工
+    def over_drawbridge(self,number):
+        tablecheck = Gtos_table(self.driver, 2)
+        tablecheck.check('桥吊号', number)
+        self.click('x', "//span[text()='桥吊完工']")
+        check.equal(tablecheck.get_value('状态'), '完工')
+
+    #离泊确认
+    def unberthing(self,number):
+        tablecheck = Gtos_table(self.driver)
+        tablecheck.check("进口航次",number)
+        self.click('x', "//span[text()='离泊/离港确认']")
+        self.click('x', "//input[@placeholder='离泊时间']")
+        self.click('x', "//span[contains(text(),'此刻')]")
+        self.click('x', "//span[text()='提交']")
 
     def rows_value(self,index=1):
         """
