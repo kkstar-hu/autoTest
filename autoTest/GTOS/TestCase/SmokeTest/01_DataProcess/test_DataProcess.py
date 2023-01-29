@@ -73,7 +73,7 @@ def testStockpiling_Planning_out(driver, input):
     """堆存计划-卸船"""
     stockpiling = Stockpiling_Planning(driver)
     stockpiling.process_out()
-    Tag(driver).closeTagGtos('堆存计划')
+    Tag(driver).closeChoiceTag('堆存计划')
 
 # @pytest.mark.skipif
 @pytest.mark.parametrize("input",read_yaml(os.path.join(os.getcwd(),'01_DataProcess', 'immediata_plan.yaml')))
