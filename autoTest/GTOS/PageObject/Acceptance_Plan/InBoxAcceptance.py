@@ -49,6 +49,7 @@ class InBox_Acceptance(BasePage):
             tablecheck = Gtos_table(self.driver)
             self.logger.info('步骤4：校验字段')
             check.equal(tablecheck.get_value('箱号'), boxnumber)
+            self.logger.info('本次直装箱号:'+ tablecheck.get_value('箱号')+'!!!!!!!!!!!!!!!!!')
             check.equal(tablecheck.get_value('贸易类型'), '内贸')
             check.equal(tablecheck.get_value('铅封号'), 'A123')
             check.equal(tablecheck.get_value('尺寸'), input['尺寸'])

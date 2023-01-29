@@ -57,6 +57,7 @@ class Manifest(BasePage):
             em = self.get_element('xpath',f"//div[text()='{boxnumber}']")
             ActionChains(self.driver).move_to_element(em).click().perform()
             check.equal(tablecheck.get_value('提单号',row), boxnumber)
+            self.logger.info('本次箱号:'+ tablecheck.get_value('提单号',row)+'!!!!!!!!!!!!!!!!!')
             check.equal(tablecheck.get_value('总箱数',row), '0')
             check.equal(tablecheck.get_value('货主',row), input['货主'])
             check.equal(tablecheck.get_value('货代',row), input['货代'])
