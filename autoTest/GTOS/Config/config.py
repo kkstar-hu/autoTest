@@ -30,10 +30,10 @@ outBoxNumber=CommonGenerator.generate_spec("JXZX",7)
 
 #进口航次
 global importNumber
-importNumber="I302"
+importNumber="I305"
 #出口航次
 global outportNumber
-outportNumber="E302"
+outportNumber="E305"
 
 #提箱预约号
 global Number
@@ -45,9 +45,10 @@ global bigshipoutportNumber
 bigshipimportNumber="I0001"
 bigshipoutportNumber="1000E"
 
-
+global takeNumber
+takeNumber=CommonGenerator.generate_spec_password(4) #进箱提单号
 #登录信息
-takeNumber="1014" #进箱提单号
+
 username="admin"
 password="ctos@12345"
 showname="管理员"

@@ -68,6 +68,7 @@ class CheckInBox(BasePage):
 
     def addgoodsinfo(self,input, takeNumber):
         self.click("x", "//span[text()='新增货']")
+        self.waitloading()
         try:
             textInput = Gtos_text(self.driver)
             textInput.input_by_label("提单号", takeNumber)

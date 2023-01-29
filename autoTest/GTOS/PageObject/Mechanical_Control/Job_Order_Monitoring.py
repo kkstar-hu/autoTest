@@ -184,7 +184,7 @@ class Job_Order_Monitoring(BasePage):
         textclick.select_by_label("桥吊司机：",input["桥吊司机"])
         textclick.select_by_label("特殊：",input["特殊"])
         textclick.click('xpath',"//span[text()='保 存']")
-        self.check_alert('装船确认成功')
+        self.check_alert('作业完成')
 
 
     def closed_box(self,input):
@@ -211,7 +211,7 @@ class Job_Order_Monitoring(BasePage):
         textclick.click('xpath',"(//span[text()='保存'])[3]")
         self.check_alert('作业完成')
         tablecheck = Gtos_table(self.driver)
-        check.equal(tablecheck.get_value('作业状态'), '完成')
+        check.equal(tablecheck.get_value('作业状态'), '已装车')
         if self.hasInput(input, '操作过程'):
             if input['操作过程'] == '场―车':
                 check.equal(tablecheck.get_value('当前位置'), input['车牌'] + input['集卡编号'])
