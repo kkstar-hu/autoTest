@@ -19,7 +19,8 @@ class Gtos_text(BasePage):
     def input_noclear_placeholder_click(self, name, value,index = 1):
         try:
             self.input_no_clear("xpath", f"(//input[@placeholder='{name}'])[{index}]", value)
-            self.click("xpath", f"//span[text()='{value}']")
+            self.click("xpath",
+                       f"//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]//span[contains(text(),'{value}')]")
         except NoSuchElementException:
             raise Exception("定位不到元素")
 

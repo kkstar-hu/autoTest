@@ -24,7 +24,7 @@ def testPacking(driver,input):
     menu.select_level_Menu("计划受理,安排计划,提箱受理")
     packing = Packing_up(driver)
     packing.packing_process(input,config.boxNumber)
-    Tag(driver).closeChoiceTag('提箱受理')
+    Tag(driver).closeTagGtos('提箱受理')
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('packing_process.yaml'))
@@ -37,7 +37,7 @@ def testPackingManagement(driver,input):
     menu.select_level_Menu("计划受理,计划管理")
     planmanegement = PlanManagement(driver)
     planmanegement.process(config.boxNumber)
-    Tag(driver).closeChoiceTag('计划管理')
+    Tag(driver).closeTagGtos('计划管理')
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('packing_process.yaml'))
@@ -50,7 +50,7 @@ def testCheckOutBox(driver,input):
     menu.select_level_Menu("道口管理,办理提箱手续V1")
     checkoutbox = CheckOutBox(driver)
     checkoutbox.process(input)
-    Tag(driver).closeChoiceTag('办理提箱手续V1')
+    Tag(driver).closeTagGtos('办理提箱手续V1')
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('packing_process.yaml'))
@@ -63,7 +63,7 @@ def testSend_box(driver, input):
     menu.select_level_Menu("机械控制,作业指令监控")
     charge_car = Job_Order_Monitoring(driver)
     charge_car.Job_SendBoxOrder(input,config.importNumber,config.boxNumber)
-    Tag(driver).closeChoiceTag('作业指令监控')
+    Tag(driver).closeTagGtos('作业指令监控')
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('packing_process.yaml'))
@@ -76,7 +76,7 @@ def testCar_Out(driver, input):
     menu.select_level_Menu("道口管理,车辆出场")
     car_out = Car_Out(driver)
     car_out.process(input,config.boxNumber)
-    Tag(driver).closeChoiceTag('车辆出场')
+    Tag(driver).closeTagGtos('车辆出场')
 
 
 

@@ -58,6 +58,7 @@ class Stockpiling_Planning(BasePage):
         time.sleep(1)
         textInput = Gtos_text(self.driver)
         textInput.input_noclear_placeholder_click('请选择','A01')
+        time.sleep(0.5)
         textInput.click('x',"//span[text()='保存']")
         self.check_alert('新增成功')
         self.close_alert('新增成功')
