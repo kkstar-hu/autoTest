@@ -17,3 +17,6 @@ class Tag(BasePage):
         self.refresh()
         self.waitloading()
 
+    def closeTagGtos(self,tagname):
+        self.click("xpath", "//div[@id='tags-view-container']//span[contains(text(),'"+tagname+"')]//following-sibling::span")
+        self.waitloading()

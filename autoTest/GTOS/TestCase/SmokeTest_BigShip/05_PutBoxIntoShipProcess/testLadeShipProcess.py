@@ -41,7 +41,7 @@ def testship_monitor(driver, input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("船舶监控,无结构船舶监控")
     Monitor = NO_Structure_Monitoring(driver)
-    Monitor.Retrieve(input)
+    Monitor.Retrieve()
     Monitor.clickLadeShipTag()
     Monitor.LadeShip_check_values(input)
     Monitor.LadeShip_Send_Box()

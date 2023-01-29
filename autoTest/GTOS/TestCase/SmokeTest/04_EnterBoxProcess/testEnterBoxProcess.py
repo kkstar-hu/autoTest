@@ -36,7 +36,7 @@ def testReceive_box(driver, input):
     work.Retrieve(input,config.outportNumber)
     work.order_info_check(input,config.outBoxNumber)
     work.closed_box(input)
-    Tag(driver).closeTag('作业指令监控')
+    Tag(driver).closeTagGtos('作业指令监控')
 
 
 @allure.story('4.新增进箱计划')
@@ -47,7 +47,7 @@ def testCar_Out(driver, input):
     menu.select_level_Menu("道口管理,车辆出场")
     car_out = Car_Out(driver)
     car_out.process_loading(input,config.outBoxNumber)
-    Tag(driver).closeTag('车辆出场')
+    Tag(driver).closeTagGtos('车辆出场')
 
 
 if __name__ == '__main__':

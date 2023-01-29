@@ -58,7 +58,7 @@ def testship_order(driver, input):
     work.charge_car("C305",input)
     work.send_box(input)
     work.LadeShip_confirm(input)
-    Tag(driver).closeTag('作业指令监控')
+    Tag(driver).closeTagGtos('作业指令监控')
 
 if __name__ == '__main__':
     #pytest.main(['-vs'])

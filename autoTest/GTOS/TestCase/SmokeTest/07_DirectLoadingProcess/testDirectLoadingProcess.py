@@ -24,7 +24,7 @@ def testAddPlan(driver,input):
     menu.select_level_Menu("计划受理,安排计划,进箱受理")
     inbox = InBox_Acceptance(driver)
     inbox.process(input,config.boxNumberThree)
-    Tag(driver).closeTag('进箱受理')
+    Tag(driver).closeTagGtos('进箱受理')
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('direct_loadingp_rocess.yaml'))
@@ -37,7 +37,7 @@ def testWharfrelease(driver,input):
     menu.select_level_Menu("资料管理,出口资料,装船箱放行")
     release = Manifest(driver)
     release.input_values(input,config.boxNumberThree)
-    Tag(driver).closeTag('装船箱放行')
+    Tag(driver).closeTagGtos('装船箱放行')
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('direct_loadingp_rocess.yaml'))
@@ -50,7 +50,7 @@ def testNoStowage(driver,input):
     menu.select_level_Menu("船舶策划,无结构船舶配载")
     no_ship = No_Structure_Stowage(driver)
     no_ship.Retrieve(input,config.boxNumberThree)
-    Tag(driver).closeTag('无结构船舶配载')
+    Tag(driver).closeTagGtos('无结构船舶配载')
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('direct_loadingp_rocess.yaml'))
@@ -63,7 +63,7 @@ def testDirectLoading(driver,input):
     menu.select_level_Menu("道口管理,直装/直提管理")
     loading = StraightLoad_StraightLift_Management(driver)
     loading.process_loading(input,config.boxNumberThree)
-    Tag(driver).closeTag('直装/直提管理')
+    Tag(driver).closeTagGtos('直装/直提管理')
 
 # @pytest.mark.skipif
 @allure.title('5、无结构监控允许直装')
@@ -76,7 +76,7 @@ def testSend_box(driver, input):
     menu.select_level_Menu("船舶监控,无结构船舶监控")
     send_box = NO_Structure_Monitoring(driver)
     send_box.choice_loading(input,config.boxNumberThree)
-    Tag(driver).closeTag('无结构船舶监控')
+    Tag(driver).closeTagGtos('无结构船舶监控')
 
 # @pytest.mark.skipif
 @allure.title('6、工作指令操作')
@@ -89,7 +89,7 @@ def testOrder(driver, input):
     menu.select_level_Menu("机械控制,作业指令监控")
     charge_car = Job_Order_Monitoring(driver)
     charge_car.loading_PackingboxOrder(input,config.outportNumber,config.boxNumberThree)
-    Tag(driver).closeTag('作业指令监控')
+    Tag(driver).closeTagGtos('作业指令监控')
 
 @allure.title('7、车辆出场')
 @allure.story('6.直装流程')
@@ -101,7 +101,7 @@ def testCar_Out(driver, input):
     menu.select_level_Menu("道口管理,车辆出场")
     car_out = Car_Out(driver)
     car_out.process_loading(input,config.boxNumberThree)
-    Tag(driver).closeTag('车辆出场')
+    Tag(driver).closeTagGtos('车辆出场')
 
 
 if __name__ == '__main__':

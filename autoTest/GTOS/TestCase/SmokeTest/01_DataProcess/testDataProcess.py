@@ -27,7 +27,7 @@ def testImmediatePlan(driver,input):
     plan.checkPlan()
     plan.Sure_ShipPlan()
     plan.SureInBox()
-    Tag(driver).closeTag('近期计划')
+    Tag(driver).closeTagGtos('近期计划')
 
 
 @pytest.mark.parametrize("input",read_yaml(os.path.join(os.getcwd(),'01_DataProcess','immediata_plan.yaml')))
@@ -40,7 +40,7 @@ def testBridgeCraneDistribution(driver,input):
     bridge = Bridge_Crane_Distribution(driver)
     bridge.search(input)
     bridge.arrangeBridge()
-    Tag(driver).closeTag('桥吊资源分配')
+    Tag(driver).closeTagGtos('桥吊资源分配')
 
 
 @pytest.mark.parametrize("input",read_yaml(os.path.join(os.getcwd(),'01_DataProcess','immediata_plan.yaml')))
@@ -52,7 +52,7 @@ def testVoyage_Attached(driver,input):
     menu.select_level_Menu("泊位策划,航次挂靠港")
     vovage = Voyage_Attached(driver)
     vovage.process(input)
-    Tag(driver).closeTag('航次挂靠港')
+    Tag(driver).closeTagGtos('航次挂靠港')
 
 # @pytest.mark.skipif
 @pytest.mark.parametrize("input",read_yaml(os.path.join(os.getcwd(),'01_DataProcess','immediata_plan.yaml')))
@@ -73,7 +73,7 @@ def testStockpiling_Planning_out(driver, input):
     """堆存计划-卸船"""
     stockpiling = Stockpiling_Planning(driver)
     stockpiling.process_out()
-    Tag(driver).closeTag('堆存计划')
+    Tag(driver).closeTagGtos('堆存计划')
 
 # @pytest.mark.skipif
 @pytest.mark.parametrize("input",read_yaml(os.path.join(os.getcwd(),'01_DataProcess', 'immediata_plan.yaml')))
@@ -85,7 +85,7 @@ def testShip_operation(driver, input):
     menu.select_level_Menu("船舶监控,无结构船舶监控")
     nostructure = NO_Structure_Monitoring(driver)
     nostructure.ship_operation(input)
-    Tag(driver).closeTag('无结构船舶监控')
+    Tag(driver).closeTagGtos('无结构船舶监控')
 
 
 if __name__ == '__main__':
