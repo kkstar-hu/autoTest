@@ -15,7 +15,7 @@ from GTOS.PageObject.CrossingManagement.carOut import Car_Out
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('direct_liftin_process.yaml'))
 @allure.title('1、新增舱单计划')
-@allure.story('7.直提流程')
+@allure.story('6.直提流程')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'06_DirectLiftingProcess', 'direct_liftin_process.yaml')))
 def testManifest(driver,input):
     """新增舱单资料"""
@@ -27,7 +27,7 @@ def testManifest(driver,input):
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('direct_liftin_process.yaml'))
 @allure.title('2、新增提箱计划')
-@allure.story('7.直提流程')
+@allure.story('6.直提流程')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'06_DirectLiftingProcess', 'direct_liftin_process.yaml')))
 def testManifest_box(driver, input):
     """新增舱单箱资料"""
@@ -40,7 +40,7 @@ def testManifest_box(driver, input):
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('direct_liftin_process.yaml'))
 @allure.title('3、生成直提计划')
-@allure.story('7.直提流程')
+@allure.story('6.直提流程')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'06_DirectLiftingProcess', 'direct_liftin_process.yaml')))
 def testPacking(driver,input):
     """提箱受理"""
@@ -53,7 +53,7 @@ def testPacking(driver,input):
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('direct_liftin_process.yaml'))
 @allure.title('4、直提报到')
-@allure.story('7.直提流程')
+@allure.story('6.直提流程')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'06_DirectLiftingProcess', 'direct_liftin_process.yaml')))
 def testDirectLoading(driver,input):
     """直提"""
@@ -66,7 +66,7 @@ def testDirectLoading(driver,input):
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('direct_liftin_process.yaml'))
 @allure.title('5、无结构船舶监控允许直提')
-@allure.story('7.直提流程')
+@allure.story('6.直提流程')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'06_DirectLiftingProcess', 'direct_liftin_process.yaml')))
 def testLifting(driver, input):
     """无结构船舶允许直提"""
@@ -79,7 +79,7 @@ def testLifting(driver, input):
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('direct_liftin_process.yaml'))
 @allure.title('6、工作指令卸船确认')
-@allure.story('7.直提流程')
+@allure.story('6.直提流程')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'06_DirectLiftingProcess', 'direct_liftin_process.yaml')))
 def testOrder(driver, input):
     """工作指令-卸船确认"""
@@ -93,7 +93,7 @@ def testOrder(driver, input):
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('direct_liftin_process.yaml'))
 @allure.title('7、车辆出场')
-@allure.story('7.直提流程')
+@allure.story('6.直提流程')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'06_DirectLiftingProcess', 'direct_liftin_process.yaml')))
 def testCar_Out(driver, input):
     """车辆出场"""
