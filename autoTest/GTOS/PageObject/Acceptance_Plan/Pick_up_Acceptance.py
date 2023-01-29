@@ -77,8 +77,8 @@ class Packing_up(BasePage):
         """
         tablecheck = Gtos_table(self.driver)
         tablecheck.tick_off_box(1)
-        time.sleep(1.5)
-        tablecheck.tick_off_box(1)
+        if self.elementExist('x',"//input[@aria-label='Press Space to toggle row selection (unchecked)']") is True:
+            tablecheck.tick_off_box(1)
         self.logger.info('步骤7：生成计划')
         self.click('xpath',"//span[text()='生成计划']")
         textinput = Gtos_text(self.driver)
