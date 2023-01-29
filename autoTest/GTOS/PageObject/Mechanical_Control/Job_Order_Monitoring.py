@@ -280,7 +280,7 @@ class Job_Order_Monitoring(BasePage):
         """
         工作指令-堆场发箱
         """
-        self.Retrieve(input,shipname)
+        self.Retrieve(input,shipname,boxmunber)
         self.order_info_check_new(input,boxmunber)
         self.send_box(input)
 
