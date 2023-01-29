@@ -93,7 +93,6 @@ def testOrder(driver, input):
 
 @allure.title('7、车辆出场')
 @allure.story('7.直装流程')
-# @pytest.mark.parametrize("input", read_yaml('direct_loadingp_rocess.yaml'))
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'07_DirectLoadingProcess', 'direct_loadingp_rocess.yaml')))
 def testCar_Out(driver, input):
     """车辆出场"""

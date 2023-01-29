@@ -52,4 +52,4 @@ def testCar_Out(driver, input):
 
 if __name__ == '__main__':
     #pytest.main(['-vs'])
-    pytest.main(['-s', '-v', 'testEnterBoxProcess.py','--html=../report/report.html', '--alluredir','../report/allure-results'])
+    pytest.main(['-s', '-v', 'test_EnterBoxProcess.py','--html=../report/report.html', '--alluredir','../report/allure-results'])

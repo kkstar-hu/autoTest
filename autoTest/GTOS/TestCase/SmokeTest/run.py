@@ -5,14 +5,20 @@ import urllib3
 from Commons import allurechange
 
 if __name__ == '__main__':
-    pytest.main(['-sv','../SmokeTest/DischargingProcess/tesDischargingProcess.py',
-                        '../SmokeTest/PackingProcess/testPackingProcess.py',
-                        '../SmokeTest/DirectLoadingProcess/testDirectLoadingProcess.py',
-                 '--alluredir', '../../report/result', "--clean-alluredir"])
+    pytest.main(['-sv','--alluredir', '../../report/result', "--clean-alluredir"])
 
-    # pytest.main(['-sv','../SmokeTest/DirectLoadingProcess/testDirectLoadingProcess.py',
-    #              '--alluredir', '../../report/result', "--clean-alluredir"])
-    urllib3.disable_warnings()
+    '''
+    pytest.main(['-sv', '../SmokeTest/01_DataProcess/test_DataProcess.py',
+                 '../SmokeTest/02_DischargingProcess/test_DischargingProcess.py',
+                 '../SmokeTest/03_PackingProcess/test_PackingProcess.py',
+                 '../SmokeTest/04_EnterBoxProcess/test_EnterBoxProcess.py',
+                 '../SmokeTest/05_PutBoxIntoShipProcess/test_LadeShipProcess.py',
+                 '../SmokeTest/06_DirectLiftingProcess/test_DirectLiftingProcess.py',
+                 '../SmokeTest/07_DirectLoadingProcess/test_DirectLoadingProcess.py',
+                 '../SmokeTest/08_OverShip/test_OverShip.py',
+                 '--alluredir', '../../report/result', "--clean-alluredir"])
+    '''
+    #urllib3.disable_warnings()
     os.system('allure generate ../../report/result -o ../../report/html --clean')
     allurechange.set_windos_title('阳逻港GTOS自动化测试')
     report_title = allurechange.get_json_data("阳逻港GTOS测试报告")

@@ -5,34 +5,35 @@ host="http://10.166.0.155/app/#/login"
 #驳船内容
 #进场计划箱号
 global boxNumber
-boxNumber=CommonGenerator.generate_spec("JXNU",7)
-# boxNumber="JXNU6875109"
+boxNumber=CommonGenerator.generate_spec("XCTX",7)
+#boxNumber="JXNU1000005"
 
 #直提箱编号
 global boxNumberTwo
 boxNumberTwo=CommonGenerator.generate_spec("ZTXZ",7)
-# boxNumberTwo ='JXNU1001'
+#boxNumberTwo ='ZTXZ1000020'
 
 #直装箱编号
 global boxNumberThree
 boxNumberThree=CommonGenerator.generate_spec("ZZXZ",7)
-# boxNumberThree ='ZZXZ3517204'
+#boxNumberThree ='ZZXZ1000021'
 
 
 #箱位置
 global boxPosition
 # boxPosition='A03011031'
 
-
+#进箱、装箱流程
 global outBoxNumber
-outBoxNumber="I107"
+outBoxNumber=CommonGenerator.generate_spec("JXZX",7)
+#outBoxNumber="JXNU1000017"
 
 #进口航次
 global importNumber
-importNumber="I101"
+importNumber="I302"
 #出口航次
 global outportNumber
-outportNumber="E101"
+outportNumber="E302"
 
 #提箱预约号
 global Number
