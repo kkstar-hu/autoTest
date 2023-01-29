@@ -41,7 +41,7 @@ class No_Structure_Stowage(BasePage):
         check.equal(tablecheck.get_value('作业状态',row), '提交作业')
 
 
-    def search(self,input):
+    def search(self):
         self.logger.info('步骤1：输入船名航次')
         Gtextinput = Gtos_text(self.driver)
         Gtextinput.search_select_by_label('出口船名航次', config.outportNumber)

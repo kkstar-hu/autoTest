@@ -338,8 +338,10 @@ class BasePage:
 
     def check_alert_and_close(self, expectAlert):
         check.equal(self.get_alert_text(), expectAlert)
-        self.click('xpath',
-                   f"//div[@role='alert']//p[text()='{expectAlert}']/following::div[@class='el-notification__closeBtn el-icon-close']")
+        try:
+            self.click('xpath',f"//div[@role='alert']//p[text()='{expectAlert}']/following::div[@class='el-notification__closeBtn el-icon-close']")
+        except:
+            self.click('xpath',f"//div[@class='el-notification__closeBtn el-icon-close']")
 
     def close_alert(self,name):
         """

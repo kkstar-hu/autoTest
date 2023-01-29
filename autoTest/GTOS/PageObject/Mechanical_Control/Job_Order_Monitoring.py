@@ -123,10 +123,11 @@ class Job_Order_Monitoring(BasePage):
         self.logger.info('步骤2：校验内容')
         tablecheck = Gtos_table(self.driver)
         check.equal(tablecheck.get_value('作业状态'), '已配集卡')
-        if input['操作过程'] == '船―场':
-            check.equal(tablecheck.get_value('起始位置'), input['作业路'])
-            check.equal(tablecheck.get_value('拖运机械'), car)
-            check.equal(tablecheck.get_value('当前位置'), '')
+        if self.hasInput(input, '操作过程'):
+            if input['操作过程']== '船―场':
+                check.equal(tablecheck.get_value('起始位置'), input['作业路'])
+                check.equal(tablecheck.get_value('拖运机械'), car)
+                check.equal(tablecheck.get_value('当前位置'), '')
 
     def discharging_confirm(self,input):
         """
@@ -183,7 +184,7 @@ class Job_Order_Monitoring(BasePage):
         textclick.select_by_label("桥吊司机：",input["桥吊司机"])
         textclick.select_by_label("特殊：",input["特殊"])
         textclick.click('xpath',"//span[text()='保 存']")
-        self.check_alert('作业完成')
+        self.check_alert('装船确认成功')
 
 
     def closed_box(self,input):
@@ -211,8 +212,9 @@ class Job_Order_Monitoring(BasePage):
         self.check_alert('作业完成')
         tablecheck = Gtos_table(self.driver)
         check.equal(tablecheck.get_value('作业状态'), '完成')
-        if input['操作过程'] == '场―车':
-            check.equal(tablecheck.get_value('当前位置'), input['车牌'] + input['集卡编号'])
+        if self.hasInput(input, '操作过程'):
+            if input['操作过程'] == '场―车':
+                check.equal(tablecheck.get_value('当前位置'), input['车牌'] + input['集卡编号'])
 
     def shipping_confirmation(self,input):
         """
@@ -227,10 +229,11 @@ class Job_Order_Monitoring(BasePage):
         self.check_alert('装船确认成功')
         tablecheck = Gtos_table(self.driver)
         check.equal(tablecheck.get_value('作业状态'), '完成')
-        if input['操作过程'] == '车―船':
-            check.equal(tablecheck.get_value('起始位置'), input['车牌'] + input['集卡编号'])
-            check.equal(tablecheck.get_value('拖运机械'), input['车牌'] + input['集卡编号'])
-            check.equal(tablecheck.get_value('当前位置'), 'B109')
+        if self.hasInput(input, '操作过程'):
+            if input['操作过程'] == '车―船':
+                check.equal(tablecheck.get_value('起始位置'), input['车牌'] + input['集卡编号'])
+                check.equal(tablecheck.get_value('拖运机械'), input['车牌'] + input['集卡编号'])
+                check.equal(tablecheck.get_value('当前位置'), 'B109')
 
 
 

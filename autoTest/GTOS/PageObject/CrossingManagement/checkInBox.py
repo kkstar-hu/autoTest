@@ -37,7 +37,7 @@ class CheckInBox(BasePage):
         #提单信息
         textInput.select_by_label("持箱人", input['持箱人'])
         textInput.select_by_label("付费人", input['付费人'])
-        textInput.select_by_label("附加操作", input['附加操作'])
+        #textInput.select_by_label("附加操作", input['附加操作'])
         textInput.select_by_label("箱组", input['箱组'])
         #箱信息
         textInput.input_by_label("铅封号", input['铅封号'])
