@@ -40,6 +40,7 @@ class CheckOutBox(BasePage):
         self.click('xpath', "//li//span[text()='B01']")
         self.input_no_clear('xpath',"//input[@placeholder='请输入车架号']",'123')
         self.waitloading()
+        time.sleep(1)
         textInput.select_by_label('结算人',input['结算人'])
         self.element_wait_disappear("xpath","//div[@role='alert']//p")
         self.click('xpath',"//span[text()='确认提箱']")

@@ -24,6 +24,7 @@ def testCheckInBox(driver,input):
     checkInBox.addgoodsinfo(input,takeNumber)
     checkInBox.input_info(input)
     checkInBox.confirm_button(input)
+    Tag(driver).closeTagGtos('办理进箱手续V1')
 
 @allure.story('4.新增进箱计划')
 @allure.title('2.堆场收箱')

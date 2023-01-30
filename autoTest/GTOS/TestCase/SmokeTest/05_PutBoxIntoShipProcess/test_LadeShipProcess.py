@@ -32,6 +32,7 @@ def testship_stowage(driver, input):
     stowage.search()
     stowage.check(input,config.outBoxNumber,config.takeNumber)
     stowage.stowage(config.outBoxNumber)
+    Tag(driver).closeTagGtos('无结构船舶配载')
 
 @allure.story('5.装船流程')
 @allure.title('3.无结构船舶监控')
@@ -45,6 +46,7 @@ def testship_monitor(driver, input):
     Monitor.clickLadeShipTag()
     Monitor.LadeShip_check_values(input,config.outBoxNumber)
     Monitor.LadeShip_Send_Box()
+    Tag(driver).closeTagGtos('无结构船舶监控')
 @allure.story('5.装船流程')
 @allure.title('4.作业指令监控')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'05_PutBoxIntoShipProcess','loadship.yaml')))

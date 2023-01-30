@@ -33,4 +33,7 @@ class GtosMenu(Menu):
             self.waitloading()
             time.sleep(1)
         except:
-            raise Exception(f"未找到菜单{name}")
+            try:
+                self.select_level_Menu(name)
+            except:
+                raise Exception(f"未找到菜单{name}")

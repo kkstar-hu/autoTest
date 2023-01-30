@@ -76,7 +76,7 @@ def testCar_Out(driver, input):
     menu.select_level_Menu("道口管理,车辆出场")
     car_out = Car_Out(driver)
     car_out.process(input,config.boxNumber)
-    Tag(driver).closeTagGtos('车辆出场')
+    Tag(driver).closeChoiceTag('车辆出场')
 
 
 
