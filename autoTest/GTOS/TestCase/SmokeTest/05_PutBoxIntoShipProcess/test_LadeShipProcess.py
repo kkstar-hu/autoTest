@@ -30,7 +30,7 @@ def testship_stowage(driver, input):
     menu.select_level_Menu("船舶策划,无结构船舶配载")
     stowage = No_Structure_Stowage(driver)
     stowage.search()
-    stowage.check(input,config.outBoxNumber)
+    stowage.check(input,config.outBoxNumber,config.takeNumber)
     stowage.stowage(config.outBoxNumber)
 
 @allure.story('5.装船流程')

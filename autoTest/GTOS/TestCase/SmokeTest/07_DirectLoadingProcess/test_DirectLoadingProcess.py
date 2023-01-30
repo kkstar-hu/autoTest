@@ -48,8 +48,10 @@ def testNoStowage(driver,input):
     """无结构船舶配载"""
     menu = GtosMenu(driver)
     menu.select_level_Menu("船舶策划,无结构船舶配载")
-    no_ship = No_Structure_Stowage(driver)
-    no_ship.Retrieve(input,config.boxNumberThree)
+    stowage = No_Structure_Stowage(driver)
+    stowage.search()
+    stowage.check(input,config.boxNumberThree)
+    stowage.stowage(config.boxNumberThree)
     Tag(driver).closeTagGtos('无结构船舶配载')
 
 # @pytest.mark.skipif

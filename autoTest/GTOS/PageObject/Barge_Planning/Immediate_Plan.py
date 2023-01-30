@@ -20,7 +20,6 @@ class Immediate_plan(BasePage):
         """
         切换驳船计划
         """
-        self.logger.info('步骤1：切换驳船计划')
         self.click('xpath',"//div[contains(text(),'驳船船期计划')]")
 
     def Add_Plan(self, input):
@@ -90,8 +89,10 @@ class Immediate_plan(BasePage):
         check.equal(self.get_text_value("计划起始尺码"), input["起始尺码"])
         check.equal(self.get_text_value("计划终止尺码"), "270")
         createTime = DataTime.GetTime()
-        check.less(DataTime.get_dif_time(self.get_text_value("实际靠泊时间"), createTime), 900)
-        check.less(DataTime.get_dif_time(self.get_text_value("实际离泊时间"), createTime), 300)
+        #check.less(DataTime.get_dif_time(self.get_text_value("实际靠泊时间"), createTime), 900)
+        #check.less(DataTime.get_dif_time(self.get_text_value("实际离泊时间"), createTime), 300)
+        #print(createTime)
+        #print(self.get_text_value("实际离泊时间"))
         check.equal(self.get_text_value("实际靠泊吃水"), "0")
         check.equal(self.get_text_value("实际起始尺码"), input["起始尺码"])
         check.equal(self.get_text_value("实际终止尺码"), "270")

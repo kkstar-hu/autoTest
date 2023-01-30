@@ -199,6 +199,9 @@ class NO_Structure_Monitoring(BasePage):
         self.click('x', "//input[@placeholder='离泊时间']")
         self.click('x', "//span[contains(text(),'此刻')]")
         self.click('x', "//span[text()='提交']")
+        if self.elementExist("x","//div[@class='el-message-box__message']"):
+            self.click("x","//div[@class='el-message-box__btns']//span[text()=' 确定 ']")
+        self.check_alert("提交成功")
 
     def rows_value(self,index=1):
         """
