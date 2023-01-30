@@ -15,13 +15,11 @@ class StraightLoad_StraightLift_Management(BasePage):
         """
         直装内容
         """
-        self.logger.info('步骤1：输入数据')
+        self.logger.info('直装直提管理-查询')
         textInput = Gtos_text(self.driver)
         textInput.select_by_label("船名航次", config.outportNumber)
         textInput.input_by_label('箱号',boxnumber)
-        self.logger.info('步骤2：检索')
         self.click('xpath',"//span[text()='检索']")
-        self.logger.info('步骤3：校验内容')
         tablecheck = Gtos_table(self.driver)
         check.equal(tablecheck.get_value('箱号'), boxnumber)
         check.equal(tablecheck.get_value('报道标志'),'N')
@@ -34,18 +32,16 @@ class StraightLoad_StraightLift_Management(BasePage):
         check.equal(tablecheck.get_value('海关放行'),'放行')
         check.equal(tablecheck.get_value('配载'),'Y')
 
-
     def lifting_value(self,input,boxnumber):
         """
         直提内容
         """
-        self.logger.info('步骤1：输入数据')
+        self.logger.info('直装直提管理-查询')
         textInput = Gtos_text(self.driver)
         textInput.select_by_label("船名航次", config.importNumber)
         textInput.input_by_label('箱号',boxnumber)
         self.logger.info('步骤2：检索')
         self.click('xpath',"//span[text()='检索']")
-        self.logger.info('步骤3：校验内容')
         tablecheck = Gtos_table(self.driver,2)
         check.equal(tablecheck.get_value('箱号'),boxnumber)
         check.equal(tablecheck.get_value('报道标志'),'N')
@@ -58,7 +54,7 @@ class StraightLoad_StraightLift_Management(BasePage):
         """
         直装报道
         """
-        self.logger.info('步骤4：直装报到')
+        self.logger.info('直装直提管理-直装报到')
         self.click('xpath',"(//span[contains(text(),'报道')])[1]")
         textInput = Gtos_text(self.driver)
         textInput.select_by_index('集卡编号',input['车牌'],2)
@@ -68,7 +64,6 @@ class StraightLoad_StraightLift_Management(BasePage):
         textInput.select_by_label('进场道口号', 'B01')
         self.click('xpath', "//button[@class='el-button el-button--primary el-button--small']")
         self.check_alert('报道完成')
-        self.logger.info('步骤5：校验字段变化')
         tablecheck = Gtos_table(self.driver)
         check.equal(tablecheck.get_value('集卡号'), input['车牌']+input['集卡编号'])
         check.equal(tablecheck.get_value('前后标志'),'后')
@@ -80,7 +75,7 @@ class StraightLoad_StraightLift_Management(BasePage):
         """
         直提报道
         """
-        self.logger.info('步骤4：直装报到')
+        self.logger.info('直装直提管理-直提报到')
         self.click('xpath',"(//span[contains(text(),'报道')])[3]")
         textInput = Gtos_text(self.driver)
         textInput.select_by_index('集卡编号',input['车牌'],2)
@@ -90,7 +85,6 @@ class StraightLoad_StraightLift_Management(BasePage):
         textInput.select_by_label('进场道口号', 'B01')
         self.click('xpath', "//button[@class='el-button el-button--primary el-button--small']")
         self.check_alert('报道完成')
-        self.logger.info('步骤5：校验字段变化')
         tablecheck = Gtos_table(self.driver,2)
         check.equal(tablecheck.get_value('集卡号'), input['车牌']+input['集卡编号'])
         check.equal(tablecheck.get_value('前后标志'),'后')
@@ -103,7 +97,6 @@ class StraightLoad_StraightLift_Management(BasePage):
         """
         切换直提
         """
-        self.logger.info('步骤2：切换直提列表')
         self.click('xpath',"//div[contains(text(),'直提列表')]")
 
 

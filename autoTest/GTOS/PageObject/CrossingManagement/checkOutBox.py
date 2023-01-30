@@ -15,7 +15,6 @@ class CheckOutBox(BasePage):
         """
         选择集卡编号、输入预约号
         """
-        self.logger.info('步骤1：输入数据')
         textInput = Gtos_text(self.driver)
         textInput.select_by_label("集卡编号", input["车牌"])
         self.get_element('xpath', "//input[@placeholder='请输入集卡号']").send_keys(input["集卡编号"])
@@ -25,7 +24,6 @@ class CheckOutBox(BasePage):
         """
         检索
         """
-        self.logger.info('步骤2：检索数据')
         self.click('xpath',"//span[text()='检索']")
 
 
@@ -33,6 +31,7 @@ class CheckOutBox(BasePage):
         """
         输入内容
         """
+        self.logger.info('办理提箱手续：输入数据')
         textInput = Gtos_text(self.driver)
         self.click('xpath',"(//div[@class='export-cntr__buttons__right']//input)[1]")
         self.click('xpath',"//li//span[text()=\"20'普通架\"]")

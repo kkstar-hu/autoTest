@@ -15,7 +15,7 @@ class Job_Order_Monitoring(BasePage):
         """
         输入内容，检索
         """
-        self.logger.info('步骤1：作业指令，输入航名航次')
+        self.logger.info('作业指令监控-查询')
         textinput = Gtos_text(self.driver)
         self.waitloading()
         textinput.multi_select_by_label('作业路类型',input['作业路类型'])
@@ -23,7 +23,6 @@ class Job_Order_Monitoring(BasePage):
             textinput.search_select_by_label('船名航次',shipname)
         if boxnumber!=None:
             textinput.input_by_label("箱号",boxnumber)
-        self.logger.info('步骤2：检索')
         self.click('xpath',"//span[text()='检索']")
 
 
@@ -31,7 +30,7 @@ class Job_Order_Monitoring(BasePage):
         """
         作业信息查验
         """
-        self.logger.info('步骤3：校验内容')
+        self.logger.info('作业指令监控-校验列表数据')
         tablecheck = Gtos_table(self.driver)
         check.is_in(tablecheck.get_value('箱号').replace(' ', '').replace('\n', ''), boxnumber)
         if self.hasInput(input,'作业路'):
@@ -63,7 +62,7 @@ class Job_Order_Monitoring(BasePage):
         """
         作业信息查验
         """
-        self.logger.info('步骤3：校验内容')
+        self.logger.info('作业指令监控-校验列表数据')
         tablecheck = Gtos_table(self.driver)
         self.waitloading()
         check.is_in(tablecheck.get_value('箱号').replace(' ', '').replace('\n', ''), boxnumber)
@@ -115,14 +114,13 @@ class Job_Order_Monitoring(BasePage):
         """
         改配集卡
         """
-        self.logger.info('步骤1：改配集卡操作')
+        self.logger.info('作业指令监控-改配集卡操作')
         textclick = Gtos_text(self.driver)
         textclick.no_elements_click('改配集卡')
         textclick.click('xpath',"(//div[@role='tooltip'])[1]//input[@placeholder='请选择']")
         textclick.no_elements_click(car,2)
         textclick.no_elements_click('保存')
         self.check_alert_and_close('改配成功!')
-        self.logger.info('步骤2：校验内容')
         tablecheck = Gtos_table(self.driver)
         check.equal(tablecheck.get_value('作业状态'), '已配集卡')
         if self.hasInput(input, '操作过程'):
@@ -135,7 +133,7 @@ class Job_Order_Monitoring(BasePage):
         """
         卸船确认按钮
         """
-        self.logger.info('步骤1：卸船确认')
+        self.logger.info('作业指令监控-卸船确认')
         textclick = Gtos_text(self.driver)
         textclick.no_elements_click('卸船确认')
         textclick.select_by_label("桥吊司机：", 'HAS')
@@ -146,7 +144,6 @@ class Job_Order_Monitoring(BasePage):
         textclick.click('xpath',"(//span[text()='保存'])[3]")
         self.check_alert('卸船确认成功')
         self.close_alert('卸船确认成功')
-        self.logger.info('步骤2：校验内容')
         tablecheck = Gtos_table(self.driver)
         check.equal(tablecheck.get_value('作业状态'), '已装车')
         if input['操作过程'] == '船―场':
@@ -158,14 +155,13 @@ class Job_Order_Monitoring(BasePage):
         """
         直提卸船确认按钮
         """
-        self.logger.info('步骤1：卸船确认')
+        self.logger.info('作业指令监控-直提卸船确认')
         textclick = Gtos_text(self.driver)
         textclick.no_elements_click('卸船确认')
         textclick.select_by_label("桥吊司机：", 'HAS')
         textclick.click('xpath',"(//span[text()='保存'])[3]")
         self.check_alert('卸船确认成功')
         self.close_alert('卸船确认成功')
-        self.logger.info('步骤2：校验内容')
         tablecheck = Gtos_table(self.driver)
         check.equal(tablecheck.get_value('作业状态'), '完成')
         if input['操作过程'] == '船―车':
@@ -173,13 +169,11 @@ class Job_Order_Monitoring(BasePage):
             check.equal(tablecheck.get_value('拖运机械'), input['车牌'] + input['集卡编号'])
             check.equal(tablecheck.get_value('当前位置'), input['车牌'] + input['集卡编号'])
 
-
-
     def LadeShip_confirm(self,input):
         """
         装船确认按钮
         """
-        self.logger.info('步骤1：装船确认')
+        self.logger.info('作业指令监控-装船确认')
         textclick = Gtos_text(self.driver)
         textclick.no_elements_click('装船确认')
         textclick.select_by_label("桥吊司机：",input["桥吊司机"])
@@ -187,12 +181,11 @@ class Job_Order_Monitoring(BasePage):
         textclick.click('xpath',"//span[text()='保 存']")
         self.check_alert('作业完成')
 
-
     def closed_box(self,input):
         """
         堆场收箱
         """
-        self.logger.info('步骤1：堆场收箱')
+        self.logger.info('作业指令监控-堆场收箱')
         textclick = Gtos_text(self.driver)
         textclick.no_elements_click('堆场收箱')
         textclick.select_by_label("堆场司机：", input["堆场司机"])
@@ -204,7 +197,7 @@ class Job_Order_Monitoring(BasePage):
         """
         堆场发箱
         """
-        self.logger.info('步骤1：堆场发箱')
+        self.logger.info('作业指令监控-堆场发箱')
         textclick = Gtos_text(self.driver)
         self.click('xpath', "//span[text()='堆场发箱']")
         textclick.select_by_label("堆场司机：", input["堆场司机"])
@@ -221,7 +214,7 @@ class Job_Order_Monitoring(BasePage):
         """
         装船确认
         """
-        self.logger.info('步骤1：装船确认')
+        self.logger.info('作业指令监控-装船确认')
         textclick = Gtos_text(self.driver)
         self.click('xpath', "//span[text()='装船确认']")
         textclick.select_by_label("桥吊司机：", 'HAS')

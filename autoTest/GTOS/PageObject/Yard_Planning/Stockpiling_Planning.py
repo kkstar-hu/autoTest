@@ -18,7 +18,7 @@ class Stockpiling_Planning(BasePage):
         """
         选择计划类型，船名航次,道口进
         """
-        self.logger.info('步骤1：选择计划类型，船名航次')
+        self.logger.info('堆存计划-查询：选择计划类型，船名航次'+number)
         textInput = Gtos_text(self.driver)
         textInput.select_by_label('计划类型', type)
         textInput.search_select_by_label('船名航次', number)
@@ -28,7 +28,7 @@ class Stockpiling_Planning(BasePage):
         """
         新增堆存计划
         """
-        self.logger.info('步骤3：新增堆存计划')
+        self.logger.info('堆存计划-新增堆存计划')
         self.click('x',"(//span[text()='新增'])[1]")
         tablecheck = Gtos_table(self.driver,4)
         tablecheck.tick_off_box(6)
@@ -40,7 +40,7 @@ class Stockpiling_Planning(BasePage):
         """
         新增计划箱区
         """
-        self.logger.info('步骤4：勾选信息，新增计划箱区')
+        self.logger.info('堆存计划-新增计划箱区A01')
         tablecheck = Gtos_table(self.driver,2)
         tablecheck.tick_off_box(1)
         self.click('x',"(//span[text()='新增'])[3]")
@@ -68,7 +68,7 @@ class Stockpiling_Planning(BasePage):
         """
         新增计划箱区
         """
-        self.logger.info('步骤4：勾选信息，新增计划箱区')
+        self.logger.info('堆存计划-新增计划箱区A01')
         tablecheck = Gtos_table(self.driver,2)
         tablecheck.tick_off_box(1)
         self.click('x',"(//span[text()='新增'])[3]")

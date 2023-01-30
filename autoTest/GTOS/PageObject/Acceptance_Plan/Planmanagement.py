@@ -11,23 +11,17 @@ class PlanManagement(BasePage):
         """
         输入船名航次
         """
-        self.logger.info('步骤1：输入船名航次')
+        self.logger.info('计划管理-查询：输入船名航次')
         textinput = Gtos_text(self.driver)
         textinput.search_select_by_label('船名航次',config.importNumber)
         textinput.input_by_label('箱号',boxnumber)
-
-    def retrieve(self):
-        """
-        检索
-        """
-        self.logger.info('步骤2：检索数据')
-        self.click('xpath',"//span[text()='检索']")
+        self.click('xpath', "//span[text()='检索']")
 
     def viewing_Plan(self):
         """
         查看计划
         """
-        self.logger.info('步骤3：查看计划')
+        self.logger.info('计划管理-查看计划')
         self.click('xpath',"//div//span[text()='查看计划']")
         self.get_tr_value()
 
@@ -63,7 +57,6 @@ class PlanManagement(BasePage):
         流程
         """
         self.select_value(boxnumber)
-        self.retrieve()
         self.viewing_Plan()
 
 

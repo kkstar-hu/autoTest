@@ -16,15 +16,13 @@ class Manifest(BasePage):
         """
         新增舱单
         """
-        self.logger.info('步骤1：输入船名航次')
         Gtextinput = Gtos_text(self.driver)
         Gtextinput.search_select_by_label('进口船名航次',config.importNumber)
-        self.logger.info('步骤2：检索')
         self.click('xpath',"//span[text()='检索']")
         try:
             if self.get_alert_text() == '未找到相关舱单信息':
                 self.close_alert('未找到相关舱单信息')
-            self.logger.info('步骤3：新增舱单货资料')
+            self.logger.info('舱单-新增舱单货资料'+boxnumber)
             self.click("xpath","(//div[@id='add'])[1]")
             time.sleep(1)
             textinput = Gtos_text(self.driver)
@@ -46,11 +44,10 @@ class Manifest(BasePage):
             textinput.input_by_label('唛头', input['唛头'])
             textinput.input_by_label('发货人',input['发货人'])
             textinput.input_by_label('通知人', input['通知人'])
-            self.logger.info('步骤4：保存，关闭新增页面')
             self.save()
             self.close()
             self.check_alert('新增成功')
-            self.logger.info('步骤5：校验字段')
+            self.logger.info('舱单-新增舱单后校验字段')
             row = self.rows_value(boxnumber)
             tablecheck = Gtos_table(self.driver)
             tablecheck.tick_off_box(row)
@@ -76,15 +73,12 @@ class Manifest(BasePage):
         except:
             self.cancel()
 
-
-
-
     def AddBox(self,input,boxnumber):
         """
         新增舱单箱
         """
         try:
-            self.logger.info('步骤1：新增舱单箱信息')
+            self.logger.info('舱单-新增舱单箱信息'+boxnumber)
             textinput = Gtos_text(self.driver)
             self.click("xpath","(//div[@id='add'])[2]")
             textinput.input_by_label('箱号',boxnumber)
@@ -96,16 +90,14 @@ class Manifest(BasePage):
             textinput.input_by_label('铅封号','CBDS11')
             textinput.select_by_label('持箱人',input['持箱人'])
             textinput.input_by_label('箱货总重',input['箱货总重'])
-            self.logger.info('步骤2：保存，关闭新增页面')
             self.save()
             self.close()
             self.check_alert('新增成功')
             tablecheck1 = Gtos_table(self.driver)
-            self.logger.info('步骤3：总箱数+1')
             check.equal(tablecheck1.get_value('总箱数'), '1')
         except:
             self.cancel()
-        self.logger.info('步骤4：校验字段')
+        self.logger.info('舱单-新增舱单箱保存后校验字段')
         tablecheck = Gtos_table(self.driver,2)
         check.equal(tablecheck.get_value('箱号'),boxnumber)
         check.equal(tablecheck.get_value('贸易类型'),input['贸易类型'])
@@ -122,7 +114,7 @@ class Manifest(BasePage):
         """
         转船图箱-整船
         """
-        self.logger.info('步骤1：转船图箱,整船')
+        self.logger.info('舱单-转船图箱,整船操作')
         self.click('xpath',"//span[text()='转船图箱']")
         self.click('xpath',"//span[text()='整船']")
         self.click('xpath',"//span[contains(text(),'确定')]")
@@ -133,7 +125,7 @@ class Manifest(BasePage):
         """
         转船图箱-提单
         """
-        self.logger.info('步骤1：转船图箱,整船')
+        self.logger.info('舱单-转船图箱,提单操作')
         self.click('xpath',"//span[text()='转船图箱']")
         self.click('xpath',"//span[text()='提单']")
 

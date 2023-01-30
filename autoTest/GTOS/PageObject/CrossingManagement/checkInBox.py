@@ -25,7 +25,7 @@ class CheckInBox(BasePage):
         self.click("x","//button//span[text()='检索']")
 
     def input_checkin_info(self,input):
-        self.logger.info('步骤1:输入进箱信息')
+        self.logger.info('办理进箱手续-输入进箱信息')
         textInput = Gtos_text(self.driver)
         #航民航次
         textInput.select_by_label("出口航次", config.outportNumber)
@@ -67,6 +67,7 @@ class CheckInBox(BasePage):
         self.click("id", "TContainerNoMiddle")
 
     def addgoodsinfo(self,input, takeNumber):
+        self.logger.info('办理进箱手续-新增箱货信息')
         self.click("x", "//span[text()='新增货']")
         self.waitloading()
         try:
@@ -93,11 +94,11 @@ class CheckInBox(BasePage):
             textInput.input_by_label("发货人", input['发货人'])
             textInput.input_by_label("收货人", input['收货人'])
             self.click("x", "//button//span[text()='保 存']")
+            self.check_alert(input["addgoodsalert"])
         except:
             self.cancel()
         if input["addgoodsalert"]=='保存成功':
             tableCheck=Gtos_table(self.driver)
-            self.logger.info('check3：验证添加后列表的值正确')
             check.equal(tableCheck.get_value("提单号"), takeNumber)
             check.equal(tableCheck.get_value("订舱号"), input['订舱号'])
             check.equal(tableCheck.get_value("交付方式"), input['交付方式'])
@@ -139,7 +140,6 @@ class CheckInBox(BasePage):
         """
         送箱确认按钮
         """
-        self.logger.info('步骤3：确认进箱')
         self.get_element('xpath', "//span[text()='确认进箱']").click()
         self.click("x","//button/span[text()=' 否 ']")
         self.check_alert(input["alert"])

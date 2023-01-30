@@ -3,7 +3,7 @@ from Commons.RandomFunction import CommonGenerator
 host="http://10.166.0.155/app/#/login"
 
 #驳船内容
-#进场计划箱号
+#卸船提箱箱号
 global boxNumber
 boxNumber=CommonGenerator.generate_spec("XCTX",7)
 #boxNumber="JXNU1000005"
@@ -30,10 +30,12 @@ outBoxNumber=CommonGenerator.generate_spec("JXZX",7)
 
 #进口航次
 global importNumber
-importNumber="I305"
+importNumber=CommonGenerator.generate_spec("I",3)
+#importNumber="I311"
 #出口航次
 global outportNumber
-outportNumber="E305"
+outportNumber=CommonGenerator.generate_spec("E",3)
+#outportNumber="E311"
 
 #提箱预约号
 global Number
@@ -46,10 +48,9 @@ bigshipimportNumber="I0001"
 bigshipoutportNumber="1000E"
 
 global takeNumber
-takeNumber=CommonGenerator.generate_spec_password(4) #进箱提单号
+takeNumber=CommonGenerator.generate_verify_code(4) #进箱提单号
 #登录信息
 
 username="admin"
 password="ctos@12345"
 showname="管理员"
-createName="8541/祁洲海"

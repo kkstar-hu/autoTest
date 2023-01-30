@@ -20,4 +20,4 @@ class CloseFlight(BasePage):
 
     def closeFlight(self):
         self.click('xpath', "//span[text()='航次关闭']")
-        self.check_alert("航次关闭结果：共计0个箱，关闭成功！资料箱归档0个, 溢箱0个, 缺箱0个")
+        self.check_alert("航次关闭结果：共计2个箱，关闭成功！资料箱归档0个, 溢箱0个, 缺箱0个。")

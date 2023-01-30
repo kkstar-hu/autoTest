@@ -20,10 +20,9 @@ class Bridge_Crane_Distribution(BasePage):
         """
         输入船名航次
         """
-        self.logger.info('步骤1：选择船名航次')
+        self.logger.info('桥吊资源分配-查询船名航次'+config.importNumber)
         textInput = Gtos_text(self.driver)
         textInput.search_select_by_label('船名航次',config.importNumber)
-        self.logger.info('步骤2：点击检索')
         self.click('x',"(//span[text()='检索'])[2]")
         tablecheck = Gtos_table(self.driver, 3)
         check.equal(tablecheck.get_value('船舶代码'), input['船舶代码'])
@@ -39,7 +38,7 @@ class Bridge_Crane_Distribution(BasePage):
         """
         勾选内容，分配桥吊
         """
-        self.logger.info('步骤3：勾选内容，分配桥吊')
+        self.logger.info('桥吊资源分配-勾选内容，分配桥吊B109')
         tablecheck = Gtos_table(self.driver,3)
         tablecheck.tick_off_box(1)
         tablecheck.click('x',"//span[text()='安排桥吊资源']")

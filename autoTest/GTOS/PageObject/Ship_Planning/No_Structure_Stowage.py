@@ -11,10 +11,9 @@ class No_Structure_Stowage(BasePage):
     无结构船舶配载
     """
     def search(self):
-        self.logger.info('步骤1：输入船名航次')
+        self.logger.info('无结构船舶配载-查询：输入船名航次')
         Gtextinput = Gtos_text(self.driver)
         Gtextinput.search_select_by_label('出口船名航次', config.outportNumber)
-        self.logger.info('步骤2：检索')
         self.click('xpath', "//span[text()='检索']")
 
     def check(self,input,boxNumber,TDNumber=None):
@@ -33,6 +32,7 @@ class No_Structure_Stowage(BasePage):
             check.equal(tablecheck.get_value_by_rowid(rowid, '提单号'),TDNumber)
         check.equal(tablecheck.get_value_by_rowid(rowid,'作业状态'), '可作业')
     def stowage(self,boxNumber):
+        self.logger.info('无结构船舶配载-勾选数据保存配载')
         table = Gtos_table(self.driver)
         table.check("箱号",boxNumber)
         self.click('xpath', "//span[contains(text(),'保存配载')]")

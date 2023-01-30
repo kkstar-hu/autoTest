@@ -15,7 +15,7 @@ class Car_Out(BasePage):
         """
         输入车辆，箱号
         """
-        self.logger.info('步骤1：输入数据')
+        self.logger.info('车辆出场操作')
         textInput = Gtos_text(self.driver)
         textInput.select_by_label("集卡号", input["车牌"])
         self.get_element('xpath', "//input[@placeholder='请输入集卡号']").send_keys(input["集卡编号"])

@@ -23,6 +23,7 @@ class Immediate_plan(BasePage):
         self.click('xpath',"//div[contains(text(),'驳船船期计划')]")
 
     def Add_Plan(self, input):
+        self.logger.info('近期计划-新增近期计划')
         self.click('xpath', "//span[contains(text(),'新增')]")
         textInput = Gtos_text(self.driver)
         textInput.select_by_label("船舶代码", input["船舶代码"])
@@ -59,6 +60,7 @@ class Immediate_plan(BasePage):
         check.equal(tablecheck.get_value_by_rowid(rowid,'船期状态'), '预报')
         check.equal(tablecheck.get_value_by_rowid(rowid, '靠泊状态'), '未靠')
     def Sure_ShipPlan(self):
+        self.logger.info('近期计划-确保船期')
         textInput = Gtos_text(self.driver)
         actualarriveDay = DataTime.Get_Current_Date()
         actuallarriveTime = actualarriveDay + " 00:00:00"
@@ -73,6 +75,7 @@ class Immediate_plan(BasePage):
 
     #点击确认进箱
     def SureInBox(self):
+        self.logger.info('近期计划-确认进箱')
         self.click('id', "confirmintocntr")
         self.click('x', "(//span[@class='el-switch__core'])[2]")
         self.click('x', "//span[text()='保 存']")
@@ -80,8 +83,9 @@ class Immediate_plan(BasePage):
 
     #验证靠泊信息
     def check_alongside_info(self,input):
+        self.logger.info('近期计划-验证靠泊信息')
         tablecheck = Gtos_table(self.driver, 2)
-        rowid = tablecheck.select_row("进口航次", config.importNumber)
+        tablecheck.select_row("进口航次", config.importNumber)
         check.equal(self.get_text_value("计划靠泊时间"), self.arriveTime)
         check.equal(self.get_text_value("计划离泊时间"), self.leaveTime)
         check.equal(self.get_text_value("计划靠泊泊位"), "01")
@@ -89,10 +93,8 @@ class Immediate_plan(BasePage):
         check.equal(self.get_text_value("计划起始尺码"), input["起始尺码"])
         check.equal(self.get_text_value("计划终止尺码"), "270")
         createTime = DataTime.GetTime()
-        #check.less(DataTime.get_dif_time(self.get_text_value("实际靠泊时间"), createTime), 900)
-        #check.less(DataTime.get_dif_time(self.get_text_value("实际离泊时间"), createTime), 300)
-        #print(createTime)
-        #print(self.get_text_value("实际离泊时间"))
+        check.less(DataTime.get_dif_time(createTime,self.get_text_value("实际靠泊时间")), 900)
+        check.less(DataTime.get_dif_time(createTime,self.get_text_value("实际离泊时间")), 300)
         check.equal(self.get_text_value("实际靠泊吃水"), "0")
         check.equal(self.get_text_value("实际起始尺码"), input["起始尺码"])
         check.equal(self.get_text_value("实际终止尺码"), "270")
