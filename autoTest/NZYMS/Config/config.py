@@ -3,12 +3,12 @@ from Commons.RandomFunction import CommonGenerator
 host="http://10.126.0.89:7980/#/login"
 #进场计划箱号
 global boxNumber
-#boxNumber=CommonGenerator.generate_spec("JXNU",7)
-boxNumber="JXNU4000000"
+boxNumber=CommonGenerator.generate_spec("JXNU",7)
+#boxNumber="JXNU3000015"
 
 global boxNumberOutPlan
-#boxNumberOutPlan=CommonGenerator.generate_spec("JXNU",7)
-boxNumberOutPlan="JXNU4000001"
+boxNumberOutPlan=CommonGenerator.generate_spec("JXNU",7)
+#boxNumberOutPlan="JXNU3000016"
 
 global planNumber
 #查询箱信息内容，字典模式
