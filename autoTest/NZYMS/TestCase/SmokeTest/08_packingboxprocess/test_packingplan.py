@@ -36,7 +36,7 @@ import pytest as pytest
 def testPacking_Plan(driver, input):
     """装箱计划"""
     menu = Menu(driver)
-    menu.select_level_Menu("市场部管理,装箱管理,装箱计划")
+    menu.select_level_Menu("仓储管理,装箱管理,装箱计划")
     packing_plan = Packing_Plan(driver)
     packing_plan.addPlan(input)
 
@@ -75,7 +75,7 @@ def testPacking_into_car(driver,input):
 def testPacking_Confirm(driver, input):
     """装箱确认"""
     menu = Menu(driver)
-    menu.select_level_Menu("市场部管理,装箱管理,装箱确认")
+    menu.select_level_Menu("仓储管理,装箱管理,装箱确认")
     packing_confirm = Packing_Confirm(driver)
     packing_confirm.addBOX_information(input)
     Tag(driver).closeTag("装箱确认")
@@ -89,7 +89,7 @@ def testPacking_Confirm(driver, input):
 def testSendMention(driver,input):
     """装箱货车确认放行"""
     menu = Menu(driver)
-    menu.select_level_Menu("市场部管理,送提货车放行确认")
+    menu.select_level_Menu("仓储管理,送提货车放行确认")
     send_and_mention = Send_Mention_CarOut(driver)
     send_and_mention.process(input)
     Tag(driver).closeTag("送提货车放行确认")

@@ -40,7 +40,7 @@ import pytest as pytest
 def testSplit_Plan(driver, input):
     """拆箱计划"""
     menu = Menu(driver)
-    menu.select_level_Menu("市场部管理,拆箱管理,拆箱计划")
+    menu.select_level_Menu("仓储管理,拆箱管理,拆箱计划")
     split_box = Split_Box_Plan(driver)
     split_box.addPlan(input)
 
@@ -78,7 +78,7 @@ def testSplit_into_car(driver,input):
 def testSplit_Confirm(driver, input):
     """拆箱确认"""
     menu = Menu(driver)
-    menu.select_level_Menu("市场部管理,拆箱管理,拆箱确认")
+    menu.select_level_Menu("仓储管理,拆箱管理,拆箱确认")
     split_confirm = Split_Box_Confirm(driver)
     split_confirm.addBOX_information(input)
     Tag(driver).closeChoiceTag("拆箱确认")
@@ -91,7 +91,7 @@ def testSplit_Confirm(driver, input):
 def testSendMention(driver,input):
     """拆箱货车确认放行"""
     menu = Menu(driver)
-    menu.select_level_Menu("市场部管理,送提货车放行确认")
+    menu.select_level_Menu("仓储管理,送提货车放行确认")
     send_and_mention = Send_Mention_CarOut(driver)
     send_and_mention.process(input)
     Tag(driver).closeTag("送提货车放行确认")

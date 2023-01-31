@@ -21,7 +21,7 @@ import pytest as pytest
 def testBulk_into(driver, input):
     """散货入库计划"""
     menu = Menu(driver)
-    menu.select_level_Menu("市场部管理,入库管理,散货入库计划")
+    menu.select_level_Menu("仓储管理,入库管理,散货入库计划")
     bulk_into = Bulk_cargo_into_storagePlan(driver)
     bulk_into.addPlan(input)
 
@@ -56,7 +56,7 @@ def testBulk_into_car(driver,input):
 def testBulk_into_confirm(driver, input):
     """散货入库"""
     menu = Menu(driver)
-    menu.select_level_Menu("市场部管理,入库管理,散货入库确认")
+    menu.select_level_Menu("仓储管理,入库管理,散货入库确认")
     bulk_into_confirm = Bulk_cargo_into_storageConfirm(driver)
     bulk_into_confirm.addbulk_into(input)
     Tag(driver).closeTag("散货入库确认")
@@ -68,7 +68,7 @@ def testBulk_into_confirm(driver, input):
 def testSendMention(driver,input):
     """送提货车确认放行"""
     menu = Menu(driver)
-    menu.select_level_Menu("市场部管理,送提货车放行确认")
+    menu.select_level_Menu("仓储管理,送提货车放行确认")
     send_and_mention = Send_Mention_CarOut(driver)
     send_and_mention.process(input)
     Tag(driver).closeTag("送提货车放行确认")
