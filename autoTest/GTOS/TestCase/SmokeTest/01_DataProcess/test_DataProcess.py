@@ -22,7 +22,6 @@ from Commons.yamlread import read_yaml
 def testImmediatePlan(driver,input):
     """近期计划"""
     print("******************************************Smoke Test Start***********************************************")
-    loggi
     menu = GtosMenu(driver)
     menu.select_level_Menu("泊位策划,近期计划")
     plan = Immediate_plan(driver)
