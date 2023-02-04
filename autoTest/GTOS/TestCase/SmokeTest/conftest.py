@@ -1,5 +1,9 @@
+import os
+import sys
+
 from selenium import webdriver
 
+sys.path.append(os.path.join(os.getcwd(), "../"))
 import pytest
 
 from GTOS.Config import config
