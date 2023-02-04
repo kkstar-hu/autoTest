@@ -23,6 +23,7 @@ class Immediate_plan(BasePage):
         self.click('xpath',"//div[contains(text(),'驳船船期计划')]")
 
     def Add_Plan(self, input):
+        self.logger.info('add-plan')
         self.logger.info('近期计划-新增近期计划')
         self.click('xpath', "//span[contains(text(),'新增')]")
         textInput = Gtos_text(self.driver)
