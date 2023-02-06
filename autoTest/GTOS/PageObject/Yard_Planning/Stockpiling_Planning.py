@@ -31,7 +31,7 @@ class Stockpiling_Planning(BasePage):
         self.logger.info('堆存计划-新增堆存计划')
         self.click('x',"(//span[text()='新增'])[1]")
         tablecheck = Gtos_table(self.driver,4)
-        tablecheck.tick_off_box(6)
+        tablecheck.check2("箱子分组条件","20_普通")
         tablecheck.click('x',"//span[text()='生成堆存计划']")
         self.has_alert('生成堆存计划成功')
 
@@ -50,6 +50,8 @@ class Stockpiling_Planning(BasePage):
         textInput = Gtos_text(self.driver)
         textInput.input_noclear_placeholder_click('请选择','A01')
         self.refresh()
+        self.waitloading()
+        time.sleep(1)
         self.search("道口进",config.outportNumber)
         tablecheck.tick_off_box(1)
         self.click('x',"(//span[text()='新增'])[3]")
