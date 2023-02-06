@@ -33,8 +33,8 @@ class Stockpiling_Planning(BasePage):
         tablecheck = Gtos_table(self.driver,4)
         tablecheck.tick_off_box(6)
         tablecheck.click('x',"//span[text()='生成堆存计划']")
-        self.check_alert('生成堆存计划成功')
-        self.close_alert('生成堆存计划成功')
+        self.has_alert('生成堆存计划成功')
+
 
     def Add_box_INTO(self):
         """
