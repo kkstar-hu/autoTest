@@ -81,9 +81,9 @@ class Packing_Confirm(BasePage):
                 print(b.index(i))
                 table.tick_off_box(b.index(i)+1)
                 table1 = Table(self.driver, 7)
-                table1.input_by_row('装箱件数', i[6],b.index(i)+1)
-                table1.input_by_row('装箱体积', i[8],b.index(i)+1)
-                table1.input_by_row('装箱重量', i[7],b.index(i)+1)
+                table1.input_by_row('装箱件数', i[7],b.index(i)+1)
+                table1.input_by_row('装箱体积', i[9],b.index(i)+1)
+                table1.input_by_row('装箱重量', i[8],b.index(i)+1)
             if '直装货' in i:
                 print(i)
                 print(b.index(i))

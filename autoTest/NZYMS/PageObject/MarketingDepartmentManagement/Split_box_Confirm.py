@@ -93,7 +93,7 @@ class Split_Box_Confirm(BasePage):
             self.logger.info('步骤2：新增货物信息')
             textInput.click('xpath', "//div[@id='add']")
             textInput.select_by_placeholder('请选择堆场',input['堆场'])
-            textInput.select_by_placeholder('请选择计划类型',input['计划类型'])
+            # textInput.select_by_placeholder('请选择计划类型',input['计划类型'])
             textInput.select_by_placeholder('请选择仓库',input['仓库'])
             b = self.get_information(6)
             table = Table(self.driver, 12)

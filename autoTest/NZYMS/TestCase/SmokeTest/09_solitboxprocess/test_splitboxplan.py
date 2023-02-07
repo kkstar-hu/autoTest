@@ -31,7 +31,7 @@ import pytest as pytest
 #     stor_box_query.get_information()
 #     Tag(driver).closeTag("存场箱查询")
 
-
+# @pytest.mark.skipif
 @allure.title('1.新增拆箱计划')
 @allure.story('9、拆箱计划流程')
 # @pytest.mark.skipif
@@ -44,6 +44,7 @@ def testSplit_Plan(driver, input):
     split_box = Split_Box_Plan(driver)
     split_box.addPlan(input)
 
+# @pytest.mark.skipif
 @allure.title('2.新增箱信息和车辆信息')
 @allure.story('9、拆箱计划流程')
 # @pytest.mark.skipif
@@ -57,6 +58,7 @@ def testSplit_PlanAddBox(driver, input):
     split_box.perform_tasks()
     Tag(driver).closeTag("拆箱计划")
 
+# @pytest.mark.skipif
 @allure.title('3.拆箱车辆进场')
 @allure.story('9、拆箱计划流程')
 # @pytest.mark.skipif

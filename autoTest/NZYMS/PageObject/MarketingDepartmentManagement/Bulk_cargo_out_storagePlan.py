@@ -1,3 +1,5 @@
+import time
+
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.by import By
@@ -156,6 +158,7 @@ class Bulk_cargo_out_storagePlan(BasePage):
         self.logger.info('步骤1：展开...')
         table= Table(self.driver,3)
         table.moreButton(row)
+        time.sleep(0.5)
         self.element_wait('id','setup')
 
 
