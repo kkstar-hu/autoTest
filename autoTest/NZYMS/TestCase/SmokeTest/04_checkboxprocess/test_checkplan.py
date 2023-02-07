@@ -26,7 +26,7 @@ def testCheckPlan(driver,input):
 def testAddPlanBox(driver, input):
     checkplan = Check_Plan(driver)
     checkplan.addWorkOrder(input,config.boxNumber)
-    checkplan.clickExcute(1)
+    #checkplan.clickExcute(1)
     Tag(driver).closeTag("查验计划")
 
 @allure.story('4.查验流程')

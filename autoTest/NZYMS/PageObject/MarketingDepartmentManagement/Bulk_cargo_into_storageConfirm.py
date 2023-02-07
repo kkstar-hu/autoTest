@@ -52,7 +52,7 @@ class Bulk_cargo_into_storageConfirm(BasePage):
             self.save_and_close()
             createTime = DataTime.GetTime()
             self.logger.info('check1：验证入库明细弹出提示信息')
-            self.check_alert(input["addboxconfirm"])
+            self.has_alert(input["addboxconfirm"])
         except:
             self.click("xpath", "//button//span[text()='取消 ']")
         tableCheck = Table(self.driver,2)
