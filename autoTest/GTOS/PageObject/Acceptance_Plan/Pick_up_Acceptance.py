@@ -81,7 +81,7 @@ class Packing_up(BasePage):
         self.logger.info('计划受理-提箱受理-保存计划')
         textclick = Gtos_text(self.driver)
         textclick.no_elements_click('保存')
-        self.check_alert(input('alert'))
+        self.check_alert(input['alert'])
 
     def packing_process(self,input,boxnumber):
         """
