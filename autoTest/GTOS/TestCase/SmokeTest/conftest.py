@@ -16,7 +16,7 @@ def driver():
     driver=webdriver.Chrome()
     login = Login(driver)
     login.geturl(config.host)
-    login.login(config.username, config.password, config.showname)
+    login.login(config.username, config.password, config.showname,"阳逻二期")
     return driver
 
 

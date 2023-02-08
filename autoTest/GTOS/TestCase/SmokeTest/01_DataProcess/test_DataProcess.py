@@ -80,7 +80,7 @@ def testStockpiling_Planning_out(driver, input):
 
 # @pytest.mark.skipif
 @pytest.mark.parametrize("input",read_yaml(os.path.join(os.getcwd(),'01_DataProcess', 'immediata_plan.yaml')))
-@allure.title('6、吊桥分配')
+@allure.title('6、靠泊确认和吊桥分配')
 @allure.story('1.驳船流程功能准备')
 def testShip_operation(driver, input):
     """无结构靠泊、吊桥分配"""
