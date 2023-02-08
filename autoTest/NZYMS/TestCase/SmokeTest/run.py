@@ -1,7 +1,10 @@
 import os
-import pytest
+import sys
 
+import pytest
+sys.path.append(os.path.join(os.getcwd(), "../../../"))
 from Commons import allurechange
+
 
 if __name__ == '__main__':
     pytest.main(['-sv','--alluredir', '../../report/result', "--clean-alluredir"])
