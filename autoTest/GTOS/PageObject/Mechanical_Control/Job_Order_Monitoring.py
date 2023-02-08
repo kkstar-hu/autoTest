@@ -237,7 +237,7 @@ class Job_Order_Monitoring(BasePage):
         """
         self.Retrieve(input,shipname,boxnumber)
         self.order_info_check_new(input,boxnumber)
-        self.charge_car('A302',input)
+        self.charge_car('A308',input)
         self.discharging_confirm(input)
         self.closed_box(input)
 

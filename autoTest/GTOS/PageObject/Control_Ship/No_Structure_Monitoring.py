@@ -158,6 +158,8 @@ class NO_Structure_Monitoring(BasePage):
         self.click('x',"//span[text()='靠泊确认']")
         self.click('x',"//input[@placeholder='靠泊时间']")
         self.click('x',"//span[contains(text(),'此刻')]")
+        textInput = Gtos_text(self.driver)
+        textInput.input_by_label("靠泊吃水",10)
         self.click('x',"//span[text()='提交']")
         self.check_alert('提交成功')
         self.close_alert('提交成功')

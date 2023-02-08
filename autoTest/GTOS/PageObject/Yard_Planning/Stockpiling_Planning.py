@@ -35,7 +35,6 @@ class Stockpiling_Planning(BasePage):
         tablecheck.click('x',"//span[text()='生成堆存计划']")
         self.has_alert('生成堆存计划成功')
 
-
     def Add_box_INTO(self):
         """
         新增计划箱区
@@ -49,47 +48,20 @@ class Stockpiling_Planning(BasePage):
         time.sleep(1)
         textInput = Gtos_text(self.driver)
         textInput.input_noclear_placeholder_click('请选择','A01')
-        self.refresh()
-        self.waitloading()
-        time.sleep(1)
-        self.search("道口进",config.outportNumber)
-        tablecheck.tick_off_box(1)
-        self.click('x',"(//span[text()='新增'])[3]")
-        time.sleep(1)
-        self.click('x',"(//span[text()='新增'])[4]")
-        time.sleep(1)
-        textInput = Gtos_text(self.driver)
-        textInput.input_noclear_placeholder_click('请选择','A01')
         time.sleep(0.5)
         textInput.click('x',"//span[text()='保存']")
         self.check_alert('新增成功')
         self.close_alert('新增成功')
 
-
-    def Add_box_OUT(self):
-        """
-        新增计划箱区
-        """
-        self.logger.info('堆存计划-新增计划箱区A01')
-        tablecheck = Gtos_table(self.driver,2)
-        tablecheck.tick_off_box(1)
-        self.click('x',"(//span[text()='新增'])[3]")
-        time.sleep(1)
-        self.click('x',"(//span[text()='新增'])[4]")
-        time.sleep(1)
-        textInput = Gtos_text(self.driver)
-        textInput.input_noclear_placeholder_click('请选择','A01')
-        textInput.click('x',"//span[text()='保存']")
-        self.check_alert('新增成功')
-        self.close_alert('新增成功')
-
-
     def process_into(self):
         """
         流程
         """
+        self.refresh()
+        self.waitloading()
+        time.sleep(4)
         self.search("道口进",config.outportNumber)
-        self.close_alert('未找到相关堆存计划')
+        #self.close_alert('未找到相关堆存计划')
         self.Add_into_plan()
         self.Add_box_INTO()
 
@@ -98,5 +70,5 @@ class Stockpiling_Planning(BasePage):
         self.search("卸船",config.importNumber)
         # self.close_alert('未找到相关堆存计划')
         self.Add_into_plan()
-        self.Add_box_OUT()
+        self.Add_box_INTO()
 
