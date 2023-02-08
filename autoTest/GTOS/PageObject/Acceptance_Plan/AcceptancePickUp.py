@@ -14,14 +14,14 @@ class Packing_up(BasePage):
         """
         选择计划类型
         """
-        self.logger.info('步骤1：选择计划类型')
+        self.logger.info('计划受理-提箱受理：选择计划类型')
         self.click('xpath',f"//span[text()='提{input['贸易类型']}重箱计划']")
 
     def select_value(self,input):
         """
         选择进口船、提单号
         """
-        self.logger.info('步骤2：输入航名航次')
+        self.logger.info('计划受理-提箱受理：输入航名航次')
         Gtextinput = Gtos_text(self.driver)
         Gtextinput.select_by_label('进口船',input['进口船'])
         Gtextinput.input_by_placeholder('提单号',config.boxNumber)
@@ -31,7 +31,6 @@ class Packing_up(BasePage):
         """
         检索
         """
-        self.logger.info('步骤3：检索')
         textclick = Gtos_text(self.driver)
         textclick.no_elements_click('检索')
         tablecheck = Gtos_table(self.driver,2)
@@ -49,7 +48,6 @@ class Packing_up(BasePage):
         """
         勾选数据
         """
-        self.logger.info('步骤4：勾选货信息数据')
         tablecheck = Gtos_table(self.driver)
         tablecheck.tick_off_box(1)
 
@@ -57,20 +55,20 @@ class Packing_up(BasePage):
         """
         海关放行
         """
-        self.logger.info('步骤5：海关放行')
+        self.logger.info('计划受理-提箱受理：海关放行')
         self.click('xpath',"//div[@class='nzctos-buttongroup']//span[text()='海关放行']")
         self.check_alert('放行成功')
         tablecheck = Gtos_table(self.driver, 2)
         check.equal(tablecheck.get_value('海关放行'), '放行')
 
-    def generation_plan(self,input):
+    def generation_plan(self):
         """
         生成计划
         """
         tablecheck = Gtos_table(self.driver)
         tablecheck.tick_off_box(1)
         tablecheck.tick_off_box(1)
-        self.logger.info('步骤7：生成计划')
+        self.logger.info('计划受理-提箱受理：生成计划')
         self.click('xpath',"//span[text()='生成计划']")
         textinput = Gtos_text(self.driver)
         textinput.select_by_label('申请人','ATL')
@@ -95,6 +93,6 @@ class Packing_up(BasePage):
         self.retrieve(input)
         self.tick_off_box()
         self.customs_release()
-        self.generation_plan(input)
+        self.generation_plan()
         self.save()
 

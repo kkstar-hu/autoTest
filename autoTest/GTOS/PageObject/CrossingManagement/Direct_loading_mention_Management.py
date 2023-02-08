@@ -17,7 +17,7 @@ class Direct_loading_mention_Management(BasePage):
         """
         直装内容
         """
-        self.logger.info('步骤1：输入航名航次')
+        self.logger.info('直装/直提管理-输入航名航次查询')
         textinput = Gtos_text(self.driver)
         # textinput.input_noclear_placeholder_click('请选择',input['直装直提船名航次'])
         # textinput.input_by_label('箱号', config.boxNumber)

@@ -15,13 +15,11 @@ class Manifest(BasePage):
         """
         输入出口船名航次、箱号
         """
-        self.logger.info('步骤1：输入船名航次')
+        self.logger.info('装船箱放行：查询航次')
         Gtextinput = Gtos_text(self.driver)
         Gtextinput.search_select_by_label('出口船名航次',config.outportNumber)
         Gtextinput.input_by_label('箱号',boxnumber)
-        self.logger.info('步骤2：检索')
         self.click('xpath',"//span[text()='检索']")
-        self.logger.info('步骤3：校验字段')
         tablecheck = Gtos_table(self.driver)
         tablecheck.tick_off_box(1)
         check.equal(tablecheck.get_value('提单号'), boxnumber)
@@ -39,7 +37,7 @@ class Manifest(BasePage):
         check.equal(tablecheck1.get_value('持箱人'),input['持箱人'])
         check.equal(tablecheck1.get_value('直装'),'Y')
         check.equal(tablecheck1.get_value('放行'), '未放')
-        self.logger.info('步骤4：码头人工放行')
+        self.logger.info('装船箱放行：码头人工放行')
         self.click('xpath',"//span[contains(text(),'码头人工放行')]")
         tablecheck2 = Gtos_table(self.driver,3)
         check.equal(tablecheck2.get_value('提单号'), boxnumber)
@@ -51,12 +49,12 @@ class Manifest(BasePage):
         Gtextinput = Gtos_text(self.driver)
         Gtextinput.search_select_by_label('请输入关键词', config.outportNumber)
         Gtextinput.input_by_label('箱号', config.boxNumber)
-        self.logger.info('步骤2：检索')
+        self.logger.info('装船箱放行：查询航次、箱号')
         self.click('xpath', "//span[text()='检索']")
 
 
     def permitthrough(self):
-        self.logger.info('步骤4：码头人工放行')
+        self.logger.info('装船箱放行：：码头人工放行')
         tablecheck = Gtos_table(self.driver)
         tablecheck.tick_off_box(1)
         self.click('xpath', "//span[contains(text(),'码头人工放行')]")
