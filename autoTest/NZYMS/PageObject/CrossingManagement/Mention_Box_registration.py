@@ -28,7 +28,7 @@ class Mention_Box_registration(BasePage):
         """
         有计划提箱进场登记
         """
-        self.logger.info('步骤1:输入已有计划的箱号')
+        self.logger.info('提箱计划:输入已有计划的箱号')
         textInput = text(self.driver)
         textInput.input_by_number("箱号", config.boxNumberOutPlan)
         self.get_element('xpath', '//input[@placeholder="请输入箱号"]').send_keys(Keys.ENTER)
@@ -56,7 +56,7 @@ class Mention_Box_registration(BasePage):
         """
         道口选择功能,手机输入，车辆选择（写死了）
         """
-        self.logger.info('步骤2：选择道口（进场专用/01）,车牌，手机号')
+        self.logger.info('道口选择：选择道口（进场专用/01）,车牌，手机号')
         textInput = text(self.driver)
         if input['堆场'] is not None:
             textInput.select_by_label("堆场", input["堆场"])
@@ -68,7 +68,7 @@ class Mention_Box_registration(BasePage):
         """
         提箱确认按钮
         """
-        self.logger.info('步骤3：提箱确认')
+        self.logger.info('提箱计划：提箱确认')
         self.get_element('xpath', "//span[text()='提箱确认']").click()
         self.check_alert(input["outboxalert"])
 

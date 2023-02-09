@@ -20,14 +20,14 @@ class Split_Box_Plan(BasePage):
         新增计划
         """
         try:
-            self.logger.info('步骤1：添加主计划')
+            self.logger.info('拆箱计划：添加主计划')
             self.click('xpath',"//div[@id='add']")
             self.waitloading()
             # self.logger.info('步骤2：刷新元素')
             # self.refresh()
             # self.click('xpath',"//div[@id='add']")
             textInput = text(self.driver)
-            self.logger.info('步骤2：输入内容')
+            self.logger.info('拆箱计划：输入内容')
             if input['堆场'] is not None:
                 textInput.select_by_index('堆场',input['堆场'],1)
             if input['结算主体'] is not None:
@@ -56,7 +56,7 @@ class Split_Box_Plan(BasePage):
         """
         新增箱信息
         """
-        self.logger.info('步骤1：添加计划箱')
+        self.logger.info('拆箱计划：添加计划箱')
         self.click_by_index('xpath',"//div[@id='add']",1)
         self.waitloading()
         textInput = text(self.driver)
@@ -102,7 +102,7 @@ class Split_Box_Plan(BasePage):
         新增车辆信息
         """
         try:
-            self.logger.info('步骤1：添加车辆')
+            self.logger.info('拆箱计划：添加车辆')
             self.click_by_index('xpath',"//div[@id='add']",1)
             self.waitloading()
             textInput = text(self.driver)
@@ -141,7 +141,7 @@ class Split_Box_Plan(BasePage):
         """
         ...鼠标点击
         """
-        self.logger.info('步骤1：展开...')
+        self.logger.info('拆箱计划：展开...')
         table= Table(self.driver,3)
         table.moreButton(row)
         self.element_wait('id','setup')
@@ -151,7 +151,7 @@ class Split_Box_Plan(BasePage):
         执行按钮（后期可能需要增加判断选择了是 取消 执行 关闭 等操作，给出 对应提示）
         """
         self.more_information(1)
-        self.logger.info('步骤2：执行')
+        self.logger.info('拆箱计划：执行')
         self.click('xpath', "//li[@class='el-menu-item']//span[text()='执行']")
         self.element_wait_disappear(By.XPATH, "//div[@role='alert']//p")
         # WebDriverWait(self.driver, 10, 1).until_not(

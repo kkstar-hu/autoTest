@@ -17,7 +17,7 @@ class Bulk_cargo_into_storagePlan(BasePage):
         新增散货入库计划
         """
         try:
-            self.logger.info('步骤1：添加主计划')
+            self.logger.info('散货入库计划：添加主计划')
             self.click('xpath',"//div[@id='add']")
             self.waitloading()
             textInput = text(self.driver)
@@ -68,7 +68,7 @@ class Bulk_cargo_into_storagePlan(BasePage):
         新增入库箱子
         """
         try:
-            self.logger.info('步骤1：添加箱子')
+            self.logger.info('散货入库计划：添加箱子')
             self.click_by_index('xpath',"//div[@id='add']",1)
             self.waitloading()
             textInput = text(self.driver)
@@ -104,7 +104,7 @@ class Bulk_cargo_into_storagePlan(BasePage):
         新增车辆信息
         """
         try:
-            self.logger.info('步骤1：添加车辆')
+            self.logger.info('散货入库计划：添加车辆')
             self.click_by_index('xpath',"//div[@id='add']",1)
             self.waitloading()
             textInput = text(self.driver)
@@ -146,7 +146,7 @@ class Bulk_cargo_into_storagePlan(BasePage):
         """
         ...鼠标点击
         """
-        self.logger.info('步骤1：展开...')
+        self.logger.info('散货入库计划：展开...')
         table= Table(self.driver,3)
         table.moreButton(row)
         self.element_wait('id','setup')

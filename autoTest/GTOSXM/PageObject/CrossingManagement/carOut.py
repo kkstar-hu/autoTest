@@ -21,7 +21,7 @@ class Car_Out(BasePage):
         self.get_element('xpath', "//input[@placeholder='请输入集卡号']").send_keys(input["集卡编号"])
         self.get_element('xpath', "//input[@placeholder='请输入箱号']").send_keys(boxnumber)
         self.click('xpath', "(//div[@class='el-select el-select--small nzctos-select-wrap'])[2]")
-        self.click('xpath', "//li//span[text()='B06']")
+        self.click('xpath', "//li//span[text()='G20']")
 
     def retrieve(self):
         """

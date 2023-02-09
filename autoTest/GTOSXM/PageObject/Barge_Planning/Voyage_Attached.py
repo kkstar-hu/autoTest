@@ -1,8 +1,8 @@
 import time
 import pytest_check as check
 from Base.basepage import BasePage
-from GTOS.Controls.text import Gtos_text
-from GTOS.Config import config
+from GTOSXM.Controls.text import Gtos_text
+from GTOSXM.Config import config
 from GTOS.Controls.Gtos_table import Gtos_table
 
 class Voyage_Attached(BasePage):
@@ -27,11 +27,11 @@ class Voyage_Attached(BasePage):
         """
         新增航次挂靠港
         """
-        self.logger.info('航次挂靠港-新增挂靠港CNWHA')
+        self.logger.info('航次挂靠港-新增挂靠港ARENS')
         self.click('x',"(//span[text()='新增'])[1]")
         textInput = Gtos_text(self.driver)
         textInput.click('x',"(//input[@placeholder='请选择'])[1]")
-        textInput.click('x',"//span[text()='CNWHA']")
+        textInput.click('x',"//span[text()='ARENS']")
         textInput.click('x',"//span[text()='保 存']")
         check.equal(self.get_text("xpath","//div[@role='alert']//h2"),"保存成功")
 

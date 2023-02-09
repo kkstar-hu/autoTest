@@ -2,9 +2,9 @@ import time
 
 import pytest_check as check
 from Base.basepage import BasePage
-from GTOS.Controls.text import Gtos_text
-from GTOS.Config import config
-from GTOS.Controls.Gtos_table import Gtos_table
+from GTOSXM.Controls.text import Gtos_text
+from GTOSXM.Config import config
+from GTOSXM.Controls.Gtos_table import Gtos_table
 
 
 class InBox_Acceptance(BasePage):
@@ -18,7 +18,7 @@ class InBox_Acceptance(BasePage):
         self.logger.info('步骤1：选择计划类型')
         self.click('xpath',f"//span[text()='安排{input['贸易类型']}箱直装计划']")
 
-    def select_value(self,input):
+    def select_value(self):
         """
         选择进口船、提单号
         """
@@ -81,15 +81,15 @@ class InBox_Acceptance(BasePage):
         except:
             self.cancel()
 
-    def build_plan(self):
+    def build_plan(self,input):
         """
         生产计划
         """
         self.logger.info('步骤7：生成计划')
         self.click('xpath',"//span[text()='生成计划']")
         Gtextinput = Gtos_text(self.driver)
-        Gtextinput.select_by_label('申请人','AHCH')
-        Gtextinput.select_by_label('流向/来源','1205')
+        Gtextinput.select_by_label('申请人',input['申请人'])
+        Gtextinput.select_by_label('流向/来源',input['流向/来源'])
         Gtextinput.element_wait_disappear("xpath","//div[@role='alert']//p")
         self.click('xpath',"//button/span[contains(text(),'保存')]")
         self.check_alert('计划保存成功')
@@ -100,7 +100,7 @@ class InBox_Acceptance(BasePage):
         进箱直提受理流程
         """
         self.choice_tree_straight(input)
-        self.select_value(input)
+        self.select_value()
         self.addPlan(input,boxnumber)
         self.Add_value(boxnumber)
-        self.build_plan()
+        self.build_plan(input)

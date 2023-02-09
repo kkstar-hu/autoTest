@@ -5,9 +5,9 @@ from selenium.webdriver import ActionChains
 
 from Base.basepage import BasePage
 from Commons.DateTime import DataTime
-from GTOS.Controls.text import Gtos_text
-from GTOS.Config import config
-from GTOS.Controls.Gtos_table import Gtos_table
+from GTOSXM.Controls.text import Gtos_text
+from GTOSXM.Config import config
+from GTOSXM.Controls.Gtos_table import Gtos_table
 
 class NO_Structure_Monitoring(BasePage):
     """
@@ -154,15 +154,17 @@ class NO_Structure_Monitoring(BasePage):
         leaveTime = leaveDay + " 00:00:00"
         check.equal(tablecheck.get_value('计划靠泊时间'), arriveTime)
         check.equal(tablecheck.get_value('计划离泊时间'), leaveTime)
-        check.equal(tablecheck.get_value('计划泊位'), '01')
+        check.equal(tablecheck.get_value('计划泊位'), '1')
         self.click('x',"//span[text()='靠泊确认']")
         self.click('x',"//input[@placeholder='靠泊时间']")
         self.click('x',"//span[contains(text(),'此刻')]")
+        textinput = Gtos_text(self.driver)
+        textinput.input_by_label('靠泊吃水','1')
         self.click('x',"//span[text()='提交']")
         self.check_alert('提交成功')
         self.close_alert('提交成功')
         check.equal(tablecheck.get_value('靠泊状态'),'靠泊')
-        check.equal(tablecheck.get_value('实际泊位'), '01')
+        check.equal(tablecheck.get_value('实际泊位'), '1')
         self.logger.info('无结构船舶监控-分配桥吊')
         self.click('x',"//span[text()='添加桥吊']")
         em = self.get_element('x',"(//div[@class='grid'])[1]//span[text()='导入']")
@@ -230,11 +232,11 @@ class NO_Structure_Monitoring(BasePage):
                     return int(row)
         if  index == 5 :
             for y in a:
-                if y == config.outBoxNumberTwo:
+                if y == config.boxNumberTwo:
                     row = a[a.index(y)-1]
                     return int(row)
         if  index == 6 :
             for y in a:
-                if y == config.outBoxNumberThree:
+                if y == config.boxNumberThree:
                     row = a[a.index(y)-1]
                     return int(row)

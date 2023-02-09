@@ -14,7 +14,7 @@ class Input_Check_Info(BasePage):
         新增查验计划
         """
         try:
-            self.logger.info('步骤1：查验录入信息')
+            self.logger.info('查验计划录入：查验录入信息')
             self.click("xpath", "(//button//span[text()='检索'])[1]")
             tablefixed = Table(self.driver,2)
             tablefixed.click_edit("查验计划号",config.checkplanNumber)

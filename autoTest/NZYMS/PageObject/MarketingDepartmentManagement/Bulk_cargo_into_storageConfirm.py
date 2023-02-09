@@ -15,7 +15,7 @@ class Bulk_cargo_into_storageConfirm(BasePage):
         """
         输入车牌号
         """
-        self.logger.info('步骤1：输入车牌号')
+        self.logger.info('散货入库确认：输入车牌号')
         textInput = text(self.driver)
         textInput.input_by_placeholder('请输入车牌号',input['车牌']+input['车号'])
         textInput.select_by_label("结算主体",input['结算主体'])
@@ -39,7 +39,7 @@ class Bulk_cargo_into_storageConfirm(BasePage):
         try:
             self.input_carnumber(input)
             self.retrieve()
-            self.logger.info('步骤2：新增入库信息')
+            self.logger.info('散货入库确认：新增入库信息')
             textInput = text(self.driver)
             #self.close_alert('没有符合条件的入库登记信息')
             textInput.click('xpath', "//div[@id='add']")

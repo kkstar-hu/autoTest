@@ -21,7 +21,7 @@ class Split_Box_Confirm(BasePage):
         """
         输入箱号
         """
-        self.logger.info('步骤1：输入箱号,选择状态')
+        self.logger.info('拆箱计划：输入箱号,选择状态')
         textInput = text(self.driver)
         textInput.input_by_placeholder('请输入箱号',config.boxNumberOutPlan)
         textInput.select_by_index('结算主体', input['结算主体'], 0)
@@ -84,13 +84,13 @@ class Split_Box_Confirm(BasePage):
         try:
             self.input_boxnumber(input)
             self.retrieve()
-            self.logger.info('步骤2：新增货物信息')
+            self.logger.info('拆箱计划：新增货物信息')
             textInput = text(self.driver)
             textInput.click('xpath', "//div[@id='add']")
             self.refresh()
             self.input_boxnumber(input)
             self.retrieve()
-            self.logger.info('步骤2：新增货物信息')
+            self.logger.info('拆箱计划：新增货物信息')
             textInput.click('xpath', "//div[@id='add']")
             textInput.select_by_placeholder('请选择堆场',input['堆场'])
             # textInput.select_by_placeholder('请选择计划类型',input['计划类型'])

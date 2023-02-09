@@ -4,9 +4,9 @@ import pytest_check as check
 from selenium.webdriver import ActionChains, Keys
 
 from Base.basepage import BasePage
-from GTOS.Controls.text import Gtos_text
-from GTOS.Config import config
-from GTOS.Controls.Gtos_table import Gtos_table
+from GTOSXM.Controls.text import Gtos_text
+from GTOSXM.Config import config
+from GTOSXM.Controls.Gtos_table import Gtos_table
 
 
 class Stockpiling_Planning(BasePage):
@@ -31,7 +31,11 @@ class Stockpiling_Planning(BasePage):
         self.logger.info('堆存计划-新增堆存计划')
         self.click('x',"(//span[text()='新增'])[1]")
         tablecheck = Gtos_table(self.driver,4)
-        tablecheck.tick_off_box(6)
+        tablecheck.tick_off_box(1)
+        # if number == config.outportNumber:
+        #     tablecheck.tick_off_box(1)
+        # if number == config.importNumber:
+        #     tablecheck.tick_off_box(7)
         tablecheck.click('x',"//span[text()='生成堆存计划']")
         self.check_alert('生成堆存计划成功')
         self.close_alert('生成堆存计划成功')
@@ -40,7 +44,7 @@ class Stockpiling_Planning(BasePage):
         """
         新增计划箱区
         """
-        self.logger.info('堆存计划-新增计划箱区A01')
+        self.logger.info('堆存计划-新增计划箱区C1')
         tablecheck = Gtos_table(self.driver,2)
         tablecheck.tick_off_box(1)
         self.click('x',"(//span[text()='新增'])[3]")
@@ -48,7 +52,7 @@ class Stockpiling_Planning(BasePage):
         self.click('x',"(//span[text()='新增'])[4]")
         time.sleep(1)
         textInput = Gtos_text(self.driver)
-        textInput.input_noclear_placeholder_click('请选择','A01')
+        textInput.input_noclear_placeholder_click('请选择','C1')
         self.refresh()
         self.search("道口进",config.outportNumber)
         tablecheck.tick_off_box(1)
@@ -57,7 +61,7 @@ class Stockpiling_Planning(BasePage):
         self.click('x',"(//span[text()='新增'])[4]")
         time.sleep(1)
         textInput = Gtos_text(self.driver)
-        textInput.input_noclear_placeholder_click('请选择','A01')
+        textInput.input_noclear_placeholder_click('请选择','C1')
         time.sleep(0.5)
         textInput.click('x',"//span[text()='保存']")
         self.check_alert('新增成功')
@@ -68,7 +72,7 @@ class Stockpiling_Planning(BasePage):
         """
         新增计划箱区
         """
-        self.logger.info('堆存计划-新增计划箱区A01')
+        self.logger.info('堆存计划-新增计划箱区C1')
         tablecheck = Gtos_table(self.driver,2)
         tablecheck.tick_off_box(1)
         self.click('x',"(//span[text()='新增'])[3]")
@@ -76,7 +80,8 @@ class Stockpiling_Planning(BasePage):
         self.click('x',"(//span[text()='新增'])[4]")
         time.sleep(1)
         textInput = Gtos_text(self.driver)
-        textInput.input_noclear_placeholder_click('请选择','A01')
+        textInput.input_noclear_placeholder_click('请选择','C1')
+        time.sleep(0.5)
         textInput.click('x',"//span[text()='保存']")
         self.check_alert('新增成功')
         self.close_alert('新增成功')

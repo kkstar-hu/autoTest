@@ -16,7 +16,7 @@ class Settlement_Charge(BasePage):
         """
         配置收费
         """
-        self.logger.info('步骤1：输入箱号、选择结算类型')
+        self.logger.info('查验计划收费：输入箱号、选择结算类型')
         textInput = text(self.driver)
         textInput.click('xpath', f'//span[text()="{config.showname}"]')
         textInput.click_by_index('xpath', "//span[text()='本地配置']", 1)
@@ -30,7 +30,7 @@ class Settlement_Charge(BasePage):
         出场收费
         """
         self.configuration()
-        self.logger.info('步骤1：输入箱号、选择结算类型')
+        self.logger.info('查验计划收费：输入箱号、选择结算类型')
         textInput = text(self.driver)
         textInput.input_by_label('箱号', config.boxNumberOutPlan)
         textInput.select_by_placeholder('请选择结费点','10/出场计划')

@@ -1,8 +1,8 @@
 import pytest_check as check
 from Base.basepage import BasePage
-from GTOS.Controls.text import Gtos_text
-from GTOS.Config import config
-from GTOS.Controls.Gtos_table import Gtos_table
+from GTOSXM.Controls.text import Gtos_text
+from GTOSXM.Config import config
+from GTOSXM.Controls.Gtos_table import Gtos_table
 
 
 class Packing_up(BasePage):
@@ -74,14 +74,14 @@ class Packing_up(BasePage):
         textinput.select_by_label('返场类型','不返场')
 
 
-    def save(self):
+    def save_over(self,input):
         """
         保存
         """
         self.logger.info('计划受理-提箱受理-保存计划')
         textclick = Gtos_text(self.driver)
         textclick.no_elements_click('保存')
-        self.check_alert(input('alert'))
+        self.check_alert(input['alert'])
 
     def packing_process(self,input,boxnumber):
         """
@@ -93,7 +93,7 @@ class Packing_up(BasePage):
         self.tick_off_box()
         self.customs_release()
         self.generation_plan()
-        self.save()
+        self.save_over(input)
 
     def straight_process(self,input,boxnumber):
         """
@@ -105,5 +105,5 @@ class Packing_up(BasePage):
         self.tick_off_box()
         self.customs_release()
         self.generation_plan()
-        self.save()
+        self.save_over(input)
 

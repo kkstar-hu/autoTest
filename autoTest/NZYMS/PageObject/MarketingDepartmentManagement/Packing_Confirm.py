@@ -19,7 +19,7 @@ class Packing_Confirm(BasePage):
         """
         输入箱号
         """
-        self.logger.info('步骤1：输入箱号,选择状态')
+        self.logger.info('装箱确认：输入箱号,选择状态')
         textInput = text(self.driver)
         textInput.input_by_placeholder('请输入箱号',config.boxNumberOutPlan)
         textInput.select_by_label('装箱状态',input['装箱状态'])
@@ -55,6 +55,7 @@ class Packing_Confirm(BasePage):
         for tr in table_tr_list:
             att = (tr.text).split("\n")
             pax.append(att)
+
         for i in pax:
             a.append(i)
         return a
@@ -69,11 +70,12 @@ class Packing_Confirm(BasePage):
         """
         self.input_boxnumber(input)
         self.retrieve()
-        self.logger.info('步骤2：新增货物信息')
+        self.logger.info('装箱确认：新增货物信息')
         textInput = text(self.driver)
         textInput.click('xpath', "//div[@id='add']")
         textInput.click('xpath',"//div[@class='vxe-modal--box']//span[text()='检索']")
         b = self.get_information(5)
+        table2 = Table(self.driver, 5)
         table = Table(self.driver, 6)
         for i in b:
             if '库内货' in i:
@@ -81,17 +83,17 @@ class Packing_Confirm(BasePage):
                 print(b.index(i))
                 table.tick_off_box(b.index(i)+1)
                 table1 = Table(self.driver, 7)
-                table1.input_by_row('装箱件数', i[7],b.index(i)+1)
-                table1.input_by_row('装箱体积', i[9],b.index(i)+1)
-                table1.input_by_row('装箱重量', i[8],b.index(i)+1)
+                table1.input_by_row('装箱件数', table2.get_value('件数'))
+                table1.input_by_row('装箱体积', table2.get_value('重量(kg)'))
+                table1.input_by_row('装箱重量', table2.get_value('体积'))
             if '直装货' in i:
                 print(i)
                 print(b.index(i))
                 table.tick_off_box(b.index(i)+1)
                 table1 = Table(self.driver, 7)
-                table1.input_by_row('装箱件数', i[6],b.index(i)+1)
-                table1.input_by_row('装箱体积', i[8],b.index(i)+1)
-                table1.input_by_row('装箱重量', i[7],b.index(i)+1)
+                table1.input_by_row('装箱件数', table2.get_value('件数',2),2)
+                table1.input_by_row('装箱体积', table2.get_value('重量(kg)',2),2)
+                table1.input_by_row('装箱重量', table2.get_value('体积',2),2)
         self.click('xpath',"//button//span[contains(text(),'确认')]")
         time.sleep(1)
         tableCheck = Table(self.driver,2)
@@ -112,7 +114,7 @@ class Packing_Confirm(BasePage):
         """
         ...鼠标点击
         """
-        self.logger.info('步骤1：展开...')
+        self.logger.info('装箱确认：展开...')
         table = Table(self.driver,3)
         table.moreButton()
         self.element_wait('xpath',"//span[text()='完成']")

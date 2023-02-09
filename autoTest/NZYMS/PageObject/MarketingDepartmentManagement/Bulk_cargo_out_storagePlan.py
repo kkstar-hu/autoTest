@@ -19,15 +19,15 @@ class Bulk_cargo_out_storagePlan(BasePage):
         新增散货出库计划
         """
         try:
-            self.logger.info('步骤1：添加主计划')
+            self.logger.info('散货出库计划：添加主计划')
             self.click('xpath',"//div[@id='add']")
             self.waitloading()
-            self.logger.info('步骤2：刷新元素')
+            self.logger.info('页面因素：刷新元素')
             self.refresh()
             self.click('xpath',"//div[@id='add']")
             self.waitloading()
             textInput = text(self.driver)
-            self.logger.info('步骤3：输入内容')
+            self.logger.info('散货出库计划：输入内容')
             if input['结算主体'] is not None:
                 textInput.select_by_index('结算主体',input['结算主体'],1)
             if input['计划类型'] is not None:
@@ -76,7 +76,7 @@ class Bulk_cargo_out_storagePlan(BasePage):
         新增出库箱子
         """
         try:
-            self.logger.info('步骤1：添加箱子')
+            self.logger.info('散货出库计划：添加箱子')
             self.click_by_index('xpath',"//div[@id='add']",1)
             self.waitloading()
             textInput = text(self.driver)
@@ -115,7 +115,7 @@ class Bulk_cargo_out_storagePlan(BasePage):
         新增车辆信息
         """
         try:
-            self.logger.info('步骤1：添加车辆')
+            self.logger.info('散货出库计划：添加车辆')
             self.click_by_index('xpath',"//div[@id='add']",1)
             self.waitloading()
             textInput = text(self.driver)
@@ -167,7 +167,7 @@ class Bulk_cargo_out_storagePlan(BasePage):
         执行按钮（后期可能需要增加判断选择了是 取消 执行 关闭 等操作，给出 对应提示）
         """
         self.more_information(1)
-        self.logger.info('步骤2：执行')
+        self.logger.info('散货出库计划：执行')
         self.click('id', 'setup')
         self.element_wait_disappear(By.XPATH, "//div[@role='alert']//p")
         # WebDriverWait(self.driver, 10, 1).until_not(

@@ -42,9 +42,9 @@ class Bulk_cargo_out_storageConfirm(BasePage):
         try:
             self.out_carnumber(input)
             self.retrieve()
-            self.logger.info(('步骤1：选择数据主题'))
+            self.logger.info('散货出库：选择数据主题')
             self.click('xpath', f"//span[text()='{config.bulkoutNumber}']")
-            self.logger.info('步骤2：新增出库信息')
+            self.logger.info('散货出库：新增出库信息')
             textInput = text(self.driver)
             textInput.click('xpath', "//div[@id='add']")
             textInput.input_by_label('出库件数', int(input['出库件数']) / 2)

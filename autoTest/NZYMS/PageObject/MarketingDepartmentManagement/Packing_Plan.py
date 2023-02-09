@@ -24,11 +24,11 @@ class Packing_Plan(BasePage):
         新增计划
         """
         try:
-            self.logger.info('步骤1：添加主计划')
+            self.logger.info('装箱计划：添加主计划')
             self.refresh()
             self.click('xpath',"//div[@id='add']")
             textInput = text(self.driver)
-            self.logger.info('步骤2：输入内容')
+            self.logger.info('装箱计划：输入内容')
             if input['结算主体'] is not None:
                 textInput.select_by_index('结算主体', input['结算主体'], 1)
             if input['堆场'] is not None:
@@ -57,7 +57,7 @@ class Packing_Plan(BasePage):
         新增箱信息
         """
         try:
-            self.logger.info('步骤1：添加计划箱')
+            self.logger.info('装箱计划：添加计划箱')
             self.click_by_index('xpath',"//div[@id='add']",1)
             self.waitloading()
             textInput = text(self.driver)
@@ -138,7 +138,7 @@ class Packing_Plan(BasePage):
         新增货物信息,直装货
         """
         try:
-            self.logger.info('步骤1：添加货物信息')
+            self.logger.info('装箱计划：添加货物信息')
             self.click_by_index('xpath',"//div[@id='add']",1)
             self.waitloading()
             textInput = text(self.driver)
@@ -179,7 +179,7 @@ class Packing_Plan(BasePage):
         """
         新增货物信息，库内货
         """
-        self.logger.info('步骤1：添加货物信息')
+        self.logger.info('装箱计划：添加货物信息')
         self.click('xpath',"//span[text()='入库明细追加']")
         self.waitloading()
         textInput = text(self.driver)
@@ -217,7 +217,7 @@ class Packing_Plan(BasePage):
         执行按钮（后期可能需要增加判断选择了是 取消 执行 关闭 等操作，给出 对应提示）
         """
         self.more_information(1)
-        self.logger.info('步骤2：执行')
+        self.logger.info('装箱计划：执行')
         self.click('id', 'setup')
         self.element_wait_disappear(By.XPATH, "//div[@role='alert']//p")
         self.click("xpath", "//div[@class='el-message-box__btns']//span[contains(text(),'确定')]")

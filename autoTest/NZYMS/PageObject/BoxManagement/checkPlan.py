@@ -16,7 +16,7 @@ class Check_Plan(BasePage):
         新增查验计划
         """
         try:
-            self.logger.info('步骤1：添加查验计划')
+            self.logger.info('查验计划：添加查验计划')
             self.click("xpath", "(//div[@id='add'])[1]")
             textInput = text(self.driver)
             self.logger.info('check1：验证查验计划号和查验方式不可编辑')
@@ -72,7 +72,7 @@ class Check_Plan(BasePage):
 
     def addWorkOrder(self, input, boxNumber):
         try:
-            self.logger.info('步骤1：添加作业指令')
+            self.logger.info('查验计划添加箱：添加作业指令')
             self.click("xpath","(//div[@id='add'])[2]")
             textInput = text(self.driver)
             textInput.input_by_placeholder("请输入箱号", boxNumber)

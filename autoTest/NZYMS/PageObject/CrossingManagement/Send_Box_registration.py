@@ -28,7 +28,7 @@ class Send_Box_registration(BasePage):
         """
         有计划送箱进场登记
         """
-        self.logger.info('步骤1:输入已有计划的箱号')
+        self.logger.info('送箱进场:输入已有计划的箱号')
         textInput = text(self.driver)
         textInput.input_by_number("箱号",boxNumber)
         # textInput.input_by_number("箱号", 'JX_762058')
@@ -49,7 +49,7 @@ class Send_Box_registration(BasePage):
         """
         无计划送箱进场登记（测试情况，结算客户 ：SHYYWL写死, 空重写死：重箱，尺寸写死：40，GP）
         """
-        self.logger.info('步骤1:输入登记信息，箱号随机生产')
+        self.logger.info('送箱进场:输入登记信息，箱号随机生产')
         textInput = text(self.driver)
         self.get_element('xpath', '//input[@placeholder="请输入箱号"]').send_keys(ret)
         self.waitloading()
@@ -78,7 +78,7 @@ class Send_Box_registration(BasePage):
         """
         道口选择功能,手机输入，车辆选择（写死了）
         """
-        self.logger.info('步骤2：选择道口（进场专用/01）,车牌，手机号')
+        self.logger.info('送箱进场：选择道口（进场专用/01）,车牌，手机号')
         textInput = text(self.driver)
         if input['堆场'] is not None:
             textInput.select_by_label("堆场", input["堆场"])
@@ -95,7 +95,7 @@ class Send_Box_registration(BasePage):
         """
         送箱确认按钮
         """
-        self.logger.info('步骤3：送箱确认')
+        self.logger.info('送箱进场：送箱确认')
         self.get_element('xpath', "//span[text()='送箱确认']").click()
         self.check_alert(input["alert"])
 

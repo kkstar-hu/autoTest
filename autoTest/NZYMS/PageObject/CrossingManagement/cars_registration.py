@@ -11,7 +11,7 @@ class Cars_Registration(BasePage):
         """
         道口选择功能,手机输入，车辆选择
         """
-        self.logger.info('步骤2：选择道口（进场专用/01）,车牌，手机号')
+        self.logger.info('车辆道口：选择道口（进场专用/01）,车牌，手机号')
         textInput = text(self.driver)
         if input['堆场'] is not None:
             textInput.select_by_label("堆场", input["堆场"])

@@ -10,7 +10,7 @@ class GoInPlan_BoxNumber(BasePage):
 
     def addPlan(self,input):
         try:
-            self.logger.info('步骤1：添加主计划')
+            self.logger.info('进箱计划：添加主计划')
             self.element_wait("xpath","(//div[@id='add'])[1]")
             self.click("xpath","(//div[@id='add'])[1]")
             if input["堆场"]!=None:
@@ -64,7 +64,7 @@ class GoInPlan_BoxNumber(BasePage):
 
     def addBoxPlan(self,input,boxNumber):
         try:
-            self.logger.info('步骤1：添加计划箱')
+            self.logger.info('进箱计划：添加计划箱')
             self.element_wait("xpath", "(//div[@id='add'])[2]")
             self.click("xpath","(//div[@id='add'])[2]")
             textInput = text(self.driver)
@@ -93,7 +93,7 @@ class GoInPlan_BoxNumber(BasePage):
 
     def addBoxInformation(self, input):
         try:
-            self.logger.info('步骤1：添加箱货信息')
+            self.logger.info('进箱计划：添加箱货信息')
             self.element_wait("xpath", "(//div[@id='add'])[3]")
             self.click("xpath", "(//div[@id='add'])[3]")
             textInput = text(self.driver)

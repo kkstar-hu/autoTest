@@ -11,7 +11,7 @@ class ChangeStorePlan(BasePage):
 
     def addChangePlan(self,input,boxNumber):
         try:
-            self.logger.info('步骤1：添加转堆计划')
+            self.logger.info('转堆计划：添加转堆计划')
             self.click("id","add")
             textInput=text(self.driver)
             self.logger.info('check1：验证计划号可否编辑')
@@ -45,7 +45,7 @@ class ChangeStorePlan(BasePage):
 
     def addWorkOrder(self, input,boxNumber):
         try:
-            self.logger.info('步骤1：添加作业指令')
+            self.logger.info('转堆计划：添加作业指令')
             #self.click("xpath","(//div[@id='add'])[2]")
             textInput = text(self.driver)
             textInput.input_by_placeholder("请输入箱号", boxNumber)

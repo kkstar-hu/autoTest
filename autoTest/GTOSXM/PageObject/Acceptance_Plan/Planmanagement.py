@@ -1,6 +1,6 @@
 from Base.basepage import BasePage
-from GTOS.Controls.text import Gtos_text
-from GTOS.Config import config
+from GTOSXM.Controls.text import Gtos_text
+from GTOSXM.Config import config
 
 
 class PlanManagement(BasePage):

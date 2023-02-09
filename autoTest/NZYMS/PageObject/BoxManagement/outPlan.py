@@ -20,12 +20,12 @@ class Out_Plan(BasePage):
         新增主计划
         """
         try:
-            self.logger.info('步骤1：添加主计划')
+            self.logger.info('出场计划：添加主计划')
             # self.refresh()
             self.click('xpath',"//div[@id='add']")
             self.waitloading()
             textInput = text(self.driver)
-            self.logger.info('步骤2：输入内容')
+            self.logger.info('出场计划：输入内容')
             textInput.get_elements('xpath',f'//input[@placeholder="请选择"]')[4].click()
             textInput.get_elements('xpath',f"//div[@class='el-scrollbar']//span[text()='{input['堆场']}']")[2].click()
             if input['出场作业类型'] is not None:
@@ -74,7 +74,7 @@ class Out_Plan(BasePage):
         """
         新增计划箱
         """
-        self.logger.info('步骤1：添加计划箱')
+        self.logger.info('出场计划：添加计划箱')
         self.click_by_index('xpath',"//div[@id='add']",1)
         self.waitloading()
         textInput = text(self.driver)
@@ -121,7 +121,7 @@ class Out_Plan(BasePage):
         """
         textInput = text(self.driver)
         tableCheck = Table(self.driver)
-        self.logger.info('步骤1：付款')
+        self.logger.info('出场计划：付款')
         value_text = self.get_alert_text()
         print(value_text)
         if self.elementExist("xpath", f"//form[@class='el-form']//label[contains(text(),'收款方式')]") is True:
@@ -137,7 +137,7 @@ class Out_Plan(BasePage):
             time.sleep(1)
             check.equal(tableCheck.get_value("计划状态"), "执行")
         elif value_text == f'箱号[{config.boxNumberOutPlan}]为转栈箱且未输入出码头时间！':
-            self.logger.info('步骤2：设置出场码头时间')
+            self.logger.info('出场计划：设置出场码头时间')
             textInput.click('xpath',"//div[@class='toscom-buttongroup']//div[@id='time']")
             textInput.click('xpath',"//div[@class='vxe-modal--box']//input[@placeholder='选择日期时间']")
             textInput.click('xpath',"//button[@class='el-button el-picker-panel__link-btn el-button--default el-button--mini is-plain']")

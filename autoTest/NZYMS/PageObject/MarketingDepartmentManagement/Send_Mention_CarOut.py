@@ -15,7 +15,7 @@ class Send_Mention_CarOut(BasePage):
         """
         输入车牌号
         """
-        self.logger.info('步骤1：输入车牌号')
+        self.logger.info('车辆放行：输入车牌号')
         textInput = text(self.driver)
         textInput.input_by_placeholder('请输入车号',input['车牌']+input['车号'])
 
@@ -44,7 +44,7 @@ class Send_Mention_CarOut(BasePage):
         """
         self.input_carnumber(input)
         self.retrieve()
-        self.logger.info('步骤2：勾选')
+        self.logger.info('车辆放行：勾选')
         table= Table(self.driver)
         table.tick_off_box(1)
         self.logger.info('步骤3：放行按钮点击')

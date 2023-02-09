@@ -3,9 +3,9 @@ import pytest_check as check
 from Base.basepage import BasePage
 from Commons.Controls.el_table import ELtable
 from Commons.DateTime import DataTime
-from GTOS.Controls.text import Gtos_text
-from GTOS.Config import config
-from GTOS.Controls.Gtos_table import Gtos_table
+from GTOSXM.Controls.text import Gtos_text
+from GTOSXM.Config import config
+from GTOSXM.Controls.Gtos_table import Gtos_table
 
 
 class Immediate_plan(BasePage):
@@ -35,15 +35,15 @@ class Immediate_plan(BasePage):
         eltable.input_text("航次",config.outportNumber)
         eltable.input_select("航次类型", input["航次类型"])
         eltable.input_select("贸易类型", input["贸易类型"])
-        eltable.input_select("归属码头", input["归属码头"])
-        eltable.input_select("海关进出口", input["海关进出口1"])
         eltable.input_select("营运人航线", input["营运人航线"])
+        # eltable.input_select("归属码头", input["归属码头"])
+        # eltable.input_select("海关进出口", input["海关进出口1"])
         self.click('xpath', "(//span[contains(text(),'新增')])[4]")
         eltable.input_text("航次",config.importNumber,2)
         eltable.input_select("航次类型", input["航次类型"],2)
         eltable.input_select("贸易类型", input["贸易类型"],2)
-        eltable.input_select("归属码头", input["归属码头"],2)
-        eltable.input_select("海关进出口", input["海关进出口2"],2)
+        # eltable.input_select("归属码头", input["归属码头"],2)
+        # eltable.input_select("海关进出口", input["海关进出口2"],2)
         eltable.input_select("营运人航线", input["营运人航线"],2)
         textInput.input_by_label('起始尺码', input["起始尺码"])
         textInput.select_by_label('船尾揽桩',input["船尾揽桩"])
@@ -59,6 +59,7 @@ class Immediate_plan(BasePage):
         self.logger.info('出口航次号为：'+tablecheck.get_value_by_rowid(rowid,'出口航次'))
         check.equal(tablecheck.get_value_by_rowid(rowid,'船期状态'), '预报')
         check.equal(tablecheck.get_value_by_rowid(rowid, '靠泊状态'), '未靠')
+        check.equal(tablecheck.get_value_by_rowid(rowid, '归属码头'), config.showname)
     def Sure_ShipPlan(self):
         self.logger.info('近期计划-确保船期')
         textInput = Gtos_text(self.driver)

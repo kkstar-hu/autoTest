@@ -2,9 +2,9 @@ import time
 
 import pytest_check as check
 from Base.basepage import BasePage
-from GTOS.Config import config
-from GTOS.Controls.Gtos_table import Gtos_table
-from GTOS.Controls.text import Gtos_text
+from GTOSXM.Config import config
+from GTOSXM.Controls.Gtos_table import Gtos_table
+from GTOSXM.Controls.text import Gtos_text
 
 
 class StraightLoad_StraightLift_Management(BasePage):
@@ -61,13 +61,13 @@ class StraightLoad_StraightLift_Management(BasePage):
         textInput.input_by_number('集卡编号',input['集卡编号'],3)
         textInput.select_by_label('前后标志','A')
         textInput.input_by_label('联系方式','13155542223')
-        textInput.select_by_label('进场道口号', 'B01')
+        textInput.select_by_label('进场道口号', 'G12')
         self.click('xpath', "//button[@class='el-button el-button--primary el-button--small']")
         self.check_alert('报道完成')
         tablecheck = Gtos_table(self.driver)
         check.equal(tablecheck.get_value('集卡号'), input['车牌']+input['集卡编号'])
         check.equal(tablecheck.get_value('前后标志'),'后')
-        check.equal(tablecheck.get_value('道口号'),'B01')
+        check.equal(tablecheck.get_value('道口号'),'G12')
         check.equal(tablecheck.get_value('报道标志'),'Y')
         check.equal(tablecheck.get_value('联系方式'),'13155542223')
 
@@ -82,13 +82,13 @@ class StraightLoad_StraightLift_Management(BasePage):
         textInput.input_by_number('集卡编号',input['集卡编号'],3)
         textInput.select_by_label('前后标志','A')
         textInput.input_by_label('联系方式','13155542223')
-        textInput.select_by_label('进场道口号', 'B01')
+        textInput.select_by_label('进场道口号', 'G12')
         self.click('xpath', "//button[@class='el-button el-button--primary el-button--small']")
         self.check_alert('报道完成')
         tablecheck = Gtos_table(self.driver,2)
         check.equal(tablecheck.get_value('集卡号'), input['车牌']+input['集卡编号'])
         check.equal(tablecheck.get_value('前后标志'),'后')
-        check.equal(tablecheck.get_value('道口号'),'B01')
+        check.equal(tablecheck.get_value('道口号'),'G12')
         check.equal(tablecheck.get_value('报道标志'),'Y')
         check.equal(tablecheck.get_value('联系方式'),'13155542223')
 

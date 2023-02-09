@@ -30,7 +30,7 @@ class ChangeBox(BasePage):
 
     def addchangePlan(self, input):
         try:
-            self.logger.info('步骤1：添加计划箱')
+            self.logger.info('集装箱整改：添加计划箱')
             self.click("xpath", "//div[@id='add']")
             textInput = text(self.driver)
             check.is_false(textInput.text_isenable("整改单号",index=0))
