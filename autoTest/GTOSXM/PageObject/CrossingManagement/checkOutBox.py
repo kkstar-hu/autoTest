@@ -2,9 +2,9 @@ import time
 
 import pytest_check as check
 from Base.basepage import BasePage
-from GTOS.Config import config
+from GTOSXM.Config import config
 from GTOS.Controls.Gtos_table import Gtos_table
-from GTOS.Controls.text import Gtos_text
+from GTOSXM.Controls.text import Gtos_text
 
 
 class CheckOutBox(BasePage):
@@ -36,7 +36,7 @@ class CheckOutBox(BasePage):
         self.click('xpath',"(//div[@class='export-cntr__buttons__right']//input)[1]")
         self.click('xpath',"//li//span[text()=\"20'普通架\"]")
         self.click('xpath', "(//div[@class='export-cntr__buttons__right']//input)[3]")
-        self.click('xpath', "//li//span[text()='B01']")
+        self.click('xpath', "//li//span[text()='G12']")
         self.input_no_clear('xpath',"//input[@placeholder='请输入车架号']",'123')
         self.waitloading()
         time.sleep(1)

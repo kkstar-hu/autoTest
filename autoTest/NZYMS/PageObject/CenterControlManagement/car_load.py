@@ -60,7 +60,7 @@ class Car_Load(BasePage):
         """
         通过选取箱号，选到框架
         """
-        self.logger.info('步骤2：选车落箱')
+        self.logger.info('车载：选车落箱')
         for i in range(1,10):
             if self.elementExist("xpath", f"//div[text()=' {boxNumber} ']") is False:
                 self.click('xpath', "//div[@class='yms__fork__btn__right']")
@@ -76,9 +76,9 @@ class Car_Load(BasePage):
         """
         通过选取箱号，选到框架
         """
-        self.logger.info('步骤：选起始箱区')
+        self.logger.info('车载：选起始箱区')
         self.click('xpath', "//div[@class = 'containerGrid containerGrid-arr-light-loc containerGrid-border']")
-        self.logger.info('步骤：选目标箱区')
+        self.logger.info('车载：选目标箱区')
         self.waitloading()
         self.click('xpath',"(//div[@class='transfer el-row']/div[2]//span[@data-tier-no and @data-row-no]//div[@class='gridItemC gridItemC-cs']/div[1][text()=' '])[1]//parent::div")
         #self.check_alert("成功")
@@ -89,7 +89,7 @@ class Car_Load(BasePage):
         """
         通过选取箱号，选到框架
         """
-        self.logger.info('步骤：落箱')
+        self.logger.info('车载：落箱')
         self.click('xpath',"(//div[@class='bayCon']//span[@data-tier-no and @data-row-no]//div[@class='gridItemC gridItemC-cs']/div[1][text()=' '])[1]//parent::div")
         self.click('xpath', "//span[text()='确认 ']")
         self.check_alert(None)

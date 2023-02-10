@@ -76,8 +76,8 @@ class Job_Order_Monitoring(BasePage):
         check.equal(tablecheck.get_value('箱状态'), input['箱状态'])
         check.equal(tablecheck.get_value('卸货港'), input['卸货港'])
         check.equal(tablecheck.get_value('作业状态'), '等待作业')
-        check.equal(tablecheck.get_value('归属码头'),config.showname)
-        check.equal(tablecheck.get_value('作业码头'),config.showname)
+        check.equal(tablecheck.get_value('指令归属码头'),config.showname)
+        check.equal(tablecheck.get_value('指令作业码头'),config.showname)
         if self.hasInput(input, '持箱人'):
             check.equal(tablecheck.get_value('持箱人'),input['持箱人'])
         if self.hasInput(input, '箱型'):
@@ -245,7 +245,7 @@ class Job_Order_Monitoring(BasePage):
         """
         self.Retrieve(input,shipname,boxnumber)
         self.order_info_check_new(input,boxnumber)
-        self.charge_car('1403',input)
+        self.charge_car('1405',input)
         self.discharging_confirm(input)
         self.closed_box(input)
 

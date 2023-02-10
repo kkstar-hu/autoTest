@@ -2,9 +2,9 @@ import time
 import pytest_check as check
 from Base.basepage import BasePage
 from Commons.DateTime import DataTime
-from GTOS.Controls.text import Gtos_text
-from GTOS.Config import config
-from GTOS.Controls.Gtos_table import Gtos_table
+from GTOSXM.Controls.text import Gtos_text
+from GTOSXM.Config import config
+from GTOSXM.Controls.Gtos_table import Gtos_table
 
 
 class Bridge_Crane_Distribution(BasePage):
@@ -32,21 +32,22 @@ class Bridge_Crane_Distribution(BasePage):
         check.equal(tablecheck.get_value('出口航次'), config.outportNumber)
         check.equal(tablecheck.get_value('计划靠泊时间'), self.arriveTime)
         check.equal(tablecheck.get_value('计划离泊时间'), self.leaveTime)
-        check.equal(tablecheck.get_value('计划靠泊泊位'), '01')
+        check.equal(tablecheck.get_value('计划靠泊泊位'), '1')
 
     def arrangeBridge(self):
         """
         勾选内容，分配桥吊
         """
-        self.logger.info('桥吊资源分配-勾选内容，分配桥吊B109')
+        self.logger.info('桥吊资源分配-勾选内容，分配桥吊L001')
         tablecheck = Gtos_table(self.driver,3)
         tablecheck.tick_off_box(1)
         tablecheck.click('x',"//span[text()='安排桥吊资源']")
-        tablecheck.click('x',"//label//span[text()='B109']")
+        time.sleep(0.5)
+        tablecheck.click('x',"//label//span[text()='L001']")
         tablecheck.click('x',"//span[text()='保 存']")
         check.equal(self.get_text("xpath","//div[@role='alert']//h2"),"保存成功")
         tablecheck2 = Gtos_table(self.driver, 4)
-        check.is_in('B109',tablecheck2.get_value('桥吊号'))
+        check.is_in('L001',tablecheck2.get_value('桥吊号'))
         check.equal(tablecheck2.get_value('桥吊计划开始时间'), self.arriveTime)
         check.equal(tablecheck2.get_value('桥吊计划结束时间'), self.leaveTime)
 

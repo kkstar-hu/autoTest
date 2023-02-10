@@ -31,7 +31,7 @@ class Stockpiling_Planning(BasePage):
         self.logger.info('堆存计划-新增堆存计划')
         self.click('x',"(//span[text()='新增'])[1]")
         tablecheck = Gtos_table(self.driver,4)
-        tablecheck.tick_off_box(1)
+        tablecheck.tick_off_box(3)
         # if number == config.outportNumber:
         #     tablecheck.tick_off_box(1)
         # if number == config.importNumber:

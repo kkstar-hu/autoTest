@@ -1,13 +1,15 @@
 import os
 import sys
-
+from Base.basepage import BasePage
 from selenium import webdriver
+import pytest
+
 
 sys.path.append(os.path.join(os.getcwd(), "../"))
 sys.path.append(os.path.join(os.getcwd(), "../../../"))
-import pytest
 from NZYMS.Config import config
 from NZYMS.PageObject.login import Login
+
 
 @pytest.fixture(scope="session")
 def driver():
@@ -15,6 +17,7 @@ def driver():
     login = Login(driver)
     login.geturl(config.host)
     login.login(config.username, config.password, config.showname)
+    BasePage(driver).refresh()
     return driver
 
 

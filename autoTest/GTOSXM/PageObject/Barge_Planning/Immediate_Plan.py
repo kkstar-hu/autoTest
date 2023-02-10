@@ -22,6 +22,12 @@ class Immediate_plan(BasePage):
         """
         self.click('xpath',"//div[contains(text(),'驳船船期计划')]")
 
+    def switch_Ship(self):
+        """
+        切换驳船计划
+        """
+        self.click('xpath',"//div[contains(text(),'大船船期计划')]")
+
     def Add_Plan(self, input):
         self.logger.info('近期计划-新增近期计划')
         self.click('xpath', "//span[contains(text(),'新增')]")
@@ -61,8 +67,10 @@ class Immediate_plan(BasePage):
         check.equal(tablecheck.get_value_by_rowid(rowid, '靠泊状态'), '未靠')
         check.equal(tablecheck.get_value_by_rowid(rowid, '归属码头'), config.showname)
     def Sure_ShipPlan(self):
-        self.logger.info('近期计划-确保船期')
+        self.logger.info('近期计划-确报船期')
         textInput = Gtos_text(self.driver)
+        textInput.search_select_by_label('船名航次',config.outportNumber)
+        self.click('x',"//span[text()='检索']")
         actualarriveDay = DataTime.Get_Current_Date()
         actuallarriveTime = actualarriveDay + " 00:00:00"
         self.click('x', "//span[text()='确报船期']")
