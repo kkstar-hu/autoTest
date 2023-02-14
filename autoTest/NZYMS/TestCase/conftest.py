@@ -17,7 +17,6 @@ def driver():
     login = Login(driver)
     login.geturl(config.host)
     login.login(config.username, config.password, config.showname)
-    BasePage(driver).refresh()
     return driver
 
 
