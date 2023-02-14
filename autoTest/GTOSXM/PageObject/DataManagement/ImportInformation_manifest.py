@@ -67,6 +67,7 @@ class Manifest(BasePage):
             check.equal(tablecheck.get_value('唛头',row), input['唛头'])
             check.equal(tablecheck.get_value('发货人',row), input['发货人'])
             check.equal(tablecheck.get_value('通知人',row), input['通知人'])
+            time.sleep(1)
             # check.equal(tablecheck.get_value('总件数',row), '1')
             # check.equal(tablecheck.get_value('总重量',row), '10000')
             # check.equal(tablecheck.get_value('总体积',row), '500')

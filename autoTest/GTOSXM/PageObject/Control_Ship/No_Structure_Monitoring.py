@@ -133,6 +133,7 @@ class NO_Structure_Monitoring(BasePage):
         check.equal(tablecheck.get_value_by_rowid(rowid,'箱货总重(吨)'),str(format(float(input['箱货总重']) * float(0.001),'.3f')))
         self.logger.info('无结构船舶监控-允许直提操作')
         self.click('xpath', "(//span[contains(text(),'允许直提')])[1]")
+        time.sleep(1)
         self.check_alert('操作成功')
         check.equal(tablecheck.get_value_by_rowid(rowid,'作业状态'), '等待作业')
 
@@ -186,6 +187,7 @@ class NO_Structure_Monitoring(BasePage):
         self.logger.info('无结构船舶监控-桥吊完工')
         tablecheck.check('桥吊号', number)
         self.click('x', "//span[text()='桥吊完工']")
+        time.sleep(0.5)
         check.equal(tablecheck.get_value('状态'), '完工')
 
     #离泊确认
@@ -196,6 +198,9 @@ class NO_Structure_Monitoring(BasePage):
         self.click('x', "//span[text()='离泊/离港确认']")
         self.click('x', "//input[@placeholder='离泊时间']")
         self.click('x', "//span[contains(text(),'此刻')]")
+        self.click('x',"//span[@class='el-checkbox__inner']")
+        textInput = Gtos_text(self.driver)
+        textInput.input_by_label('离泊吃水', '100')
         self.click('x', "//span[text()='提交']")
         if self.elementExist("x","//div[@class='el-message-box__message']"):
             self.click("x","//div[@class='el-message-box__btns']//span[text()=' 确定 ']")

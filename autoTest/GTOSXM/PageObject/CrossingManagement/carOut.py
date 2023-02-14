@@ -28,7 +28,9 @@ class Car_Out(BasePage):
         检索
         """
         self.click('xpath',"//span[text()='检索']")
-        time.sleep(1)
+        time.sleep(1.5)
+
+
 
 
     def confirm_out_picking(self):
@@ -36,6 +38,7 @@ class Car_Out(BasePage):
         确认出场——提箱流程
         """
         self.click('xpath', "//span[text()='确认出场']")
+        time.sleep(0.5)
         self.click('xpath',"//span[contains(text(),'否')]")
         self.check_alert('车辆出场成功')
 

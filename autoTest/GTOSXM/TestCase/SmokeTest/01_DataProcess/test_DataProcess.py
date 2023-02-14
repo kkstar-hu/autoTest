@@ -13,12 +13,13 @@ from GTOSXM.PageObject.Control_Ship.No_Structure_Monitoring import NO_Structure_
 from Commons.yamlread import read_yaml
 
 
-
+# @pytest.mark.skipif
 @allure.title('1、近期计划')
 @allure.story('1.驳船流程功能准备')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'01_DataProcess', 'immediata_plan.yaml')))
 def testImmediatePlan(driver,input):
     """近期计划"""
+    print("******************************************Smoke Test Start***********************************************")
     menu = GtosMenu(driver)
     menu.select_level_Menu("泊位策划,近期计划")
     plan = Immediate_plan(driver)
@@ -29,7 +30,7 @@ def testImmediatePlan(driver,input):
     plan.SureInBox()
     Tag(driver).closeTagGtos('近期计划')
 
-
+# @pytest.mark.skipif
 @pytest.mark.parametrize("input",read_yaml(os.path.join(os.getcwd(),'01_DataProcess','immediata_plan.yaml')))
 @allure.title('2、桥吊资源分配')
 @allure.story('1.驳船流程功能准备')
@@ -42,7 +43,7 @@ def testBridgeCraneDistribution(driver,input):
     bridge.arrangeBridge()
     Tag(driver).closeTagGtos('桥吊资源分配')
 
-
+# @pytest.mark.skipif
 @pytest.mark.parametrize("input",read_yaml(os.path.join(os.getcwd(),'01_DataProcess','immediata_plan.yaml')))
 @allure.title('3、航次挂靠港')
 @allure.story('1.驳船流程功能准备')
@@ -73,7 +74,7 @@ def testStockpiling_Planning_out(driver, input):
     """堆存计划-卸船"""
     stockpiling = Stockpiling_Planning(driver)
     stockpiling.process_out()
-    #Tag(driver).closeTagGtos('堆存计划')
+    Tag(driver).closeChoiceTag('堆存计划')
 
 # @pytest.mark.skipif
 @pytest.mark.parametrize("input",read_yaml(os.path.join(os.getcwd(),'01_DataProcess', 'immediata_plan.yaml')))

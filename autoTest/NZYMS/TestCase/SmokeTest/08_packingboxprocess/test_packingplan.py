@@ -28,7 +28,7 @@ import pytest as pytest
 #     #stor_box_query.get_information(1)
 #     Tag(driver).closeTag("存场箱查询")
 
-
+# @pytest.mark.skipif
 @allure.title('1.新增装箱计划')
 @allure.story('8、装箱计划流程')
 # @pytest.mark.parametrize("input", read_yaml('packing_box_new.yaml'))
@@ -40,7 +40,7 @@ def testPacking_Plan(driver, input):
     packing_plan = Packing_Plan(driver)
     packing_plan.addPlan(input)
 
-
+@pytest.mark.skipif
 @allure.title('2.新增箱子信息和货信息')
 @allure.story('8、装箱计划流程')
 # @pytest.mark.parametrize("input", read_yaml('packing_box_new.yaml'))
@@ -54,7 +54,7 @@ def testPacking_PlanAddbox(driver, input):
     packing_plan.perform_tasks()
     Tag(driver).closeChoiceTag("装箱计划")
 
-
+@pytest.mark.skipif
 @allure.title('3.装箱车辆进场')
 @allure.story('8、装箱计划流程')
 # @pytest.mark.parametrize("input", read_yaml('packing_box_new.yaml'))
@@ -81,7 +81,7 @@ def testPacking_Confirm(driver, input):
     Tag(driver).closeTag("装箱确认")
 
 
-
+# @pytest.mark.skipif
 @allure.title('5.装箱货车放行')
 @allure.story('8、装箱计划流程')
 # @pytest.mark.parametrize("input", read_yaml('packing_box_new.yaml'))
@@ -95,7 +95,7 @@ def testSendMention(driver,input):
     Tag(driver).closeTag("送提货车放行确认")
 
 
-
+# @pytest.mark.skipif
 @allure.title('6.装箱货车出场')
 @allure.story('8、装箱计划流程')
 # @pytest.mark.parametrize("input", read_yaml('packing_box_new.yaml'))

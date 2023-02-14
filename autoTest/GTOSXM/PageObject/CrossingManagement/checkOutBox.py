@@ -18,7 +18,10 @@ class CheckOutBox(BasePage):
         textInput = Gtos_text(self.driver)
         textInput.select_by_label("集卡编号", input["车牌"])
         self.get_element('xpath', "//input[@placeholder='请输入集卡号']").send_keys(input["集卡编号"])
-        self.get_element('xpath', "//input[@placeholder='请输入预约号']").send_keys(config.Number)
+        # self.get_element('xpath', "//input[@placeholder='请输入预约号']").send_keys(config.Number)
+        textInput.search_select_by_label("箱号(前)", config.boxNumber)
+        self.retrieve()
+
 
     def retrieve(self):
         """
@@ -39,10 +42,10 @@ class CheckOutBox(BasePage):
         self.click('xpath', "//li//span[text()='G12']")
         self.input_no_clear('xpath',"//input[@placeholder='请输入车架号']",'123')
         self.waitloading()
-        time.sleep(1)
         textInput.select_by_label('结算人',input['结算人'])
         self.element_wait_disappear("xpath","//div[@role='alert']//p")
         self.click('xpath',"//span[text()='确认提箱']")
+        time.sleep(1)
         self.click('xpath',"//span[contains(text(),'否')]")
         self.check_alert('清除成功')
 
@@ -54,5 +57,4 @@ class CheckOutBox(BasePage):
         流程
         """
         self.select_value(input)
-        self.retrieve()
         self.input_value(input)

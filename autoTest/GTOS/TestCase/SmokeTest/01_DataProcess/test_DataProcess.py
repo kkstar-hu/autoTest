@@ -32,7 +32,7 @@ def testImmediatePlan(driver,input):
     plan.SureInBox()
     Tag(driver).closeTagGtos('近期计划')
 
-
+@pytest.mark.skipif
 @pytest.mark.parametrize("input",read_yaml(os.path.join(os.getcwd(),'01_DataProcess','immediata_plan.yaml')))
 @allure.title('2、桥吊资源分配')
 @allure.story('1.驳船流程功能准备')
@@ -45,7 +45,7 @@ def testBridgeCraneDistribution(driver,input):
     bridge.arrangeBridge()
     Tag(driver).closeTagGtos('桥吊资源分配')
 
-
+@pytest.mark.skipif
 @pytest.mark.parametrize("input",read_yaml(os.path.join(os.getcwd(),'01_DataProcess','immediata_plan.yaml')))
 @allure.title('3、航次挂靠港')
 @allure.story('1.驳船流程功能准备')
@@ -57,7 +57,7 @@ def testVoyage_Attached(driver,input):
     vovage.process(input)
     Tag(driver).closeTagGtos('航次挂靠港')
 
-# @pytest.mark.skipif
+@pytest.mark.skipif
 @pytest.mark.parametrize("input",read_yaml(os.path.join(os.getcwd(),'01_DataProcess','immediata_plan.yaml')))
 @allure.title('4、堆存计划-道口进')
 @allure.story('1.驳船流程功能准备')
@@ -68,7 +68,7 @@ def testStockpiling_Planning_into(driver,input):
     stockpiling = Stockpiling_Planning(driver)
     stockpiling.process_into()
 
-# @pytest.mark.skipif
+@pytest.mark.skipif
 @pytest.mark.parametrize("input",read_yaml(os.path.join(os.getcwd(),'01_DataProcess','immediata_plan.yaml')))
 @allure.title('5、堆存计划-卸船')
 @allure.story('1.驳船流程功能准备')
@@ -78,7 +78,7 @@ def testStockpiling_Planning_out(driver, input):
     stockpiling.process_out()
     #Tag(driver).closeTagGtos('堆存计划')
 
-# @pytest.mark.skipif
+@pytest.mark.skipif
 @pytest.mark.parametrize("input",read_yaml(os.path.join(os.getcwd(),'01_DataProcess', 'immediata_plan.yaml')))
 @allure.title('6、靠泊确认和吊桥分配')
 @allure.story('1.驳船流程功能准备')

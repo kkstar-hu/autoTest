@@ -1,8 +1,10 @@
+import time
+
 import pytest_check as check
 from Base.basepage import BasePage
-from GTOS.Config import config
-from GTOS.Controls.Gtos_table import Gtos_table
-from GTOS.Controls.text import Gtos_text
+from GTOSXM.Config import config
+from GTOSXM.Controls.Gtos_table import Gtos_table
+from GTOSXM.Controls.text import Gtos_text
 
 
 class CheckInBox(BasePage):
@@ -42,7 +44,7 @@ class CheckInBox(BasePage):
         #箱信息
         textInput.input_by_label("铅封号", input['铅封号'])
         textInput.select_by_label("箱状态", input['箱状态'])
-        textInput.select_by_label("贸易类型", input['贸易类型'])
+        textInput.select_by_label("贸易类型1", input['贸易类型1'])
         textInput.select_by_label("尺寸", input['尺寸'])
         textInput.select_by_label("箱型", input['箱型'])
         textInput.select_by_label("箱高", input['箱高'])
@@ -132,6 +134,13 @@ class CheckInBox(BasePage):
             self.click("x", "//span[text()='进口道口号：']//following-sibling::div//input")
             self.click("x",f"//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]//span[contains(text(),{input['进口道口号']})]")
 
+    def other_information(self,input):
+        """
+        车门方向
+        """
+        textInput = Gtos_text(self.driver)
+        textInput.select_by_label("箱门方向", input['箱门方向'])
+        textInput.select_by_label("付费人", input['付费人'])
 
 
 
@@ -141,6 +150,7 @@ class CheckInBox(BasePage):
         送箱确认按钮
         """
         self.get_element('xpath', "//span[text()='确认进箱']").click()
+        time.sleep(0.5)
         self.click("x","//button/span[text()=' 否 ']")
         self.check_alert(input["alert"])
 

@@ -10,7 +10,7 @@ from GTOSXM.PageObject.Mechanical_Control.Job_Order_Monitoring import Job_Order_
 from GTOSXM.PageObject.Ship_Planning.No_Structure_Stowage import No_Structure_Stowage
 from GTOSXM.PageObject.gtos_menu import GtosMenu
 
-@pytest.mark.skip
+# @pytest.mark.skip
 @allure.story('5.装船流程')
 @allure.title('1.装船箱放行')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'05_PutBoxIntoShipProcess','loadship.yaml')))
@@ -18,9 +18,11 @@ def testCheckInBox(driver,input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("资料管理,出口资料,装船箱放行")
     Load=Manifest(driver)
-    Load.search(input)
+    Load.search()
     Load.permitthrough()
+    Tag(driver).closeTagGtos('装船箱放行')
 
+# @pytest.mark.skip
 @allure.story('5.装船流程')
 @allure.title('2.无结构船舶配载')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'05_PutBoxIntoShipProcess','loadship.yaml')))
@@ -30,10 +32,11 @@ def testship_stowage(driver, input):
     menu.select_level_Menu("船舶策划,无结构船舶配载")
     stowage = No_Structure_Stowage(driver)
     stowage.search()
-    stowage.check(input,config.outBoxNumber,config.takeNumber)
+    stowage.check(input,config.outBoxNumber)
     stowage.stowage(config.outBoxNumber)
     Tag(driver).closeTagGtos('无结构船舶配载')
 
+# @pytest.mark.skip
 @allure.story('5.装船流程')
 @allure.title('3.无结构船舶监控')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'05_PutBoxIntoShipProcess','loadship.yaml')))
@@ -57,7 +60,7 @@ def testship_order(driver, input):
     work = Job_Order_Monitoring(driver)
     work.Retrieve(input,config.outportNumber,config.outBoxNumber)
     work.order_info_check(input,config.outBoxNumber)
-    work.charge_car("C305",input)
+    work.charge_car("7016",input)
     work.send_box(input)
     work.LadeShip_confirm(input)
     Tag(driver).closeTagGtos('作业指令监控')

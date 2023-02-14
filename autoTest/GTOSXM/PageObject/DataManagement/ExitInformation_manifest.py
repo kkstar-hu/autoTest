@@ -15,13 +15,13 @@ class Manifest(BasePage):
         """
         输入出口船名航次、箱号
         """
-        self.logger.info('步骤1：输入船名航次')
+        self.logger.info('码头人放行：输入船名航次')
         Gtextinput = Gtos_text(self.driver)
         Gtextinput.search_select_by_label('出口船名航次',config.outportNumber)
         Gtextinput.input_by_label('箱号',boxnumber)
-        self.logger.info('步骤2：检索')
+        self.logger.info('码头人放行：检索')
         self.click('xpath',"//span[text()='检索']")
-        self.logger.info('步骤3：校验字段')
+        self.logger.info('码头人放行：校验字段')
         tablecheck = Gtos_table(self.driver)
         tablecheck.tick_off_box(1)
         check.equal(tablecheck.get_value('提单号'), boxnumber)
@@ -32,14 +32,14 @@ class Manifest(BasePage):
         check.equal(tablecheck1.get_value('箱号'), boxnumber)
         check.equal(tablecheck1.get_value('放行'), '未放')
         check.equal(tablecheck1.get_value('卸货港'), input['卸货港'])
-        check.equal(tablecheck1.get_value('贸易类型'),input['贸易类型'])
+        check.equal(tablecheck1.get_value('贸易类型'),input['贸易类型'][:2])
         check.equal(tablecheck1.get_value('尺寸'),input['尺寸'])
         check.equal(tablecheck1.get_value('箱型'),'GP')
         check.equal(tablecheck1.get_value('箱高'),input['箱高'])
         check.equal(tablecheck1.get_value('持箱人'),input['持箱人'])
         check.equal(tablecheck1.get_value('直装'),'Y')
         check.equal(tablecheck1.get_value('放行'), '未放')
-        self.logger.info('步骤4：码头人工放行')
+        self.logger.info('码头人放行：码头人工放行')
         self.click('xpath',"//span[contains(text(),'码头人工放行')]")
         tablecheck2 = Gtos_table(self.driver,3)
         check.equal(tablecheck2.get_value('提单号'), boxnumber)
@@ -47,10 +47,10 @@ class Manifest(BasePage):
         check.equal(tablecheck.get_value('放行'), '放行')
         check.equal(tablecheck1.get_value('放行'), '放行')
 
-    def search(self, input):
+    def search(self):
         Gtextinput = Gtos_text(self.driver)
-        Gtextinput.search_select_by_label('请输入关键词', config.outportNumber)
-        Gtextinput.input_by_label('箱号', config.boxNumber)
+        Gtextinput.search_select_by_label('出口船名航次', config.outportNumber)
+        Gtextinput.input_by_label('箱号',config.outBoxNumber)
         self.logger.info('步骤2：检索')
         self.click('xpath', "//span[text()='检索']")
 
@@ -60,6 +60,7 @@ class Manifest(BasePage):
         tablecheck = Gtos_table(self.driver)
         tablecheck.tick_off_box(1)
         self.click('xpath', "//span[contains(text(),'码头人工放行')]")
+        time.sleep(0.5)
         self.click('xpath', "//i[@class='el-dialog__close el-icon el-icon-close']")
         check.equal(tablecheck.get_value('放行'), '放行')
         tablecheck1 = Gtos_table(self.driver, 2)

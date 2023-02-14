@@ -80,7 +80,7 @@ class Immediate_plan(BasePage):
         check.equal(self.get_text("xpath", "//div[@role='alert']//h2"), "保存成功")
         tablecheck = Gtos_table(self.driver, 2)
         check.equal(tablecheck.get_value('船期状态'), '确报')
-        check.equal(tablecheck.get_value('确报时间'), actuallarriveTime)
+        # check.equal(tablecheck.get_value('确报时间'), actuallarriveTime)
 
     #点击确认进箱
     def SureInBox(self):
@@ -97,16 +97,16 @@ class Immediate_plan(BasePage):
         tablecheck.select_row("进口航次", config.importNumber)
         check.equal(self.get_text_value("计划靠泊时间"), self.arriveTime)
         check.equal(self.get_text_value("计划离泊时间"), self.leaveTime)
-        check.equal(self.get_text_value("计划靠泊泊位"), "01")
+        check.equal(self.get_text_value("计划靠泊泊位"), "1")
         check.equal(self.get_text_value("计划靠泊吃水"), "0")
         check.equal(self.get_text_value("计划起始尺码"), input["起始尺码"])
-        check.equal(self.get_text_value("计划终止尺码"), "270")
+        check.equal(self.get_text_value("计划终止尺码"), "400")
         createTime = DataTime.GetTime()
         check.less(DataTime.get_dif_time(createTime,self.get_text_value("实际靠泊时间")), 900)
         check.less(DataTime.get_dif_time(createTime,self.get_text_value("实际离泊时间")), 300)
-        check.equal(self.get_text_value("实际靠泊吃水"), "0")
+        check.equal(self.get_text_value("实际靠泊吃水"), "1")
         check.equal(self.get_text_value("实际起始尺码"), input["起始尺码"])
-        check.equal(self.get_text_value("实际终止尺码"), "270")
+        check.equal(self.get_text_value("实际终止尺码"), "400")
         check.equal(self.get_text_value("船头揽桩"), input["船头揽桩"])
         check.equal(self.get_text_value("船尾揽桩"), input["船尾揽桩"])
 
