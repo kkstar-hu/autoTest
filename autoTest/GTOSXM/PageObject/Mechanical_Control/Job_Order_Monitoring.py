@@ -99,7 +99,7 @@ class Job_Order_Monitoring(BasePage):
                 check.equal(tablecheck.get_value('拖运机械'), input['车牌'] + input['集卡编号'])
                 check.equal(tablecheck.get_value('当前位置'), config.boxPosition)
             if input['操作过程'] == '船―车':
-                check.equal(tablecheck.get_value('起始位置'), 'L001')
+                check.equal(tablecheck.get_value('起始位置'), 'Q002')
                 check.equal(tablecheck.get_value('拖运机械'), input['车牌'] + input['集卡编号'])
                 check.equal(tablecheck.get_value('当前位置'), '')
             if input['操作过程'] == '车―船':
@@ -175,7 +175,7 @@ class Job_Order_Monitoring(BasePage):
         tablecheck = Gtos_table(self.driver)
         check.equal(tablecheck.get_value('作业状态'), '完成')
         if input['操作过程'] == '船―车':
-            check.equal(tablecheck.get_value('起始位置'), 'L001')
+            check.equal(tablecheck.get_value('起始位置'), 'Q002')
             check.equal(tablecheck.get_value('拖运机械'), input['车牌'] + input['集卡编号'])
             check.equal(tablecheck.get_value('当前位置'), input['车牌'] + input['集卡编号'])
 
@@ -237,7 +237,7 @@ class Job_Order_Monitoring(BasePage):
             if input['操作过程'] == '车―船':
                 check.equal(tablecheck.get_value('起始位置'), input['车牌'] + input['集卡编号'])
                 check.equal(tablecheck.get_value('拖运机械'), input['车牌'] + input['集卡编号'])
-                check.equal(tablecheck.get_value('当前位置'), 'L001')
+                check.equal(tablecheck.get_value('当前位置'), 'Q002')
 
 
 

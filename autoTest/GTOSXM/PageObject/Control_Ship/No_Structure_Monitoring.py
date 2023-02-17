@@ -27,19 +27,21 @@ class NO_Structure_Monitoring(BasePage):
         校验
         """
         self.logger.info('无结构船舶监控-验证卸船列表信息'+boxnumber)
-        row = self.rows_value(3)
-        tablecheck = Gtos_table(self.driver,3)
-        check.is_in(tablecheck.get_value('箱号',row).replace(' ','').replace('\n',''),boxnumber)
-        check.equal(tablecheck.get_value('装货港',row), input['装货港'])
-        check.equal(tablecheck.get_value('卸货港',row), input['卸货港'])
-        check.equal(tablecheck.get_value('作业状态',row), '可作业')
-        check.equal(tablecheck.get_value('箱状态',row),input['箱状态'])
-        check.equal(tablecheck.get_value('尺寸',row),input['尺寸'])
-        check.equal(tablecheck.get_value('箱型',row),input['箱型'])
-        check.equal(tablecheck.get_value('箱高',row),input['箱高'])
-        check.equal(tablecheck.get_value('目的港',row),input['目的港'])
-        check.equal(tablecheck.get_value('箱货总重(吨)',row),str(format(float(input['箱货总重']) * float(0.001),'.3f')))
-        check.equal(tablecheck.get_value('持箱人',row),input['持箱人'])
+        table = Gtos_table(self.driver, 3)
+        # row = self.rows_value(3)
+        rowid = table.select_row2("箱号", boxnumber)
+        check.is_in(boxnumber,table.get_value_by_rowid(rowid,'箱号'))
+        check.equal(table.get_value_by_rowid(rowid,'装货港'), input['装货港'])
+        check.equal(table.get_value_by_rowid(rowid,'卸货港'), input['卸货港'])
+        check.equal(table.get_value_by_rowid(rowid,'作业状态'), '可作业')
+        check.equal(table.get_value_by_rowid(rowid,'箱状态'),input['箱状态'])
+        check.equal(table.get_value_by_rowid(rowid,'尺寸'),input['尺寸'])
+        check.equal(table.get_value_by_rowid(rowid,'箱型'),input['箱型'])
+        check.equal(table.get_value_by_rowid(rowid,'箱高'),input['箱高'])
+        check.equal(table.get_value_by_rowid(rowid,'目的港'),input['目的港'])
+        check.equal(table.get_value_by_rowid(rowid,'箱货总重(吨)'),str(format(float(input['箱货总重']) * float(0.001),'.3f')))
+        check.equal(table.get_value_by_rowid(rowid,'持箱人'),input['持箱人'])
+
 
 
     def Send_Box(self,input,boxnumber):
@@ -49,12 +51,14 @@ class NO_Structure_Monitoring(BasePage):
         self.Retrieve()
         self.SendBox_check_values(input,boxnumber)
         self.logger.info('无结构船舶监控-卸船发箱'+boxnumber)
-        row = self.rows_value(3)
-        tablecheck = Gtos_table(self.driver, 3)
-        tablecheck.tick_off_box(row)
-        self.click('xpath',"//span[text()='发箱']")
+        # row = self.rows_value(3)
+        # tablecheck = Gtos_table(self.driver, 3)
+        table = Gtos_table(self.driver, 3)
+        table.check2("箱号", boxnumber)
+        self.click('id',"shipmentconfirm")
         self.check_alert('发箱成功')
-        check.equal(tablecheck.get_value('作业状态',row), '等待作业')
+        rowid = table.select_row2("箱号", boxnumber)
+        check.equal(table.get_value_by_rowid(rowid,'作业状态'), '等待作业')
 
     def LadeShip_Send_Box(self):
         """
