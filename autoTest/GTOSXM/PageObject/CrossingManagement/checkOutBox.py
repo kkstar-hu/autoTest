@@ -37,7 +37,7 @@ class CheckOutBox(BasePage):
         self.logger.info('办理提箱手续：输入数据')
         textInput = Gtos_text(self.driver)
         self.click('xpath',"(//div[@class='export-cntr__buttons__right']//input)[1]")
-        self.click('xpath',"//li//span[text()=\"20'普通架\"]")
+        self.click('xpath',"//li//span[text()=\"20'_2H\"]")
         self.click('xpath', "(//div[@class='export-cntr__buttons__right']//input)[3]")
         self.click('xpath', "//li//span[text()='G12']")
         self.input_no_clear('xpath',"//input[@placeholder='请输入车架号']",'123')
