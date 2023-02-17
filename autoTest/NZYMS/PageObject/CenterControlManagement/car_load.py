@@ -17,7 +17,7 @@ class Car_Load(BasePage):
         textInput = text(self.driver)
         if input['堆场'] is not None:
             textInput.select_by_placeholder("请选择", input["堆场"])
-            self.click("xpath", "//span[text()='确认 ']")
+        self.click("xpath", "//span[text()='确认 ']")
         self.logger.info('步骤1：选择作业类型')
         try:
             self.click("xpath", f"//div[text()='{input['操作']}']")
@@ -61,7 +61,7 @@ class Car_Load(BasePage):
         通过选取箱号，选到框架
         """
         self.logger.info('车载：选车落箱')
-        for i in range(1,10):
+        for i in range(1,20):
             if self.elementExist("xpath", f"//div[text()=' {boxNumber} ']") is False:
                 self.click('xpath', "//div[@class='yms__fork__btn__right']")
             else:
@@ -81,7 +81,7 @@ class Car_Load(BasePage):
         self.logger.info('车载：选目标箱区')
         self.waitloading()
         self.click('xpath',"(//div[@class='transfer el-row']/div[2]//span[@data-tier-no and @data-row-no]//div[@class='gridItemC gridItemC-cs']/div[1][text()=' '])[1]//parent::div")
-        #self.check_alert("成功")
+        self.check_alert(None)
 
 
     # 放箱，自动从1-1位选空位
@@ -90,7 +90,7 @@ class Car_Load(BasePage):
         通过选取箱号，选到框架
         """
         self.logger.info('车载：落箱')
-        self.click('xpath',"(//div[@class='bayCon']//span[@data-tier-no and @data-row-no]//div[@class='gridItemC gridItemC-cs']/div[1][text()=' '])[1]//parent::div")
+        self.click('xpath',"(//div[@class='bayCon']//span[@data-tier-no and @data-row-no]//div[@class='gridItemC gridItemC-cs']/div[1][text()=''])[1]//parent::div")
         self.click('xpath', "//span[text()='确认 ']")
         self.check_alert(None)
         time.sleep(1)

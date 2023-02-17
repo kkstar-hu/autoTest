@@ -31,7 +31,7 @@ def testChangeStore(driver):
     changebox=Car_Load(driver)
     changebox.switchNewWindow()
     changebox.changeStore("FZ/辅助区堆场","重箱")
-    changebox.choice_car(config.boxNumber)
+    changebox.choice_car(config.boxNumberOutPlan)
     changebox.change_box()
     changebox.closeWindow()
     cls = driver.window_handles
