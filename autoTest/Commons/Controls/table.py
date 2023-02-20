@@ -79,6 +79,14 @@ class Table(BasePage):
         rowid = self.select_row(header, value)
         self.click("xpath",f"(//table[@class='vxe-table--body'])[{self.index + 1}]//tr[@rowid='" + rowid + "']//ul[@role='menubar']")
 
+    def input_by_rowid(self, rowid,header,value):
+        try:
+            colid=self.get_attribute_info("xpath",f"(//table[@class='vxe-table--header'])[{self.index}]//thead/tr/th//span[text()='{header}']//parent::div//parent::th","colid")
+            self.input("xpath",f"(//table[@class='vxe-table--body'])[{self.index}]//tr[@rowid='{rowid}']/td[@colid='" + colid + "']//input",value)
+        except NoSuchElementException:
+            raise Exception("定位不到元素")
+
+    #根据表头输入第row行的值
     def input_by_row(self, header,value,row=1):
         try:
             colid=self.get_attribute_info("xpath",f"(//table[@class='vxe-table--header'])[{self.index}]//thead/tr/th//span[text()='{header}']//parent::div//parent::th","colid")

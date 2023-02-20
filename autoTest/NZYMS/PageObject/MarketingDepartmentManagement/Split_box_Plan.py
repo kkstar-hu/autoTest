@@ -34,7 +34,7 @@ class Split_Box_Plan(BasePage):
             self.save_and_close()
             createTime = DataTime.GetTime()
             self.logger.info('check1：验证添加主计划弹出提示信息')
-            self.check_alert(input["addplanalert"])
+            self.check_alert_and_close(input["addplanalert"])
         except:
             self.click("x", "//button//span[text()='取消 ']")
         tableCheck = Table(self.driver,2)

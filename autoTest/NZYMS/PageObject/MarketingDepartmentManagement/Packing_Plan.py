@@ -63,8 +63,6 @@ class Packing_Plan(BasePage):
             self.waitloading()
             textInput = text(self.driver)
             textInput.select_by_index('堆场', input['堆场'], 1)
-            #textInput.click('xpath', '//div[@class="vxe-modal--box"]//label[contains(text(),"堆场")]//following-sibling::div//input')
-            #textInput.get_elements('xpath', f"//div[@class='el-scrollbar']//span[text()='{input['堆场']}']")[1].click()
             textInput.input_by_placeholder("请输入箱号",config.boxNumberOutPlan)
             self.click_by_index("xpath", "(//button//span[text()='检索'])",1)
             tableCheck = ELtable(self.driver)
