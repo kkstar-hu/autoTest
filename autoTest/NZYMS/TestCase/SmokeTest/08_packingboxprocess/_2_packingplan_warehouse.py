@@ -16,22 +16,6 @@ from NZYMS.PageObject.MarketingDepartmentManagement.Packing_Confirm import Packi
 import pytest as pytest
 
 
-# @allure.epic('装箱计划')
-# @allure.title('获取箱内信息成功')
-# @allure.story('获取箱内信息')
-# # @pytest.mark.skipif
-# # @pytest.mark.parametrize("input", read_yaml('packing_box_new.yaml'))
-# @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'08_packingboxprocess','packing_box_new.yaml')))
-# def testGet_information(driver, input):
-#     """获取计划箱信息"""
-#     menu = Menu(driver)
-#     menu.select_level_Menu("查询统计,存场箱查询")
-#     stor_box_query = Storage_Box_Query(driver)
-#     stor_box_query.select_body(input)
-#     #stor_box_query.get_information(1)
-#     Tag(driver).closeTag("存场箱查询")
-
-
 @allure.title('1.新增装箱计划')
 @allure.story('3、装箱计划库内追加流程')
 # @pytest.mark.skipif
@@ -43,7 +27,6 @@ def testPacking_Plan(driver, input):
     menu.select_level_Menu("市场部管理,装箱管理,装箱计划")
     packing_plan = Packing_Plan(driver)
     packing_plan.addPlan(input)
-
 
 
 @allure.title('2.新增箱子信息和货信息')

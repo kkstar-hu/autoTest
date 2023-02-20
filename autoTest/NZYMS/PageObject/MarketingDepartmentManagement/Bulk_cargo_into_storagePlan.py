@@ -43,12 +43,13 @@ class Bulk_cargo_into_storagePlan(BasePage):
             self.save_and_close()
             createTime = DataTime.GetTime()
             self.logger.info('check1：验证添加主计划弹出提示信息')
-            self.check_alert(input["addplanalert"])
+            self.check_alert_and_close(input["addplanalert"])
         except:
             self.click("x", "//button//span[text()='取消 ']")
         tableCheck = Table(self.driver,2)
         self.logger.info('check3：验证添加后列表的值正确')
         config.bulkintoNumber = tableCheck.get_value("计划号")
+        self.logger.info("散货入库计划号:"+config.bulkintoNumber)
         check.equal(tableCheck.get_value("客户"), "上海永旭集装箱运输")
         check.is_in(tableCheck.get_value("计划类型"), input['计划类型'])
         tableCheck1 = Table(self.driver)
@@ -85,7 +86,7 @@ class Bulk_cargo_into_storagePlan(BasePage):
             self.cancel()
         createTime = DataTime.GetTime()
         self.logger.info('check1：验证入库明细弹出提示信息')
-        self.check_alert(input["addboxalert"])
+        self.check_alert_and_close(input["addboxalert"])
         tableCheck = Table(self.driver,4)
         self.logger.info('check3：验证添加后列表的值正确')
         check.equal(tableCheck.get_value("提单号"), input['提单号'])
@@ -112,15 +113,12 @@ class Bulk_cargo_into_storagePlan(BasePage):
                 textInput.select_by_label("车牌", input['车牌'])
             if input['车号'] is not None:
                 self.get_element('xpath', "//input[@placeholder='请输入车牌号']").send_keys(input['车号'])
-            self.element_wait_disappear(By.XPATH, "//div[@role='alert']//p")
-            # WebDriverWait(self.driver, 5, 1).until_not(
-            #     EC.presence_of_element_located((By.XPATH, "//div[@role='alert']//p")))
             self.save_and_close()
         except:
             self.cancel()
         createTime = DataTime.GetTime()
         self.logger.info('check1：验证新增车辆信息弹出提示信息')
-        self.check_alert(input["addcaralert"])
+        self.check_alert_and_close(input["addcaralert"])
         tableCheck = Table(self.driver,6)
         self.logger.info('check2：验证添加后列表的值正确')
         check.equal(tableCheck.get_value("车牌号"), input['车牌']+input['车号'])
@@ -156,12 +154,8 @@ class Bulk_cargo_into_storagePlan(BasePage):
         执行按钮（后期可能需要增加判断选择了是 取消 执行 关闭 等操作，给出 对应提示）
         """
         self.more_information(1)
-        #self.click('xpatn',"//li/span[text()='执行']")
         self.logger.info('步骤2：执行')
         self.click('id', 'setup')
-        self.element_wait_disappear(By.XPATH, "//div[@role='alert']//p")
-        # WebDriverWait(self.driver, 10, 1).until_not(
-        #     EC.presence_of_element_located((By.XPATH, "//div[@role='alert']//p")))
         self.click("xpath", "//div[@class='el-message-box__btns']//span[contains(text(),'确定')]")
         self.check_alert("执行成功")
         tableCheck = Table(self.driver)

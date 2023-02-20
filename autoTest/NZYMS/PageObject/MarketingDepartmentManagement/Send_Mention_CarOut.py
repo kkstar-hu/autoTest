@@ -49,8 +49,6 @@ class Send_Mention_CarOut(BasePage):
         table.tick_off_box(1)
         self.logger.info('步骤3：放行按钮点击')
         self.element_wait_disappear(By.XPATH, "//div[@role='alert']//p")
-        # WebDriverWait(self.driver, 10, 1).until_not(
-        #     EC.presence_of_element_located((By.XPATH, "//div[@role='alert']//p")))
         self.car_release()
         self.click("xpath", "//div[@class='el-message-box__btns']//span[contains(text(),'确定')]")
         self.check_alert("放行成功")

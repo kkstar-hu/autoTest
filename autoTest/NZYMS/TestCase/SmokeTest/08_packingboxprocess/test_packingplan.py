@@ -13,21 +13,6 @@ from NZYMS.PageObject.MarketingDepartmentManagement.Packing_Confirm import Packi
 import pytest as pytest
 
 
-# @allure.epic('装箱计划')
-# @allure.title('获取箱内信息成功')
-# @allure.story('获取箱内信息')
-# # @pytest.mark.skipif
-# # @pytest.mark.parametrize("input", read_yaml('packing_box_new.yaml'))
-# @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'08_packingboxprocess','packing_box_new.yaml')))
-# def testGet_information(driver, input):
-#     """获取计划箱信息"""
-#     menu = Menu(driver)
-#     menu.select_level_Menu("查询统计,存场箱查询")
-#     stor_box_query = Storage_Box_Query(driver)
-#     stor_box_query.select_body(input)
-#     #stor_box_query.get_information(1)
-#     Tag(driver).closeTag("存场箱查询")
-
 # @pytest.mark.skipif
 @allure.title('1.新增装箱计划')
 @allure.story('8、装箱计划流程')
@@ -40,7 +25,7 @@ def testPacking_Plan(driver, input):
     packing_plan = Packing_Plan(driver)
     packing_plan.addPlan(input)
 
-@pytest.mark.skipif
+
 @allure.title('2.新增箱子信息和货信息')
 @allure.story('8、装箱计划流程')
 # @pytest.mark.parametrize("input", read_yaml('packing_box_new.yaml'))
@@ -54,7 +39,6 @@ def testPacking_PlanAddbox(driver, input):
     packing_plan.perform_tasks()
     Tag(driver).closeChoiceTag("装箱计划")
 
-@pytest.mark.skipif
 @allure.title('3.装箱车辆进场')
 @allure.story('8、装箱计划流程')
 # @pytest.mark.parametrize("input", read_yaml('packing_box_new.yaml'))

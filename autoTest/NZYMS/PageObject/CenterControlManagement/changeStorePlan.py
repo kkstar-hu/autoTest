@@ -58,7 +58,7 @@ class ChangeStorePlan(BasePage):
             check.is_in(tableCheck.get_value("箱型"), input['箱型'])
             check.equal(tableCheck.get_value("箱高"), input['箱高'])
             check.equal(tableCheck.get_value("箱状态"), "已落箱")
-            tableCheck.click_row(1)
+            tableCheck.select_row("箱号",boxNumber)
             self.click("xpath","//button//span[contains(text(),'确认')]")
         except:
             self.cancel()

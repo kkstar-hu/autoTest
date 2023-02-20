@@ -44,6 +44,7 @@ class Packing_Plan(BasePage):
         tableCheck = Table(self.driver,2)
         self.logger.info('check3：验证添加后列表的值正确')
         config.packingboxNumber = tableCheck.get_value("计划号")
+        self.logger.info("装箱计划号:" + config.packingboxNumber)
         check.equal(tableCheck.get_value("客户"), "上海永旭集装箱运输")
         tableCheck1 = Table(self.driver)
         check.is_in(tableCheck1.get_value("堆场"), input['堆场'])

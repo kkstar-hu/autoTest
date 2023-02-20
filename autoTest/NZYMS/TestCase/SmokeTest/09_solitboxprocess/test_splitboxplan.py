@@ -2,34 +2,17 @@ import os
 import time
 
 import allure
-
 from Commons.Controls.tag import Tag
 from Commons.menu import Menu
 from Commons.yamlread import read_yaml
-from Commons import allurechange
 from NZYMS.PageObject.CrossingManagement.Out_confirm import Out_Confirm
 from NZYMS.PageObject.CrossingManagement.cars_registration import Cars_Registration
 from NZYMS.PageObject.MarketingDepartmentManagement.Send_Mention_CarOut import Send_Mention_CarOut
 from NZYMS.PageObject.MarketingDepartmentManagement.Split_box_Confirm import Split_Box_Confirm
 from NZYMS.PageObject.MarketingDepartmentManagement.Split_box_Plan import Split_Box_Plan
-from NZYMS.PageObject.Query_Statistics.Storage_box_query import Storage_Box_Query
 import pytest as pytest
 
 
-# @allure.epic('拆箱计划')
-# @allure.title('获取箱内信息成功')
-# @allure.story('获取箱内信息')
-# # @pytest.mark.skipif
-# # @pytest.mark.parametrize("input", read_yaml('split_box.yaml'))
-# @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'09_solitboxprocess','split_box.yaml')))
-# def testGet_information(driver, input):
-#     """获取计划箱信息"""
-#     menu = Menu(driver)
-#     menu.select_level_Menu("查询统计,存场箱查询")
-#     stor_box_query = Storage_Box_Query(driver)
-#     stor_box_query.select_body(input)
-#     stor_box_query.get_information()
-#     Tag(driver).closeTag("存场箱查询")
 
 # @pytest.mark.skipif
 @allure.title('1.新增拆箱计划')

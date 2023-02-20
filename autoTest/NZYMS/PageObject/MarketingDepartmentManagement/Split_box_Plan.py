@@ -23,9 +23,6 @@ class Split_Box_Plan(BasePage):
             self.logger.info('拆箱计划：添加主计划')
             self.click('xpath',"//div[@id='add']")
             self.waitloading()
-            # self.logger.info('步骤2：刷新元素')
-            # self.refresh()
-            # self.click('xpath',"//div[@id='add']")
             textInput = text(self.driver)
             self.logger.info('拆箱计划：输入内容')
             if input['堆场'] is not None:
@@ -43,6 +40,7 @@ class Split_Box_Plan(BasePage):
         tableCheck = Table(self.driver,2)
         self.logger.info('check3：验证添加后列表的值正确')
         config.splitboxNumber = tableCheck.get_value("计划号")
+        self.logger.info("拆箱计划号:" + config.splitboxNumber)
         check.equal(tableCheck.get_value("客户"), "上海永旭集装箱运输")
         tableCheck1 = Table(self.driver)
         check.is_in(tableCheck1.get_value("堆场"), input['堆场'])
@@ -111,8 +109,6 @@ class Split_Box_Plan(BasePage):
             if input['车号'] is not None:
                 self.get_element('xpath', "//input[@placeholder='请输入车号']").send_keys(input['车号'])
             self.element_wait_disappear(By.XPATH, "//div[@role='alert']//p")
-            # WebDriverWait(self.driver, 5, 1).until_not(
-            #     EC.presence_of_element_located((By.XPATH, "//div[@role='alert']//p")))
             self.save_and_close()
         except:
             self.cancel()
@@ -154,8 +150,6 @@ class Split_Box_Plan(BasePage):
         self.logger.info('拆箱计划：执行')
         self.click('xpath', "//li[@class='el-menu-item']//span[text()='执行']")
         self.element_wait_disappear(By.XPATH, "//div[@role='alert']//p")
-        # WebDriverWait(self.driver, 10, 1).until_not(
-        #     EC.presence_of_element_located((By.XPATH, "//div[@role='alert']//p")))
         self.click("xpath", "//div[@class='el-message-box__btns']//span[contains(text(),'确定')]")
         self.check_alert("执行成功")
         tableCheck = Table(self.driver,2)

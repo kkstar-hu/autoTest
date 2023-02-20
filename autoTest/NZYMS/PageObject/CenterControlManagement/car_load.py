@@ -80,7 +80,7 @@ class Car_Load(BasePage):
         self.click('xpath', "//div[@class = 'containerGrid containerGrid-arr-light-loc containerGrid-border']")
         self.logger.info('车载：选目标箱区')
         self.waitloading()
-        self.click('xpath',"(//div[@class='transfer el-row']/div[2]//span[@data-tier-no and @data-row-no]//div[@class='gridItemC gridItemC-cs']/div[1][text()=' '])[1]//parent::div")
+        self.click('xpath',"(//div[@class='transfer el-row']/div[2]//span[@data-tier-no and @data-row-no]//div[@class='gridItemC gridItemC-cs']/div[1][text()=''])[1]//parent::div")
         self.check_alert(None)
 
 

@@ -19,7 +19,7 @@ def testAddChangeStorePlan(driver, input):
     menu=Menu(driver)
     menu.select_level_Menu("中控管理,场内计划管理,转堆计划管理")
     changeStorePlan=ChangeStorePlan(driver)
-    changeStorePlan.addChangePlan(input,config.boxNumber)
+    changeStorePlan.addChangePlan(input,config.boxNumberOutPlan)
     #changeStorePlan.addWorkOrder(input,"JX_516784")
     Tag(driver).closeTag("转堆计划管理")
 
