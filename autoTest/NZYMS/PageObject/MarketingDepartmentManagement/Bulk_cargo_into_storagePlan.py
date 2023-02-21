@@ -61,6 +61,7 @@ class Bulk_cargo_into_storagePlan(BasePage):
         check.equal(tableCheck1.get_value("联系人"), input['联系人'])
         check.equal(tableCheck1.get_value("联系电话"), input['联系电话'])
         check.equal(tableCheck1.get_value("备注"), input['备注'])
+        check.equal(tableCheck1.get_value("生成方式"), input['生成方式'])
         check.less(DataTime.get_dif_time(tableCheck1.get_value("创建时间"), createTime), 300)
         check.equal(tableCheck1.get_value("创建人"), config.createName)
 

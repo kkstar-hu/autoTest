@@ -41,7 +41,6 @@ class Bulk_cargo_into_storageConfirm(BasePage):
             self.retrieve()
             self.logger.info('散货入库确认：新增入库信息')
             textInput = text(self.driver)
-            #self.close_alert('没有符合条件的入库登记信息')
             textInput.click('xpath', "//div[@id='add']")
             textInput.select_by_placeholder_index('请选择', input['入库位置1'],1)
             textInput.select_by_placeholder_index('请选择', input['入库位置2'],2)

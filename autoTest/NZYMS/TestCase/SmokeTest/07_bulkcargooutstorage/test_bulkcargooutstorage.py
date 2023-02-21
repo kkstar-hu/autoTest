@@ -1,10 +1,9 @@
 import os.path
-
 import allure
-
 from Commons.Controls.tag import Tag
 from Commons.menu import Menu
 from Commons.yamlread import read_yaml
+from NZYMS.Config import config
 from NZYMS.PageObject.CrossingManagement.Out_confirm import Out_Confirm
 from NZYMS.PageObject.CrossingManagement.cars_registration import Cars_Registration
 from NZYMS.PageObject.MarketingDepartmentManagement.Bulk_cargo_out_storageConfirm import Bulk_cargo_out_storageConfirm
@@ -12,7 +11,7 @@ from NZYMS.PageObject.MarketingDepartmentManagement.Bulk_cargo_out_storagePlan i
 from NZYMS.PageObject.MarketingDepartmentManagement.Send_Mention_CarOut import Send_Mention_CarOut
 import pytest as pytest
 
-
+from NZYMS.PageObject.Query_Statistics.out_storage_query import Out_Storage_Query
 
 
 @allure.title('1.新增散货出库计划')
@@ -71,8 +70,6 @@ def testSendMention(driver,input):
     send_and_mention.process(input)
     Tag(driver).closeTag("送提货车放行确认")
 
-
-
 @allure.title('6.散货入库车辆出场')
 @allure.story('7、散货出库计划')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'07_bulkcargooutstorage','bulk_out.yaml')))
@@ -85,6 +82,17 @@ def testSend_Box_Out_Confirm(driver, input):
     out_confirm.choice_car(input)
     out_confirm.confirm_button()
     Tag(driver).closeTag("出场确认")
+
+@allure.title('7.市场部查询-出库流程查询')
+@allure.story('7.散货出库计划')
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'07_bulkcargooutstorage','bulk_out.yaml')))
+def test_search_outStorage(driver, input):
+    """车辆出场"""
+    menu = Menu(driver)
+    menu.select_level_Menu("查询统计,市场部查询,出库查询")
+    search = Out_Storage_Query(driver)
+    search.search_and_check(input, config.bulkoutNumber)
+    Tag(driver).closeTag("出库查询")
 
 # if __name__ == '__main__':
 #     pytest.main(["./test_script",
