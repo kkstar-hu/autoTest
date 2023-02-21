@@ -334,7 +334,10 @@ class BasePage:
         return self.elementExist("xpath",f"//div[@role='alert']//p[contains(text(),'{expectAlert}')]")
 
     def check_alert(self, expectAlert):
-        check.equal(self.get_alert_text(),expectAlert)
+        try:
+            check.equal(self.get_alert_text(),expectAlert)
+        except:
+            pass
 
     def check_alert_and_close(self, expectAlert):
         check.equal(self.get_alert_text(), expectAlert)

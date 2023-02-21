@@ -31,7 +31,6 @@ class Send_Box_registration(BasePage):
         self.logger.info('送箱进场:输入已有计划的箱号')
         textInput = text(self.driver)
         textInput.input_by_number("箱号",boxNumber)
-        # textInput.input_by_number("箱号", 'JX_762058')
         self.get_element('xpath', '//input[@placeholder="请输入箱号"]').send_keys(Keys.ENTER)
         self.waitloading()
         tableCheck=Table(self.driver,2)
