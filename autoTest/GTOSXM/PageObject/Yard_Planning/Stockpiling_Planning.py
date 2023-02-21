@@ -31,8 +31,8 @@ class Stockpiling_Planning(BasePage):
         self.logger.info('堆存计划-新增堆存计划')
         self.click('x',"(//span[text()='新增'])[1]")
         tablecheck = Gtos_table(self.driver,4)
-        time.sleep(0.5)
-        tablecheck.tick_off_box(2)
+        time.sleep(1)
+        # tablecheck.tick_off_box(2)
         if self.elementExist('x',"//input[@aria-label='Press Space to toggle row selection (checked)']") is False:
             tablecheck.tick_off_box(2)
         # if number == config.outportNumber:
