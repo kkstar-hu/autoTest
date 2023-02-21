@@ -21,6 +21,7 @@ def testShip_operation(driver):
     nostructure.Retrieve()
     nostructure.over_drawbridge("B109")
     nostructure.unberthing(config.importNumber)
+    Tag(driver).closeTagGtos('无结构船舶监控')
     menu.select_level_Menu("资料管理,航次关闭")
     close=CloseFlight(driver)
     close.search(config.importNumber)
