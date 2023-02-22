@@ -139,6 +139,7 @@ class Job_Order_Monitoring(BasePage):
                     check.equal(tablecheck.get_value('起始位置'), input['作业路'])
                     check.equal(tablecheck.get_value('当前位置'), '')
                     check.equal(tablecheck.get_value('拖运机械'), config.carnumber)
+        self.logger.info('作业指令监控-自动分配集卡')
         if self.hasInput(input, '操作过程'):
             if input['操作过程'] == '船―场':
                 check.equal(tablecheck.get_value('起始位置'), input['作业路'])
