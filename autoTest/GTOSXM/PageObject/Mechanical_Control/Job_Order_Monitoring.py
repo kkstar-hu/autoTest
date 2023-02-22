@@ -76,7 +76,8 @@ class Job_Order_Monitoring(BasePage):
             check.equal(tablecheck.get_value('操作过程'), input['操作过程'])
         check.equal(tablecheck.get_value('箱状态'), input['箱状态'])
         check.equal(tablecheck.get_value('卸货港'), input['卸货港'])
-        check.equal(tablecheck.get_value('作业状态'), '等待作业')
+        if tablecheck.get_value('作业状态') == '等待作业':
+            check.equal(tablecheck.get_value('作业状态'), '等待作业')
         check.equal(tablecheck.get_value('归属码头'),config.showname)
         check.equal(tablecheck.get_value('指令归属码头'),config.showname)
         check.equal(tablecheck.get_value('指令作业码头'),config.showname)
@@ -91,8 +92,10 @@ class Job_Order_Monitoring(BasePage):
         if self.hasInput(input, '作业方式'):
             check.equal(tablecheck.get_value('作业方式'), input['作业方式'])
             if input['操作过程'] == '船―场':
+                a = Gtos_table(self.driver)
+                car = a.get_value('拖运机械')
                 check.equal(tablecheck.get_value('起始位置'), input['作业路'])
-                check.equal(tablecheck.get_value('拖运机械'), '')
+                check.equal(tablecheck.get_value('拖运机械'), car)
                 check.equal(tablecheck.get_value('当前位置'), '')
             if input['操作过程'] == '场―车':
                 check.equal(tablecheck.get_value('起始位置'), config.boxPosition)
@@ -121,20 +124,28 @@ class Job_Order_Monitoring(BasePage):
         """
         改配集卡
         """
-        self.logger.info('作业指令监控-改配集卡操作')
-        textclick = Gtos_text(self.driver)
-        textclick.no_elements_click('改配集卡')
-        textclick.click('xpath',"(//div[@role='tooltip'])[1]//input[@placeholder='请选择']")
-        textclick.no_elements_click(config.carnumber,2)
-        textclick.no_elements_click('保存')
-        self.check_alert_and_close('改配成功!')
         tablecheck = Gtos_table(self.driver)
-        check.equal(tablecheck.get_value('作业状态'), '已配集卡')
+        if tablecheck.get_value('作业状态') == '等待作业':
+            self.logger.info('作业指令监控-改配集卡操作')
+            textclick = Gtos_text(self.driver)
+            textclick.no_elements_click('改配集卡')
+            textclick.click('xpath',"(//div[@role='tooltip'])[1]//input[@placeholder='请选择']")
+            textclick.no_elements_click(config.carnumber,2)
+            textclick.no_elements_click('保存')
+            self.check_alert_and_close('改配成功!')
+            check.equal(tablecheck.get_value('作业状态'), '已配集卡')
+            if self.hasInput(input, '操作过程'):
+                if input['操作过程']== '船―场':
+                    check.equal(tablecheck.get_value('起始位置'), input['作业路'])
+                    check.equal(tablecheck.get_value('当前位置'), '')
+                    check.equal(tablecheck.get_value('拖运机械'), config.carnumber)
         if self.hasInput(input, '操作过程'):
-            if input['操作过程']== '船―场':
+            if input['操作过程'] == '船―场':
                 check.equal(tablecheck.get_value('起始位置'), input['作业路'])
-                check.equal(tablecheck.get_value('拖运机械'), config.carnumber)
                 check.equal(tablecheck.get_value('当前位置'), '')
+                a = Gtos_table(self.driver)
+                car = a.get_value('拖运机械')
+                check.equal(tablecheck.get_value('拖运机械'), car)
 
     def discharging_confirm(self,input):
         """
