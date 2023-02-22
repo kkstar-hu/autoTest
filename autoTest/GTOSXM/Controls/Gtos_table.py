@@ -123,6 +123,9 @@ class Gtos_table(BasePage):
         ActionChains(self.driver).move_to_element(em).click().perform()
         self.element_wait('xpath',f"(//div[@class='ag-center-cols-clipper'])[{self.index}]//div[@row-index='{row-1}']//input[@aria-label='Press Space to toggle row selection (checked)']")
 
+    def get_row(self,name):
+        row_index = self.get_attribute_info('x',f"(//div[@class='ag-center-cols-clipper'])[4]//span[text()='{name}']/parent::span/parent::span/parent::div/parent::div/parent::div","row-index")
+        return row_index
 
 
     #gtos 获取弹窗类，label后面的值

@@ -34,7 +34,7 @@ class Stockpiling_Planning(BasePage):
         time.sleep(1)
         # tablecheck.tick_off_box(2)
         if self.elementExist('x',"//input[@aria-label='Press Space to toggle row selection (checked)']") is False:
-            tablecheck.tick_off_box(2)
+            tablecheck.tick_off_box(int(tablecheck.get_row('20自动化')) + 1)
         # if number == config.outportNumber:
         #     tablecheck.tick_off_box(2)
         # if number == config.importNumber:
