@@ -6,7 +6,7 @@ host="http://web.cloudtos.com/#/login"
 #卸船提箱箱号
 global boxNumber
 boxNumber=CommonGenerator.generate_spec("XCTX",7)
-# boxNumber="XCTX3716950"
+# boxNumber="XCTX6108739"
 
 #直提箱编号
 global boxNumberTwo
@@ -18,6 +18,8 @@ global boxNumberThree
 boxNumberThree=CommonGenerator.generate_spec("ZZXZ",7)
 # boxNumberThree ='ZZXZ2137456'
 
+#闲置集卡号
+global carnumber
 
 #箱位置
 global boxPosition
@@ -32,14 +34,14 @@ outBoxNumber=CommonGenerator.generate_spec("JXZX",7)
 voyage = CommonGenerator.generate_verify_code(4)
 #进口航次
 global importNumber
-importNumber = 'I'+voyage
-# importNumber="I7159"
+# importNumber = 'I'+voyage
+importNumber="I2369"
 # importNumber=CommonGenerator.generate_spec("I",4)
 
 # 出口航次
 global outportNumber
-outportNumber = 'E'+voyage
-# outportNumber="E7159"
+# outportNumber = 'E'+voyage
+outportNumber="E2369"
 # outportNumber=CommonGenerator.generate_spec("E",4)
 
 

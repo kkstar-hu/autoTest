@@ -60,7 +60,7 @@ def testship_order(driver, input):
     work = Job_Order_Monitoring(driver)
     work.Retrieve(input,config.outportNumber,config.outBoxNumber)
     work.order_info_check(input,config.outBoxNumber)
-    work.charge_car("1403",input)
+    work.charge_car(input)
     work.send_box(input)
     work.LadeShip_confirm(input)
     Tag(driver).closeTagGtos('作业指令监控')

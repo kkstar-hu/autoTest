@@ -117,7 +117,7 @@ class Job_Order_Monitoring(BasePage):
         table = Gtos_table(self.driver)
         table.select_row("箱号",config.boxNumber)
 
-    def charge_car(self,car,input):
+    def charge_car(self,input):
         """
         改配集卡
         """
@@ -125,7 +125,7 @@ class Job_Order_Monitoring(BasePage):
         textclick = Gtos_text(self.driver)
         textclick.no_elements_click('改配集卡')
         textclick.click('xpath',"(//div[@role='tooltip'])[1]//input[@placeholder='请选择']")
-        textclick.no_elements_click(car,2)
+        textclick.no_elements_click(config.carnumber,2)
         textclick.no_elements_click('保存')
         self.check_alert_and_close('改配成功!')
         tablecheck = Gtos_table(self.driver)
@@ -133,7 +133,7 @@ class Job_Order_Monitoring(BasePage):
         if self.hasInput(input, '操作过程'):
             if input['操作过程']== '船―场':
                 check.equal(tablecheck.get_value('起始位置'), input['作业路'])
-                check.equal(tablecheck.get_value('拖运机械'), car)
+                check.equal(tablecheck.get_value('拖运机械'), config.carnumber)
                 check.equal(tablecheck.get_value('当前位置'), '')
 
     def discharging_confirm(self,input):
@@ -247,7 +247,7 @@ class Job_Order_Monitoring(BasePage):
         """
         self.Retrieve(input,shipname,boxnumber)
         self.order_info_check_new(input,boxnumber)
-        self.charge_car('1403',input)
+        self.charge_car(input)
         self.discharging_confirm(input)
         self.closed_box(input)
 
