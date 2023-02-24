@@ -32,9 +32,10 @@ def testImmediatePlan(driver,input):
     Tag(driver).closeTagGtos('近期计划')
 
 # @pytest.mark.skipif
-@pytest.mark.parametrize("input",read_yaml(os.path.join(os.getcwd(),'01_DataProcess','immediata_plan.yaml')))
+
 @allure.title('2、桥吊资源分配')
 @allure.story('1.驳船流程功能准备')
+@pytest.mark.parametrize("input",read_yaml(os.path.join(os.getcwd(),'01_DataProcess','immediata_plan.yaml')))
 def testBridgeCraneDistribution(driver,input):
     """桥吊资源分配"""
     menu = GtosMenu(driver)
@@ -45,9 +46,10 @@ def testBridgeCraneDistribution(driver,input):
     Tag(driver).closeTagGtos('桥吊资源分配')
 
 # @pytest.mark.skipif
-@pytest.mark.parametrize("input",read_yaml(os.path.join(os.getcwd(),'01_DataProcess','immediata_plan.yaml')))
+
 @allure.title('3、航次挂靠港')
 @allure.story('1.驳船流程功能准备')
+@pytest.mark.parametrize("input",read_yaml(os.path.join(os.getcwd(),'01_DataProcess','immediata_plan.yaml')))
 def testVoyage_Attached(driver,input):
     """航次挂靠港"""
     menu = GtosMenu(driver)
@@ -68,9 +70,10 @@ def testStockpiling_Planning_into(driver,input):
     stockpiling.process_into()
 
 # @pytest.mark.skipif
-@pytest.mark.parametrize("input",read_yaml(os.path.join(os.getcwd(),'01_DataProcess','immediata_plan.yaml')))
+
 @allure.title('5、堆存计划-卸船')
 @allure.story('1.驳船流程功能准备')
+@pytest.mark.parametrize("input",read_yaml(os.path.join(os.getcwd(),'01_DataProcess','immediata_plan.yaml')))
 def testStockpiling_Planning_out(driver, input):
     """堆存计划-卸船"""
     stockpiling = Stockpiling_Planning(driver)
@@ -78,9 +81,10 @@ def testStockpiling_Planning_out(driver, input):
     Tag(driver).closeTagGtos('堆存计划')
 
 # @pytest.mark.skipif
-@pytest.mark.parametrize("input",read_yaml(os.path.join(os.getcwd(),'01_DataProcess', 'immediata_plan.yaml')))
+
 @allure.title('6、靠泊确认和吊桥分配')
 @allure.story('1.驳船流程功能准备')
+@pytest.mark.parametrize("input",read_yaml(os.path.join(os.getcwd(),'01_DataProcess','immediata_plan.yaml')))
 def testShip_operation(driver, input):
     """无结构靠泊、吊桥分配"""
     menu = GtosMenu(driver)

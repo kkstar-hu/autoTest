@@ -41,7 +41,7 @@ def testPacking(driver,input):
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('packing_process.yaml'))
-@allure.title('3、办理提箱手续')
+@allure.title('2、办理提箱手续')
 @allure.story('3.提箱流程')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'03_PackingProcess', 'packing_process.yaml')))
 def testCheckOutBox(driver,input):
@@ -54,7 +54,7 @@ def testCheckOutBox(driver,input):
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('packing_process.yaml'))
-@allure.title('4、工作指令堆场发箱')
+@allure.title('3、工作指令堆场发箱')
 @allure.story('3.提箱流程')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'03_PackingProcess', 'packing_process.yaml')))
 def testSend_box(driver, input):
@@ -67,7 +67,7 @@ def testSend_box(driver, input):
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('packing_process.yaml'))
-@allure.title('5、车辆出场')
+@allure.title('4、车辆出场')
 @allure.story('3.提箱流程')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'03_PackingProcess', 'packing_process.yaml')))
 def testCar_Out(driver, input):

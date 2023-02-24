@@ -29,8 +29,8 @@ from GTOS.PageObject.gtos_menu import GtosMenu
 
 
 # @pytest.mark.skipif
-@allure.title('4、新增进箱计划')
-@allure.story('1.生成进箱计划')
+@allure.title('1、新增进箱计划')
+@allure.story('4.生成进箱计划')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'04_EnterBoxProcess', 'inboxplan.yaml')))
 def testAddPlan(driver,input):
     """新增进场计划"""
@@ -42,8 +42,9 @@ def testAddPlan(driver,input):
 
 
 # @pytest.mark.skipif
-@allure.story('4.新增进箱计划')
+
 @allure.title('2.办理进场')
+@allure.story('4.新增进箱计划')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'04_EnterBoxProcess','inboxplan.yaml')))
 def testCheckInBox(driver,input):
     menu = GtosMenu(driver)
@@ -55,8 +56,9 @@ def testCheckInBox(driver,input):
     checkInBox.confirm_button(input)
     Tag(driver).closeTagGtos('办理进箱手续V1')
 
-@allure.story('4.新增进箱计划')
+
 @allure.title('2.堆场收箱')
+@allure.story('4.新增进箱计划')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'04_EnterBoxProcess','inboxplan.yaml')))
 def testReceive_box(driver, input):
     """工作指令-堆场收箱"""
@@ -69,8 +71,9 @@ def testReceive_box(driver, input):
     Tag(driver).closeTagGtos('作业指令监控')
 
 
-@allure.story('4.新增进箱计划')
+
 @allure.title('3.车辆出场')
+@allure.story('4.新增进箱计划')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'04_EnterBoxProcess','inboxplan.yaml')))
 def testCar_Out(driver, input):
     menu = GtosMenu(driver)
