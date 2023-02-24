@@ -87,7 +87,6 @@ class Split_Box_Confirm(BasePage):
             self.logger.info('拆箱计划：新增货物信息')
             textInput = text(self.driver)
             textInput.click('xpath', "//div[@id='add']")
-            self.refresh()
             self.input_boxnumber(input)
             self.retrieve()
             self.logger.info('拆箱计划：新增货物信息')

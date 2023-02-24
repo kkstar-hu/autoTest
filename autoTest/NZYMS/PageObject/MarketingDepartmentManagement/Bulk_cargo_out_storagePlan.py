@@ -19,7 +19,6 @@ class Bulk_cargo_out_storagePlan(BasePage):
         新增散货出库计划
         """
         try:
-            self.refresh()
             self.waitloading()
             self.logger.info('散货出库计划：添加主计划')
             self.click('xpath',"//div[@id='add']")

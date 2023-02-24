@@ -25,7 +25,6 @@ class Packing_Plan(BasePage):
         """
         try:
             self.logger.info('装箱计划：添加主计划')
-            self.refresh()
             self.click('xpath',"//div[@id='add']")
             textInput = text(self.driver)
             self.logger.info('装箱计划：输入内容')

@@ -42,7 +42,6 @@ class Packing_Confirm(BasePage):
         """
         新增箱货信息
         """
-        self.refresh()
         self.input_boxnumber(input)
         self.retrieve()
         self.logger.info('装箱确认：新增货物信息')
