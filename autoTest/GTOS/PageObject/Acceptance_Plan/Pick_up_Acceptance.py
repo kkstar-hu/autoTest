@@ -74,7 +74,7 @@ class Packing_up(BasePage):
         textinput.select_by_label('返场类型','不返场')
 
 
-    def save(self):
+    def save_out(self,input):
         """
         保存
         """
@@ -93,7 +93,7 @@ class Packing_up(BasePage):
         self.tick_off_box()
         self.customs_release()
         self.generation_plan()
-        self.save()
+        self.save_out(input)
 
     def straight_process(self,input,boxnumber):
         """
@@ -105,5 +105,5 @@ class Packing_up(BasePage):
         self.tick_off_box()
         self.customs_release()
         self.generation_plan()
-        self.save()
+        self.save_out(input)
 

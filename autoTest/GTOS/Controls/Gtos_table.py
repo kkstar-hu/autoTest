@@ -53,6 +53,14 @@ class Gtos_table(BasePage):
         except:
             raise Exception("定位不到元素")
 
+    def left_select(self,header):
+        try:
+            e1 = self.get_element("xpath",f"(//div[@class='ag-pinned-left-cols-container'])[{self.index}]//div//div[contains(text(),'{header}')]")
+            ActionChains(self.driver).click(e1).perform()
+        except:
+            raise Exception("定位不到元素")
+
+
     #列表中选择行传入表头和值，会分页查找，存在右侧箭头
     def select_row2(self, header, value):
         try:

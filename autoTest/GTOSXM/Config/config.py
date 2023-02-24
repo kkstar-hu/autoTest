@@ -6,7 +6,7 @@ host="http://web.cloudtos.com/#/login"
 #卸船提箱箱号
 global boxNumber
 boxNumber=CommonGenerator.generate_spec("XCTX",7)
-# boxNumber="XCTX6108739"
+# boxNumber="XCTX8024136"
 
 #直提箱编号
 global boxNumberTwo
