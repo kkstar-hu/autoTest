@@ -26,22 +26,22 @@ def testPacking(driver,input):
     packing.packing_process(input,config.boxNumber)
     Tag(driver).closeTagGtos('提箱受理')
 
-# @pytest.mark.skipif
-# @pytest.mark.parametrize("input", read_yaml('packing_process.yaml'))
-@allure.title('2、获取箱预约号')
-@allure.story('3.提箱流程')
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'03_PackingProcess', 'packing_process.yaml')))
-def testPackingManagement(driver,input):
-    """计划管理--获取箱预约号"""
-    menu = GtosMenu(driver)
-    menu.select_level_Menu("计划受理,计划管理")
-    planmanegement = PlanManagement(driver)
-    planmanegement.process(config.boxNumber)
-    Tag(driver).closeTagGtos('计划管理')
+# # @pytest.mark.skipif
+# # @pytest.mark.parametrize("input", read_yaml('packing_process.yaml'))
+# @allure.title('2、获取箱预约号')
+# @allure.story('3.提箱流程')
+# @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'03_PackingProcess', 'packing_process.yaml')))
+# def testPackingManagement(driver,input):
+#     """计划管理--获取箱预约号"""
+#     menu = GtosMenu(driver)
+#     menu.select_level_Menu("计划受理,计划管理")
+#     planmanegement = PlanManagement(driver)
+#     planmanegement.process(config.boxNumber)
+#     Tag(driver).closeTagGtos('计划管理')
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('packing_process.yaml'))
-@allure.title('3、办理提箱手续')
+@allure.title('2、办理提箱手续')
 @allure.story('3.提箱流程')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'03_PackingProcess', 'packing_process.yaml')))
 def testCheckOutBox(driver,input):
@@ -54,7 +54,7 @@ def testCheckOutBox(driver,input):
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('packing_process.yaml'))
-@allure.title('4、工作指令堆场发箱')
+@allure.title('3、工作指令堆场发箱')
 @allure.story('3.提箱流程')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'03_PackingProcess', 'packing_process.yaml')))
 def testSend_box(driver, input):
@@ -67,7 +67,7 @@ def testSend_box(driver, input):
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('packing_process.yaml'))
-@allure.title('5、车辆出场')
+@allure.title('4、车辆出场')
 @allure.story('3.提箱流程')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'03_PackingProcess', 'packing_process.yaml')))
 def testCar_Out(driver, input):
@@ -76,7 +76,7 @@ def testCar_Out(driver, input):
     menu.select_level_Menu("道口管理,车辆出场")
     car_out = Car_Out(driver)
     car_out.process(input,config.boxNumber)
-    Tag(driver).closeChoiceTag('车辆出场')
+    Tag(driver).closeTagGtos('车辆出场')
 
 
 

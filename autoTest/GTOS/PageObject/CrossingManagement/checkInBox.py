@@ -1,3 +1,5 @@
+import time
+
 import pytest_check as check
 from Base.basepage import BasePage
 from GTOS.Config import config
@@ -22,6 +24,7 @@ class CheckInBox(BasePage):
             textInput.input_by_label("后", boxNumbercenter)
         if input["车队"] is not None:
             textInput.select_by_label("车队", input['车队'])
+        time.sleep(0.5)
         self.click("x","//button//span[text()='检索']")
 
     def input_checkin_info(self,input):
@@ -133,6 +136,14 @@ class CheckInBox(BasePage):
             self.click("x",f"//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]//span[contains(text(),{input['进口道口号']})]")
 
 
+    def other_information(self,input):
+        """
+        车门方向
+        """
+        textInput = Gtos_text(self.driver)
+        textInput.select_by_label("箱门方向", input['箱门方向'])
+        textInput.select_by_label("付费人", input['付费人'])
+        time.sleep(0.5)
 
 
     def confirm_button(self,input):

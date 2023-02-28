@@ -6,23 +6,27 @@ from Commons.yamlread import read_yaml
 from GTOS.Config import config
 from GTOS.PageObject.Control_Ship.No_Structure_Monitoring import NO_Structure_Monitoring
 from GTOS.PageObject.DataManagement.ExitInformation_manifest import Manifest
+from GTOS.PageObject.Mechanical_Control.Inset_Car import Inset_Car
 from GTOS.PageObject.Mechanical_Control.Job_Order_Monitoring import Job_Order_Monitoring
 from GTOS.PageObject.Ship_Planning.No_Structure_Stowage import No_Structure_Stowage
 from GTOS.PageObject.gtos_menu import GtosMenu
 
-@pytest.mark.skip
-@allure.story('5.装船流程')
+# @pytest.mark.skip
+
 @allure.title('1.装船箱放行')
+@allure.story('5.装船流程')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'05_PutBoxIntoShipProcess','loadship.yaml')))
 def testCheckInBox(driver,input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("资料管理,出口资料,装船箱放行")
     Load=Manifest(driver)
-    Load.search(input)
+    Load.search()
     Load.permitthrough()
 
-@allure.story('5.装船流程')
+
+
 @allure.title('2.无结构船舶配载')
+@allure.story('5.装船流程')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'05_PutBoxIntoShipProcess','loadship.yaml')))
 def testship_stowage(driver, input):
     """无结构配载"""
@@ -30,12 +34,25 @@ def testship_stowage(driver, input):
     menu.select_level_Menu("船舶策划,无结构船舶配载")
     stowage = No_Structure_Stowage(driver)
     stowage.search()
-    stowage.check(input,config.outBoxNumber,config.takeNumber)
+    stowage.check(input,config.outBoxNumber)
     stowage.stowage(config.outBoxNumber)
     Tag(driver).closeTagGtos('无结构船舶配载')
 
+@allure.title('3、内集卡控制')
 @allure.story('5.装船流程')
-@allure.title('3.无结构船舶监控')
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'05_PutBoxIntoShipProcess','loadship.yaml')))
+def testCharge_Car(driver, input):
+    """查看内集卡"""
+    menu = GtosMenu(driver)
+    menu.select_level_Menu("机械控制,内集卡控制")
+    inset_car = Inset_Car(driver)
+    inset_car.choice_job('B01')
+    inset_car.choice_cars('作业步骤','空车')
+    Tag(driver).closeTagGtos('内集卡控制')
+
+
+@allure.title('4.无结构船舶监控')
+@allure.story('5.装船流程')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'05_PutBoxIntoShipProcess','loadship.yaml')))
 def testship_monitor(driver, input):
     """无结构船舶监控"""
@@ -47,8 +64,9 @@ def testship_monitor(driver, input):
     Monitor.LadeShip_check_values(input,config.outBoxNumber)
     Monitor.LadeShip_Send_Box()
     Tag(driver).closeTagGtos('无结构船舶监控')
+
+@allure.title('5.作业指令监控')
 @allure.story('5.装船流程')
-@allure.title('4.作业指令监控')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'05_PutBoxIntoShipProcess','loadship.yaml')))
 def testship_order(driver, input):
     """作业指令监控"""
@@ -57,7 +75,7 @@ def testship_order(driver, input):
     work = Job_Order_Monitoring(driver)
     work.Retrieve(input,config.outportNumber,config.outBoxNumber)
     work.order_info_check(input,config.outBoxNumber)
-    work.charge_car("C305",input)
+    work.charge_car(input)
     work.send_box(input)
     work.LadeShip_confirm(input)
     Tag(driver).closeTagGtos('作业指令监控')

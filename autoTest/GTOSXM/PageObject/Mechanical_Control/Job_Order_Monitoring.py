@@ -156,7 +156,7 @@ class Job_Order_Monitoring(BasePage):
         textclick = Gtos_text(self.driver)
         textclick.no_elements_click('卸船确认')
         textclick.select_by_label("桥吊司机：", 'test02')
-        time.sleep(1)
+        self.element_wait("xpath","//div[@role='alert']//p")
         a = Gtos_table(self.driver)
         config.boxPosition= a.get_body_values('收箱位')
         self.logger.info('箱位置：' + config.boxPosition)

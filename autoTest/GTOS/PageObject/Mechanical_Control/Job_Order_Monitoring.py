@@ -1,4 +1,4 @@
-
+import time
 import pytest_check as check
 from Base.basepage import BasePage
 from GTOS.Controls.text import Gtos_text
@@ -42,6 +42,9 @@ class Job_Order_Monitoring(BasePage):
         check.equal(tablecheck.get_value('箱状态'), input['箱状态'])
         check.equal(tablecheck.get_value('卸货港'), input['卸货港'])
         check.equal(tablecheck.get_value('作业状态'), '等待作业')
+        check.equal(tablecheck.get_value('归属码头'),config.showname)
+        check.equal(tablecheck.get_value('指令归属码头'),config.showname)
+        check.equal(tablecheck.get_value('指令作业码头'),config.showname)
         if self.hasInput(input, '集卡编号'):
             check.equal(tablecheck.get_value('拖运机械'), input['车牌'] + input['集卡编号'])
         if self.hasInput(input, '集卡编号'):
@@ -72,7 +75,11 @@ class Job_Order_Monitoring(BasePage):
             check.equal(tablecheck.get_value('操作过程'), input['操作过程'])
         check.equal(tablecheck.get_value('箱状态'), input['箱状态'])
         check.equal(tablecheck.get_value('卸货港'), input['卸货港'])
-        check.equal(tablecheck.get_value('作业状态'), '等待作业')
+        if tablecheck.get_value('作业状态') == '等待作业':
+            check.equal(tablecheck.get_value('作业状态'), '等待作业')
+        check.equal(tablecheck.get_value('归属码头'),config.showname)
+        check.equal(tablecheck.get_value('指令归属码头'),config.showname)
+        check.equal(tablecheck.get_value('指令作业码头'),config.showname)
         if self.hasInput(input, '持箱人'):
             check.equal(tablecheck.get_value('持箱人'),input['持箱人'])
         if self.hasInput(input, '箱型'):
@@ -84,8 +91,10 @@ class Job_Order_Monitoring(BasePage):
         if self.hasInput(input, '作业方式'):
             check.equal(tablecheck.get_value('作业方式'), input['作业方式'])
             if input['操作过程'] == '船―场':
+                a = Gtos_table(self.driver)
+                car = a.get_value('拖运机械')
                 check.equal(tablecheck.get_value('起始位置'), input['作业路'])
-                check.equal(tablecheck.get_value('拖运机械'), '')
+                check.equal(tablecheck.get_value('拖运机械'), car)
                 check.equal(tablecheck.get_value('当前位置'), '')
             if input['操作过程'] == '场―车':
                 check.equal(tablecheck.get_value('起始位置'), config.boxPosition)
@@ -110,24 +119,33 @@ class Job_Order_Monitoring(BasePage):
         table = Gtos_table(self.driver)
         table.select_row("箱号",config.boxNumber)
 
-    def charge_car(self,car,input):
+    def charge_car(self,input):
         """
         改配集卡
         """
-        self.logger.info('作业指令监控-改配集卡操作')
-        textclick = Gtos_text(self.driver)
-        textclick.no_elements_click('改配集卡')
-        textclick.click('xpath',"(//div[@role='tooltip'])[1]//input[@placeholder='请选择']")
-        textclick.no_elements_click(car,2)
-        textclick.no_elements_click('保存')
-        self.check_alert_and_close('改配成功!')
         tablecheck = Gtos_table(self.driver)
-        check.equal(tablecheck.get_value('作业状态'), '已配集卡')
+        if tablecheck.get_value('作业状态') == '等待作业':
+            self.logger.info('作业指令监控-改配集卡操作')
+            textclick = Gtos_text(self.driver)
+            textclick.no_elements_click('改配集卡')
+            textclick.click('xpath',"(//div[@role='tooltip'])[1]//input[@placeholder='请选择']")
+            textclick.no_elements_click(config.carnumber,2)
+            textclick.no_elements_click('保存')
+            self.check_alert_and_close('改配成功!')
+            check.equal(tablecheck.get_value('作业状态'), '已配集卡')
+            if self.hasInput(input, '操作过程'):
+                if input['操作过程']== '船―场':
+                    check.equal(tablecheck.get_value('起始位置'), input['作业路'])
+                    check.equal(tablecheck.get_value('当前位置'), '')
+                    check.equal(tablecheck.get_value('拖运机械'), config.carnumber)
+        self.logger.info('作业指令监控-自动分配集卡')
         if self.hasInput(input, '操作过程'):
-            if input['操作过程']== '船―场':
+            if input['操作过程'] == '船―场':
                 check.equal(tablecheck.get_value('起始位置'), input['作业路'])
-                check.equal(tablecheck.get_value('拖运机械'), car)
                 check.equal(tablecheck.get_value('当前位置'), '')
+                a = Gtos_table(self.driver)
+                car = a.get_value('拖运机械')
+                check.equal(tablecheck.get_value('拖运机械'), car)
 
     def discharging_confirm(self,input):
         """
@@ -137,10 +155,12 @@ class Job_Order_Monitoring(BasePage):
         textclick = Gtos_text(self.driver)
         textclick.no_elements_click('卸船确认')
         textclick.select_by_label("桥吊司机：", 'HAS')
+        self.element_wait("xpath","//div[@role='alert']//p")
         a = Gtos_table(self.driver)
         config.boxPosition= a.get_body_values('收箱位')
+        self.logger.info('箱位置：' + config.boxPosition)
         carnumber = a.get_body_values('集卡号')
-        self.close_alert(f"{a.get_body_values('收箱位')},获取收箱位成功！")
+        self.close_alert(f"{config.boxPosition},获取收箱位成功！")
         textclick.click('xpath',"(//span[text()='保存'])[3]")
         self.check_alert('卸船确认成功')
         self.close_alert('卸船确认成功')
@@ -159,7 +179,8 @@ class Job_Order_Monitoring(BasePage):
         textclick = Gtos_text(self.driver)
         textclick.no_elements_click('卸船确认')
         textclick.select_by_label("桥吊司机：", 'HAS')
-        textclick.click('xpath',"(//span[text()='保存'])[3]")
+        textclick.click('xpath',"//button[@class='el-button el-button--primary el-button--medium']")
+        time.sleep(1)
         self.check_alert('卸船确认成功')
         self.close_alert('卸船确认成功')
         tablecheck = Gtos_table(self.driver)
@@ -237,7 +258,7 @@ class Job_Order_Monitoring(BasePage):
         """
         self.Retrieve(input,shipname,boxnumber)
         self.order_info_check_new(input,boxnumber)
-        self.charge_car('A308',input)
+        self.charge_car(input)
         self.discharging_confirm(input)
         self.closed_box(input)
 

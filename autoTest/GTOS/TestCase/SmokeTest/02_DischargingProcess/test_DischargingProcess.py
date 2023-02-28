@@ -3,6 +3,7 @@ import allure
 import pytest
 from Commons.Controls.tag import Tag
 from GTOS.Config import config
+from GTOS.PageObject.Mechanical_Control.Inset_Car import Inset_Car
 from GTOS.PageObject.gtos_menu import GtosMenu
 from Commons.yamlread import read_yaml
 from GTOS.PageObject.DataManagement.ImportInformation_manifest import Manifest
@@ -47,12 +48,28 @@ def testSend_box(driver, input):
     send_box.Send_Box(input,config.boxNumber)
     Tag(driver).closeTagGtos('无结构船舶监控')
 
+
+
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('discharging_process.yaml'))
-@allure.title('4、工作指令操作')
+@allure.title('4、内集卡控制')
 @allure.story('2.卸船流程')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'02_DischargingProcess', 'discharging_process.yaml')))
 def testCharge_Car(driver, input):
+    """查看内集卡"""
+    menu = GtosMenu(driver)
+    menu.select_level_Menu("机械控制,内集卡控制")
+    inset_car = Inset_Car(driver)
+    inset_car.choice_job('B01')
+    inset_car.choice_cars('作业步骤','空车')
+    Tag(driver).closeTagGtos('内集卡控制')
+
+# @pytest.mark.skipif
+# @pytest.mark.parametrize("input", read_yaml('discharging_process.yaml'))
+@allure.title('5、工作指令操作')
+@allure.story('2.卸船流程')
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'02_DischargingProcess', 'discharging_process.yaml')))
+def testJob(driver, input):
     """工作指令--改配集卡"""
     menu = GtosMenu(driver)
     menu.select_level_Menu("机械控制,作业指令监控")

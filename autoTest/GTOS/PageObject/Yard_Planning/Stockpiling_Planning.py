@@ -57,9 +57,6 @@ class Stockpiling_Planning(BasePage):
         """
         流程
         """
-        self.refresh()
-        self.waitloading()
-        time.sleep(4)
         self.search("道口进",config.outportNumber)
         #self.close_alert('未找到相关堆存计划')
         self.Add_into_plan()
