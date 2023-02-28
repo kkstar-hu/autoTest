@@ -60,13 +60,28 @@ class Manifest(BasePage):
         self.logger.info('步骤4：码头人工放行')
         tablecheck = Gtos_table(self.driver)
         tablecheck.tick_off_box(1)
-        self.click('xpath', "//span[contains(text(),'码头人工放行')]")
+        tablecheck1 = Gtos_table(self.driver, 2)
+        if tablecheck1.get_value('放行') == '放行':
+            Tag(self.driver).closeTagGtos('装船箱放行')
+        else:
+            self.click('xpath', "//span[contains(text(),'码头人工放行')]")
+            time.sleep(0.5)
+            self.click('xpath', "//i[@class='el-dialog__close el-icon el-icon-close']")
+            check.equal(tablecheck.get_value('放行'), '放行')
+            tablecheck1 = Gtos_table(self.driver, 2)
+            check.equal(tablecheck1.get_value('放行'), '放行')
+            Tag(self.driver).closeTagGtos('装船箱放行')
+
+
+
+        # self.click('xpath', "//span[contains(text(),'码头人工放行')]")
         # if self.get_text('x',"//div[@role='alert']//p") == '请选择未放行的提单！':
         #     self.close_alert('请选择未放行的提单！')
         #     Tag(self.driver).closeTagGtos('装船箱放行')
-        time.sleep(0.5)
-        self.click('xpath', "//i[@class='el-dialog__close el-icon el-icon-close']")
-        check.equal(tablecheck.get_value('放行'), '放行')
-        tablecheck1 = Gtos_table(self.driver, 2)
-        check.equal(tablecheck1.get_value('放行'), '放行')
-        Tag(self.driver).closeTagGtos('装船箱放行')
+        # else:
+        #     time.sleep(0.5)
+        #     self.click('xpath', "//i[@class='el-dialog__close el-icon el-icon-close']")
+        #     check.equal(tablecheck.get_value('放行'), '放行')
+        #     tablecheck1 = Gtos_table(self.driver, 2)
+        #     check.equal(tablecheck1.get_value('放行'), '放行')
+        #     Tag(self.driver).closeTagGtos('装船箱放行')
