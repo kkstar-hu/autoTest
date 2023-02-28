@@ -1,6 +1,5 @@
 import os
 import sys
-from Base.basepage import BasePage
 from selenium import webdriver
 import pytest
 
