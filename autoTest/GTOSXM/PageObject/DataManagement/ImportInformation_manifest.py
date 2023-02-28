@@ -82,6 +82,7 @@ class Manifest(BasePage):
             self.logger.info('舱单-新增舱单箱信息'+boxnumber)
             textinput = Gtos_text(self.driver)
             self.click("xpath","(//div[@id='add'])[2]")
+            time.sleep(0.5)
             textinput.input_by_label('箱号',boxnumber)
             textinput.select_by_label('尺寸',input['尺寸'])
             textinput.select_by_label('箱型','00')

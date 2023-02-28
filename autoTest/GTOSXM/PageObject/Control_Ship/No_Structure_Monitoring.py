@@ -51,8 +51,6 @@ class NO_Structure_Monitoring(BasePage):
         self.Retrieve()
         self.SendBox_check_values(input,boxnumber)
         self.logger.info('无结构船舶监控-卸船发箱'+boxnumber)
-        # row = self.rows_value(3)
-        # tablecheck = Gtos_table(self.driver, 3)
         table = Gtos_table(self.driver, 3)
         table.check2("箱号", boxnumber)
         self.click('id',"shipmentconfirm")
@@ -166,6 +164,10 @@ class NO_Structure_Monitoring(BasePage):
         textinput = Gtos_text(self.driver)
         textinput.input_by_label('靠泊吃水','1')
         self.click('x',"//span[text()='提交']")
+        if self.get_text('x',"//div[@role='alert']//p") == '靠泊时间不能大于当前时间.':
+            self.close_alert('靠泊时间不能大于当前时间.')
+            time.sleep(1)
+            self.click('x', "//span[text()='提交']")
         self.check_alert('提交成功')
         self.close_alert('提交成功')
         check.equal(tablecheck.get_value('靠泊状态'),'靠泊')
@@ -208,44 +210,10 @@ class NO_Structure_Monitoring(BasePage):
         self.click('x', "//span[text()='提交']")
         if self.elementExist("x","//div[@class='el-message-box__message']"):
             self.click("x","//div[@class='el-message-box__btns']//span[text()=' 确定 ']")
+        if self.get_text('x',"//div[@role='alert']//p") == '离泊时间应不大于当前时间！':
+            self.close_alert('离泊时间应不大于当前时间！')
+            time.sleep(1)
+            self.click('x', "//span[text()='提交']")
+            if self.elementExist("x", "//div[@class='el-message-box__message']"):
+                self.click("x", "//div[@class='el-message-box__btns']//span[text()=' 确定 ']")
         self.check_alert("提交成功")
-
-    def rows_value(self,index=1):
-        """
-        获取内容，用于check
-        """
-        pax_value = []
-        att = []
-        a = []
-        b= []
-        # 通过标签名获取表格的所有行
-        table_value = self.get_elements('xpath',f"(//div[@class='ag-center-cols-viewport'])[{index}]//div[@role='gridcell']")
-        #  按行查询表格的数据，取出的数据是一整行，按,分隔每一列的数据
-        for tr in table_value:
-            # print(tr.text)     获取文本
-            # print(tr.get_attribute('outerHTML'))   获取当前元素源代码
-            # print(tr.is_displayed())      判断元素文本是不是被隐藏了
-            # print(tr.get_attribute('attributeName'))
-            # print(tr.get_attribute('textContent'))           获取隐藏的文本信息
-            # print(tr.get_attribute('innerText'))          获取隐藏的文本信息
-            att = (tr.get_attribute('textContent')).split("\n")
-            pax_value.append(att)
-        for i in pax_value:
-            if len(i) == 1:
-                b.append(i)
-                a = sum(b,[])
-        if index == 3 :
-            for y in a :
-                if y == '可作业':
-                    row = a[a.index(y)-9]
-                    return int(row)
-        if  index == 5 :
-            for y in a:
-                if y == config.boxNumberTwo:
-                    row = a[a.index(y)-1]
-                    return int(row)
-        if  index == 6 :
-            for y in a:
-                if y == config.boxNumberThree:
-                    row = a[a.index(y)-1]
-                    return int(row)

@@ -6,6 +6,7 @@ from Commons.yamlread import read_yaml
 from GTOSXM.Config import config
 from GTOSXM.PageObject.Control_Ship.No_Structure_Monitoring import NO_Structure_Monitoring
 from GTOSXM.PageObject.DataManagement.ExitInformation_manifest import Manifest
+from GTOSXM.PageObject.Mechanical_Control.Inset_Car import Inset_Car
 from GTOSXM.PageObject.Mechanical_Control.Job_Order_Monitoring import Job_Order_Monitoring
 from GTOSXM.PageObject.Ship_Planning.No_Structure_Stowage import No_Structure_Stowage
 from GTOSXM.PageObject.gtos_menu import GtosMenu
@@ -20,7 +21,6 @@ def testCheckInBox(driver,input):
     Load=Manifest(driver)
     Load.search()
     Load.permitthrough()
-    Tag(driver).closeTagGtos('装船箱放行')
 
 # @pytest.mark.skip
 @allure.story('5.装船流程')
@@ -36,9 +36,24 @@ def testship_stowage(driver, input):
     stowage.stowage(config.outBoxNumber)
     Tag(driver).closeTagGtos('无结构船舶配载')
 
+
+
+@allure.title('3、内集卡控制')
+@allure.story('5.装船流程')
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'05_PutBoxIntoShipProcess','loadship.yaml')))
+def testCharge_Car(driver, input):
+    """查看内集卡"""
+    menu = GtosMenu(driver)
+    menu.select_level_Menu("机械控制,内集卡控制")
+    inset_car = Inset_Car(driver)
+    inset_car.choice_job('ALL')
+    inset_car.choice_cars('作业步骤','空车')
+    Tag(driver).closeTagGtos('内集卡控制')
+
+
 # @pytest.mark.skip
 @allure.story('5.装船流程')
-@allure.title('3.无结构船舶监控')
+@allure.title('4.无结构船舶监控')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'05_PutBoxIntoShipProcess','loadship.yaml')))
 def testship_monitor(driver, input):
     """无结构船舶监控"""
@@ -50,8 +65,10 @@ def testship_monitor(driver, input):
     Monitor.LadeShip_check_values(input,config.outBoxNumber)
     Monitor.LadeShip_Send_Box()
     Tag(driver).closeTagGtos('无结构船舶监控')
+
+# @pytest.mark.skip
 @allure.story('5.装船流程')
-@allure.title('4.作业指令监控')
+@allure.title('5.作业指令监控')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'05_PutBoxIntoShipProcess','loadship.yaml')))
 def testship_order(driver, input):
     """作业指令监控"""
