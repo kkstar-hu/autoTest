@@ -13,15 +13,19 @@ from GTOSXM.PageObject.Mechanical_Control.Job_Order_Monitoring import Job_Order_
 from GTOSXM.PageObject.gtos_menu import GtosMenu
 
 # @pytest.mark.skipif
-@allure.title('4、新增进箱计划')
-@allure.story('1.生成进箱计划')
+@allure.story('4.新增进箱计划')
+@allure.title('1.生成进箱计划')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'04_EnterBoxProcess', 'inboxplan.yaml')))
 def testAddPlan(driver,input):
     """新增进场计划"""
     menu = GtosMenu(driver)
     menu.select_level_Menu("计划受理,安排计划,进箱受理")
     inbox = InBox_Acceptance(driver)
-    inbox.process(input,config.outBoxNumber)
+    inbox.choice_tree_straight(input)
+    inbox.select_value()
+    inbox.addPlan(input, config.outBoxNumber)
+    inbox.Add_value(config.outBoxNumber)
+    inbox.build_plan(input)
     Tag(driver).closeTagGtos('进箱受理')
 
 
@@ -76,7 +80,9 @@ def testCar_Out(driver, input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("道口管理,车辆出场")
     car_out = Car_Out(driver)
-    car_out.process_loading(input,config.outBoxNumber)
+    car_out.input_values(input, config.outBoxNumber)
+    car_out.retrieve()
+    car_out.confirm_out_loadingAndLifting()
     Tag(driver).closeTagGtos('车辆出场')
 
 

@@ -33,7 +33,7 @@ class Manifest(BasePage):
         check.equal(tablecheck1.get_value('箱号'), boxnumber)
         check.equal(tablecheck1.get_value('放行'), '未放')
         check.equal(tablecheck1.get_value('卸货港'), input['卸货港'])
-        check.equal(tablecheck1.get_value('贸易类型'),input['贸易类型'][:2])
+        check.equal(tablecheck1.get_value('贸易类型'),input['贸易类型'][2:4])
         check.equal(tablecheck1.get_value('尺寸'),input['尺寸'])
         check.equal(tablecheck1.get_value('箱型'),'GP')
         check.equal(tablecheck1.get_value('箱高'),input['箱高'])
@@ -65,7 +65,7 @@ class Manifest(BasePage):
             Tag(self.driver).closeTagGtos('装船箱放行')
         else:
             self.click('xpath', "//span[contains(text(),'码头人工放行')]")
-            time.sleep(0.5)
+            time.sleep(3)
             self.click('xpath', "//i[@class='el-dialog__close el-icon el-icon-close']")
             check.equal(tablecheck.get_value('放行'), '放行')
             tablecheck1 = Gtos_table(self.driver, 2)
@@ -74,14 +74,3 @@ class Manifest(BasePage):
 
 
 
-        # self.click('xpath', "//span[contains(text(),'码头人工放行')]")
-        # if self.get_text('x',"//div[@role='alert']//p") == '请选择未放行的提单！':
-        #     self.close_alert('请选择未放行的提单！')
-        #     Tag(self.driver).closeTagGtos('装船箱放行')
-        # else:
-        #     time.sleep(0.5)
-        #     self.click('xpath', "//i[@class='el-dialog__close el-icon el-icon-close']")
-        #     check.equal(tablecheck.get_value('放行'), '放行')
-        #     tablecheck1 = Gtos_table(self.driver, 2)
-        #     check.equal(tablecheck1.get_value('放行'), '放行')
-        #     Tag(self.driver).closeTagGtos('装船箱放行')

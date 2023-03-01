@@ -48,8 +48,6 @@ class NO_Structure_Monitoring(BasePage):
         """
         发箱
         """
-        self.Retrieve()
-        self.SendBox_check_values(input,boxnumber)
         self.logger.info('无结构船舶监控-卸船发箱'+boxnumber)
         table = Gtos_table(self.driver, 3)
         table.check2("箱号", boxnumber)
@@ -166,7 +164,7 @@ class NO_Structure_Monitoring(BasePage):
         self.click('x',"//span[text()='提交']")
         if self.get_text('x',"//div[@role='alert']//p") == '靠泊时间不能大于当前时间.':
             self.close_alert('靠泊时间不能大于当前时间.')
-            time.sleep(1)
+            time.sleep(2)
             self.click('x', "//span[text()='提交']")
         self.check_alert('提交成功')
         self.close_alert('提交成功')

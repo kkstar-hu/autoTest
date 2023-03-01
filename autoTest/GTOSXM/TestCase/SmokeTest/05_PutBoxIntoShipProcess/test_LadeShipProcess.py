@@ -37,9 +37,9 @@ def testship_stowage(driver, input):
     Tag(driver).closeTagGtos('无结构船舶配载')
 
 
-
-@allure.title('3、内集卡控制')
+# @pytest.mark.skip
 @allure.story('5.装船流程')
+@allure.title('3、内集卡控制')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'05_PutBoxIntoShipProcess','loadship.yaml')))
 def testCharge_Car(driver, input):
     """查看内集卡"""

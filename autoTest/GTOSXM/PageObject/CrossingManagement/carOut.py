@@ -28,8 +28,6 @@ class Car_Out(BasePage):
         检索
         """
         self.click('xpath',"//span[text()='检索']")
-        # if self.get_text('x',"//div[@role='alert']//p") == '暂无箱数据，请先检索！':
-        #     self.click('xpath', "//span[text()='检索']")
         time.sleep(2)
 
 
@@ -53,20 +51,3 @@ class Car_Out(BasePage):
         self.check_alert('车辆出场成功')
 
 
-
-    def process(self,input,boxnumber):
-        """
-        流程
-        """
-        self.input_values(input,boxnumber)
-        self.retrieve()
-        self.confirm_out_picking()
-
-
-    def process_loading(self,input,boxnumber):
-        """
-        流程
-        """
-        self.input_values(input,boxnumber)
-        self.retrieve()
-        self.confirm_out_loadingAndLifting()
