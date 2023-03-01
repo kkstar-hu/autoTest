@@ -11,8 +11,9 @@ from GTOS.PageObject.Control_Ship.No_Structure_Monitoring import NO_Structure_Mo
 from Commons.yamlread import read_yaml
 
 
-@allure.title('1、吊桥完工')
+
 @allure.story('8.离泊确认,航次关闭')
+@allure.title('1、吊桥完工')
 def testShip_operation(driver):
     """无结构靠泊、吊桥分配"""
     menu = GtosMenu(driver)
@@ -28,9 +29,9 @@ def testShip_operation(driver):
     close.closeFlight()
 
 
-@pytest.mark.parametrize("input",read_yaml(os.path.join(os.getcwd(),'01_DataProcess', 'immediata_plan.yaml')))
-@allure.title('2、近期计划验证靠泊信息')
 @allure.story('8.离泊确认,航次关闭')
+@allure.title('2、近期计划验证靠泊信息')
+@pytest.mark.parametrize("input",read_yaml(os.path.join(os.getcwd(),'01_DataProcess', 'immediata_plan.yaml')))
 def testCheck_shipinfo(driver, input):
     """近期计划验证靠泊信息"""
     menu = GtosMenu(driver)

@@ -50,5 +50,6 @@ class Inset_Car(BasePage):
         选择等待装货集卡号
         '''
         textable = Gtos_table(self.driver,2)
+        self.left_click('x',"//span[text()='作业步骤']")
         config.carnumber = textable.select_row(f'{job}',f'{value}')
 

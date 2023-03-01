@@ -48,20 +48,3 @@ class Car_Out(BasePage):
         self.check_alert('车辆出场成功')
 
 
-
-    def process(self,input,boxnumber):
-        """
-        流程
-        """
-        self.input_values(input,boxnumber)
-        self.retrieve()
-        self.confirm_out_picking()
-
-
-    def process_loading(self,input,boxnumber):
-        """
-        流程
-        """
-        self.input_values(input,boxnumber)
-        self.retrieve()
-        self.confirm_out_loadingAndLifting()

@@ -13,8 +13,8 @@ from GTOS.PageObject.Mechanical_Control.Job_Order_Monitoring import Job_Order_Mo
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('discharging_process.yaml'))
-@allure.title('1、新增舱单')
 @allure.story('2.卸船流程')
+@allure.title('1、新增舱单')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'02_DischargingProcess', 'discharging_process.yaml')))
 def testManifest(driver,input):
     """新增舱单资料"""
@@ -25,8 +25,8 @@ def testManifest(driver,input):
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('discharging_process.yaml'))
-@allure.title('2、新增舱单箱')
 @allure.story('2.卸船流程')
+@allure.title('2、新增舱单箱')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'02_DischargingProcess', 'discharging_process.yaml')))
 def testManifest_box(driver, input):
     """新增舱单箱资料"""
@@ -37,14 +37,16 @@ def testManifest_box(driver, input):
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('discharging_process.yaml'))
-@allure.title('3、无结构监控发箱')
 @allure.story('2.卸船流程')
+@allure.title('3、无结构监控发箱')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'02_DischargingProcess', 'discharging_process.yaml')))
 def testSend_box(driver, input):
     """无结构船舶发箱"""
     menu = GtosMenu(driver)
     menu.select_level_Menu("船舶监控,无结构船舶监控")
     send_box = NO_Structure_Monitoring(driver)
+    send_box.Retrieve()
+    send_box.SendBox_check_values(input, config.boxNumber)
     send_box.Send_Box(input,config.boxNumber)
     Tag(driver).closeTagGtos('无结构船舶监控')
 
@@ -52,8 +54,8 @@ def testSend_box(driver, input):
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('discharging_process.yaml'))
-@allure.title('4、内集卡控制')
 @allure.story('2.卸船流程')
+@allure.title('4、内集卡控制')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'02_DischargingProcess', 'discharging_process.yaml')))
 def testCharge_Car(driver, input):
     """查看内集卡"""
@@ -66,15 +68,19 @@ def testCharge_Car(driver, input):
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('discharging_process.yaml'))
-@allure.title('5、工作指令操作')
 @allure.story('2.卸船流程')
+@allure.title('5、工作指令操作')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'02_DischargingProcess', 'discharging_process.yaml')))
 def testJob(driver, input):
     """工作指令--改配集卡"""
     menu = GtosMenu(driver)
     menu.select_level_Menu("机械控制,作业指令监控")
     charge_car = Job_Order_Monitoring(driver)
-    charge_car.Job_DischargingOrder(input,config.importNumber,config.boxNumber)
+    charge_car.Retrieve(input, config.importNumber, config.boxNumber)
+    charge_car.order_info_check_new(input, config.boxNumber)
+    charge_car.charge_car(input)
+    charge_car.discharging_confirm(input)
+    charge_car.closed_box(input)
     Tag(driver).closeTagGtos('作业指令监控')
 
 

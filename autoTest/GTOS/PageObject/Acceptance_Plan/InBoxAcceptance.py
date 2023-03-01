@@ -16,15 +16,9 @@ class InBox_Acceptance(BasePage):
         选择计划类型
         """
         self.logger.info('计划：选择计划类型')
-        self.click('xpath',f"//span[text()='提{input['贸易类型']}计划']")
+        self.click('xpath',f"//span[text()='{input['贸易类型']}']")
 
 
-    def choice_tree_inbox(self,input):
-        """
-        选择计划类型
-        """
-        self.logger.info('计划：选择计划类型')
-        self.click('xpath',f"//span[text()='OF_{input['贸易类型']}']")
 
     def select_value(self):
         """
@@ -103,12 +97,3 @@ class InBox_Acceptance(BasePage):
         self.check_alert('计划保存成功')
 
 
-    def process(self,input,boxnumber):
-        """
-        进箱直提受理流程
-        """
-        self.choice_tree_inbox(input)
-        self.select_value()
-        self.addPlan(input,boxnumber)
-        self.Add_value(boxnumber)
-        self.build_plan(input)

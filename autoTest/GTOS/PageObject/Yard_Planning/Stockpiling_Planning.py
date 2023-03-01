@@ -53,19 +53,5 @@ class Stockpiling_Planning(BasePage):
         self.check_alert('新增成功')
         self.close_alert('新增成功')
 
-    def process_into(self):
-        """
-        流程
-        """
-        self.search("道口进",config.outportNumber)
-        #self.close_alert('未找到相关堆存计划')
-        self.Add_into_plan()
-        self.Add_box_INTO()
 
-
-    def process_out(self):
-        self.search("卸船",config.importNumber)
-        # self.close_alert('未找到相关堆存计划')
-        self.Add_into_plan()
-        self.Add_box_INTO()
 

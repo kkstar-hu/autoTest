@@ -12,9 +12,8 @@ from GTOS.PageObject.Ship_Planning.No_Structure_Stowage import No_Structure_Stow
 from GTOS.PageObject.gtos_menu import GtosMenu
 
 # @pytest.mark.skip
-
-@allure.title('1.装船箱放行')
 @allure.story('5.装船流程')
+@allure.title('1.装船箱放行')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'05_PutBoxIntoShipProcess','loadship.yaml')))
 def testCheckInBox(driver,input):
     menu = GtosMenu(driver)
@@ -24,9 +23,9 @@ def testCheckInBox(driver,input):
     Load.permitthrough()
 
 
-
-@allure.title('2.无结构船舶配载')
+# @pytest.mark.skip
 @allure.story('5.装船流程')
+@allure.title('2.无结构船舶配载')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'05_PutBoxIntoShipProcess','loadship.yaml')))
 def testship_stowage(driver, input):
     """无结构配载"""
@@ -38,8 +37,9 @@ def testship_stowage(driver, input):
     stowage.stowage(config.outBoxNumber)
     Tag(driver).closeTagGtos('无结构船舶配载')
 
-@allure.title('3、内集卡控制')
+# @pytest.mark.skip
 @allure.story('5.装船流程')
+@allure.title('3、内集卡控制')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'05_PutBoxIntoShipProcess','loadship.yaml')))
 def testCharge_Car(driver, input):
     """查看内集卡"""
@@ -51,8 +51,9 @@ def testCharge_Car(driver, input):
     Tag(driver).closeTagGtos('内集卡控制')
 
 
-@allure.title('4.无结构船舶监控')
+# @pytest.mark.skip
 @allure.story('5.装船流程')
+@allure.title('4.无结构船舶监控')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'05_PutBoxIntoShipProcess','loadship.yaml')))
 def testship_monitor(driver, input):
     """无结构船舶监控"""
@@ -65,8 +66,9 @@ def testship_monitor(driver, input):
     Monitor.LadeShip_Send_Box()
     Tag(driver).closeTagGtos('无结构船舶监控')
 
-@allure.title('5.作业指令监控')
+# @pytest.mark.skip
 @allure.story('5.装船流程')
+@allure.title('5.作业指令监控')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'05_PutBoxIntoShipProcess','loadship.yaml')))
 def testship_order(driver, input):
     """作业指令监控"""

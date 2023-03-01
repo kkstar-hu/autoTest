@@ -83,27 +83,6 @@ class Packing_up(BasePage):
         textclick.no_elements_click('保存')
         self.check_alert(input['alert'])
 
-    def packing_process(self,input,boxnumber):
-        """
-        提箱受理流程
-        """
-        self.choice_tree(input)
-        self.select_value(boxnumber)
-        self.retrieve(input,boxnumber)
-        self.tick_off_box()
-        self.customs_release()
-        self.generation_plan()
-        self.save_out(input)
 
-    def straight_process(self,input,boxnumber):
-        """
-        直提受理流程
-        """
-        self.choice_tree(input)
-        self.select_value(boxnumber)
-        self.retrieve(input,boxnumber)
-        self.tick_off_box()
-        self.customs_release()
-        self.generation_plan()
-        self.save_out(input)
+
 

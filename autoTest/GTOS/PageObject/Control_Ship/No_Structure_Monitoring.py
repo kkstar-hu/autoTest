@@ -46,8 +46,6 @@ class NO_Structure_Monitoring(BasePage):
         """
         发箱
         """
-        self.Retrieve()
-        self.SendBox_check_values(input,boxnumber)
         self.logger.info('无结构船舶监控-卸船发箱'+boxnumber)
         table = Gtos_table(self.driver, 3)
         table.check2("箱号", boxnumber)

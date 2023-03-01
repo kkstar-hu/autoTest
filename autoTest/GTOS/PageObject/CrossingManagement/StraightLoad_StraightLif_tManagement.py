@@ -100,18 +100,3 @@ class StraightLoad_StraightLift_Management(BasePage):
         self.click('xpath',"//div[contains(text(),'直提列表')]")
 
 
-
-    def process_loading(self,input,boxnumber):
-        """
-        直装流程
-        """
-        self.loading_value(input,boxnumber)
-        self.loading_report(input)
-
-    def process_lifting(self,input,boxnumber):
-        """
-        直提流程
-        """
-        self.switch_lift()
-        self.lifting_value(input,boxnumber)
-        self.lifting_report(input)

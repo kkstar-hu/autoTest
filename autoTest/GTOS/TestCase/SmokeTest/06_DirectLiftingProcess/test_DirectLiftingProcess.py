@@ -14,8 +14,8 @@ from GTOS.PageObject.CrossingManagement.carOut import Car_Out
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('direct_liftin_process.yaml'))
-@allure.title('1、新增舱单计划')
 @allure.story('6.直提流程')
+@allure.title('1、新增舱单计划')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'06_DirectLiftingProcess', 'direct_liftin_process.yaml')))
 def testManifest(driver,input):
     """新增舱单资料"""
@@ -26,8 +26,8 @@ def testManifest(driver,input):
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('direct_liftin_process.yaml'))
-@allure.title('2、新增提箱计划')
 @allure.story('6.直提流程')
+@allure.title('2、新增提箱计划')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'06_DirectLiftingProcess', 'direct_liftin_process.yaml')))
 def testManifest_box(driver, input):
     """新增舱单箱资料"""
@@ -39,34 +39,42 @@ def testManifest_box(driver, input):
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('direct_liftin_process.yaml'))
-@allure.title('3、生成直提计划')
 @allure.story('6.直提流程')
+@allure.title('3、生成直提计划')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'06_DirectLiftingProcess', 'direct_liftin_process.yaml')))
 def testPacking(driver,input):
     """提箱受理"""
     menu = GtosMenu(driver)
     menu.select_level_Menu("计划受理,安排计划,提箱受理")
     packing = Packing_up(driver)
-    packing.straight_process(input,config.boxNumberTwo)
+    packing.choice_tree(input)
+    packing.select_value(config.boxNumberTwo)
+    packing.retrieve(input, config.boxNumberTwo)
+    packing.tick_off_box()
+    packing.customs_release()
+    packing.generation_plan()
+    packing.save_out(input)
     Tag(driver).closeTagGtos('提箱受理')
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('direct_liftin_process.yaml'))
-@allure.title('4、直提报到')
 @allure.story('6.直提流程')
+@allure.title('4、直提报到')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'06_DirectLiftingProcess', 'direct_liftin_process.yaml')))
 def testDirectLoading(driver,input):
     """直提"""
     menu = GtosMenu(driver)
     menu.select_level_Menu("道口管理,直装/直提管理")
     loading = StraightLoad_StraightLift_Management(driver)
-    loading.process_lifting(input,config.boxNumberTwo)
+    loading.switch_lift()
+    loading.lifting_value(input, config.boxNumberTwo)
+    loading.lifting_report(input)
     Tag(driver).closeTagGtos('直装/直提管理')
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('direct_liftin_process.yaml'))
-@allure.title('5、无结构船舶监控允许直提')
 @allure.story('6.直提流程')
+@allure.title('5、无结构船舶监控允许直提')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'06_DirectLiftingProcess', 'direct_liftin_process.yaml')))
 def testLifting(driver, input):
     """无结构船舶允许直提"""
@@ -78,29 +86,33 @@ def testLifting(driver, input):
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('direct_liftin_process.yaml'))
-@allure.title('6、工作指令卸船确认')
 @allure.story('6.直提流程')
+@allure.title('6、工作指令卸船确认')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'06_DirectLiftingProcess', 'direct_liftin_process.yaml')))
 def testOrder(driver, input):
     """工作指令-卸船确认"""
     menu = GtosMenu(driver)
     menu.select_level_Menu("机械控制,作业指令监控")
     charge_car = Job_Order_Monitoring(driver)
-    charge_car.lifting_Order(input,config.importNumber,config.boxNumberTwo)
+    charge_car.Retrieve(input, config.importNumber, config.boxNumberTwo)
+    charge_car.order_info_check_new(input, config.boxNumberTwo)
+    charge_car.discharging_confirm_lifting(input)
     Tag(driver).closeTagGtos('作业指令监控')
 
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('direct_liftin_process.yaml'))
-@allure.title('7、车辆出场')
 @allure.story('6.直提流程')
+@allure.title('7、车辆出场')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'06_DirectLiftingProcess', 'direct_liftin_process.yaml')))
 def testCar_Out(driver, input):
     """车辆出场"""
     menu = GtosMenu(driver)
     menu.select_level_Menu("道口管理,车辆出场")
     car_out = Car_Out(driver)
-    car_out.process_loading(input,config.boxNumberTwo)
+    car_out.input_values(input,config.boxNumberTwo)
+    car_out.retrieve()
+    car_out.confirm_out_loadingAndLifting()
     Tag(driver).closeTagGtos('车辆出场')
 
 

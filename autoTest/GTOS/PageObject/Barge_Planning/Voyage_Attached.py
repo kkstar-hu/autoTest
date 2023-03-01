@@ -35,12 +35,3 @@ class Voyage_Attached(BasePage):
         textInput.click('x',"//span[text()='保 存']")
         check.equal(self.get_text("xpath","//div[@role='alert']//h2"),"保存成功")
 
-
-    def process(self,input):
-        """
-        流程
-        """
-        self.input_values()
-        self.Retrieval()
-        self.close_alert('未找到相关航次挂靠港数据')
-        self.Add()
