@@ -33,12 +33,9 @@ class Stockpiling_Planning(BasePage):
         tablecheck = Gtos_table(self.driver,4)
         time.sleep(1)
         # tablecheck.tick_off_box(2)
-        if self.elementExist('x',"//input[@aria-label='Press Space to toggle row selection (checked)']") is False:
-            tablecheck.tick_off_box(int(tablecheck.get_row('20自动化')) + 1)
-        # if number == config.outportNumber:
-        #     tablecheck.tick_off_box(2)
-        # if number == config.importNumber:
-        #     tablecheck.tick_off_box(11)
+        # if self.elementExist('x',"//input[@aria-label='Press Space to toggle row selection (checked)']") is False:
+        #     tablecheck.tick_off_box(int(tablecheck.get_row('20自动化')) + 1)
+        tablecheck.check2("箱子分组条件", "20自动化")
         tablecheck.click('x',"//span[text()='生成堆存计划']")
         self.check_alert('生成堆存计划成功')
         self.close_alert('生成堆存计划成功')
@@ -56,15 +53,6 @@ class Stockpiling_Planning(BasePage):
         time.sleep(1)
         textInput = Gtos_text(self.driver)
         textInput.input_noclear_placeholder_click('请选择','C1')
-        # self.refresh()
-        # self.search("道口进",config.outportNumber)
-        # tablecheck.tick_off_box(1)
-        # self.click('x',"(//span[text()='新增'])[3]")
-        # time.sleep(1)
-        # self.click('x',"(//span[text()='新增'])[4]")
-        # time.sleep(1)
-        # textInput = Gtos_text(self.driver)
-        # textInput.input_noclear_placeholder_click('请选择','C1')
         time.sleep(0.5)
         textInput.click('x',"//span[text()='保存']")
         self.check_alert('新增成功')

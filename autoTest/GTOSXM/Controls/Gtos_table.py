@@ -53,6 +53,13 @@ class Gtos_table(BasePage):
         except:
             raise Exception("定位不到元素")
 
+    def left_select(self,header):
+        try:
+            e1 = self.get_element("xpath",f"(//div[@class='ag-pinned-left-cols-container'])[{self.index}]//div//div[contains(text(),'{header}')]")
+            ActionChains(self.driver).click(e1).perform()
+        except:
+            raise Exception("定位不到元素")
+
     #列表中选择行传入表头和值，会分页查找，存在右侧箭头
     def select_row2(self, header, value):
         try:
@@ -124,7 +131,7 @@ class Gtos_table(BasePage):
         self.element_wait('xpath',f"(//div[@class='ag-center-cols-clipper'])[{self.index}]//div[@row-index='{row-1}']//input[@aria-label='Press Space to toggle row selection (checked)']")
 
     def get_row(self,name):
-        row_index = self.get_attribute_info('x',f"(//div[@class='ag-center-cols-clipper'])[4]//span[text()='{name}']/parent::span/parent::span/parent::div/parent::div/parent::div","row-index")
+        row_index = self.get_attribute_info('x',f"(//div[@class='ag-center-cols-clipper'])[{self.index}]//span[text()='{name}']/parent::span/parent::span/parent::div/parent::div/parent::div","row-index")
         return row_index
 
 
