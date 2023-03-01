@@ -64,5 +64,5 @@ class Bulk_cargo_into_storageConfirm(BasePage):
         check.equal(tableCheck.get_value("入库体积"), input['入库体积'])
         check.equal(tableCheck.get_value("入库重量(kg)"), input['入库重量(kg)'])
         check.equal(tableCheck.get_value("入库位置"), input['入库位置1']+input['入库位置2'])
-        check.less(DataTime.get_dif_time(tableCheck.get_value("登记时间"), createTime), 300)
+        check.less(DataTime.get_dif_time(createTime,tableCheck.get_value("登记时间")), 100)
         check.equal(tableCheck.get_value("登记人"), config.createName)

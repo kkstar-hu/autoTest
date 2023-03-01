@@ -62,5 +62,5 @@ class Bulk_cargo_out_storageConfirm(BasePage):
         check.equal(tableCheck.get_value("出库件数"), str(int(input['出库件数']) // 2))
         check.equal(tableCheck.get_value("出库体积"), str(int(input['出库体积']) // 2))
         check.equal(tableCheck.get_value("出库重量(kg)"), str(int(input['出库重量(kg)']) // 2))
-        check.less(DataTime.get_dif_time(tableCheck.get_value("登记时间"), createTime), 300)
+        check.less(DataTime.get_dif_time(createTime,tableCheck.get_value("登记时间")), 100)
         check.equal(tableCheck.get_value("登记人"), config.createName)

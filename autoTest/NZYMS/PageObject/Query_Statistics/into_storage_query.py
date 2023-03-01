@@ -1,4 +1,4 @@
-from pytest_check import check
+import pytest_check as check
 
 from Base.basepage import BasePage
 from Commons.Controls.table import Table

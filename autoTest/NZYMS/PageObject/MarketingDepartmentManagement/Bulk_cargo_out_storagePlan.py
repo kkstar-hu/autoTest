@@ -66,7 +66,7 @@ class Bulk_cargo_out_storagePlan(BasePage):
         check.equal(tableCheck1.get_value("联系人"), input['联系人'])
         check.equal(tableCheck1.get_value("联系电话"), input['联系电话'])
         check.equal(tableCheck1.get_value("备注"), input['备注'])
-        check.less(DataTime.get_dif_time(tableCheck1.get_value("创建时间"), createTime), 300)
+        check.less(DataTime.get_dif_time(createTime,tableCheck1.get_value("创建时间")), 300)
         check.equal(tableCheck1.get_value("创建人"), config.createName)
 
     def addBox(self,input):
@@ -130,7 +130,7 @@ class Bulk_cargo_out_storagePlan(BasePage):
         tableCheck = Table(self.driver,6)
         self.logger.info('check2：验证添加后列表的值正确')
         check.equal(tableCheck.get_value("车牌号"), input['车牌']+input['车号'])
-        check.less(DataTime.get_dif_time(tableCheck.get_value("创建时间"), createTime), 300)
+        check.less(DataTime.get_dif_time(createTime,tableCheck.get_value("创建时间")), 100)
         check.equal(tableCheck.get_value("创建人"), config.createName)
 
 

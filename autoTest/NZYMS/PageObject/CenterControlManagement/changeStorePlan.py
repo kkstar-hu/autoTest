@@ -36,8 +36,8 @@ class ChangeStorePlan(BasePage):
         check.equal(tableCheck.get_value("目标位置"),input['目标位置箱区']+"-"+input['目标位置倍位号'])
         check.equal(tableCheck.get_value("备注"),input['备注'])
         check.equal(tableCheck.get_value("计划状态"), "执行")
-        check.less(DataTime.get_dif_time(tableCheck.get_value("创建时间"), createTime), 300)
-        check.less(DataTime.get_dif_time(tableCheck.get_value("录入时间"),createTime),300)
+        check.less(DataTime.get_dif_time(createTime,tableCheck.get_value("创建时间")), 100)
+        check.less(DataTime.get_dif_time(createTime,tableCheck.get_value("录入时间")),100)
         check.equal(tableCheck.get_value("录入人"), config.createName)
         check.equal(tableCheck.get_value("创建人"), config.createName)
 

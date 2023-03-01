@@ -67,7 +67,7 @@ class Check_Plan(BasePage):
             check.equal(tableCheck.get_value("备注"), input['备注'])
             check.equal(tableCheck.get_value("联系电话"), input['联系电话'])
             check.equal(tableCheck.get_value("联系人"), input['联系人'])
-            check.less(DataTime.get_dif_time(tableCheck.get_value("创建时间"), createTime), 300)
+            check.less(DataTime.get_dif_time(createTime,tableCheck.get_value("创建时间")), 100)
             check.equal(tableCheck.get_value("创建人"), config.createName)
 
     def addWorkOrder(self, input, boxNumber):

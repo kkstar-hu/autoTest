@@ -48,7 +48,7 @@ class Packing_Plan(BasePage):
         tableCheck1 = Table(self.driver)
         check.is_in(tableCheck1.get_value("堆场"), input['堆场'])
         check.equal(tableCheck1.get_value("备注"), input['备注'])
-        check.less(DataTime.get_dif_time(tableCheck1.get_value("创建时间"), createTime), 300)
+        check.less(DataTime.get_dif_time(createTime,tableCheck1.get_value("创建时间")), 100)
         check.equal(tableCheck1.get_value("创建人"), config.createName)
 
 
@@ -170,7 +170,7 @@ class Packing_Plan(BasePage):
         check.equal(tableCheck.get_value("计划体积"), input['体积'])
         check.equal(tableCheck.get_value("计划重量(kg)"), input['重量(kg)'])
         check.equal(tableCheck.get_value("车牌号"), input['车牌']+input['车号'])
-        check.less(DataTime.get_dif_time(tableCheck.get_value("创建时间"), createTime), 300)
+        check.less(DataTime.get_dif_time(createTime,tableCheck.get_value("创建时间")), 300)
         check.equal(tableCheck.get_value("创建人"), config.createName)
 
     def addGoods_warehouse(self, input):

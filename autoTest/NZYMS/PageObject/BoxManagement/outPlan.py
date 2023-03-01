@@ -67,7 +67,7 @@ class Out_Plan(BasePage):
         check.is_in(tableCheck1.get_value("去向地"), input['去向地'])
         check.equal(tableCheck1.get_value("备注"), input['备注'])
         check.is_in(tableCheck1.get_value("委托送港类型"), input['委托送港类型'])
-        check.less(DataTime.get_dif_time(tableCheck1.get_value("创建时间"),createTime),300)
+        check.less(DataTime.get_dif_time(createTime,tableCheck1.get_value("创建时间")),100)
         check.equal(tableCheck1.get_value("创建人"), config.createName)
 
 
