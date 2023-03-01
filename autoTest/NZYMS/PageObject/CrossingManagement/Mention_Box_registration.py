@@ -30,7 +30,7 @@ class Mention_Box_registration(BasePage):
         """
         self.logger.info('提箱计划:输入已有计划的箱号')
         textInput = text(self.driver)
-        textInput.input_by_number("箱号", config.boxNumberOutPlan)
+        textInput.input_by_number("箱号", config.boxNumber)
         self.get_element('xpath', '//input[@placeholder="请输入箱号"]').send_keys(Keys.ENTER)
         if input['车牌'] is not None:
             textInput.select_by_label("车牌", input['车牌'])
