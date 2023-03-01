@@ -82,7 +82,7 @@ class Out_Plan(BasePage):
         textInput = text(self.driver)
         textInput.get_elements('xpath', f'//input[@placeholder="请选择"]')[4].click()
         textInput.get_elements('xpath', f"//div[@class='el-scrollbar']//span[text()='{input['堆场']}']")[1].click()
-        textInput.input_by_placeholder("请输入箱号", config.boxNumberOutPlan)
+        textInput.input_by_placeholder("请输入箱号", config.boxNumber)
         self.click_by_index("xpath", "(//button//span[text()='检索'])",1)
         tableCheck = ELtable(self.driver)
         row = self.rows()
@@ -90,7 +90,7 @@ class Out_Plan(BasePage):
         check.is_in(tableCheck.get_value("结算主体",row), input['结算主体'])
         check.is_in(tableCheck.get_value("进场作业类型",row), input['进场作业类型'])
         check.is_in(tableCheck.get_value("堆场",row), input['堆场'])
-        check.equal(tableCheck.get_value("箱号",row), config.boxNumberOutPlan)
+        check.equal(tableCheck.get_value("箱号",row), config.boxNumber)
         check.equal(tableCheck.get_value("尺寸",row), input['尺寸'])
         check.equal(tableCheck.get_value("箱型",row), input['箱型'])
         check.equal(tableCheck.get_value("箱高",row), input['箱高'])
@@ -113,7 +113,7 @@ class Out_Plan(BasePage):
             att = (tr.text).split("\n")
             pax.append(att)
         for i in pax:
-            if config.boxNumberOutPlan in i:
+            if config.boxNumber in i:
                 return i[1]
 
 
@@ -138,7 +138,7 @@ class Out_Plan(BasePage):
             self.logger.info('check1：月票确定后自动执行，计划状态变执行状态')
             time.sleep(1)
             check.equal(tableCheck.get_value("计划状态"), "执行")
-        elif value_text == f'箱号[{config.boxNumberOutPlan}]为转栈箱且未输入出码头时间！':
+        elif value_text == f'箱号[{config.boxNumber}]为转栈箱且未输入出码头时间！':
             self.logger.info('出场计划：设置出场码头时间')
             textInput.click('xpath',"//div[@class='toscom-buttongroup']//div[@id='time']")
             textInput.click('xpath',"//div[@class='vxe-modal--box']//input[@placeholder='选择日期时间']")

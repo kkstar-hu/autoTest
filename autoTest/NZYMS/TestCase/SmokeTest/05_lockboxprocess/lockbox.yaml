@@ -5,7 +5,7 @@
   alert: 加锁成功
   unlockalert: 解锁成功
   箱号: config.boxNumber
-  尺寸: "10"
+  尺寸: "20"
   箱型: GP
   箱高: "8"
   持箱人: HLYS/上海港城危险品物流
