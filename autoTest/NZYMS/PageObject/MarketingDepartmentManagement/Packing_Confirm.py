@@ -54,6 +54,7 @@ class Packing_Confirm(BasePage):
         tableinput.input_by_rowid(rowid,"装箱件数",input["装箱件数"])
         tableinput.input_by_rowid(rowid, "装箱体积", input["装箱体积"])
         tableinput.input_by_rowid(rowid, "装箱重量", input["装箱重量"])
+        time.sleep(1)
         rowid2 = table.select_row("仓库", input["车牌"]+input["车号"])
         tableinput.input_by_rowid(rowid2, "装箱件数", input["装箱件数1"])
         tableinput.input_by_rowid(rowid2, "装箱体积", input["装箱体积1"])

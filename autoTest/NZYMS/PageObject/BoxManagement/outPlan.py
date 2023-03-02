@@ -39,8 +39,8 @@ class Out_Plan(BasePage):
             #textInput.special_input("结算客户", "SHA", "SHANGJ/上海禾旭货运代理")#收费页面
             if input["委托送港类型"] != None:
                 textInput.select_by_label("委托送港类型",input['委托送港类型'])
-            self.get_elements('xpath',f'//input[@placeholder="请选择"]')[6].click()
-            self.get_elements('xpath', f"//div[@class='el-scrollbar']//span[text()='{input['目标堆场']}']")[2].click()
+            #self.get_elements('xpath',f'//input[@placeholder="请选择"]')[6].click()
+            #self.get_elements('xpath', f"//div[@class='el-scrollbar']//span[text()='{input['目标堆场']}']")[2].click()
             if input["流向"] != None:
                 textInput.select_by_label("流向", input['流向'])
             if input["去向地"] != None:
