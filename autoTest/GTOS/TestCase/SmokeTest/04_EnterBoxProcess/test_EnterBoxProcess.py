@@ -29,7 +29,7 @@ from GTOS.PageObject.gtos_menu import GtosMenu
 
 
 # @pytest.mark.skipif
-@allure.story('4.生成进箱计划')
+@allure.story('4.新增进箱计划')
 @allure.title('1、新增进箱计划')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'04_EnterBoxProcess', 'inboxplan.yaml')))
 def testAddPlan(driver,input):
