@@ -21,28 +21,6 @@ class Inset_Car(BasePage):
         textable = Gtos_table(self.driver, 3)
         textable.left_select(name)
 
-    def choice_car(self):
-        '''
-        选择可用集卡号
-        '''
-        list1 = []
-        row = []
-        value = self.get_element('x',"(//div[@class='ag-center-cols-container'])[2]")
-        value_text = list(value.get_attribute('textContent').split('Q002'))
-        del value_text[0]
-        # print(value_text)
-        for i in value_text:
-            if '等待装车' in i:
-                row.append(value_text.index(i))
-        # print(row)
-        car_value = self.get_element('x',"(//div[@class='ag-pinned-left-cols-container'])[2]")
-        car_text = car_value.get_attribute('textContent').replace(' ','').split('\n')
-        for i in car_text:
-            if len(i) >= 2:
-                list1.append(i[0:4])
-        # print(list1)
-        # print(list1[row[0]])
-        config.carnumber = list1[row[1]]
 
 
     def choice_cars(self,job,value):

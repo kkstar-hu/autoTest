@@ -32,8 +32,6 @@ def testImmediatePlan(driver,input):
     Tag(driver).closeTagGtos('近期计划')
 
 # @pytest.mark.skipif
-
-
 @allure.story('1.驳船流程功能准备')
 @allure.title('2、桥吊资源分配')
 @pytest.mark.parametrize("input",read_yaml(os.path.join(os.getcwd(),'01_DataProcess','immediata_plan.yaml')))

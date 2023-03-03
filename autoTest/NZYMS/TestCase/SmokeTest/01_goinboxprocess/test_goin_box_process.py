@@ -14,7 +14,7 @@ from NZYMS.PageObject.CrossingManagement.storePlan import StorePlan
 import pytest as pytest
 
 
-#@pytest.mark.skip
+# @pytest.mark.skip
 @allure.story('1.进箱计划流程')
 @allure.title('1.新增进箱计划')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'01_goinboxprocess','goInPlan_BoxNumber.yaml')))
@@ -24,7 +24,7 @@ def testAddGoInPlan_BoxNumber(driver, input):
     goInPlan=GoInPlan_BoxNumber(driver)
     goInPlan.addPlan(input)
 
-#@pytest.mark.skip
+# @pytest.mark.skip
 @allure.title('2.新增计划箱和箱信息')
 @allure.story('1.进箱计划流程')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'01_goinboxprocess','boxPlan.yaml')))
