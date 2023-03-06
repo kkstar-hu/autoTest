@@ -68,7 +68,7 @@ class Car_Load(BasePage):
                 self.click('xpath', f"(//div[@class='main']//div[text()=' {boxNumber} '])[{index}]")
                 break
         self.waitloading()
-        time.sleep(1)
+        time.sleep(0.3)
 
 
     #转推箱
