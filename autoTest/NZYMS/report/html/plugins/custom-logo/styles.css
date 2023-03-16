@@ -1,9 +1,0 @@
-.side-nav__brand {
-  background: url('331.png') no-repeat left center !important;
-  margin-left: 10px;
-  height: 100px;
-  background-size: contain !important;
-}
-.side-nav__brand span{
-  display: none;
-}
