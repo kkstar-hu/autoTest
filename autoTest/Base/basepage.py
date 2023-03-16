@@ -66,7 +66,7 @@ class BasePage:
             elements = self.driver.find_elements(By.CSS_SELECTOR, value=selector_value)
         else:
             return None
-        time.sleep(0.3)
+        time.sleep(0.2)
         return elements
 
     # 输入内容带清除
