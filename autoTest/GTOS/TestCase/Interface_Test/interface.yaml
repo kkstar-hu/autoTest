@@ -1,0 +1,14 @@
+#新建舱单
+- 舱单url : http://10.166.0.155/apserver/api/generic/portal?nameSpace=SHB.Cloud.TOS.DMS.Contract.Manifest&className=IManifest&methodName=AddMFTGoodsList
+  #发箱
+  发箱url : http://10.166.0.155/apserver/api/generic/portal?nameSpace=SHB.Cloud.TOS.DMS.Contract.Manifest&className=IManifest&methodName=CopyMFTToVPCCore
+  #有结构配载
+  配载url : http://10.166.0.155/apserver/api/vesselload/Stowage
+  #有结构作业顺序
+  作业顺序url : http://10.166.0.155/apserver/api/cranework/workunit/setorderbylocation
+  #有结构作业发箱
+  作业发箱rul : http://10.166.0.155/apserver/api/vms/BargeOperation/SendContainer
+  #有结构监控发箱
+  监控url : http://10.166.0.155/apserver/api/generic/portal?nameSpace=SHB.Cloud.TOS.DMS.Contract.Query&className=IQuery&methodName=GetStowagePlanContainers
+  #查箱号
+  箱号url : http://10.166.0.155/apserver/api/generic/portal?nameSpace=SHB.Cloud.TOS.DMS.Contract.Query&className=IQuery&methodName=QueryCtnInOutHistories

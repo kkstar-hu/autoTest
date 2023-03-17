@@ -69,4 +69,5 @@ class Manifest(BasePage):
             self.click('xpath', "//i[@class='el-dialog__close el-icon el-icon-close']")
             check.equal(tablecheck.get_value('放行'), '放行')
             check.equal(tablecheck1.get_value('放行'), '放行')
+            time.sleep(0.5)
             Tag(self.driver).closeTagGtos('装船箱放行')

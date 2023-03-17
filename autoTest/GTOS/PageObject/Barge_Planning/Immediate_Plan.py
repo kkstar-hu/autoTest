@@ -53,15 +53,15 @@ class Immediate_plan(BasePage):
         textInput.click('x',"//span[contains(text(),'保 存')]")
         check.equal(self.get_text("xpath", "//div[@role='alert']//h2"), "添加成功")
 
-    def checkPlan(self):
+    def checkPlan(self,number):
         self.click('x', "//span[text()='检索']")
-        tablecheck = Gtos_table(self.driver, 2)
+        tablecheck = Gtos_table(self.driver, number)
         rowid=tablecheck.select_row("进口航次",config.importNumber)
         self.logger.info('进口航次号为：'+tablecheck.get_value_by_rowid(rowid,'进口航次'))
         self.logger.info('出口航次号为：'+tablecheck.get_value_by_rowid(rowid,'出口航次'))
         check.equal(tablecheck.get_value_by_rowid(rowid,'船期状态'), '预报')
         check.equal(tablecheck.get_value_by_rowid(rowid, '靠泊状态'), '未靠')
-    def Sure_ShipPlan(self):
+    def Sure_ShipPlan(self,number):
         self.logger.info('近期计划-确保船期')
         textInput = Gtos_text(self.driver)
         # textInput.search_select_by_label('船名航次',config.outportNumber)
@@ -73,7 +73,7 @@ class Immediate_plan(BasePage):
         self.click('xpath', "//span[contains(text(),'确定')]")
         self.click('x', "//span[text()='保 存']")
         check.equal(self.get_text("xpath", "//div[@role='alert']//h2"), "保存成功")
-        tablecheck = Gtos_table(self.driver, 2)
+        tablecheck = Gtos_table(self.driver, number)
         check.equal(tablecheck.get_value('船期状态'), '确报')
         check.equal(tablecheck.get_value('确报时间'), actuallarriveTime)
 
