@@ -1,6 +1,5 @@
 # -*- coding:utf-8 -*-
 import time
-
 from selenium.common.exceptions import *
 from selenium.webdriver import ActionChains
 

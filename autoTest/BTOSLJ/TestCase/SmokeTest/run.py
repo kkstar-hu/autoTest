@@ -9,7 +9,7 @@ if __name__ == '__main__':
     #pytest.main(['-sv','--alluredir', '../report/result', "--clean-alluredir"])
 
 
-    pytest.main(['-sv', '01_ShipSchedule/test_AddShipSchedule.py',
+    pytest.main(['-sv', 'test_01_AddShipSchedule.py',
                  '--alluredir', '../../Report/result', "--clean-alluredir"])
 
     #urllib3.disable_warnings()

@@ -142,7 +142,7 @@ class BasePage:
             print("查找元素超时请检查元素")
 
         # 显示等待
-    def get_element_wait(self, by, value, index=0, secs=5):
+    def get_element_wait(self, by, value, secs=5):
         """
         等待元素显示
         """
@@ -165,7 +165,7 @@ class BasePage:
         except TimeoutException:
             print("查找元素超时请检查元素")
         else:
-            return self.get_elements(by, value)[index]
+            return self.get_element(by, value)
 
     def element_wait_disappear(self, by, value, secs=5):
         """
