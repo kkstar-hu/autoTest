@@ -40,7 +40,7 @@ class BasePage:
             w_element = self.driver.find_element(By.CSS_SELECTOR, value=selector_value)
         else:
             return None
-        time.sleep(0.3)
+        time.sleep(0.2)
         return w_element
 
 
