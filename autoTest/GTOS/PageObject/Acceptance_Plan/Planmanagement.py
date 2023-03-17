@@ -1,4 +1,5 @@
 from Base.basepage import BasePage
+from GTOS.Controls.Gtos_table import Gtos_table
 from GTOS.Controls.text import Gtos_text
 from GTOS.Config import config
 
@@ -23,7 +24,10 @@ class PlanManagement(BasePage):
         """
         self.logger.info('计划管理-查看计划')
         self.click('xpath',"//div//span[text()='查看计划']")
-        self.get_tr_value()
+        table = Gtos_table(self.driver)
+        config.Number = table.plan_get_value('箱预约号')
+        print(config.Number)
+        # self.get_tr_value()
 
     def get_tr_value(self):
         """
@@ -46,10 +50,13 @@ class PlanManagement(BasePage):
             pax_name.append(att.split(','))
             for i in pax_name:
                 j = i[:11]
+                print(j)
                 k = i[11:]
+                print(k)
                 a = dict(zip(j,k))
-                config.Number = a['箱预约号']
-                return config.Number
+        print(a)
+                # config.Number = a['箱预约号']
+                # return config.Number
 
 
     def process(self,boxnumber):

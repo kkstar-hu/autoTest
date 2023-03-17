@@ -70,7 +70,7 @@ class CheckInBox(BasePage):
         self.click("id", "TContainerNoMiddle")
 
     def addgoodsinfo(self,input, takeNumber):
-        self.logger.info('办理进箱手续-新增箱货信息')
+        self.logger.info('办理进箱手续-新增箱货信息:'+config.outportNumber)
         self.click("x", "//span[text()='新增货']")
         self.waitloading()
         try:

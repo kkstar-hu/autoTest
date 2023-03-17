@@ -48,25 +48,22 @@ class Manifest(BasePage):
             self.close()
             self.check_alert('新增成功')
             self.logger.info('舱单-新增舱单后校验字段')
-            row = self.rows_value(boxnumber)
             tablecheck = Gtos_table(self.driver)
-            tablecheck.tick_off_box(row)
-            em = self.get_element('xpath',f"//div[text()='{boxnumber}']")
-            ActionChains(self.driver).move_to_element(em).click().perform()
-            check.equal(tablecheck.get_value('提单号',row), boxnumber)
-            self.logger.info('本次箱号:'+ tablecheck.get_value('提单号',row)+'!!!!!!!!!!!!!!!!!')
-            check.equal(tablecheck.get_value('总箱数',row), '0')
-            check.equal(tablecheck.get_value('货主',row), input['货主'])
-            check.equal(tablecheck.get_value('货代',row), input['货代'])
-            check.equal(tablecheck.get_value('装货港',row), input['装货港'])
-            check.equal(tablecheck.get_value('卸货港',row), input['卸货港'])
-            check.equal(tablecheck.get_value('目的港',row), input['目的港'])
-            check.equal(tablecheck.get_value('交付方式',row), input['交付方式'])
-            check.equal(tablecheck.get_value('货类',row), input['货类'])
-            check.equal(tablecheck.get_value('货名',row), input['货名'])
-            check.equal(tablecheck.get_value('唛头',row), input['唛头'])
-            check.equal(tablecheck.get_value('发货人',row), input['发货人'])
-            check.equal(tablecheck.get_value('通知人',row), input['通知人'])
+            tablecheck.check('提单号',boxnumber)
+            rowid = tablecheck.select_row('提单号', boxnumber)
+            self.logger.info('本次箱号:'+ tablecheck.get_value_by_rowid(rowid,'提单号')+'!!!!!!!!!!!!!!!!!')
+            check.equal(tablecheck.get_value_by_rowid(rowid,'总箱数'), '0')
+            check.equal(tablecheck.get_value_by_rowid(rowid,'货主'), input['货主'])
+            check.equal(tablecheck.get_value_by_rowid(rowid,'货代'), input['货代'])
+            check.equal(tablecheck.get_value_by_rowid(rowid,'装货港'), input['装货港'])
+            check.equal(tablecheck.get_value_by_rowid(rowid,'卸货港'), input['卸货港'])
+            check.equal(tablecheck.get_value_by_rowid(rowid,'目的港'), input['目的港'])
+            check.equal(tablecheck.get_value_by_rowid(rowid,'交付方式'), input['交付方式'])
+            check.equal(tablecheck.get_value_by_rowid(rowid,'货类'), input['货类'])
+            check.equal(tablecheck.get_value_by_rowid(rowid,'货名'), input['货名'])
+            check.equal(tablecheck.get_value_by_rowid(rowid,'唛头'), input['唛头'])
+            check.equal(tablecheck.get_value_by_rowid(rowid,'发货人'), input['发货人'])
+            check.equal(tablecheck.get_value_by_rowid(rowid,'通知人'), input['通知人'])
             time.sleep(1)
             # check.equal(tablecheck.get_value('总件数',row), '1')
             # check.equal(tablecheck.get_value('总重量',row), '10000')
@@ -135,61 +132,3 @@ class Manifest(BasePage):
 
 
 
-    def rows_name(self,index=1):
-        """
-        获取内容，用于check
-        """
-        pax_name = []
-        att = []
-        a = []
-        # 通过标签名获取表格的所有行
-        table_name = self.get_elements('xpath',f"(//div[@class='ag-header-row ag-header-row-column'])[{index}]//div[@class='ag-header-cell-label']//span[@ref='eText']")
-        #  按行查询表格的数据，取出的数据是一整行，按,分隔每一列的数据
-        for tr in table_name:
-            # print(tr.text)     获取文本
-            # print(tr.get_attribute('outerHTML'))   获取当前元素源代码
-            # print(tr.is_displayed())      判断元素文本是不是被隐藏了
-            # print(tr.get_attribute('attributeName'))
-            # print(tr.get_attribute('textContent'))           获取隐藏的文本信息
-            # print(tr.get_attribute('innerText'))          获取隐藏的文本信息
-            att = (tr.get_attribute('textContent')).split("\n")
-            pax_name.append(att)
-        a = sum(pax_name,[])  #将 嵌套的列表合并成一个列表
-        return a
-
-    def rows_value(self,boxnumber,index=1):
-        """
-        获取内容，用于check
-        """
-        pax_value = []
-        att = []
-        a = []
-        b= []
-        # 通过标签名获取表格的所有行
-        table_value = self.get_elements('xpath',f"(//div[@class='ag-center-cols-viewport'])[{index}]//div[@role='gridcell']")
-        #  按行查询表格的数据，取出的数据是一整行，按,分隔每一列的数据
-        for tr in table_value:
-            # print(tr.text)     获取文本
-            # print(tr.get_attribute('outerHTML'))   获取当前元素源代码
-            # print(tr.is_displayed())      判断元素文本是不是被隐藏了
-            # print(tr.get_attribute('attributeName'))
-            # print(tr.get_attribute('textContent'))           获取隐藏的文本信息
-            # print(tr.get_attribute('innerText'))          获取隐藏的文本信息
-            att = (tr.get_attribute('textContent')).split("\n")
-            pax_value.append(att)
-
-        for i in pax_value:
-            if len(i) == 1:
-                b.append(i)
-                a = sum(b,[])
-        for y in a :
-            if y == boxnumber:
-                row = a[a.index(y)-1]
-                return int(row)
-        #return a  返回所有数据
-
-    def table_information(self,name_index,value_index):
-        a = self.rows_name(name_index)
-        b = self.rows_value(value_index)
-        c = dict(zip(a,b))
-        return c
