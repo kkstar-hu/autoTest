@@ -40,6 +40,7 @@ class Table(BasePage):
             return self.get_text("xpath",
                                  f"(//table[@class='vxe-table--body'])[{self.index}]//tr[@rowid='{rowid}']/td[@colid='" + colid + "']//span")
         except NoSuchElementException:
+            self.logger.error(f"定位不到列表头:{header}和rowid={rowid}")
             raise Exception("定位不到元素")
 
 #   获取最后一行的单元格的值

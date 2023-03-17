@@ -46,7 +46,7 @@ class LockBox(BasePage):
             tablecheck.down_arrow_sort("锁箱时间")
             check.equal(tablecheck.get_value("是否高级锁"), "否")
             check.equal(tablecheck.get_value("锁箱人"), config.createName)
-            check.less(DataTime.get_dif_time(tablecheck.get_value("锁箱时间"), createTime), 300)
+            check.less(DataTime.get_dif_time(createTime,tablecheck.get_value("锁箱时间")), 300)
             check.equal(tablecheck.get_value("锁箱备注"), input["锁定原因"])
 
 
@@ -81,7 +81,7 @@ class LockBox(BasePage):
         createTime = DataTime.GetTime()
         if input["unlockalert"] == "解锁成功":
             check.equal(tablecheck.get_last_row_value("解锁人"), config.createName)
-            check.less(DataTime.get_dif_time(tablecheck.get_value("解锁时间"), createTime), 300)
+            check.less(createTime,DataTime.get_dif_time(tablecheck.get_value("解锁时间")), 300)
 
 
 

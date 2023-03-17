@@ -1,10 +1,6 @@
-import time
-
 from selenium.common import NoSuchElementException
 from selenium.webdriver import ActionChains
-
 from Base.basepage import BasePage
-from Commons.Controls.text import text
 
 
 class Gtos_text(BasePage):
@@ -14,6 +10,7 @@ class Gtos_text(BasePage):
             self.click("xpath",
                        f"//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]//span[contains(text(),'{value}')]")
         except NoSuchElementException:
+            self.logger.error(f"定位不到下拉控件标签名:{label}和值{value}")
             raise Exception("定位不到元素")
 
     def input_noclear_placeholder_click(self, name, value,index = 1):
@@ -22,8 +19,8 @@ class Gtos_text(BasePage):
             self.click("xpath",
                        f"//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]//span[contains(text(),'{value}')]")
         except NoSuchElementException:
+            self.logger.error(f"定位不到控件placeholder:{name}和值{value}")
             raise Exception("定位不到元素")
-
 
     #无type元素操作
     def no_elements_click(self,name,index=1):
@@ -34,33 +31,31 @@ class Gtos_text(BasePage):
         try:
             self.input("xpath",f"//label[contains(text(),'{label}')]//following-sibling::div//input",value)
         except NoSuchElementException:
+            self.logger.error(f"定位不到单行文本控件标签名:{label}和值{value}")
             raise Exception("定位不到元素")
-
-    #精确查找label
-    def input_by_label_exact(self,label,value):
-        try:
-            self.input("xpath",f"//label[text()='{label}']//following-sibling::div//input",value)
-        except NoSuchElementException:
-            raise Exception("定位不到元素")
-
 
     #name:输入单行文本款的显示信息
     def input_by_placeholder(self, name, value):
         try:
             self.input("xpath",f"//input[@placeholder='{name}']",value)
         except NoSuchElementException:
+            self.logger.error(f"定位不到单行文本控件placeholder:{name}和值{value}")
             raise Exception("定位不到元素")
 
     def input_by_number(self, label, value,index=1):
         try:
             self.input_by_index("xpath",f"//label[contains(text(),'{label}')]//following-sibling::div//input",value,index)
         except NoSuchElementException:
+            self.logger.error(f"定位不到单行文本控件标签名:{label}和值{value}")
             raise Exception("定位不到元素")
 
     #获取单行文本的值
     def get_text_value(self,label,index=1):
-        return self.get_text_index("xpath",f"//label[contains(text(),'{label}')]//following-sibling::div//input",index)
-
+        try:
+            return self.get_text_index("xpath",f"//label[contains(text(),'{label}')]//following-sibling::div//input",index)
+        except NoSuchElementException:
+            self.logger.error(f"获取值定位不到标签名:{label}")
+            raise Exception("定位不到元素")
     def text_isenable(self,label,index=0):
         return self.get_enable("xpath",f"//label[contains(text(),'{label}')]//following-sibling::div//input",index)
 
@@ -69,6 +64,7 @@ class Gtos_text(BasePage):
             self.click("xpath",f"//label[contains(text(),'{label}')]//following-sibling::div//input")
             self.click("xpath",f"//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]//span[text()='{value}']")
         except NoSuchElementException:
+            self.logger.error(f"定位不到下拉控件标签名:{label}和值{value}")
             raise Exception("定位不到元素")
 
     def multi_select_by_label(self, label, value):
@@ -78,21 +74,16 @@ class Gtos_text(BasePage):
                 self.click("xpath",
                            f"//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]//span[text()='{x}']")
         except NoSuchElementException:
+            self.logger.error(f"定位不到多选下拉控件标签名:{label}和值{value}")
             raise Exception("定位不到元素")
 
-    def select_by_label_time(self, label, value):
-        try:
-            self.click("xpath",f"//label[contains(text(),'{label}')]//following-sibling::div//input")
-            time.sleep(0.5)
-            self.click("xpath",f"//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]//span[text()='{value}']")
-        except NoSuchElementException:
-            raise Exception("定位不到元素")
 
     def select_by_label_exact(self, label, value):
         try:
             self.click("xpath",f"//label[text()='{label}']//following-sibling::div//input")
             self.click("xpath",f"//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]//span[text()='{value}']")
         except NoSuchElementException:
+            self.logger.error(f"定位不到下拉控件标签名:{label}和值{value}")
             raise Exception("定位不到元素")
 
     def select_by_placeholder(self, name, value):
@@ -100,6 +91,7 @@ class Gtos_text(BasePage):
             self.click("xpath",f"//input[@placeholder='{name}']")
             self.click("xpath", f"//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]//span[text()='{value}']")
         except NoSuchElementException:
+            self.logger.error(f"定位不到下拉框控件placeholder:{name}和值{value}")
             raise Exception("定位不到元素")
 
     def select_by_placeholder_index(self,name,value,index=1):
@@ -107,6 +99,7 @@ class Gtos_text(BasePage):
             self.get_elements('xpath', f'//input[@placeholder="{name}"]')[index].click()
             self.click("xpath", f"//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]//span[text()='{value}']")
         except NoSuchElementException:
+            self.logger.error(f"定位不到下拉框控件placeholder:{name}和值{value}")
             raise Exception("定位不到元素")
         #新
 
@@ -115,15 +108,15 @@ class Gtos_text(BasePage):
             self.click_by_index("xpath", f"//label[contains(text(),'{label}')]//following-sibling::div//input",index)
             self.click("xpath", f"//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]//span[text()='{value}']")
         except NoSuchElementException:
+            self.logger.error(f"定位不到下拉框控件标签名:{label}和值{value}")
             raise Exception("定位不到元素")
-
 
     def select_clickOption(self, value):
         try:
             self.click("xpath", f"//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]//span[text()='{value}']")
         except NoSuchElementException:
+            self.logger.error(f"定位不到下拉框控件值:{value}")
             raise Exception("定位不到元素")
-
 
     #多行文本输入
     def textarea_by_label(self, label, value):
@@ -131,4 +124,5 @@ class Gtos_text(BasePage):
             self.input("xpath",
                        f"//label[contains(text(),'{label}')]//following-sibling::div//textarea",value)
         except NoSuchElementException:
+            self.logger.error(f"定位不到多行文本:{label}和值{value}")
             raise Exception("定位不到元素")

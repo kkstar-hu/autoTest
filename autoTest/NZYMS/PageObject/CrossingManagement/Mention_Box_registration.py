@@ -42,7 +42,7 @@ class Mention_Box_registration(BasePage):
         tableCheck=Table(self.driver,3)
         self.logger.info('check2：验证添加后列表的值正确')
         check.is_in(tableCheck.get_value('计划号',),config.outplanNumber)
-        check.equal(tableCheck.get_value("箱号"), config.boxNumberOutPlan)
+        check.equal(tableCheck.get_value("箱号"), config.boxNumber)
         tableCheck1 = Table(self.driver,2)
         check.is_in(tableCheck1.get_value("尺寸"), input['尺寸'])
         check.is_in(tableCheck1.get_value("箱型"), input['箱型'])
