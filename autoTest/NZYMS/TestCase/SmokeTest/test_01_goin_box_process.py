@@ -1,7 +1,5 @@
 import os
-
 import allure
-
 from Commons.Controls.tag import Tag
 from Commons.menu import Menu
 from Commons.yamlread import read_yaml
@@ -17,7 +15,8 @@ import pytest as pytest
 # @pytest.mark.skip
 @allure.story('1.进箱计划流程')
 @allure.title('1.新增进箱计划')
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'01_goinboxprocess','goInPlan_BoxNumber.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'01_goinboxprocess/goInPlan_BoxNumber.yaml')))
+#@pytest.mark.parametrize("input", read_yaml("../01_goinboxprocess/goInPlan_BoxNumber.yaml"))
 def testAddGoInPlan_BoxNumber(driver, input):
     menu=Menu(driver)
     menu.select_level_Menu("箱务管理,进场计划(按箱号)")
@@ -27,7 +26,7 @@ def testAddGoInPlan_BoxNumber(driver, input):
 # @pytest.mark.skip
 @allure.title('2.新增计划箱和箱信息')
 @allure.story('1.进箱计划流程')
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'01_goinboxprocess','boxPlan.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'01_goinboxprocess/boxPlan.yaml')))
 def testAddBox(driver, input):
     boxPlan = GoInPlan_BoxNumber(driver)
     boxPlan.addBoxPlan(input,config.boxNumber)
@@ -41,7 +40,7 @@ def testAddBox(driver, input):
 # @pytest.mark.skip
 @allure.title('3.添加堆存计划')
 @allure.story('1.进箱计划流程')
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'01_goinboxprocess','storePlan.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'01_goinboxprocess/storePlan.yaml')))
 def testAddStorePlan(driver, input):
     menu = Menu(driver)
     menu.select_level_Menu("中控管理,场内计划管理,堆存计划")
@@ -52,7 +51,7 @@ def testAddStorePlan(driver, input):
 # @pytest.mark.skip
 @allure.title('4.送箱进场登记')
 @allure.story('1.进箱计划流程')
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'01_goinboxprocess','Send_Bos_Plan.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'01_goinboxprocess/Send_Bos_Plan.yaml')))
 def testSend_Box_Plan(driver, input):
     """送箱进场登记有计划"""
     menu = Menu(driver)
@@ -68,7 +67,7 @@ def testSend_Box_Plan(driver, input):
 #@pytest.mark.skip
 @allure.title('5.车载落箱')
 @allure.story('1.进箱计划流程')
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'01_goinboxprocess','car_load.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'01_goinboxprocess/car_load.yaml')))
 def testSend_Box_Load(driver, input):
     """车载操作"""
     menu = Menu(driver)
@@ -87,7 +86,7 @@ def testSend_Box_Load(driver, input):
 
 @allure.title('6.车辆出场')
 @allure.story('1.进箱计划流程')
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'01_goinboxprocess','car_load.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'01_goinboxprocess/car_load.yaml')))
 def testSend_Box_Out_Confirm(driver, input):
     """车辆出场"""
     cls = driver.window_handles
@@ -100,10 +99,3 @@ def testSend_Box_Out_Confirm(driver, input):
     out_confirm.confirm_button()
     Tag(driver).closeTag("出场确认")
 
-
-
-
-if __name__ == '__main__':
-    pytest.main(['-vs'])
-    # pytest.main(['-s', '-v', 'test_goin_box_process.py','--html=../report/report.html', '--alluredir','../report/allure-results'])
-    # os.system('./report.html -o ./report/html --clean')

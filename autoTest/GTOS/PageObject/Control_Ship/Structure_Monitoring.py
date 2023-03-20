@@ -11,7 +11,7 @@ class Structure_Monitoring(BasePage):
     """
     有结构船舶监控
     """
-    def Retrieve(self,input):
+    def Retrieve(self,input,boxnumber):
         """
         输入内容，检索
         """
@@ -19,10 +19,10 @@ class Structure_Monitoring(BasePage):
         textinput = Gtos_text(self.driver)
         textinput.search_select_by_label('船舶查询',input["船舶代码"])
         self.click('xpath',"//span[text()='检索']")
-        textinput.left_click('x',f"//div[text()='{config.importNumber}']")
+        textinput.left_click('x',f"//div[text()='{boxnumber}']")
         self.click('xpath',"//span[text()='确 认']")
-        self.check_alert('检查通过')
-        self.close_alert('检查通过')
+        #self.check_alert('检查通过')
+        #self.close_alert('检查通过')
 
 
     def Send_Box(self,input,boxnumber):

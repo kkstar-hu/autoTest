@@ -14,7 +14,7 @@ from NZYMS.PageObject.CenterControlManagement.car_load import Car_Load
 #@pytest.mark.skip
 @allure.story('2.转堆流程')
 @allure.title('1.添加转堆计划')
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'02_changeStoreProcess','changeStorePlan.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'02_changeStoreProcess/changeStorePlan.yaml')))
 def testAddChangeStorePlan(driver, input):
     menu=Menu(driver)
     menu.select_level_Menu("中控管理,场内计划管理,转堆计划管理")
