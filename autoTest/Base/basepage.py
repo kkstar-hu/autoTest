@@ -141,6 +141,32 @@ class BasePage:
         except TimeoutException:
             print("查找元素超时请检查元素")
 
+        # 显示等待
+    def get_element_wait(self, by, value, secs=5):
+        """
+        等待元素显示
+        """
+        try:
+            if by == "id":
+                WebDriverWait(self.driver, secs, 1).until(EC.presence_of_element_located((By.ID, value)))
+            elif by == "name":
+                WebDriverWait(self.driver, secs, 1).until(EC.presence_of_element_located((By.NAME, value)))
+            elif by == "class":
+                WebDriverWait(self.driver, secs, 1).until(EC.presence_of_element_located((By.CLASS_NAME, value)))
+            elif by == "link_text":
+                WebDriverWait(self.driver, secs, 1).until(EC.presence_of_element_located((By.LINK_TEXT, value)))
+            elif by == "xpath":
+                WebDriverWait(self.driver, secs, 1).until(EC.presence_of_element_located((By.XPATH, value)))
+            elif by == "css":
+                WebDriverWait(self.driver, secs, 1).until(EC.presence_of_element_located((By.CSS_SELECTOR, value)))
+            else:
+                raise NoSuchElementException(
+                    "找不到元素，请检查语法或元素")
+        except TimeoutException:
+            print("查找元素超时请检查元素")
+        else:
+            return self.get_element(by, value)
+
     def element_wait_disappear(self, by, value, secs=5):
         """
         等待元素消失
@@ -203,7 +229,7 @@ class BasePage:
         用法:
         driver.get_text("css=>#el")
         """
-        el = self.get_element(by,selector)
+        el = self.get_element_wait(by,selector)
         return el.text
 
 
@@ -397,6 +423,7 @@ class BasePage:
         """
         e1 = self.get_element(by,selector)
         ActionChains(self.driver).move_to_element(e1).perform()
+
 
     def drag_mouse_to_element(self,by1,source,by2,target):
         """

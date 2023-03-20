@@ -33,3 +33,4 @@ class BtosMenu(BasePage):
         else:
             self.click("xpath","//span[not(@slot) and text()='"+name3+"']")
             time.sleep(0.5)
+
