@@ -410,8 +410,8 @@ class BasePage:
         """
         鼠标左键按住不放
         """
-        e1 = self.get_element(by, selector)
-        ActionChains(self.driver).click_and_hold(e1).perform()
+        el = self.get_element(by, selector)
+        ActionChains(self.driver).click_and_hold(el).perform()
 
     def move_by_xy(self, offsetx, offsety):
         """

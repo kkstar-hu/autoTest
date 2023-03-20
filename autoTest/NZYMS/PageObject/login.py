@@ -42,8 +42,7 @@ class Login(BasePage):
                     f.write(img2)
 
                 distance = get_distance() + 10  # 滑动距离
-                slide_element=self.get_element("xpath","/html/body/div[2]/div/div[2]/div/div[2]")
-                self.clickandhold(slide_element)
+                self.clickandhold("xpath","/html/body/div[2]/div/div[2]/div/div[2]")
                 self.move_by_xy(distance, 0)
                 self.move_release()  # 松开滑块
                 info = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, "/html/body/div[2]/div/div[1]/div[2]"))).text
