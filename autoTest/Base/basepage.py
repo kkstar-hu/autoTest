@@ -461,17 +461,6 @@ class BasePage:
         select_text = e1.get_attribute('text')
         return select_text
 
-    def get_select_values(self, selector):
-        """
-        获取下拉框的全部值
-        """
-        name_list = []
-        e1_all = Select(self.get_element(selector)).options
-        for e1 in e1_all:
-            select_txt = e1.get_attribute("text")
-            name_list.append(select_txt)
-        return name_list
-
     def hasInput(self,input,data):
         try:
             input[data]
