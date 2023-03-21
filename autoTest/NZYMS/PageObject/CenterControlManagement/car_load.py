@@ -18,9 +18,9 @@ class Car_Load(BasePage):
         if input['堆场'] is not None:
             textInput.select_by_placeholder("请选择", input["堆场"])
         self.click("xpath", "//span[text()='确认 ']")
-        self.logger.info('车载：选择查找指令')
+        self.logger.info("车载：选择查找指令-"+input['操作'])
         self.click("xpath", f"//div[text()='查找指令']")
-        self.click("xpath", f"label[@role='radio']//span[text()='{input['操作']}']")
+        self.click("xpath", f"//label[@role='radio']//span[text()='{input['操作']}']")
         self.click("xpath", f"//span[text()='{input['空重']}']")
         self.click("xpath", "//span[text()='确认 ']")
 
@@ -43,16 +43,16 @@ class Car_Load(BasePage):
     def closeWindow(self):
         self.driver.close()
 
-    def choice_car(self,boxNumber,index=1):
+    def choice_car(self,boxNumber):
         """
         通过选取箱号，选到框架
         """
         self.logger.info('车载：选车落箱')
         for i in range(1,20):
-            if self.elementExist("xpath", f"//div[text()=' {boxNumber} ']") is False:
+            if self.elementExist("xpath", f"//div[@class='yms__fork__btn__content']//div[text()=' {boxNumber} ']") is False:
                 self.click('xpath', "//div[@class='yms__fork__btn__right']")
             else:
-                self.click('xpath', f"(//div[@class='main']//div[text()=' {boxNumber} '])[{index}]")
+                self.click('xpath', f"//div[@class='main']//div[text()=' {boxNumber} ']")
                 break
         self.waitloading()
         time.sleep(0.1)

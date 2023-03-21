@@ -349,7 +349,8 @@ class BasePage:
         try:
             return self.get_text("xpath","//div[@role='alert']//p")
         except:
-            self.logger.error("未发现提示信息")
+            self.logger.info("未发现提示信息,返回none")
+            return None
 
 
     #判断是否存在提示信息
@@ -360,10 +361,7 @@ class BasePage:
         return self.elementExist("xpath",f"//div[@role='alert']//p[contains(text(),'{expectAlert}')]")
 
     def check_alert(self, expectAlert):
-        try:
-            check.equal(self.get_alert_text(),expectAlert)
-        except:
-            pass
+        check.equal(self.get_alert_text(),expectAlert)
 
     def check_alert_and_close(self, expectAlert):
         check.equal(self.get_alert_text(), expectAlert)

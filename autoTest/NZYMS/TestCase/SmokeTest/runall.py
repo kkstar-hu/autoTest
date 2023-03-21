@@ -12,16 +12,16 @@ if __name__ == '__main__':
 
     '''
     pytest.main([
-                 #'../SmokeTest/01_goinboxprocess/test_01_goin_box_process.py',
-                 #'../SmokeTest/02_changeStoreProcess/test_02_changeStoreProcess.py',
-                # '../SmokeTest/03_changeBoxProcess/test_changeBox.py',
-                 #'../SmokeTest/04_checkboxprocess/test_checkplan.py',
-                #'../SmokeTest/06_bulkcargointostorage/test_bulkcargointostorage.py',
-                # '../SmokeTest/07_bulkcargooutstorage/test_bulkcargooutstorage.py',
-                # '../SmokeTest/08_packingboxprocess/test_packingplan.py',
-                # '../SmokeTest/09_solitboxprocess/test_splitboxplan.py',
-                 '../SmokeTest/10_outboxprocess/test_outplan.py',
-                 '-sv','--alluredir', '../../report/result', "--clean-alluredir"])
+                 #'../SmokeTest/test_01_goin_box_process.py',
+                 #'../SmokeTest/test_02_changeStoreProcess.py',
+                # '../SmokeTest/test_changeBox.py',
+                 #'../SmokeTest/test_checkplan.py',
+                #'../SmokeTest/test_bulkcargointostorage.py',
+                # '../SmokeTest/test_bulkcargooutstorage.py',
+                # '../SmokeTest/test_packingplan.py',
+                # '../SmokeTest/test_splitboxplan.py',
+                 '../SmokeTest/test_outplan.py',
+                 '-sv','--alluredir', '../report/result', "--clean-alluredir"])
     '''
 
     os.system('allure generate ../../report/result -o ../../report/html --clean')
