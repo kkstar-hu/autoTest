@@ -1,3 +1,5 @@
+import time
+
 from Base.basepage import BasePage
 from GTOSXM.Controls.text import Gtos_text
 
@@ -18,6 +20,8 @@ class Login(BasePage):
         self.get_elements("xpath", "//button[@class='el-button login-btn el-button--primary el-button--bg']")[1].click()
         self.waitloading()
         self.element_wait("xpath","//div[@role='alert']//p")
-        self.compareValue("xpath","//div[@class='el-badge item el-dropdown-selfdefine']//span",showName)
+        self.element_wait("xpath", "(//div[@class='avatar-center avatar-center__termcd']//span)[1]")
+        time.sleep(0.5)
+        self.compareValue("xpath","(//div[@class='avatar-center avatar-center__termcd']//span)[1]",showName)
 
 

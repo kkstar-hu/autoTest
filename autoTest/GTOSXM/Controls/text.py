@@ -1,3 +1,5 @@
+import time
+
 from selenium.common import NoSuchElementException
 from selenium.webdriver import ActionChains
 from Base.basepage import BasePage
@@ -65,6 +67,15 @@ class Gtos_text(BasePage):
             self.click("xpath",f"//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]//span[text()='{value}']")
         except NoSuchElementException:
             self.logger.error(f"定位不到下拉控件标签名:{label}")
+            raise Exception("定位不到元素")
+
+    def select_by_label_time(self, label, value):
+        try:
+            self.click("xpath", f"//label[contains(text(),'{label}')]//following-sibling::div//input")
+            time.sleep(0.5)
+            self.click("xpath",
+                       f"//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]//span[text()='{value}']")
+        except NoSuchElementException:
             raise Exception("定位不到元素")
 
     def multi_select_by_label(self, label, value):
