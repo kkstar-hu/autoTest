@@ -31,8 +31,6 @@ class GoInPlan_BoxNumber(BasePage):
                 textInput.input_by_number("外部编号", input['外部编号'])
             if input["计划来源"] != None:
                 textInput.select_by_index("计划来源", input['计划来源'])
-            # if input["是否安排运务"] != None:
-            #     textInput.select_by_label("是否安排运务", input['是否安排运务'])
             if input["来源地"] != None:
                 textInput.select_by_label("来源地", input['来源地'])
             if input["备注"] != None:

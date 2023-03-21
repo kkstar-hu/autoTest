@@ -18,7 +18,7 @@ import pytest as pytest
 
 @allure.title('1.新增出场计划')
 @allure.story('10、出场计划流程')
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'10_outboxprocess','stor_box.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '06_outboxprocess', 'stor_box.yaml')))
 def testOut_Plan(driver, input):
     """出场计划"""
     menu = Menu(driver)
@@ -29,7 +29,7 @@ def testOut_Plan(driver, input):
 
 @allure.title('2.新增箱子信息和货信息')
 @allure.story('10、出场计划流程')
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'10_outboxprocess','stor_box.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '06_outboxprocess', 'stor_box.yaml')))
 def testOut_PlanAddbox(driver, input):
     outplan = Out_Plan(driver)
     outplan.addBoxPlan(input)
@@ -41,7 +41,7 @@ def testOut_PlanAddbox(driver, input):
 # @pytest.mark.parametrize("input", read_yaml('stor_box.yaml'))
 @allure.title('3.提箱进场登记')
 @allure.story('10、出场计划流程')
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'10_outboxprocess','stor_box.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '06_outboxprocess', 'stor_box.yaml')))
 def testMention_Box_registration(driver,input):
     """提箱进场登记"""
     menu = Menu(driver)
@@ -56,7 +56,7 @@ def testMention_Box_registration(driver,input):
 # @pytest.mark.parametrize("input", read_yaml('stor_box.yaml'))
 @allure.title('4.车载提箱')
 @allure.story('10、出场计划流程')
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'10_outboxprocess','stor_box.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '06_outboxprocess', 'stor_box.yaml')))
 def testSend_Box_Load(driver, input):
     """车载操作"""
     menu = Menu(driver)
@@ -65,7 +65,7 @@ def testSend_Box_Load(driver, input):
     cls = driver.window_handles
     driver.switch_to.window(cls[1])
     car = Car_Load(driver)
-    car.type_of_job(input)
+    car.findCommand(input)
     car.choice_car(config.boxNumberOutPlan)
     car.container_Box(input)
 
@@ -74,7 +74,7 @@ def testSend_Box_Load(driver, input):
 # @pytest.mark.parametrize("input", read_yaml('stor_box.yaml'))
 @allure.title('5.车辆出场')
 @allure.story('10、出场计划流程')
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'10_outboxprocess','stor_box.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '06_outboxprocess', 'stor_box.yaml')))
 def testSend_Box_Out_Confirm(driver, input):
     """车辆出场"""
     cls = driver.window_handles

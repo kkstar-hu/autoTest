@@ -19,7 +19,7 @@ import pytest as pytest
 @allure.story('9、拆箱计划流程')
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('split_box.yaml'))
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'09_solitboxprocess','split_box.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '10_solitboxprocess', 'split_box.yaml')))
 def testSplit_Plan(driver, input):
     """拆箱计划"""
     menu = Menu(driver)
@@ -32,7 +32,7 @@ def testSplit_Plan(driver, input):
 @allure.story('9、拆箱计划流程')
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('split_box.yaml'))
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '09_solitboxprocess', 'split_box.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '10_solitboxprocess', 'split_box.yaml')))
 def testSplit_PlanAddBox(driver, input):
     split_box = Split_Box_Plan(driver)
     split_box.addBoxPlan(input)
@@ -46,7 +46,7 @@ def testSplit_PlanAddBox(driver, input):
 @allure.story('9、拆箱计划流程')
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('split_box.yaml'))
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'09_solitboxprocess','split_box.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '10_solitboxprocess', 'split_box.yaml')))
 def testSplit_into_car(driver,input):
     """拆箱车辆进场"""
     menu = Menu(driver)
@@ -59,7 +59,7 @@ def testSplit_into_car(driver,input):
 @allure.story('9、拆箱计划流程')
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('split_box.yaml'))
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'09_solitboxprocess','split_box.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '10_solitboxprocess', 'split_box.yaml')))
 def testSplit_Confirm(driver, input):
     """拆箱确认"""
     menu = Menu(driver)
@@ -72,7 +72,7 @@ def testSplit_Confirm(driver, input):
 @allure.story('9、拆箱计划流程')
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('split_box.yaml'))
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'09_solitboxprocess','split_box.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '10_solitboxprocess', 'split_box.yaml')))
 def testSendMention(driver,input):
     """拆箱货车确认放行"""
     menu = Menu(driver)
@@ -85,7 +85,7 @@ def testSendMention(driver,input):
 @allure.story('9、拆箱计划流程')
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('split_box.yaml'))
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'09_solitboxprocess','split_box.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '10_solitboxprocess', 'split_box.yaml')))
 def testSend_Box_Out_Confirm(driver, input):
     """车辆出场"""
     menu = Menu(driver)

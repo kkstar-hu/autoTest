@@ -12,31 +12,18 @@ class Car_Load(BasePage):
     中控管理---车载
     """
 
-    def type_of_job(self, input):
-        """作业类型"""
+    def findCommand(self, input):
+        """查找指令"""
         textInput = text(self.driver)
         if input['堆场'] is not None:
             textInput.select_by_placeholder("请选择", input["堆场"])
         self.click("xpath", "//span[text()='确认 ']")
-        self.logger.info('步骤1：选择作业类型')
-        try:
-            self.click("xpath", f"//div[text()='{input['操作']}']")
-        except NoSuchElementException:
-            raise Exception("定位不到元素")
-        if input['操作'] == '查找指令':
-            if input['空重'] == '空箱':
-                self.click("xpath", "//span[text()='空箱']")
-                self.click("xpath", "//span[text()='确认 ']")
-            if input['空重'] == '重箱':
-                self.click("xpath", "//span[text()='重箱']")
-                self.click("xpath", "//span[text()='确认 ']")
-        if input['操作'] == '转堆':
-            if input['空重'] == '空箱':
-                self.click("xpath", "//span[text()='空箱']")
-                self.click("xpath", "//span[text()='确认 ']")
-            if input['空重'] == '重箱':
-                self.click("xpath", "//span[text()='重箱']")
-                self.click("xpath", "//span[text()='确认 ']")
+        self.logger.info('车载：选择查找指令')
+        self.click("xpath", f"//div[text()='查找指令']")
+        self.click("xpath", f"label[@role='radio']//span[text()='{input['操作']}']")
+        self.click("xpath", f"//span[text()='{input['空重']}']")
+        self.click("xpath", "//span[text()='确认 ']")
+
 
     def changeStore(self, storeDump,boxType):
         textInput = text(self.driver)

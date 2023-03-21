@@ -16,7 +16,6 @@ import pytest as pytest
 @allure.story('1.进箱计划流程')
 @allure.title('1.新增进箱计划')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'01_goinboxprocess/goInPlan_BoxNumber.yaml')))
-#@pytest.mark.parametrize("input", read_yaml("../01_goinboxprocess/goInPlan_BoxNumber.yaml"))
 def testAddGoInPlan_BoxNumber(driver, input):
     menu=Menu(driver)
     menu.select_level_Menu("箱务管理,进场计划(按箱号)")
@@ -76,7 +75,7 @@ def testSend_Box_Load(driver, input):
     cls = driver.window_handles
     driver.switch_to.window(cls[1])
     car = Car_Load(driver)
-    car.type_of_job(input)
+    car.findCommand(input)
     car.choice_car(config.boxNumber)
     car.place_box()
     car.choice_car(config.boxNumberOutPlan)

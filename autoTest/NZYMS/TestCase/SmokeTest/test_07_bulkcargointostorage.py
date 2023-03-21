@@ -16,7 +16,7 @@ from NZYMS.PageObject.Query_Statistics.into_storage_query import Into_Storage_Qu
 @allure.title('1.新增散货入库计划')
 @allure.story('6.散货入库计划流程')
 # @pytest.mark.parametrize("input", read_yaml('bulk_into.yaml'))
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'06_bulkcargointostorage','bulk_into.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '07_bulkcargointostorage', 'bulk_into.yaml')))
 def testBulk_into(driver, input):
     """散货入库计划"""
     menu = Menu(driver)
@@ -27,7 +27,7 @@ def testBulk_into(driver, input):
 @allure.title('2.新增散货入库箱信息和车辆信息')
 @allure.story('6.散货入库计划流程')
 # @pytest.mark.parametrize("input", read_yaml('bulk_into.yaml'))
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '06_bulkcargointostorage', 'bulk_into.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '07_bulkcargointostorage', 'bulk_into.yaml')))
 def testBulk_intoaddbox(driver, input):
     bulk_into = Bulk_cargo_into_storagePlan(driver)
     bulk_into.addBox(input)
@@ -39,7 +39,7 @@ def testBulk_intoaddbox(driver, input):
 @allure.title('3.散货入库车辆进场')
 @allure.story('6.散货入库计划流程')
 # @pytest.mark.parametrize("input", read_yaml('bulk_into.yaml'))
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'06_bulkcargointostorage','bulk_into.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '07_bulkcargointostorage', 'bulk_into.yaml')))
 def testBulk_into_car(driver,input):
     """散货入库车辆进场"""
     menu = Menu(driver)
@@ -51,7 +51,7 @@ def testBulk_into_car(driver,input):
 @allure.title('4.散货入库确认')
 @allure.story('6.散货入库计划流程')
 # @pytest.mark.parametrize("input", read_yaml('bulk_into.yaml'))
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'06_bulkcargointostorage','bulk_into.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '07_bulkcargointostorage', 'bulk_into.yaml')))
 def testBulk_into_confirm(driver, input):
     """散货入库"""
     menu = Menu(driver)
@@ -63,7 +63,7 @@ def testBulk_into_confirm(driver, input):
 @allure.title('5.散货入库车辆放行')
 @allure.story('6.散货入库计划流程')
 # @pytest.mark.parametrize("input", read_yaml('bulk_into.yaml'))
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'06_bulkcargointostorage','bulk_into.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '07_bulkcargointostorage', 'bulk_into.yaml')))
 def testSendMention(driver,input):
     """送提货车确认放行"""
     menu = Menu(driver)
@@ -75,7 +75,7 @@ def testSendMention(driver,input):
 @allure.title('6.散货入库车辆出场')
 @allure.story('6.散货入库计划流程')
 # @pytest.mark.parametrize("input", read_yaml('bulk_into.yaml'))
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'06_bulkcargointostorage','bulk_into.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '07_bulkcargointostorage', 'bulk_into.yaml')))
 def testSend_Box_Out_Confirm(driver, input):
     """车辆出场"""
     menu = Menu(driver)
@@ -88,7 +88,7 @@ def testSend_Box_Out_Confirm(driver, input):
 
 @allure.title('7.市场部查询-入库流程查询')
 @allure.story('6.散货入库计划流程')
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'06_bulkcargointostorage','bulk_into.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '07_bulkcargointostorage', 'bulk_into.yaml')))
 def test_search_intoStorage(driver, input):
     """车辆出场"""
     menu = Menu(driver)
