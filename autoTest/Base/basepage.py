@@ -4,7 +4,7 @@ from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-from Commons.log import getlogger
+from Commons.log import logger
 import pytest_check as check
 import time
 
@@ -15,7 +15,7 @@ class BasePage:
         运行初始化方法
         """
         self.driver = driver
-        self.logger = getlogger()
+        self.logger = logger
 
     def get_element(self, selector_by, selector_value):
         """
@@ -142,7 +142,7 @@ class BasePage:
             print("查找元素超时请检查元素")
 
         # 显示等待
-    def get_element_wait(self, by, value, secs=5):
+    def get_elements_wait(self, by, value, index=0,secs=5):
         """
         等待元素显示
         """
@@ -165,7 +165,7 @@ class BasePage:
         except TimeoutException:
             print("查找元素超时请检查元素")
         else:
-            return self.get_element(by, value)
+            return self.get_elements(by, value)[index]
 
     def element_wait_disappear(self, by, value, secs=5):
         """
@@ -229,7 +229,7 @@ class BasePage:
         用法:
         driver.get_text("css=>#el")
         """
-        el = self.get_element_wait(by,selector)
+        el = self.get_elements_wait(by,selector)
         return el.text
 
 
