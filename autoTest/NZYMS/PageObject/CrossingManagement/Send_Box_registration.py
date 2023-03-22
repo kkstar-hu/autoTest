@@ -6,18 +6,6 @@ from Commons.Controls.text import text
 import random
 from NZYMS.Config import config
 
-ret = ""
-res = ""
-for j in range(4):
-    Letter = chr(random.randint(65, 90))  # 取大写字母 ASCII码值，对照百度
-    c = str(random.choice([Letter]))
-    ret += c
-for i in range(8):
-    num = random.randint(0, 9)
-    s = str(random.choice([num]))
-    ret += s
-    res += s
-
 
 class Send_Box_registration(BasePage):
     """
@@ -43,14 +31,13 @@ class Send_Box_registration(BasePage):
         check.is_in(tableCheck1.get_value("持箱人"), input['持箱人'])
     # 新
 
-
     def send_box_noplan(self, input):
         """
         无计划送箱进场登记（测试情况，结算客户 ：SHYYWL写死, 空重写死：重箱，尺寸写死：40，GP）
         """
         self.logger.info('送箱进场:输入登记信息，箱号随机生产')
         textInput = text(self.driver)
-        self.get_element('xpath', '//input[@placeholder="请输入箱号"]').send_keys(ret)
+        self.get_element('xpath', '//input[@placeholder="请输入箱号"]').send_keys(input["箱号"])
         self.waitloading()
         self.logger.info('步骤2:录入登记信息，数据写死')
         textInput.special_input("结算客户", "SHA", "SHAPGJHWYS/上海永旭集装箱运输")
@@ -71,7 +58,6 @@ class Send_Box_registration(BasePage):
             textInput.select_by_label("进出口", input['进出口'])
         if input['来源'] is not None:
             textInput.select_by_label("来源", input['来源'])
-        return ret
 
     def select_values(self, input):
         """
@@ -98,13 +84,6 @@ class Send_Box_registration(BasePage):
         self.get_element('xpath', "//span[text()='送箱确认']").click()
         self.check_alert(input["alert"])
 
-    def boxs_messages(self):
-        """
-        箱内信息
-        """
-        self.get_element('xpath',
-                         '//*[@id="app"]/div[3]/section/div[1]/div[2]/div[1]/div[2]/div[2]/div/div/div[2]/div/div[3]/table/tbody/tr/td[1]/div/div/input').send_keys(
-            res)
 
     def add_box(self):
         """

@@ -1,10 +1,6 @@
 from selenium.common import NoSuchElementException
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.by import By
 from Base.basepage import BasePage
-from selenium.webdriver.common.keys import Keys
-import time
 from Commons.Controls.text import text
 
 class Out_Confirm(BasePage):
@@ -39,7 +35,5 @@ class Out_Confirm(BasePage):
         """
         self.logger.info('车辆出场：确认出场')
         self.element_wait_disappear(By.XPATH, "//div[@role='alert']//p")
-        # WebDriverWait(self.driver, 5, 1).until_not(
-        #     EC.presence_of_element_located((By.XPATH, "//div[@role='alert']//p")))
         self.get_element('xpath', "//span[text()='确认出场']").click()
         self.check_alert("成功")

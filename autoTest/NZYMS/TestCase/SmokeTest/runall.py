@@ -7,21 +7,22 @@ from Commons import allurechange
 
 
 if __name__ == '__main__':
-    pytest.main(['-sv','--alluredir', '../../report/result', "--clean-alluredir"])
+    pytest.main(['test_07_bulkcargointostorage.py','-sv','--alluredir', '../../report/result', "--clean-alluredir"])
 
 
     '''
     pytest.main([
-                 #'../SmokeTest/test_01_goin_box_process.py',
-                 #'../SmokeTest/test_02_changeStoreProcess.py',
-                # '../SmokeTest/test_changeBox.py',
-                 #'../SmokeTest/test_checkplan.py',
-                #'../SmokeTest/test_bulkcargointostorage.py',
-                # '../SmokeTest/test_bulkcargooutstorage.py',
-                # '../SmokeTest/test_packingplan.py',
-                # '../SmokeTest/test_splitboxplan.py',
-                 '../SmokeTest/test_outplan.py',
-                 '-sv','--alluredir', '../report/result', "--clean-alluredir"])
+                 #'test_01_goin_box_process.py',
+                 #'test_02_changeStoreProcess.py',
+                 #'test_03_changeBox.py',
+                 #'test_04_checkplan.py',
+                 #'test_05_lockbox.py',
+                 # test_06_outplan.py'
+                 #'test_07_bulkcargointostorage.py',
+                 # test_08_bulkcargooutstorage.py',
+                 # test_09_packingplan.py',
+                 # test_10_splitboxplan.py',
+                 '-sv','--alluredir', '../../report/result', "--clean-alluredir"])
     '''
 
     os.system('allure generate ../../report/result -o ../../report/html --clean')

@@ -162,10 +162,6 @@ class NO_Structure_Monitoring(BasePage):
         textinput = Gtos_text(self.driver)
         textinput.input_by_label('靠泊吃水','1')
         self.click('x',"//span[text()='提交']")
-        if self.get_text('x',"//div[@role='alert']//p") == '靠泊时间不能大于当前时间.':
-            self.close_alert('靠泊时间不能大于当前时间.')
-            time.sleep(2)
-            self.click('x', "//span[text()='提交']")
         self.check_alert('提交成功')
         self.close_alert('提交成功')
         check.equal(tablecheck.get_value('靠泊状态'),'靠泊')

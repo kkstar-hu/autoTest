@@ -3,21 +3,7 @@ from Base.basepage import BasePage
 from selenium.webdriver.common.keys import Keys
 from Commons.Controls.table import Table
 from Commons.Controls.text import text
-import random
 from NZYMS.Config import config
-
-ret = ""
-res = ""
-for j in range(4):
-    Letter = chr(random.randint(65, 90))  # 取大写字母 ASCII码值，对照百度
-    c = str(random.choice([Letter]))
-    ret += c
-for i in range(8):
-    num = random.randint(0, 9)
-    s = str(random.choice([num]))
-    ret += s
-    res += s
-
 
 class Mention_Box_registration(BasePage):
     """
@@ -49,9 +35,6 @@ class Mention_Box_registration(BasePage):
         check.is_in(tableCheck1.get_value("持箱人"), input['持箱人'])
         check.equal(tableCheck1.get_value("空重"), input['空重'])
 
-
-
-
     def select_values(self, input):
         """
         道口选择功能,手机输入，车辆选择（写死了）
@@ -62,7 +45,6 @@ class Mention_Box_registration(BasePage):
             textInput.select_by_label("堆场", input["堆场"])
         if input['道口'] is not None:
             textInput.select_by_label("道口", input['道口'])
-
 
     def  confirm_button(self,input):
         """

@@ -65,59 +65,16 @@ class Packing_Plan(BasePage):
             textInput.input_by_placeholder("请输入箱号",config.boxNumberOutPlan)
             self.click_by_index("xpath", "(//button//span[text()='检索'])",1)
             tableCheck = ELtable(self.driver)
-            self.logger.info('check1：验证添加作业指令窗口中列表的值正确')
-            row = self.rows_boxNumber()
-            check.is_in(tableCheck.get_value("结算主体",row), input['结算主体'])
-            check.is_in(tableCheck.get_value("堆场",row), input['堆场'])
-            check.equal(tableCheck.get_value("箱号",row), config.boxNumberOutPlan)
-            check.is_in(tableCheck.get_value("尺寸",row), input['尺寸'])
-            check.is_in(tableCheck.get_value("箱型",row), input['箱型'])
-            check.equal(tableCheck.get_value("箱高",row), input['箱高'])
-            check.is_in(tableCheck.get_value("进场类型",row), input['进场作业类型'])
-            tableCheck.click_row(row)
+            self.logger.info('check3：验证添加作业指令窗口中列表的值正确')
+            check.is_in(tableCheck.get_value_by_trElement("箱号", config.boxNumberOutPlan, "堆场"), input['堆场'])
+            check.equal(tableCheck.get_value_by_trElement("箱号", config.boxNumberOutPlan, "尺寸"), input['尺寸'])
+            check.is_in(tableCheck.get_value_by_trElement("箱号", config.boxNumberOutPlan, "箱型"), input['箱型'])
+            check.equal(tableCheck.get_value_by_trElement("箱号", config.boxNumberOutPlan, "箱高"), input['箱高'])
+            check.equal(tableCheck.get_value_by_trElement("箱号", config.boxNumberOutPlan, "进场类型"),input['进场作业类型'])
+            tableCheck.select_row("箱号",config.boxNumberOutPlan)
             self.click("xpath","//button//span[contains(text(),'确认')]")
         except:
             self.click("x", "//button//span[text()='取消']")
-
-
-    def rows_boxNumber(self):
-        """
-        通过对列表循环，查找对应计划所在行数
-        """
-        pax = []
-        att = []
-        # 根据table xpath定位到表格
-        table = self.get_elements('xpath','//*[@id="app"]/div[3]/section/div[1]/div[2]/div[1]/div/div[2]/div/div/div[2]/div[1]/div[2]/table')
-        # 通过标签名获取表格的所有行
-        table_tr_list = self.get_elements('xpath',"(//div[@class='el-table__body-wrapper is-scrolling-left'])//tr")
-        #  按行查询表格的数据，取出的数据是一整行，按,分隔每一列的数据
-        for tr in table_tr_list:
-            att = (tr.text).split("\n")
-            pax.append(att)
-        for i in pax:
-            if config.boxNumberOutPlan in i:
-                return i[1]
-    def rows_outplanNumber(self,index):
-        """
-        通过对列表循环，查找对应计划所在行数
-        """
-        pax = []
-        att = []
-        # 根据table xpath定位到表格
-        table = self.get_elements('xpath','//*[@id="app"]/div[3]/section/div[1]/div[2]/div[1]/div/div[2]/div/div/div[2]/div[1]/div[2]/table')
-        # 通过标签名获取表格的所有行
-        table_tr_list = self.get_elements('xpath',f"(//div[@class='vxe-table--body-wrapper body--wrapper'])[{index}]//tr")
-        #  按行查询表格的数据，取出的数据是一整行，按,分隔每一列的数据
-        for tr in table_tr_list:
-            att = (tr.text).split("\n")
-            pax.append(att)
-        for i in pax:
-            if config.bulkintoNumber in i:
-                return i[0]
-
-
-
-
 
     def switch_box_information(self):
         """
@@ -183,10 +140,8 @@ class Packing_Plan(BasePage):
         textInput = text(self.driver)
         textInput.select_by_index('堆场',input['堆场'],1)
         self.click_by_index('xpath',"//span[text()='检索']",1)
-        rows = self.rows_outplanNumber(3)
-        print(rows)
         table = Table(self.driver,6)
-        table.tick_off_box(rows)
+        table.check("计划号", config.bulkintoNumber)
         self.click('xpath',"//span[text()='确认']")
 
 

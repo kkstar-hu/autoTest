@@ -82,23 +82,6 @@ class Car_Load(BasePage):
         self.check_alert(None)
         time.sleep(1)
 
-    def cycle_choice_box(self,input):
-        """
-        循环选择箱子
-        """
-        for falg in range(0,101):
-            xt = self.get_text_index('xpath', '//span[@class="containerBox"]', falg)
-            if xt[1] == '-':
-                self.click_by_index('xpath', '//span[@class="containerBox"]', falg)
-                break
-        self.click('xpath', "//span[text()='确认 ']")
-        if self.get_alert_text() == None :
-            self.driver.close()
-        else:
-            self.logger.info(self.get_alert_text())
-            self.driver.close()
-
-
     def container_Box(self,input):
         """
         定位格子放箱子

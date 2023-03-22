@@ -41,11 +41,6 @@ class Settlement_Charge(BasePage):
         self.pay(input)
         self.refresh()
 
-
-
-
-
-
     def search(self,boxnumber,type,service_number=None,submit_number=None):
         textInput = text(self.driver)
         if service_number != None:

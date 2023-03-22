@@ -10,7 +10,6 @@ from NZYMS.PageObject.MarketingDepartmentManagement.Bulk_cargo_out_storageConfir
 from NZYMS.PageObject.MarketingDepartmentManagement.Bulk_cargo_out_storagePlan import Bulk_cargo_out_storagePlan
 from NZYMS.PageObject.MarketingDepartmentManagement.Send_Mention_CarOut import Send_Mention_CarOut
 import pytest as pytest
-
 from NZYMS.PageObject.Query_Statistics.out_storage_query import Out_Storage_Query
 
 
@@ -94,7 +93,4 @@ def test_search_outStorage(driver, input):
     search.search_and_check(input, config.bulkoutNumber)
     Tag(driver).closeTag("出库查询")
 
-# if __name__ == '__main__':
-#     pytest.main(["./test_script",
-#                  "-sv", "--alluredir", "./report/temp_jsonreport"])
-#     os.system("allure generate ./report/temp_jsonreport -o ./report/html --clean")
+

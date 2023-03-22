@@ -77,7 +77,7 @@ class Table(BasePage):
             self.logger.error(f"定位不到列表头:{header}和值{value}")
             raise Exception("定位不到元素")
 
-    #存在勾选框
+    #存在勾选框,通过表头和唯一值 勾选框
     def check(self,header,value):
         try:
             rowid = self.select_row(header,value)

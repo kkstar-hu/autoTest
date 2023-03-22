@@ -1,5 +1,7 @@
 import os.path
 import allure
+
+from Commons import allurechange
 from Commons.Controls.tag import Tag
 from Commons.menu import Menu
 from Commons.yamlread import read_yaml
@@ -15,7 +17,6 @@ from NZYMS.PageObject.Query_Statistics.into_storage_query import Into_Storage_Qu
 
 @allure.title('1.新增散货入库计划')
 @allure.story('6.散货入库计划流程')
-# @pytest.mark.parametrize("input", read_yaml('bulk_into.yaml'))
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '07_bulkcargointostorage', 'bulk_into.yaml')))
 def testBulk_into(driver, input):
     """散货入库计划"""
@@ -26,7 +27,6 @@ def testBulk_into(driver, input):
 
 @allure.title('2.新增散货入库箱信息和车辆信息')
 @allure.story('6.散货入库计划流程')
-# @pytest.mark.parametrize("input", read_yaml('bulk_into.yaml'))
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '07_bulkcargointostorage', 'bulk_into.yaml')))
 def testBulk_intoaddbox(driver, input):
     bulk_into = Bulk_cargo_into_storagePlan(driver)
@@ -38,7 +38,6 @@ def testBulk_intoaddbox(driver, input):
 
 @allure.title('3.散货入库车辆进场')
 @allure.story('6.散货入库计划流程')
-# @pytest.mark.parametrize("input", read_yaml('bulk_into.yaml'))
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '07_bulkcargointostorage', 'bulk_into.yaml')))
 def testBulk_into_car(driver,input):
     """散货入库车辆进场"""
@@ -50,7 +49,6 @@ def testBulk_into_car(driver,input):
 
 @allure.title('4.散货入库确认')
 @allure.story('6.散货入库计划流程')
-# @pytest.mark.parametrize("input", read_yaml('bulk_into.yaml'))
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '07_bulkcargointostorage', 'bulk_into.yaml')))
 def testBulk_into_confirm(driver, input):
     """散货入库"""
@@ -62,7 +60,6 @@ def testBulk_into_confirm(driver, input):
 
 @allure.title('5.散货入库车辆放行')
 @allure.story('6.散货入库计划流程')
-# @pytest.mark.parametrize("input", read_yaml('bulk_into.yaml'))
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '07_bulkcargointostorage', 'bulk_into.yaml')))
 def testSendMention(driver,input):
     """送提货车确认放行"""
@@ -74,7 +71,6 @@ def testSendMention(driver,input):
 
 @allure.title('6.散货入库车辆出场')
 @allure.story('6.散货入库计划流程')
-# @pytest.mark.parametrize("input", read_yaml('bulk_into.yaml'))
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '07_bulkcargointostorage', 'bulk_into.yaml')))
 def testSend_Box_Out_Confirm(driver, input):
     """车辆出场"""
@@ -98,6 +94,12 @@ def test_search_intoStorage(driver, input):
     Tag(driver).closeTag("入库查询")
 
 if __name__ == '__main__':
-    pytest.main(["test_bulkcargooutstorage.py",
-                 "-sv", "--alluredir", "./report/temp_jsonreport"])
-    os.system("allure generate ./report/temp_jsonreport -o ./report/html --clean")
+    pytest.main([
+        '../SmokeTest/test_bulkcargointostorage.py',
+        '-sv', '--alluredir', '../../report/result', "--clean-alluredir"])
+
+
+    os.system('allure generate ../../report/result -o ../../report/html --clean')
+    allurechange.set_windos_title('集疏运UI自动化测试')
+    report_title = allurechange.get_json_data("集疏运测试报告")
+    allurechange.write_json_data(report_title)

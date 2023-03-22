@@ -46,7 +46,6 @@ class ChangeStorePlan(BasePage):
     def addWorkOrder(self, input,boxNumber):
         try:
             self.logger.info('转堆计划：添加作业指令')
-            #self.click("xpath","(//div[@id='add'])[2]")
             textInput = text(self.driver)
             textInput.input_by_placeholder("请输入箱号", boxNumber)
             self.click("xpath", "(//button//span[text()='检索'])[2]")

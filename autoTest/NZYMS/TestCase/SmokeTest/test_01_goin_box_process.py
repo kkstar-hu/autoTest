@@ -51,8 +51,8 @@ def testAddStorePlan(driver, input):
 @allure.title('4.送箱进场登记')
 @allure.story('1.进箱计划流程')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'01_goinboxprocess/Send_Bos_Plan.yaml')))
-def testSend_Box_Plan(driver, input):
-    """送箱进场登记有计划"""
+def testSend_Box(driver, input):
+    """送箱进场登记"""
     menu = Menu(driver)
     menu.select_level_Menu("道口管理,送箱进场登记")
     send_box = Send_Box_registration(driver)

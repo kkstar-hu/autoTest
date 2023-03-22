@@ -3,7 +3,6 @@ import allure
 from Commons.Controls.tag import Tag
 from Commons.menu import Menu
 from Commons.yamlread import read_yaml
-from Commons import allurechange
 from NZYMS.Config import config
 from NZYMS.PageObject.CenterControlManagement.car_load import Car_Load
 from NZYMS.PageObject.CrossingManagement.Mention_Box_registration import Mention_Box_registration
@@ -11,10 +10,6 @@ from NZYMS.PageObject.CrossingManagement.Out_confirm import Out_Confirm
 from NZYMS.PageObject.BoxManagement.outPlan import Out_Plan
 import pytest as pytest
 
-
-
-# @pytest.mark.skipif
-# @pytest.mark.parametrize("input", read_yaml('stor_box.yaml'))
 
 @allure.title('1.新增出场计划')
 @allure.story('10、出场计划流程')
@@ -36,9 +31,6 @@ def testOut_PlanAddbox(driver, input):
     outplan.pay_for_box(input)
     Tag(driver).closeTag("出场计划")
 
-
-# @pytest.mark.skipif
-# @pytest.mark.parametrize("input", read_yaml('stor_box.yaml'))
 @allure.title('3.提箱进场登记')
 @allure.story('10、出场计划流程')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '06_outboxprocess', 'stor_box.yaml')))
@@ -52,8 +44,6 @@ def testMention_Box_registration(driver,input):
     out_box.confirm_button(input)
     Tag(driver).closeTag("提箱进场登记")
 
-# @pytest.mark.skipif
-# @pytest.mark.parametrize("input", read_yaml('stor_box.yaml'))
 @allure.title('4.车载提箱')
 @allure.story('10、出场计划流程')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '06_outboxprocess', 'stor_box.yaml')))
@@ -69,9 +59,6 @@ def testSend_Box_Load(driver, input):
     car.choice_car(config.boxNumberOutPlan)
     car.container_Box(input)
 
-
-# @pytest.mark.skipif
-# @pytest.mark.parametrize("input", read_yaml('stor_box.yaml'))
 @allure.title('5.车辆出场')
 @allure.story('10、出场计划流程')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '06_outboxprocess', 'stor_box.yaml')))
@@ -88,13 +75,3 @@ def testSend_Box_Out_Confirm(driver, input):
     Tag(driver).closeTag("出场确认")
 
 
-
-
-
-if __name__ == '__main__':
-    # pytest.main(['-v','--alluredir','./result','--clean-alluredir','test_outplan.py'])
-    # os.system('allure generate ./result -o ./report --clean')
-    # allurechange.set_windos_title('集疏运UI自动化测试')
-    # report_title = allurechange.get_json_data("集疏运测试报告")
-    # allurechange.write_json_data(report_title)
-    pytest.main(['-sv'])

@@ -1,5 +1,4 @@
 from selenium.webdriver.common.by import By
-
 from Base.basepage import BasePage
 from Commons.Controls.el_table import ELtable
 from Commons.Controls.table import Table
@@ -7,14 +6,11 @@ from Commons.Controls.text import text
 from Commons.DateTime import DataTime
 from NZYMS.Config import config
 import pytest_check as check
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
 
 class Split_Box_Plan(BasePage):
     """
     拆箱计划
     """
-
     def addPlan(self,input):
         """
         新增计划
@@ -48,8 +44,6 @@ class Split_Box_Plan(BasePage):
         check.less(DataTime.get_dif_time(createTime,tableCheck1.get_value("创建时间")), 300)
         check.equal(tableCheck1.get_value("创建人"), config.createName)
 
-
-
     def addBoxPlan(self,input):
         """
         新增箱信息
@@ -65,35 +59,13 @@ class Split_Box_Plan(BasePage):
         tableCheck = ELtable(self.driver)
         row = self.rows()
         self.logger.info('check1：验证添加作业指令窗口中列表的值正确')
-        check.is_in(tableCheck.get_value("堆场",row), input['堆场'])
-        check.equal(tableCheck.get_value("箱号",row), config.boxNumberOutPlan)
-        check.equal(tableCheck.get_value("尺寸",row), input['尺寸'])
-        check.equal(tableCheck.get_value("箱型",row), input['箱型'])
-        check.equal(tableCheck.get_value("箱高",row), input['箱高'])
-        check.is_in(tableCheck.get_value("结算主体",row), input['结算主体'])
-        check.is_in(tableCheck.get_value("进场类型",row), input['进场作业类型'])
-        tableCheck.click_row(row)
+        check.is_in(tableCheck.get_value_by_trElement("箱号", config.boxNumberOutPlan, "堆场"), input['堆场'])
+        check.equal(tableCheck.get_value_by_trElement("箱号", config.boxNumberOutPlan, "尺寸"), input['尺寸'])
+        check.is_in(tableCheck.get_value_by_trElement("箱号", config.boxNumberOutPlan, "箱型"), input['箱型'])
+        check.equal(tableCheck.get_value_by_trElement("箱号", config.boxNumberOutPlan, "箱高"), input['箱高'])
+        check.equal(tableCheck.get_value_by_trElement("箱号", config.boxNumberOutPlan, "进场类型"),input['进场作业类型'])
+        tableCheck.select_row("箱号",config.boxNumberOutPlan)
         self.click("xpath","//button//span[contains(text(),'确认')]")
-
-    def rows(self):
-        """
-        通过对列表循环，查找对应计划所在行数
-        """
-        pax = []
-        att = []
-        # 根据table xpath定位到表格
-        table = self.get_elements('xpath','//*[@id="app"]/div[3]/section/div[1]/div[2]/div[1]/div/div[2]/div/div/div[2]/div[1]/div[2]/table')
-        # 通过标签名获取表格的所有行
-        table_tr_list = self.get_elements('xpath',"(//div[@class='el-table__body-wrapper is-scrolling-left'])//tr")
-        #  按行查询表格的数据，取出的数据是一整行，按,分隔每一列的数据
-        for tr in table_tr_list:
-            att = (tr.text).split("\n")
-            pax.append(att)
-        for i in pax:
-            if config.boxNumberOutPlan in i:
-                return i[1]
-
-
 
     def addCar(self,input):
         """

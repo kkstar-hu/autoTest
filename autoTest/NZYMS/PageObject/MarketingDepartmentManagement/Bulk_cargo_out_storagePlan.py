@@ -1,8 +1,4 @@
 import time
-
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.common.by import By
 from Base.basepage import BasePage
 from Commons.Controls.table import Table
 from Commons.Controls.text import text
@@ -71,42 +67,22 @@ class Bulk_cargo_out_storagePlan(BasePage):
 
     def addBox(self,input):
         """
-        新增出库箱子
+        新增出库明细
         """
         try:
-            self.logger.info('散货出库计划：添加箱子')
+            self.logger.info('散货出库计划：添加出库明细')
             self.click_by_index('xpath',"//div[@id='add']",1)
             self.waitloading()
             textInput = text(self.driver)
             textInput.select_by_index('堆场',input['堆场'])
             self.click_by_index('xpath',"//span[text()='检索']",1)
             table = Table(self.driver,8)
-            row = self.rows(4)
-            table.tick_off_box(row)
+            table.check("计划号",config.bulkintoNumber)
             self.click('xpath',"//span[text()='确认']")
             self.logger.info('check1：验证添加主计划弹出提示信息')
             self.check_alert_and_close(input["addboxalert"])
         except:
             self.click("x", "//button//span[text()='取消']")
-
-    def rows(self,index):
-        """
-        通过对列表循环，查找对应计划所在行数
-        """
-        pax = []
-        att = []
-        # 根据table xpath定位到表格
-        table = self.get_elements('xpath',
-                                  '//*[@id="app"]/div[3]/section/div[1]/div[2]/div[1]/div/div[2]/div/div/div[2]/div[1]/div[2]/table')
-        # 通过标签名获取表格的所有行
-        table_tr_list = self.get_elements('xpath', f"(//div[@class='vxe-table--main-wrapper'])[{index}]//tr")
-        #  按行查询表格的数据，取出的数据是一整行，按,分隔每一列的数据
-        for tr in table_tr_list:
-            att = (tr.text).split("\n")
-            pax.append(att)
-        for i in pax:
-            if config.bulkintoNumber in i:
-                return i[0]
 
     def addCar(self,input):
         """
@@ -132,8 +108,6 @@ class Bulk_cargo_out_storagePlan(BasePage):
         check.equal(tableCheck.get_value("车牌号"), input['车牌']+input['车号'])
         check.less(DataTime.get_dif_time(createTime,tableCheck.get_value("创建时间")), 100)
         check.equal(tableCheck.get_value("创建人"), config.createName)
-
-
 
 
     def switch_car_information(self):

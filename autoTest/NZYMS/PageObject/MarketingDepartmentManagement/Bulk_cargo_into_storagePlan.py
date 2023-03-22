@@ -1,6 +1,3 @@
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.common.by import By
 from Base.basepage import BasePage
 from Commons.Controls.table import Table
 from Commons.Controls.text import text
@@ -125,8 +122,6 @@ class Bulk_cargo_into_storagePlan(BasePage):
         check.equal(tableCheck.get_value("车牌号"), input['车牌']+input['车号'])
         check.less(DataTime.get_dif_time(createTime,tableCheck.get_value("创建时间")), 100)
         check.equal(tableCheck.get_value("创建人"), config.createName)
-
-
 
 
     def switch_car_information(self):

@@ -22,28 +22,6 @@ class Storage_Box_Query(BasePage):
         self.waitloading()
         self.click('xpath',"//span[text()='检索']")
 
-    def get_information(self,index=1):
-        """
-        通过对列表循环，查找箱子信息
-        结合成字典返回
-        """
-        pax = []
-        att = []
-        a = []
-        # 根据table xpath定位到表格
-
-        table = self.get_elements('xpath',"//table[@class='vxe-table--header']")[index]
-        # # 通过标签名获取表格的所有行
-        table_tr_list = self.get_elements('xpath',"//tr")
-        #
-        # #  按行查询表格的数据，取出的数据是一整行，按,分隔每一列的数据
-        for tr in table_tr_list:
-            att = (tr.text).split("\n")
-            pax.append(att)
-        for i in pax:
-            a.append(i)
-        b = dict(zip(a[2],a[3]))
-        config.dict = b
 
 
 

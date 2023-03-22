@@ -1,7 +1,4 @@
-import time
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
 from Base.basepage import BasePage
 from Commons.Controls.table import Table
 from Commons.Controls.text import text

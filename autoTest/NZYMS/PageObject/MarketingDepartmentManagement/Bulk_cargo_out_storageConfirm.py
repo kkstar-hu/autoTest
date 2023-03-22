@@ -1,12 +1,9 @@
 from selenium.webdriver.common.by import By
-
 from Base.basepage import BasePage
 from Commons.Controls.table import Table
 from Commons.Controls.text import text
 from Commons.DateTime import DataTime
 import pytest_check as check
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
 from NZYMS.Config import config
 
 
