@@ -145,3 +145,14 @@ class Gtos_table(BasePage):
 
         return em.text
 
+    def Big_get_value(self,name):
+        '''
+        大船桥吊
+        '''
+        try:
+            cla_ss = self.get_attribute_info('x',f"//div[@class='cell' and text()='{name}']/parent::th","class")
+            cla = list(cla_ss.split(' '))[0]
+        except NoSuchElementException:
+            raise Exception("定位不到元素")
+
+        return self.get_attribute_info('x',f"//td[@class='{cla}   el-table__cell']//div//p","textContent").strip()

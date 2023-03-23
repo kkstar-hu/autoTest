@@ -14,7 +14,7 @@ import warnings
 warnings.filterwarnings("ignore")
 
 
-# @pytest.mark.skipif
+@pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('discharging_process.yaml'))
 @allure.story('2.大船卸船流程')
 @allure.title('1、新增舱单')
@@ -26,7 +26,7 @@ def testManifest(driver,input):
     manifest = Manifest(driver)
     manifest.AddManifest(input,config.boxNumber)
 
-# @pytest.mark.skipif
+@pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('discharging_process.yaml'))
 @allure.story('2.大船卸船流程')
 @allure.title('2、新增舱单箱')
@@ -38,18 +38,19 @@ def testManifest_box(driver, input):
     manifest.choice_ship()
     Tag(driver).closeTagGtos('舱单')
 
-# @pytest.mark.skipif
+@pytest.mark.skipif
 @allure.story('2.大船卸船流程')
 @allure.title('3、箱校验安排箱位置')
 @pytest.mark.parametrize("input",read_yaml(os.path.join(os.getcwd(),'01_DataProcess','immediata_plan.yaml')))
 def testSImport_data_verification(driver, input):
-    """无结构靠泊、吊桥分配"""
+    """资料校验"""
     menu = GtosMenu(driver)
     menu.select_level_Menu("资料管理,进口资料,进口资料校验")
     idv = Import_data_verification(driver)
     idv.retrieval()
-    idv.verification()
+    idv.verification('010582')
     Tag(driver).closeTagGtos('进口资料校验')
+
 
 # @pytest.mark.skipif
 @allure.story('2.大船卸船流程')
@@ -60,11 +61,13 @@ def testShip_sendbox(driver, input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("船舶监控,有结构船舶监控")
     nostructure = Structure_Monitoring(driver)
-    nostructure.Retrieve(input)
-    nostructure.LadeShip_Send_Box(config.boxNumber)
+    nostructure.Retrieve(input,config.outportNumber)
+    nostructure.mouse_job()
+    nostructure.new_windows_job()
+    # nostructure.LadeShip_Send_Box(config.boxNumber)
     Tag(driver).closeTagGtos('有结构船舶监控')
 
-# @pytest.mark.skipif
+@pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('discharging_process.yaml'))
 @allure.story('2.卸船流程')
 @allure.title('4、内集卡控制')
@@ -78,7 +81,7 @@ def testCharge_Car(driver, input):
     inset_car.choice_cars('作业步骤','空车')
     Tag(driver).closeTagGtos('内集卡控制')
 
-# @pytest.mark.skipif
+@pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('discharging_process.yaml'))
 @allure.story('2.卸船流程')
 @allure.title('5、工作指令操作')

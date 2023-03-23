@@ -1,0 +1,8 @@
+{
+	"HatchId": 143033,
+	"LoadVesselLocations": [],
+	"DischargeVesselLocations": ["010286"],
+	"VesselBerthId": 5040,
+	"Direction": "2",
+	"InsertSeqNo": 1
+}

@@ -14,7 +14,6 @@ from Commons.yamlread import read_yaml
 
 
 # @pytest.mark.skipif
-
 @allure.story('1.驳船流程功能准备')
 @allure.title('1、近期计划')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'01_DataProcess', 'immediata_plan.yaml')))
@@ -26,8 +25,8 @@ def testImmediatePlan(driver,input):
     plan = Immediate_plan(driver)
     plan.switch_Barge()
     plan.Add_Plan(input)
-    plan.checkPlan()
-    plan.Sure_ShipPlan()
+    plan.checkPlan(2)
+    plan.Sure_ShipPlan(2)
     plan.SureInBox()
     Tag(driver).closeTagGtos('近期计划')
 

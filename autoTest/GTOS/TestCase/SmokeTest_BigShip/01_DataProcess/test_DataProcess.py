@@ -14,7 +14,7 @@ from GTOS.PageObject.Control_Ship.Structure_Monitoring import Structure_Monitori
 from Commons.yamlread import read_yaml
 
 
-@pytest.mark.skipif
+# @pytest.mark.skipif
 @allure.story('1.大船流程功能准备')
 @allure.title('1、近期计划')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'01_DataProcess', 'immediata_plan.yaml')))
@@ -30,7 +30,7 @@ def testImmediatePlan(driver,input):
     plan.SureInBox()
     Tag(driver).closeTagGtos('近期计划')
 
-# @pytest.mark.skipif
+@pytest.mark.skipif
 @allure.story('1.大船流程功能准备')
 @allure.title('2、桥吊资源分配')
 @pytest.mark.parametrize("input",read_yaml(os.path.join(os.getcwd(),'01_DataProcess','immediata_plan.yaml')))
@@ -84,7 +84,7 @@ def testStockpiling_Planning_out(driver, input):
     stockpiling.Add_box_INTO()
     Tag(driver).closeTagGtos('堆存计划')
 
-# @pytest.mark.skipif
+@pytest.mark.skipif
 @allure.story('1.大船流程功能准备')
 @allure.title('6、靠泊确认和吊桥分配')
 @pytest.mark.parametrize("input",read_yaml(os.path.join(os.getcwd(),'01_DataProcess','immediata_plan.yaml')))

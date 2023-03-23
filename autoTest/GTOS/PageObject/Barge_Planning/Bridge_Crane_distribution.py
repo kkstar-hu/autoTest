@@ -42,11 +42,11 @@ class Bridge_Crane_Distribution(BasePage):
         tablecheck = Gtos_table(self.driver,3)
         tablecheck.tick_off_box(1)
         tablecheck.click('x',"//span[text()='安排桥吊资源']")
-        tablecheck.click('x',"//label//span[text()='A105']")
+        tablecheck.click('x',"//label//span[text()='A101']")
         tablecheck.click('x',"//span[text()='保 存']")
         check.equal(self.get_text("xpath","//div[@role='alert']//h2"),"保存成功")
         tablecheck2 = Gtos_table(self.driver, 4)
-        check.is_in('A105',tablecheck2.get_value('桥吊号'))
+        check.is_in('A101',tablecheck2.get_value('桥吊号'))
         check.equal(tablecheck2.get_value('桥吊计划开始时间'), self.arriveTime)
         check.equal(tablecheck2.get_value('桥吊计划结束时间'), self.leaveTime)
 

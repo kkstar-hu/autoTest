@@ -1,0 +1,20 @@
+#新建舱单
+- 舱单url : http://apserver.cloudtos.com/api/generic/portal?nameSpace=SHB.Cloud.TOS.DMS.Contract.Manifest&className=IManifest&methodName=AddMFTGoodsList
+  #发箱
+  发箱url : http://apserver.cloudtos.com/api/generic/portal?nameSpace=SHB.Cloud.TOS.DMS.Contract.Manifest&className=IManifest&methodName=CopyMFTToVPCCore
+  #有结构配载
+  配载url : http://apserver.cloudtos.com/api/vesselload/Stowage
+  #船期查询
+  船期url : http://apserver.cloudtos.com/api/generalsearch
+  #有结构作业顺序
+  作业顺序url : http://apserver.cloudtos.com/api/cranework/workunit/setorderbylocation
+  #有结构作业发箱
+  作业发箱rul : http://apserver.cloudtos.com/api/vms/BargeOperation/SendContainer
+  #有结构监控发箱
+  监控url : http://apserver.cloudtos.com/api/generic/portal?nameSpace=SHB.Cloud.TOS.DMS.Contract.Query&className=IQuery&methodName=GetStowagePlanContainers
+  #查箱号
+  箱号url : http://apserver.cloudtos.com/api/generic/portal?nameSpace=SHB.Cloud.TOS.DMS.Contract.Query&className=IQuery&methodName=QueryCtnInOutHistories
+  #直提作业顺序
+  直提顺序url : http://apserver.cloudtos.com/api/cranework/workunit/setorderbylocation
+  #允许直提
+  允许直提url : http://apserver.cloudtos.com/api/vms/ship/allowDirectDischargeGateIn

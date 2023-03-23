@@ -73,6 +73,7 @@ class BasePage:
     def input(self, selector_by, selector_value, value):
         webelement = self.get_element(selector_by, selector_value)
         webelement.clear()
+        time.sleep(0.5)
         webelement.send_keys(value)
 
 

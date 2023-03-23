@@ -17,6 +17,7 @@ class CheckInBox(BasePage):
             textInput.select_by_label("集卡编号", input["车牌"])
             self.get_element('xpath', "//input[@placeholder='请输入集卡号']").send_keys(input["集卡编号"])
         if boxNumberfirst is not None:
+            self.logger.info(f'办理进箱手续-箱号:{config.outBoxNumber}')
             textInput.input_by_label("前", boxNumberfirst)
         if boxNumberbehind is not None:
             textInput.input_by_label("中", boxNumberbehind)
@@ -24,6 +25,7 @@ class CheckInBox(BasePage):
             textInput.input_by_label("后", boxNumbercenter)
         if input["车队"] is not None:
             textInput.select_by_label("车队", input['车队'])
+        time.sleep(1)
         self.click("x","//button//span[text()='检索']")
 
     def input_checkin_info(self,input):
@@ -40,13 +42,14 @@ class CheckInBox(BasePage):
         textInput.select_by_label("持箱人", input['持箱人'])
         textInput.select_by_label("付费人", input['付费人'])
         #textInput.select_by_label("附加操作", input['附加操作'])
-        textInput.select_by_label("箱组", input['箱组'])
+        if input["箱组"]!=None:
+            textInput.select_by_label("箱组", input['箱组'])
         #箱信息
         textInput.input_by_label("铅封号", input['铅封号'])
         textInput.select_by_label("箱状态", input['箱状态'])
-        textInput.select_by_label("贸易类型1", input['贸易类型1'])
+        textInput.select_by_label("贸易类型", input['贸易类型'])
         textInput.select_by_label("尺寸", input['尺寸'])
-        textInput.select_by_label("箱型", input['箱型'])
+        textInput.select_by_label("箱型", input['箱型1'])
         textInput.select_by_label("箱高", input['箱高'])
         check.is_false(textInput.text_isenable("ISO"))
         #验箱
@@ -55,9 +58,12 @@ class CheckInBox(BasePage):
         check.is_false(textInput.text_isenable("限重"))
         check.is_false(textInput.text_isenable("是否冷藏箱"))
         #特殊信息
-        textInput.select_by_label("工原残标志", input['工原残标志'])
-        textInput.select_by_label("残损代码", input['残损代码'])
-        textInput.select_by_label_exact("超限", input['超限'])
+        if input["工原残标志"] != None:
+            textInput.select_by_label("工原残标志", input['工原残标志'])
+        if input["残损代码"] != None:
+            textInput.select_by_label("残损代码", input['残损代码'])
+        if input["超限"] != None:
+            textInput.select_by_label_exact("超限", input['超限'])
         if input["危类"]!=None:
             textInput.select_by_label("危类", input['危类'])
             textInput.input_by_label("UNNO", input['UNNO'])
@@ -68,13 +74,14 @@ class CheckInBox(BasePage):
     def click_centerdbox_tag(self):
         self.click("id", "TContainerNoMiddle")
 
-    def addgoodsinfo(self,input, takeNumber):
+    def addgoodsinfo(self,input, boxnumber):
         self.logger.info('办理进箱手续-新增箱货信息')
         self.click("x", "//span[text()='新增货']")
         self.waitloading()
         try:
             textInput = Gtos_text(self.driver)
-            textInput.input_by_label("提单号", takeNumber)
+            time.sleep(1)
+            textInput.input_by_label("提单号", boxnumber)
             textInput.input_by_label("订舱号", input['订舱号'])
             textInput.select_by_label("交付方式", input['交付方式'])
             textInput.select_by_label("交货地", input['交货地'])
@@ -89,8 +96,9 @@ class CheckInBox(BasePage):
             if input["危类"] != None:
                 textInput.select_by_index("危类", input['危类'])
                 textInput.input_by_number("UNNO", input['UNNO'])
-            textInput.input_by_number("温度", input['温度'],2)
-            textInput.select_by_index("温度单位", input['温度单位'])
+            if input["温度"] != None:
+                textInput.input_by_number("温度", input['温度'],2)
+                textInput.select_by_index("温度单位", input['温度单位'])
             textInput.textarea_by_label("货名", input['货名'])
             textInput.textarea_by_label("唛头", input['唛头'])
             textInput.input_by_label("发货人", input['发货人'])
@@ -101,7 +109,7 @@ class CheckInBox(BasePage):
             self.cancel()
         if input["addgoodsalert"]=='保存成功':
             tableCheck=Gtos_table(self.driver)
-            check.equal(tableCheck.get_value("提单号"), takeNumber)
+            check.equal(tableCheck.get_value("提单号"), boxnumber)
             check.equal(tableCheck.get_value("订舱号"), input['订舱号'])
             check.equal(tableCheck.get_value("交付方式"), input['交付方式'])
             check.equal(tableCheck.get_value("交货地"), input['交货地'])
@@ -115,8 +123,8 @@ class CheckInBox(BasePage):
             check.equal(tableCheck.get_value("包装类型"), input['包装类型'])
             #check.equal(tableCheck.get_value("危类"), input['危类'])
             #check.equal(tableCheck.get_value("UNNO"), input['UNNO'])
-            check.equal(tableCheck.get_value("温度单位"), input['温度单位'])
-            check.equal(tableCheck.get_value("温度"), input['温度'])
+            # check.equal(tableCheck.get_value("温度单位"), input['温度单位'])
+            # check.equal(tableCheck.get_value("温度"), input['温度'])
             check.equal(tableCheck.get_value("货名"), input['货名'])
             check.equal(tableCheck.get_value("唛头"), input['唛头'])
             check.equal(tableCheck.get_value("发货人"), input['发货人'])

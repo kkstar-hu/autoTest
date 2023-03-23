@@ -47,7 +47,7 @@ def testinterface_cangdanxiang():
 
 @pytest.mark.skipif
 def testinterface_fangxiang():
-    """发箱"""
+    """舱单发箱"""
     req = RequestHandler()
     faxiang = req.visit('post',url=read_yaml(r'D:\ATA\autoTest\GTOS\TestCase\Interface_Test\interface.yaml')[0]['发箱url'],
                         json=shipid,
@@ -109,6 +109,56 @@ def testinterface_getsendboxno(boxnumber):
         # print(file_f)
         with open(r'D:\ATA\autoTest\GTOS\TestCase\Interface_Test\JSOn\zuoyefaxiang.json','w') as s:
             json.dump(file_f,s)
+    with open(r'D:\ATA\autoTest\GTOS\TestCase\Interface_Test\JSOn\yunxuzhiti.json','rb') as q:
+        file_q = json.load(q)
+        # print(file_q)
+        file_q['vpcIds'] = [k[0]['ContainerID']]
+        # print(file_q)
+        with open(r'D:\ATA\autoTest\GTOS\TestCase\Interface_Test\JSOn\yunxuzhiti.json','w') as p:
+            json.dump(file_q,p)
+
+
+def testShipID(boxnumber):
+    """查计划ID，航次ID"""
+    shipname =''
+    req = RequestHandler()
+    with open(r'D:\ATA\autoTest\GTOS\TestCase\Interface_Test\JSOn\boxID.json','rb') as a:
+        file_a = json.load(a)
+        # print(file_a['commonSearch']['CtnNos'])
+        file_a['commonSearch']['CtnNos'] = [f'{boxnumber}']
+        # print(file_a)
+        with open(r'D:\ATA\autoTest\GTOS\TestCase\Interface_Test\JSOn\boxID.json','w') as b:
+            json.dump(file_a,b)
+        boxid = req.visit('post',
+                          url=read_yaml(r'D:\ATA\autoTest\GTOS\TestCase\Interface_Test\interface.yaml')[0]['箱号url'],
+                          data=json.dumps(read_json(r'D:\ATA\autoTest\GTOS\TestCase\Interface_Test\JSOn\boxID.json')),
+                          headers=configinterface.head)
+        # print(boxid.json()['data'])
+        for i in boxid.json()['data']:
+            #全称
+            shipname = i['ImportVesselName'][:2]+'/'+i['ImportVesselName'][2:]+i['ImportVesselName'][2:]+'/'+i['ImportVoyage']+'/'+i['ImportVoyage'][:1]
+            # print(shipname)
+            #航次名称
+            # print(i['ImportVoyage'])
+            for j in i['InGoodsBillInfos']:
+                #航次ID
+                # print(j['VoyageID'])
+                with open(r'D:\ATA\autoTest\GTOS\TestCase\Interface_Test\JSOn\chuanqi.json','rb') as f:
+                    file_f = json.load(f)
+                    # print(file_f['dynamicConditions'])
+                    for k in file_f['dynamicConditions']:
+                        # print(k['conditionValues'])
+                        for q in k['conditionValues']:
+                            # print(q['displayName'])
+                            # print(q['value'])
+                            q['displayName'] = shipname
+                            q['value'] = j['VoyageID']
+                            with open(r'D:\ATA\autoTest\GTOS\TestCase\Interface_Test\JSOn\chuanqi.json','w') as c:
+                                json.dump(file_f,c)
+
+
+
+
 
 
     #发箱接口

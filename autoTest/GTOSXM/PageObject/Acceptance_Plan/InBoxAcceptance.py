@@ -35,6 +35,7 @@ class InBox_Acceptance(BasePage):
             self.click('xpath',"(//span[text()='新增'])[1]")
             self.waitloading()
             Gtextinput = Gtos_text(self.driver)
+            time.sleep(1)
             Gtextinput.input_by_label('箱号', boxnumber)
             Gtextinput.input_by_label('铅封号', 'A123')
             Gtextinput.select_by_label('尺寸', input['尺寸'])

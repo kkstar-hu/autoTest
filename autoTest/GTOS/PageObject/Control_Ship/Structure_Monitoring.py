@@ -21,21 +21,28 @@ class Structure_Monitoring(BasePage):
         self.click('xpath',"//span[text()='检索']")
         textinput.left_click('x',f"//div[text()='{boxnumber}']")
         self.click('xpath',"//span[text()='确 认']")
-        #self.check_alert('检查通过')
-        #self.close_alert('检查通过')
+        self.check_alert('检查通过')
+        self.close_alert('检查通过')
 
 
-    def Send_Box(self,input,boxnumber):
+    def mouse_job(self):
         """
-        发箱
+        框选操作
         """
-        self.logger.info('无结构船舶监控-卸船发箱'+boxnumber)
-        table = Gtos_table(self.driver, 3)
-        table.check2("箱号", boxnumber)
-        self.click('id',"shipmentconfirm")
-        self.check_alert('发箱成功')
-        rowid = table.select_row2("箱号", boxnumber)
-        check.equal(table.get_value_by_rowid(rowid,'作业状态'), '等待作业')
+        self.clickandhold("x",
+                          "//div[@class='nzctos-lateral__body__deck nzctos-lateral__body__right']//div[@data-hno='05']")
+        self.move_mouse_to_element("x",
+                                   "//div[@class='nzctos-lateral__body__deck nzctos-lateral__body__right']//div[@data-hno='01']")
+        self.move_release()
+        time.sleep(1)
+
+    def new_windows_job(self):
+        """
+        新窗口操作
+        """
+        pass
+
+
 
     def LadeShip_Send_Box(self,boxnumber):
         """
@@ -66,4 +73,48 @@ class Structure_Monitoring(BasePage):
             self.close_alert('发箱成功')
             check.equal(tablecheck.get_value_by_rowid(config.outBoxNumber, '作业状态'), '发箱')
 
+    def ship_operation(self):
+        """
+        靠泊，桥吊操作
+        """
+        self.logger.info('有结构船舶监控-靠泊操作')
+        self.click('x',"//span[text()='视图']")
+        time.sleep(1)
+        self.click('x',"//span[text()='靠离泊']")
+        time.sleep(1)
+        self.click('x',"//span[text()='靠泊确认']")
+        self.click('x',"//input[@placeholder='靠泊时间']")
+        self.click('x',"//span[contains(text(),'此刻')]")
+        textInput = Gtos_text(self.driver)
+        textInput.input_by_label("靠泊吃水",'1')
+        self.click('x',"//span[text()='提交']")
+        if self.get_text('x',"//div[@role='alert']//p") == '靠泊时间不能大于当前时间.':
+            self.close_alert('靠泊时间不能大于当前时间.')
+            time.sleep(2)
+            self.click('x', "//span[text()='提交']")
+        self.check_alert('提交成功')
+        self.close_alert('提交成功')
+        self.logger.info('有结构船舶监控-分配桥吊')
+        self.click('x',"//span[text()='作业路']")
+        time.sleep(1)
+        self.click('x', "//span[text()='加载作业路']")
+        self.left_click('x',"(//div[@class='grid'])[1]//span[text()='导入']")
+        self.check_alert('保存成功')
+        self.close_alert('保存成功')
+        self.click('x',"//i[@class='el-dialog__close el-icon el-icon-close']")
+        self.logger.info('有结构船舶监控-桥吊开工')
+        self.click('x',"//span[text()='作业路']")
+        time.sleep(1)
+        self.click('x', "//span[text()='作业路管理']")
+        tablecheck1 = Gtos_table(self.driver)
+        check.equal(tablecheck1.Big_get_value('状态'),'计划')
+        self.click('x',"//span[@class='el-checkbox__inner']")
+        time.sleep(1)
+        self.input_by_index('x',"//input[@type='code']",2,0)
+        self.input_by_index('x',"//input[@type='code']",2,1)
+        self.click('x',"//span[text()='开工']")
+        check.equal(tablecheck1.Big_get_value('状态'),'作业/开工')
+        self.check_alert('开工成功。')
+        self.close_alert('开工成功。')
+        self.click('x', "//i[@class='el-dialog__close el-icon el-icon-close']")
 

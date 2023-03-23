@@ -4,6 +4,8 @@
   发箱url : http://10.166.0.155/apserver/api/generic/portal?nameSpace=SHB.Cloud.TOS.DMS.Contract.Manifest&className=IManifest&methodName=CopyMFTToVPCCore
   #有结构配载
   配载url : http://10.166.0.155/apserver/api/vesselload/Stowage
+  #船期查询
+  船期url : http://10.166.0.155/apserver/api/generalsearch
   #有结构作业顺序
   作业顺序url : http://10.166.0.155/apserver/api/cranework/workunit/setorderbylocation
   #有结构作业发箱
@@ -12,3 +14,7 @@
   监控url : http://10.166.0.155/apserver/api/generic/portal?nameSpace=SHB.Cloud.TOS.DMS.Contract.Query&className=IQuery&methodName=GetStowagePlanContainers
   #查箱号
   箱号url : http://10.166.0.155/apserver/api/generic/portal?nameSpace=SHB.Cloud.TOS.DMS.Contract.Query&className=IQuery&methodName=QueryCtnInOutHistories
+  #直提作业顺序
+  直提顺序url : http://10.166.0.155/apserver/api/cranework/workunit/setorderbylocation
+  #允许直提
+  允许直提url : http://10.166.0.155/apserver/api/vms/ship/allowDirectDischargeGateIn
