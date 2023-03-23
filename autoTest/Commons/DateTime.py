@@ -46,21 +46,6 @@ class DataTime(object):
         a2 = datetime.now().strptime(time2, "%Y-%m-%d %H:%M:%S")
         return (a1-a2).seconds
 
-    def Get_Current_Time(self, time_format="%I:%M %p", HisRisFlag=False):
-        """Get the current time with time format
-
-        Example:
-        | Get Current Time |
-        """
-        if not HisRisFlag:
-            return time.strftime(time_format, time.localtime(time.time()))
-        m_time = datetime.now().strftime(time_format)
-        m_time = self.com.basic.remove_illegal_chars(m_time, '\'', '\"')
-        m_timelist = m_time.split(".")
-        m_time = self.com.basic.remove_illegal_chars(m_timelist[0], '\'', '\"') + "." + self.com.remove_illegal_chars(
-            m_timelist[1][:3], '\'', '\"')
-        return str(m_time)
-
 
     def Set_Time(self, t):
         """Set the system time"""
@@ -180,23 +165,6 @@ class DataTime(object):
         date_object = datetime.strptime(date_string, '%m/%d/%Y')
         return date_object.strftime(format)
 
-    def Verify_Date_Time_Is_The_Correct_Format(self, date_time_string, format):
-        """Verifies that the specified time, as a string, is in the specified format.
-
-        | Verify Date Time Is The Correct Format | 9:35 AM | %I:%M %p |
-        | Verify Date Time Is The Correct Format | 9:35:25 | %H:%M:%S |
-        | Verify Date Time Is The Correct Format | 09/27/2017 | %m/%d/%Y |
-        | Verify Date Time Is The Correct Format | 27-09-2017 | %d-%m-%Y |
-        | Verify Date Time Is The Correct Format | 09/27/2017 9:35 AM | %m/%d/%Y %I:%M %p |
-        """
-        self.logger.log_info(
-            "Verify that the date/time string [%s] is the correct format [%s]" % (date_time_string, format))
-        try:
-            dt_converted = datetime.strptime(date_time_string, format)
-            dt_converted = dt_converted.strftime(format)
-            self.com.basic.verify(dt_converted, date_time_string)
-        except ValueError:
-            self.logger.log_error("The specified time is not in the correct format")
 
     def wait_time_sec(self, DateTime):
         Sec = DateTime.second
@@ -207,5 +175,3 @@ class DataTime(object):
         else:
             return DateTime
 
-    def _end_of_file(self):
-        pass

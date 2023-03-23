@@ -1,6 +1,6 @@
 from Base.basepage import BasePage
 from Commons.Controls.table import Table
-from NZYMS.Config import config
+from NZYMS.config import config
 
 
 class StorePlan(BasePage):

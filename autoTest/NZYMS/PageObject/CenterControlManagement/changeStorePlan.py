@@ -2,7 +2,7 @@ from Base.basepage import BasePage
 from Commons.Controls.text import text
 from Commons.Controls.table import Table
 from Commons.Controls.el_table import ELtable
-from NZYMS.Config import config
+from NZYMS.config import config
 import pytest_check as check
 from Commons.DateTime import DataTime
 
@@ -40,8 +40,6 @@ class ChangeStorePlan(BasePage):
         check.less(DataTime.get_dif_time(createTime,tableCheck.get_value("录入时间")),100)
         check.equal(tableCheck.get_value("录入人"), config.createName)
         check.equal(tableCheck.get_value("创建人"), config.createName)
-
-
 
     def addWorkOrder(self, input,boxNumber):
         try:

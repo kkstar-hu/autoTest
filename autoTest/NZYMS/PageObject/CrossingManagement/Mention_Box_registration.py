@@ -3,7 +3,7 @@ from Base.basepage import BasePage
 from selenium.webdriver.common.keys import Keys
 from Commons.Controls.table import Table
 from Commons.Controls.text import text
-from NZYMS.Config import config
+from NZYMS.config import config
 
 class Mention_Box_registration(BasePage):
     """

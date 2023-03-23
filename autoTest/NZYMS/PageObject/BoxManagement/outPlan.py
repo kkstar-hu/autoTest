@@ -6,7 +6,7 @@ from Commons.Controls.el_table import ELtable
 from Commons.Controls.table import Table
 from Commons.Controls.text import text
 from Commons.DateTime import DataTime
-from NZYMS.Config import config
+from NZYMS.config import config
 from Commons.menu import Menu
 from Commons.Controls.tag import Tag
 from NZYMS.PageObject.PayManagement.Settlement_charge import Settlement_Charge

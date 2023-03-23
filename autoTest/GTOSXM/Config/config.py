@@ -34,15 +34,15 @@ outBoxNumber=CommonGenerator.generate_spec("JXZX",7)
 voyage = CommonGenerator.generate_verify_code(4)
 #进口航次
 global importNumber
-# importNumber = 'I'+voyage
-importNumber="I2369"
-# importNumber=CommonGenerator.generate_spec("I",4)
+importNumber = 'I'+voyage
+#importNumber="I9284"
+#importNumber=CommonGenerator.generate_spec("I",4)
 
 # 出口航次
 global outportNumber
-# outportNumber = 'E'+voyage
-outportNumber="E2369"
-# outportNumber=CommonGenerator.generate_spec("E",4)
+outportNumber = 'E'+voyage
+#outportNumber="E4280"
+#outportNumber=CommonGenerator.generate_spec("E",4)
 
 
 #提箱预约号

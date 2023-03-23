@@ -1,5 +1,4 @@
 import time
-
 from Base.basepage import BasePage
 from GTOSXM.Controls.text import Gtos_text
 

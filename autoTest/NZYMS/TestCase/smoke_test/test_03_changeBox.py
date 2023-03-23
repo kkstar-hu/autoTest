@@ -6,7 +6,7 @@ import pytest as pytest
 from Commons.Controls.tag import Tag
 from Commons.menu import Menu
 from Commons.yamlread import read_yaml
-from NZYMS.Config import config
+from NZYMS.config import config
 from NZYMS.PageObject.BoxManagement.changebox import ChangeBox
 from NZYMS.PageObject.PayManagement.Settlement_charge import Settlement_Charge
 

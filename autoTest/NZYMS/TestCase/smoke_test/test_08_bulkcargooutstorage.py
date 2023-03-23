@@ -3,7 +3,7 @@ import allure
 from Commons.Controls.tag import Tag
 from Commons.menu import Menu
 from Commons.yamlread import read_yaml
-from NZYMS.Config import config
+from NZYMS.config import config
 from NZYMS.PageObject.CrossingManagement.Out_confirm import Out_Confirm
 from NZYMS.PageObject.CrossingManagement.cars_registration import Cars_Registration
 from NZYMS.PageObject.MarketingDepartmentManagement.Bulk_cargo_out_storageConfirm import Bulk_cargo_out_storageConfirm

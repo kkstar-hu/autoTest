@@ -7,7 +7,7 @@ from Commons.Controls.el_table import ELtable
 from Commons.Controls.table import Table
 from Commons.Controls.text import text
 from Commons.DateTime import DataTime
-from NZYMS.Config import config
+from NZYMS.config import config
 import pytest_check as check
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait

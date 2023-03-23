@@ -4,7 +4,7 @@ from selenium.webdriver.common.keys import Keys
 from Commons.Controls.table import Table
 from Commons.Controls.text import text
 import random
-from NZYMS.Config import config
+from NZYMS.config import config
 
 
 class Send_Box_registration(BasePage):

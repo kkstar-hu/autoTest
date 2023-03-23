@@ -3,7 +3,7 @@ import allure
 from Commons.Controls.tag import Tag
 from Commons.menu import Menu
 from Commons.yamlread import read_yaml
-from NZYMS.Config import config
+from NZYMS.config import config
 from NZYMS.PageObject.CenterControlManagement.car_load import Car_Load
 from NZYMS.PageObject.CrossingManagement.Mention_Box_registration import Mention_Box_registration
 from NZYMS.PageObject.CrossingManagement.Out_confirm import Out_Confirm

@@ -1,8 +1,4 @@
-from selenium.common import NoSuchElementException
-
 from Base.basepage import BasePage
-from Commons.log import getlogger
-
 
 class Tag(BasePage):
 

@@ -3,7 +3,7 @@ import allure
 from Commons.Controls.tag import Tag
 from Commons.menu import Menu
 from Commons.yamlread import read_yaml
-from NZYMS.Config import config
+from NZYMS.config import config
 from NZYMS.PageObject.BoxManagement.goInPlan_BoxNumber import GoInPlan_BoxNumber
 from NZYMS.PageObject.CenterControlManagement.car_load import Car_Load
 from NZYMS.PageObject.CrossingManagement.Out_confirm import Out_Confirm
@@ -21,6 +21,7 @@ def testAddGoInPlan_BoxNumber(driver, input):
     menu.select_level_Menu("箱务管理,进场计划(按箱号)")
     goInPlan=GoInPlan_BoxNumber(driver)
     goInPlan.addPlan(input)
+
 
 # @pytest.mark.skip
 @allure.title('2.新增计划箱和箱信息')
@@ -46,6 +47,7 @@ def testAddStorePlan(driver, input):
     storePlan = StorePlan(driver)
     storePlan.addStoreArea(input)
     Tag(driver).closeTag("堆存计划")
+
 
 # @pytest.mark.skip
 @allure.title('4.送箱进场登记')

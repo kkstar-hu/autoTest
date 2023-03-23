@@ -5,7 +5,7 @@ from Commons.Controls.table import Table
 from Commons.Controls.text import text
 from Commons.DateTime import DataTime
 from Commons.yamlread import generate_yaml
-from NZYMS.Config import config
+from NZYMS.config import config
 
 class Check_Plan(BasePage):
     """

@@ -4,7 +4,7 @@ from selenium.common import NoSuchElementException
 
 from Base.basepage import BasePage
 from Commons.Controls.text import text
-from NZYMS.Config import config
+from NZYMS.config import config
 
 
 class Car_Load(BasePage):

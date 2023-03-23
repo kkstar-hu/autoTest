@@ -6,7 +6,7 @@ import pytest as pytest
 from Commons.Controls.tag import Tag
 from Commons.menu import Menu
 from Commons.yamlread import read_yaml
-from NZYMS.Config import config
+from NZYMS.config import config
 from NZYMS.PageObject.CenterControlManagement.changeStorePlan import ChangeStorePlan
 from NZYMS.PageObject.CenterControlManagement.car_load import Car_Load
 

@@ -3,7 +3,7 @@ from Base.basepage import BasePage
 from Commons.Controls.text import text
 from Commons.Controls.table import Table
 from Commons.DateTime import DataTime
-from NZYMS.Config import config
+from NZYMS.config import config
 import pytest_check as check
 
 

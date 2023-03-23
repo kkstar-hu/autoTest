@@ -5,7 +5,7 @@ from Commons.Controls.tag import Tag
 from Commons.Controls.text import text
 from Commons.Controls.table import Table
 from Commons.menu import Menu
-from NZYMS.Config import config
+from NZYMS.config import config
 from NZYMS.PageObject.CrossingManagement.cars_registration import Cars_Registration
 from NZYMS.PageObject.CrossingManagement.Out_confirm import Out_Confirm
 from NZYMS.PageObject.MarketingDepartmentManagement.Send_Mention_CarOut import Send_Mention_CarOut
