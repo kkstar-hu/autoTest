@@ -37,8 +37,8 @@ class Stockpiling_Planning(BasePage):
         #     tablecheck.tick_off_box(int(tablecheck.get_row('20自动化')) + 1)
         tablecheck.check2("箱子分组条件", "20自动化")
         tablecheck.click('x',"//span[text()='生成堆存计划']")
-        self.check_alert('生成堆存计划成功')
-        self.close_alert('生成堆存计划成功')
+        self.check_alert('新增成功')
+        self.close_alert('新增成功')
 
     def Add_box_INTO(self):
         """

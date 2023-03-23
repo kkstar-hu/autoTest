@@ -177,9 +177,6 @@ def testShipID(boxnumber):
                             with open(r'D:\ATA\autoTest\GTOSXM\TestCase\Interface_Test\JSOn\peizai.json','w') as e:
                                 json.dump(file_d,e)
 
-
-
-
 # @pytest.mark.skipif
 def testmodify_position(numbers):
     """
@@ -195,24 +192,3 @@ def testmodify_position(numbers):
             with open(r'D:\ATA\autoTest\GTOSXM\TestCase\Interface_Test\JSOn\peizai.json','w') as s :
                 json.dump(file_f, s)
 
-
-
-
-
-    #发箱接口
-    # testinterface_getsendboxno(config.outBoxNumber)
-    # jobfaxiang = req.visit('post',url = read_yaml(r'D:\ATA\autoTest\GTOSXM\TestCase\Interface_Test\interface.yaml')[0]['作业发箱rul'],
-    #                        data = json.dumps(read_json(r'D:\ATA\autoTest\GTOSXM\TestCase\Interface_Test\JSOn\zuoyefaxiang.json')),
-    #                        headers = configinterface.head)
-
-
-    # #允许直提作业顺序
-    # sendbox_job = req.visit('post',url = read_yaml(r'D:\ATA\autoTest\GTOS\TestCase\Interface_Test\interface.yaml')[0]['直提顺序url'],
-    #                         data = json.dumps(read_json(r'D:\ATA\autoTest\GTOS\TestCase\Interface_Test\JSOn\zuoyeshunxu-zhiti.json')),
-    #                         headers = configinterface.head)
-    # testinterface_getsendboxno(config.boxNumberTwo)
-    # #允许直提接口
-    # yunxuzhiti = req.visit('post',url = read_yaml(r'D:\ATA\autoTest\GTOS\TestCase\Interface_Test\interface.yaml')[0]['允许直提url'],
-    #                         data = json.dumps(read_json(r'D:\ATA\autoTest\GTOS\TestCase\Interface_Test\JSOn\yunxuzhiti.json')),
-    #                         headers = configinterface.head)
-    # # (input,config.boxNumberTwo)

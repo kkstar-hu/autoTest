@@ -80,6 +80,7 @@ class Immediate_plan(BasePage):
         tablecheck = Gtos_table(self.driver, number)
         check.equal(tablecheck.get_value('船期状态'), '确报')
         check.equal(tablecheck.get_value('确报时间'), actuallarriveTime)
+        time.sleep(1)
 
     #点击确认进箱
     def SureInBox(self):

@@ -92,6 +92,7 @@ class Manifest(BasePage):
             textinput.input_by_label('箱货总重',input['箱货总重'])
             time.sleep(1)
             self.save()
+            time.sleep(1)
             self.close()
             self.check_alert('新增成功')
             tablecheck1 = Gtos_table(self.driver)
