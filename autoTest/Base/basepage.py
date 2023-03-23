@@ -4,7 +4,7 @@ from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-from Commons.log import logger
+from Commons.log import getlogger
 import pytest_check as check
 import time
 
@@ -15,7 +15,7 @@ class BasePage:
         运行初始化方法
         """
         self.driver = driver
-        self.logger = logger
+        self.logger = getlogger()
 
     def get_element(self, selector_by, selector_value):
         """
