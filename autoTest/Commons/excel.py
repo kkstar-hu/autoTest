@@ -7,10 +7,6 @@ import xlwt
 from xlutils.copy import copy
 import xlwings as xw
 
-
-from Commons.log import getlogger
-
-
 class Excel():
     xlwt = xlwt
 
