@@ -2,10 +2,7 @@ from Base.basepage import BasePage
 from Commons.Controls.text import text
 
 
-class Cars_Registration(BasePage):
-    """
-    车辆进场登记
-    """
+class Cars_Registration(BasePage):  #车辆进场登记
 
     def select_values(self,input):
         """
@@ -25,22 +22,15 @@ class Cars_Registration(BasePage):
             self.get_element('xpath', '//input[@placeholder="请输入手机号"]').send_keys(input['手机号'])
 
     def goin_noplan(self):
-        """
-        无任务进场
-        """
+        """无任务进场"""
         self.click('xpath',"//span[text()='无任务进场']")
 
-
     def goin_mentionplan(self):
-        """
-        提货进场
-        """
+        """提货进场"""
         self.click('xpath', "//span[text()='提货进场']")
 
     def goin_sendplan(self):
-        """
-        送货进场
-        """
+        """送货进场"""
         self.click('xpath', "//span[text()='送货进场']")
 
     def into_process(self,input):

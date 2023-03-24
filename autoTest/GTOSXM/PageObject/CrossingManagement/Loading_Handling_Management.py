@@ -55,11 +55,3 @@ class Loading_Management(BasePage):
         check.equal(tablecheck.get_value('报道标志'),'Y')
 
 
-
-
-    def process(self,input):
-        """
-        流程
-        """
-        self.loading_value(input)
-        self.loading_report(input)

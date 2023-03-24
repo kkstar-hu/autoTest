@@ -1,6 +1,8 @@
 import time
-
 from Base.basepage import BasePage
+from Commons.excel import Excel
+import xlwings as xw
+
 
 class Menu(BasePage):
     def selectMenu(self,name):
@@ -27,3 +29,33 @@ class Menu(BasePage):
                 self.select_level_Menu(name)
             except:
                 raise Exception(f"未找到菜单{name}")
+
+    def print_Menu(self,filename,sheetname):
+        tobarMenuElement=self.get_elements("x","//div[@class='topbarItem']/li[@role='menuitem']/div/span/span")
+        exceloperator=Excel()
+        exceloperator.create_excel_file(filename,sheetname)
+        #tobarMenuNameList=[]
+        row1=1
+        row = 1
+        col = 1
+        app = xw.App(visible=True, add_book=False)
+        wb = app.books.open(filename)
+
+        for name in tobarMenuElement:
+            tobarMenuName=name.text
+            #tobarMenuNameList.append(tobarMenuName)
+            wb.sheets[0].range("a"+str(row)).value = tobarMenuName
+            name.click()
+            self.waitloading()
+            time.sleep(2)
+            nestmenus=None
+            nestmenus=self.get_elements("x","//div[@class='el-menu--horizontal' and not (contains(@style,'display: none;'))]//div[@class='nest-menu']/li[@role='menuitem'][@class='el-menu-item tos-menu-item']/a/span/span")
+            for x in nestmenus:
+                nestName=x.text
+                #x.click()
+                wb.sheets[sheetname].range("b" + str(row1)).value = nestName
+                row1=row1+1
+            row=row+1
+            wb.save()
+        wb.close()
+        app.quit()

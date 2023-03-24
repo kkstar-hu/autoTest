@@ -57,7 +57,6 @@ class Split_Box_Plan(BasePage):
         textInput.input_by_placeholder("请输入箱号", config.boxNumberOutPlan)
         self.click_by_index("xpath", "(//button//span[text()='检索'])",1)
         tableCheck = ELtable(self.driver)
-        row = self.rows()
         self.logger.info('check1：验证添加作业指令窗口中列表的值正确')
         check.is_in(tableCheck.get_value_by_trElement("箱号", config.boxNumberOutPlan, "堆场"), input['堆场'])
         check.equal(tableCheck.get_value_by_trElement("箱号", config.boxNumberOutPlan, "尺寸"), input['尺寸'])

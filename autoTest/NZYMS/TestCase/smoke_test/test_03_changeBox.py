@@ -1,6 +1,5 @@
 import os.path
 import time
-
 import allure
 import pytest as pytest
 from Commons.Controls.tag import Tag
@@ -21,6 +20,8 @@ def testchangebox(driver,input):
     changebox.checkboxInformation(input)
     changebox.addchangePlan(input)
     Tag(driver).closeTag("集装箱整改")
+
+
 @allure.story('3.集装箱整改流程')
 @allure.title('2.整改计划结算')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'03_changeBoxProcess','changebox.yaml')))
@@ -35,10 +36,3 @@ def testchargepay(driver,input):
     driver.refresh()
     time.sleep(1)
 
-
-
-
-
-if __name__ == '__main__':
-    pytest.main(['-vs','--alluredir','../allure-result'])
-    #os.system('allure generate ../allure-result -o ../reports')

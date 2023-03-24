@@ -7,9 +7,7 @@ from NZYMS.config import config
 import pytest_check as check
 
 class Bulk_cargo_out_storagePlan(BasePage):
-    """
-    散货出库计划
-    """
+
     def addPlan(self,input):
         """
         新增散货出库计划
@@ -66,9 +64,7 @@ class Bulk_cargo_out_storagePlan(BasePage):
         check.equal(tableCheck1.get_value("创建人"), config.createName)
 
     def addBox(self,input):
-        """
-        新增出库明细
-        """
+        """新增出库明细"""
         try:
             self.logger.info('散货出库计划：添加出库明细')
             self.click_by_index('xpath',"//div[@id='add']",1)
@@ -85,9 +81,7 @@ class Bulk_cargo_out_storagePlan(BasePage):
             self.click("x", "//button//span[text()='取消']")
 
     def addCar(self,input):
-        """
-        新增车辆信息
-        """
+        """新增车辆信息"""
         try:
             self.logger.info('散货出库计划：添加车辆')
             self.click_by_index('xpath',"//div[@id='add']",1)
@@ -109,34 +103,24 @@ class Bulk_cargo_out_storagePlan(BasePage):
         check.less(DataTime.get_dif_time(createTime,tableCheck.get_value("创建时间")), 100)
         check.equal(tableCheck.get_value("创建人"), config.createName)
 
-
     def switch_car_information(self):
-        """
-        切换车辆信息
-        """
+        """切换车辆信息"""
         self.click('xpath',"//div[contains(text(),'车辆信息')]")
 
     def switch_box_information(self):
-        """
-        切换出库明细
-        """
+        """切换出库明细"""
         self.click('xpath',"//div[contains(text(),'入库明细')]")
 
     def more_information(self,row):
-        """
-        ...鼠标点击
-        """
+        """...鼠标点击"""
         self.logger.info('步骤1：展开...')
         table= Table(self.driver,3)
         table.moreButton(row)
         time.sleep(0.5)
         self.element_wait('id','setup')
 
-
     def perform_tasks(self):
-        """
-        执行按钮（后期可能需要增加判断选择了是 取消 执行 关闭 等操作，给出 对应提示）
-        """
+        """执行按钮（后期可能需要增加判断选择了是 取消 执行 关闭 等操作，给出 对应提示）"""
         self.more_information(1)
         self.logger.info('散货出库计划：执行')
         self.click('id', 'setup')

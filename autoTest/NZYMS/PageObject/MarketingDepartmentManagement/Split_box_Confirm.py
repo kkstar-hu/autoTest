@@ -7,13 +7,9 @@ from Commons.Controls.table import Table
 from NZYMS.config import config
 
 class Split_Box_Confirm(BasePage):
-    """
-    拆箱计划确认
-    """
+    """拆箱计划确认"""
     def input_boxnumber(self,input):
-        """
-        输入箱号
-        """
+        """输入箱号"""
         self.logger.info('拆箱计划：输入箱号,选择状态')
         textInput = text(self.driver)
         textInput.input_by_placeholder('请输入箱号',config.boxNumberOutPlan)
@@ -21,15 +17,11 @@ class Split_Box_Confirm(BasePage):
         textInput.select_by_label('拆箱状态',input['拆箱状态'])
 
     def retrieve(self):
-        """
-        点击检索按钮
-        """
+        """点击检索按钮"""
         self.click('xpath', "//span[text()='检索']")
 
     def reset(self):
-        """
-        点击重置按钮
-        """
+        """点击重置按钮"""
         self.click('xpath', "//span[text()='重置']")
 
     def get_information(self,index=1):
@@ -55,25 +47,16 @@ class Split_Box_Confirm(BasePage):
         b =dict(zip(a[-6],a[-5]))
         return b
 
-
     def switch_split_information(self):
-        """
-        切换拆箱车提
-        """
+        """切换拆箱车提"""
         self.click('xpath',"//div[contains(text(),'拆箱车提')]")
 
     def switch_split_warehouse(self):
-        """
-        切换拆箱入库
-        """
+        """切换拆箱入库"""
         self.click('xpath',"//div[contains(text(),'拆箱入库')]")
 
-
-
     def addBOX_information(self,input):
-        """
-        新增箱货信息
-        """
+        """新增箱货信息"""
         try:
             self.input_boxnumber(input)
             self.retrieve()
@@ -85,7 +68,6 @@ class Split_Box_Confirm(BasePage):
             self.logger.info('拆箱计划：新增货物信息')
             textInput.click('xpath', "//div[@id='add']")
             textInput.select_by_placeholder('请选择堆场',input['堆场'])
-            # textInput.select_by_placeholder('请选择计划类型',input['计划类型'])
             textInput.select_by_placeholder('请选择仓库',input['仓库'])
             b = self.get_information(6)
             table = Table(self.driver, 12)

@@ -25,7 +25,6 @@ class Login(BasePage):
         try:
             JS1 = 'return document.querySelector("body > div.vue-puzzle-vcode.show_ > div > div.auth-body_ > canvas:nth-child(1)").toDataURL("image/jpeg");'
             JS2 = 'return document.querySelector("body > div.vue-puzzle-vcode.show_ > div > div.auth-body_ > canvas.auth-canvas2_").toDataURL("image/jpeg");'
-
             k = 0
             while k < 60:
                 time.sleep(2)

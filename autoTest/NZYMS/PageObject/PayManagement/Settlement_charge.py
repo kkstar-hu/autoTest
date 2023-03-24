@@ -1,5 +1,3 @@
-import time
-
 import pytest_check as check
 from Base.basepage import BasePage
 from Commons.Controls.table import Table
@@ -7,15 +5,10 @@ from Commons.Controls.text import text
 from Commons.DateTime import DataTime
 from NZYMS.config import config
 
-
 class Settlement_Charge(BasePage):
-    """
-    结算收费
-    """
+    """结算收费"""
     def configuration(self):
-        """
-        配置收费
-        """
+        """配置收费"""
         self.logger.info('查验计划收费：输入箱号、选择结算类型')
         textInput = text(self.driver)
         textInput.click('xpath', f'//span[text()="{config.showname}"]')
@@ -24,11 +17,8 @@ class Settlement_Charge(BasePage):
         textInput.click('xpath', "//div/button/span[contains(text(),'保存')]")
         self.waitloading()
 
-
     def out_pay(self,input):
-        """
-        出场收费
-        """
+        """出场收费"""
         self.configuration()
         self.logger.info('查验计划收费：输入箱号、选择结算类型')
         textInput = text(self.driver)
@@ -70,7 +60,6 @@ class Settlement_Charge(BasePage):
 
     def outPlanPay(self):
         self.click('xpath', "//button//span[contains(text(),'确定')]")
-
 
     def check_change_box_information(self,input):
         self.element_wait("xpath", "//div[text()='整改计划']")

@@ -68,6 +68,7 @@ def testStockpiling_Planning_into(driver,input):
     menu.select_level_Menu("堆场策划,堆存,堆存计划")
     stockpiling = Stockpiling_Planning(driver)
     stockpiling.search("道口进", config.outportNumber)
+    stockpiling.close_alert('未找到相关堆存计划')
     stockpiling.Add_into_plan()
     stockpiling.Add_box_INTO()
 

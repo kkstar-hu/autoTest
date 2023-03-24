@@ -18,7 +18,7 @@ from GTOSXM.PageObject.Acceptance_Plan.InBoxAcceptance import InBox_Acceptance
 from GTOSXM.PageObject.DataManagement.ExitInformation_manifest import Manifest
 from GTOSXM.PageObject.Ship_Planning.No_Structure_Stowage import No_Structure_Stowage
 from GTOSXM.PageObject.CrossingManagement.StraightLoad_StraightLif_tManagement import StraightLoad_StraightLift_Management
-from GTOSXM.TestCase.Interface_Test.InterfacePage import testmodify_position, testinterface_getboxno
+from GTOSXM.TestCase.Interface_Test.InterfacePage import  testinterface_getboxno, modify_position
 
 req = RequestHandler()
 login_res = req.visit("post", url=configinterface.url, json=configinterface.BodyXRCT)
@@ -32,7 +32,7 @@ configinterface.head['Authorization'] = a
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('direct_loadingp_rocess.yaml'))
-@allure.story('7.直装流程')
+@allure.story('7.大船直装流程')
 @allure.title('1、新建进场直装计划')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'07_DirectLoadingProcess', 'direct_loadingp_rocess.yaml')))
 def testAddPlan(driver,input):
@@ -49,7 +49,7 @@ def testAddPlan(driver,input):
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('direct_loadingp_rocess.yaml'))
-@allure.story('7.直装流程')
+@allure.story('7.大船直装流程')
 @allure.title('2、码头人放行')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'07_DirectLoadingProcess', 'direct_loadingp_rocess.yaml')))
 def testWharfrelease(driver,input):
@@ -61,7 +61,7 @@ def testWharfrelease(driver,input):
     Tag(driver).closeTagGtos('装船箱放行')
 
 # @pytest.mark.skip
-@allure.story('7.直装流程')
+@allure.story('7.大船直装流程')
 @allure.title('3.有结构船舶配载')
 @pytest.mark.parametrize("input",read_yaml(os.path.join(os.getcwd(),'07_DirectLoadingProcess','direct_loadingp_rocess.yaml')))
 def testship_stowage(driver, input):
@@ -73,7 +73,7 @@ def testship_stowage(driver, input):
     stowage.mouse_job()
     stowage.choice_table()
     #定义船箱位接口
-    testmodify_position('010982')
+    modify_position('010382')
     # #配载接口
     testinterface_getboxno(config.boxNumberThree)
     peizai = req.visit('post',url=read_yaml(os.path.join('../Interface_Test','interface.yaml'))[0]['配载url'],
@@ -86,7 +86,7 @@ def testship_stowage(driver, input):
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('direct_loadingp_rocess.yaml'))
-@allure.story('7.直装流程')
+@allure.story('7.大船直装流程')
 @allure.title('4、直装/直提管理')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'07_DirectLoadingProcess', 'direct_loadingp_rocess.yaml')))
 def testDirectLoading(driver,input):
@@ -100,7 +100,7 @@ def testDirectLoading(driver,input):
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('direct_liftin_process.yaml'))
-@allure.story('7.直装流程')
+@allure.story('7.大船直装流程')
 @allure.title('5、有结构船舶监控允许直装')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'06_DirectLiftingProcess', 'direct_liftin_process.yaml')))
 def testLifting(driver, input):
@@ -124,7 +124,7 @@ def testLifting(driver, input):
 
 
 # @pytest.mark.skipif
-@allure.story('7.直装流程')
+@allure.story('7.大船直装流程')
 @allure.title('6、工作指令操作')
 # @pytest.mark.parametrize("input", read_yaml('direct_loadingp_rocess.yaml'))
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'07_DirectLoadingProcess', 'direct_loadingp_rocess.yaml')))
@@ -139,7 +139,7 @@ def testOrder(driver, input):
     Tag(driver).closeTagGtos('作业指令监控')
 
 # @pytest.mark.skipif
-@allure.story('7.直装流程')
+@allure.story('7.大船直装流程')
 @allure.title('7、车辆出场')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'07_DirectLoadingProcess', 'direct_loadingp_rocess.yaml')))
 def testCar_Out(driver, input):

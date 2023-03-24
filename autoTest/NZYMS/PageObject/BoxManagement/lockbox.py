@@ -5,9 +5,7 @@ from Commons.DateTime import DataTime
 from NZYMS.config import config
 import pytest_check as check
 
-
 class LockBox(BasePage):
-
     def search(self,input):
         textInput = text(self.driver)
         textInput.input_by_label("箱号",config.boxNumber)
@@ -24,8 +22,6 @@ class LockBox(BasePage):
         check.equal(tablecheck.get_value("尺寸"), input["尺寸"])
         check.equal(tablecheck.get_value("箱高"), input["箱高"])
         check.equal(tablecheck.get_value("箱型"), input["箱型"])
-
-
 
     def lockbox(self,input):
         try:
@@ -49,7 +45,6 @@ class LockBox(BasePage):
             check.less(DataTime.get_dif_time(createTime,tablecheck.get_value("锁箱时间")), 300)
             check.equal(tablecheck.get_value("锁箱备注"), input["锁定原因"])
 
-
     def superlockbox(self, input):
         try:
             table = Table(self.driver, 2)
@@ -70,7 +65,6 @@ class LockBox(BasePage):
             check.equal(tablecheck.get_value("锁箱人"), config.createName)
             check.less(DataTime.get_dif_time(tablecheck.get_value("锁箱时间"), createTime), 300)
             check.equal(tablecheck.get_value("锁箱备注"), input["锁定原因"])
-
 
     def unlockbox(self, input):
         tablecheck = Table(self.driver, 4)

@@ -4,13 +4,10 @@ from Commons.Controls.el_table import ELtable
 from Commons.Controls.table import Table
 from Commons.Controls.text import text
 from Commons.DateTime import DataTime
-from Commons.yamlread import generate_yaml
 from NZYMS.config import config
 
 class Check_Plan(BasePage):
-    """
-    查验计划
-    """
+
     def addcheckPlan(self,input):
         """
         新增查验计划
@@ -96,10 +93,8 @@ class Check_Plan(BasePage):
     def clickExcute(self, row):
         table = Table(self.driver, 3)
         table.excuteButton(row)
-        #table.menu_excute()
         self.click("xpath", "//div[@class='el-message-box__btns']//span[contains(text(),'确定')]")
         self.has_alert("计划状态修改成功")
         tableCheck = Table(self.driver)
         self.logger.info('check3：验证执行按钮后计划状态变执行状态')
-        # check.equal(tableCheck.get_value("计划状态"), "查验中")
         check.equal(tableCheck.get_value("计划状态"), "计划")

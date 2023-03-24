@@ -32,13 +32,10 @@ class Stockpiling_Planning(BasePage):
         self.click('x',"(//span[text()='新增'])[1]")
         tablecheck = Gtos_table(self.driver,4)
         time.sleep(1)
-        # tablecheck.tick_off_box(2)
-        # if self.elementExist('x',"//input[@aria-label='Press Space to toggle row selection (checked)']") is False:
-        #     tablecheck.tick_off_box(int(tablecheck.get_row('20自动化')) + 1)
         tablecheck.check2("箱子分组条件", "20自动化")
         tablecheck.click('x',"//span[text()='生成堆存计划']")
-        self.check_alert('新增成功')
-        self.close_alert('新增成功')
+        self.check_alert('生成堆存计划成功')
+        self.close_alert('生成堆存计划成功')
 
     def Add_box_INTO(self):
         """
@@ -77,20 +74,4 @@ class Stockpiling_Planning(BasePage):
         self.check_alert('新增成功')
         self.close_alert('新增成功')
 
-
-    def process_into(self):
-        """
-        流程
-        """
-        self.search("道口进",config.outportNumber)
-        self.close_alert('未找到相关堆存计划')
-        self.Add_into_plan()
-        self.Add_box_INTO()
-
-
-    def process_out(self):
-        self.search("卸船",config.importNumber)
-        # self.close_alert('未找到相关堆存计划')
-        self.Add_into_plan()
-        self.Add_box_OUT()
 

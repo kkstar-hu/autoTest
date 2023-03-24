@@ -23,6 +23,7 @@ def testBulk_out(driver, input):
     bulk_out = Bulk_cargo_out_storagePlan(driver)
     bulk_out.addPlan(input)
 
+
 @allure.title('2.新增箱信息和车辆信息')
 @allure.story('7、散货出库计划')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '08_bulkcargooutstorage', 'bulk_out.yaml')))
@@ -47,6 +48,7 @@ def testBulk_out_car(driver,input):
     cars_into.out_process(input)
     Tag(driver).closeTag("车辆进场登记")
 
+
 @allure.title('4.散货出库确认')
 @allure.story('7、散货出库计划')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '08_bulkcargooutstorage', 'bulk_out.yaml')))
@@ -58,6 +60,7 @@ def testBulk__outconfirm(driver, input):
     bulk_out_confirm.addbulk_out(input)
     Tag(driver).closeTag("散货出库确认")
 
+
 @allure.title('5.散货出库车辆放行')
 @allure.story('7、散货出库计划')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '08_bulkcargooutstorage', 'bulk_out.yaml')))
@@ -68,6 +71,7 @@ def testSendMention(driver,input):
     send_and_mention = Send_Mention_CarOut(driver)
     send_and_mention.process(input)
     Tag(driver).closeTag("送提货车放行确认")
+
 
 @allure.title('6.散货入库车辆出场')
 @allure.story('7、散货出库计划')
@@ -81,6 +85,7 @@ def testSend_Box_Out_Confirm(driver, input):
     out_confirm.choice_car(input)
     out_confirm.confirm_button()
     Tag(driver).closeTag("出场确认")
+
 
 @allure.title('7.市场部查询-出库流程查询')
 @allure.story('7.散货出库计划')

@@ -85,16 +85,3 @@ class Packing_up(BasePage):
         textclick.no_elements_click('保存')
         self.check_alert('提内贸重箱计划生成计划成功')
 
-
-    def packing_process(self,input):
-        """
-        提箱受理流程
-        """
-        self.choice_tree(input)
-        self.select_value(input)
-        self.retrieve(input)
-        self.tick_off_box()
-        self.customs_release()
-        self.generation_plan(input)
-        self.save()
-

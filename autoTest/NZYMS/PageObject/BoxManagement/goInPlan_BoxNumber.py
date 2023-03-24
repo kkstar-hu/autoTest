@@ -60,7 +60,6 @@ class GoInPlan_BoxNumber(BasePage):
             check.less(DataTime.get_dif_time(createTime,tableCheck.get_value("创建时间")),100)
             check.equal(tableCheck.get_value("创建人"), config.createName)
 
-
     def addBoxPlan(self,input,boxNumber):
         try:
             self.logger.info('进箱计划：添加计划箱')
@@ -111,8 +110,6 @@ class GoInPlan_BoxNumber(BasePage):
         self.check_alert(input["addplanalert"])
         tableCheck = Table(self.driver,7)
         check.equal(tableCheck.get_value("提单号"), input['提单号'])
-
-
 
     def clickExcute(self,row):
         table= Table(self.driver, 3)

@@ -31,9 +31,7 @@ class Structure_Stowage(BasePage):
         框选操作
         """
         self.logger.info('有结构船舶配载-框选')
-        # self.clickandhold("x","//div[@class='nzctos-lateral__hatch__tier__bay']//div[@data-hno='01']")
         self.clickandhold("x","//div[@data-hno='01']")
-        # self.move_mouse_to_element("x","//div[@class='nzctos-lateral__hatch__tier__bay']//div[@data-hno='05']")
         self.move_mouse_to_element("x","//div[@data-hno='05']")
         self.move_release()
         time.sleep(3)
@@ -43,9 +41,7 @@ class Structure_Stowage(BasePage):
         框选操作
         """
         self.logger.info('有结构船舶配载-查看接口配载情况')
-        # self.clickandhold("x","//div[@class='nzctos-lateral__hatch__tier__bay']//div[@data-hno='01']")
         self.clickandhold("x","//div[@data-hno='01']")
-        # self.move_mouse_to_element("x","//div[@class='nzctos-lateral__hatch__tier__bay']//div[@data-hno='05']")
         self.move_mouse_to_element("x","//div[@data-hno='05']")
         self.move_release()
         time.sleep(1)

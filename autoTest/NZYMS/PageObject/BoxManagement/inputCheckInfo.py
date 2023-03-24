@@ -6,9 +6,7 @@ from Commons.DateTime import DataTime
 from NZYMS.config import config
 
 class Input_Check_Info(BasePage):
-    """
-    查验计划
-    """
+    #查验计划
     def editPlan(self,input,boxnumber):
         """
         新增查验计划

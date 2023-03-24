@@ -1,17 +1,9 @@
 import time
-
-from selenium.common import NoSuchElementException
-
 from Base.basepage import BasePage
 from Commons.Controls.text import text
-from NZYMS.config import config
-
 
 class Car_Load(BasePage):
-    """
-    中控管理---车载
-    """
-
+     #中控管理---车载
     def findCommand(self, input):
         """查找指令"""
         textInput = text(self.driver)
@@ -24,7 +16,6 @@ class Car_Load(BasePage):
         self.click("xpath", f"//span[text()='{input['空重']}']")
         self.click("xpath", "//span[text()='确认 ']")
 
-
     def changeStore(self, storeDump,boxType):
         textInput = text(self.driver)
         textInput.select_by_label("堆场",storeDump)
@@ -36,8 +27,7 @@ class Car_Load(BasePage):
             self.click("xpath","//div[@role='radiogroup']/label/span[contains(text(),'空箱')]")
         self.click("xpath", "//span[text()='确认 ']")
 
-    #先切换到新窗口
-    def switchNewWindow(self):
+    def switchNewWindow(self):   #先切换到新窗口
         self.switchWindow(1)
 
     def closeWindow(self):
@@ -57,11 +47,9 @@ class Car_Load(BasePage):
         self.waitloading()
         time.sleep(0.1)
 
-
-    #转推箱
     def change_box(self):
         """
-        通过选取箱号，选到框架
+        通过选取箱号，选到框架 转推箱
         """
         self.logger.info('车载：选起始箱区')
         self.click('xpath', "//div[@class = 'containerGrid containerGrid-arr-light-loc containerGrid-border']")
@@ -70,11 +58,9 @@ class Car_Load(BasePage):
         self.click('xpath',"(//div[@class='transfer el-row']/div[2]//span[@data-tier-no and @data-row-no]//div[@class='gridItemC gridItemC-cs']/div[1][text()=''])[1]//parent::div")
         self.check_alert(None)
 
-
-    # 放箱，自动从1-1位选空位
     def place_box(self):
         """
-        通过选取箱号，选到框架
+        通过选取箱号，选到框架   放箱，自动从1-1位选空位
         """
         self.logger.info('车载：落箱')
         self.click('xpath',"(//div[@class='bayCon']//span[@data-tier-no and @data-row-no]//div[@class='gridItemC gridItemC-cs']/div[1][text()=''])[1]//parent::div")
@@ -82,12 +68,9 @@ class Car_Load(BasePage):
         self.check_alert(None)
         time.sleep(1)
 
-    def container_Box(self,input):
-        """
-        定位格子放箱子
-        """
+    def container_Box(self):
+        #定位格子放箱子
         self.click('xpath',"//div[@class = 'containerGrid containerGrid-light-loc containerGrid-arr-light-loc containerGrid-border']")
-        #self.click('xpath',"(//span[@data-tier-no and @data-row-no]//div[@class='gridItemC gridItemC-cs']/div[1][text()=' '])[1]//parent::div")
         self.click('xpath', "//span[text()='确认 ']")
         self.check_alert(None)
 

@@ -6,9 +6,7 @@ from Commons.Controls.text import text
 from NZYMS.config import config
 
 class Mention_Box_registration(BasePage):
-    """
-    道口管理-----提箱进场登记
-    """
+    """道口管理-----提箱进场登记"""
 
     def mention_box_plan(self,input):
         """

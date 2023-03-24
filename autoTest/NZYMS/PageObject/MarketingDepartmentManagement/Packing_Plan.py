@@ -1,7 +1,5 @@
 import time
-
 from selenium.webdriver.common.by import By
-
 from Base.basepage import BasePage
 from Commons.Controls.el_table import ELtable
 from Commons.Controls.table import Table
@@ -9,20 +7,11 @@ from Commons.Controls.text import text
 from Commons.DateTime import DataTime
 from NZYMS.config import config
 import pytest_check as check
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
-
-
 
 class Packing_Plan(BasePage):
-    """
-    装箱计划
-    """
-
+    """装箱计划"""
     def addPlan(self,input):
-        """
-        新增计划
-        """
+        """新增计划"""
         try:
             self.logger.info('装箱计划：添加主计划')
             self.click('xpath',"//div[@id='add']")
@@ -51,11 +40,8 @@ class Packing_Plan(BasePage):
         check.less(DataTime.get_dif_time(createTime,tableCheck1.get_value("创建时间")), 100)
         check.equal(tableCheck1.get_value("创建人"), config.createName)
 
-
     def addBoxPlan(self,input):
-        """
-        新增箱信息
-        """
+        """新增箱信息"""
         try:
             self.logger.info('装箱计划：添加计划箱')
             self.click_by_index('xpath',"//div[@id='add']",1)
@@ -77,21 +63,15 @@ class Packing_Plan(BasePage):
             self.click("x", "//button//span[text()='取消']")
 
     def switch_box_information(self):
-        """
-        切换箱信息
-        """
+        """切换箱信息"""
         self.click('xpath',"//div[contains(text(),'箱信息')]")
 
     def switch_goods_information(self):
-        """
-        切换货物信息
-        """
+        """切换货物信息"""
         self.click('xpath',"//div[contains(text(),'货物信息')]")
 
     def addGoods_stow(self,input):
-        """
-        新增货物信息,直装货
-        """
+        """新增货物信息,直装货"""
         try:
             self.logger.info('装箱计划：添加货物信息')
             self.click_by_index('xpath',"//div[@id='add']",1)
@@ -131,9 +111,7 @@ class Packing_Plan(BasePage):
         check.equal(tableCheck.get_value("创建人"), config.createName)
 
     def addGoods_warehouse(self, input):
-        """
-        新增货物信息，库内货
-        """
+        """新增货物信息，库内货"""
         self.logger.info('装箱计划：添加货物信息')
         self.click('xpath',"//span[text()='入库明细追加']")
         self.waitloading()
@@ -144,16 +122,12 @@ class Packing_Plan(BasePage):
         table.check("计划号", config.bulkintoNumber)
         self.click('xpath',"//span[text()='确认']")
 
-
     def choice_addGoods(self,input):
-        """
-        选择如何新增货物信息
-        """
+        """选择如何新增货物信息"""
         if input['新增货物方式'] == '新增':
             self.addGoods_stow(input)
         else:
             self.addGoods_warehouse(input)
-
 
     def more_information(self,row):
         """
