@@ -37,6 +37,7 @@ def testPacking_PlanAddbox(driver, input):
     packing_plan.perform_tasks()
     Tag(driver).closeChoiceTag("装箱计划")
 
+
 @allure.title('3.装箱车辆进场')
 @allure.story('8、装箱计划流程')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '09_packingboxprocess', 'packing_box_new.yaml')))
@@ -89,12 +90,3 @@ def testSend_Box_Out_Confirm(driver, input):
     Tag(driver).closeTag("出场确认")
 
 
-#
-
-if __name__ == '__main__':
-    # pytest.main(['-v','--alluredir','./result','--clean-alluredir','test_outplan.py'])
-    # os.system('allure generate ./result -o ./report --clean')
-    # allurechange.set_windos_title('集疏运UI自动化测试')
-    # report_title = allurechange.get_json_data("集疏运测试报告")
-    # allurechange.write_json_data(report_title)
-    pytest.main(['-sv'])

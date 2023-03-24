@@ -6,13 +6,8 @@ from NZYMS.config import config
 import pytest_check as check
 
 class Bulk_cargo_into_storagePlan(BasePage):
-    """
-    散货入库计划
-    """
+    """散货入库计划"""
     def addPlan(self,input):
-        """
-        新增散货入库计划
-        """
         try:
             self.logger.info('散货入库计划：添加主计划')
             self.click('xpath',"//div[@id='add']")
@@ -122,7 +117,6 @@ class Bulk_cargo_into_storagePlan(BasePage):
         check.equal(tableCheck.get_value("车牌号"), input['车牌']+input['车号'])
         check.less(DataTime.get_dif_time(createTime,tableCheck.get_value("创建时间")), 100)
         check.equal(tableCheck.get_value("创建人"), config.createName)
-
 
     def switch_car_information(self):
         """

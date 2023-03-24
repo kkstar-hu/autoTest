@@ -26,8 +26,6 @@ class ChangeBox(BasePage):
         check.equal(tablecheck.get_value("尺寸箱型"), input["尺寸箱型"])
         check.equal(tablecheck.get_value("箱高"), input["箱高"])
 
-
-
     def addchangePlan(self, input):
         try:
             self.logger.info('集装箱整改：添加计划箱')

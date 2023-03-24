@@ -3,15 +3,12 @@ from Base.basepage import BasePage
 from selenium.webdriver.common.keys import Keys
 from Commons.Controls.table import Table
 from Commons.Controls.text import text
-import random
 from NZYMS.config import config
 
 
 class Send_Box_registration(BasePage):
-    """
-    道口管理-----送箱进场登记
-    """
 
+    """道口管理-----送箱进场登记 """
     def send_box_plan(self,input,boxNumber):
         """
         有计划送箱进场登记
@@ -29,7 +26,6 @@ class Send_Box_registration(BasePage):
         tableCheck1 = Table(self.driver)
         check.equal(tableCheck1.get_value("尺寸"), input['尺寸'])
         check.is_in(tableCheck1.get_value("持箱人"), input['持箱人'])
-    # 新
 
     def send_box_noplan(self, input):
         """
@@ -83,7 +79,6 @@ class Send_Box_registration(BasePage):
         self.logger.info('送箱进场：送箱确认')
         self.get_element('xpath', "//span[text()='送箱确认']").click()
         self.check_alert(input["alert"])
-
 
     def add_box(self):
         """

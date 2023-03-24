@@ -5,40 +5,27 @@ from Commons.Controls.text import text
 
 
 class Send_Mention_CarOut(BasePage):
-    """
-    送提货车辆放行确认
-    """
+    """送提货车辆放行确认"""
     def input_carnumber(self,input):
-        """
-        输入车牌号
-        """
+        """输入车牌号"""
         self.logger.info('车辆放行：输入车牌号')
         textInput = text(self.driver)
         textInput.input_by_placeholder('请输入车号',input['车牌']+input['车号'])
 
     def retrieve(self):
-        """
-        点击检索按钮
-        """
+        """点击检索按钮"""
         self.click('xpath', "//span[text()='检索']")
 
     def reset(self):
-        """
-        点击重置按钮
-        """
+        """点击重置按钮"""
         self.click('xpath', "//span[text()='重置']")
 
     def car_release(self):
-        """
-        确认放行按钮
-        """
+        """确认放行按钮"""
         self.click('xpath',"//span[text()='确认放行']")
 
-
     def process(self,input):
-        """
-        送提货车辆放行流程
-        """
+        """送提货车辆放行流程"""
         self.input_carnumber(input)
         self.retrieve()
         self.logger.info('车辆放行：勾选')

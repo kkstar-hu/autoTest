@@ -1,5 +1,4 @@
 import os
-
 import allure
 import pytest as pytest
 from Commons.Controls.tag import Tag
@@ -27,15 +26,3 @@ def testlockbox(driver, input):
 
 
 
-
-
-
-
-
-
-
-
-
-if __name__ == '__main__':
-    pytest.main(['-vs','--alluredir','../allure-result'])
-    #os.system('allure generate ../allure-result -o ../reports')

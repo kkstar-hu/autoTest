@@ -10,15 +10,10 @@ from NZYMS.PageObject.CrossingManagement.cars_registration import Cars_Registrat
 from NZYMS.PageObject.CrossingManagement.Out_confirm import Out_Confirm
 from NZYMS.PageObject.MarketingDepartmentManagement.Send_Mention_CarOut import Send_Mention_CarOut
 
-
 class Packing_Confirm(BasePage):
-    """
-    装箱计划确认
-    """
+    """装箱计划确认"""
     def input_boxnumber(self,input):
-        """
-        输入箱号
-        """
+        """输入箱号"""
         self.logger.info('装箱确认：输入箱号,选择状态')
         textInput = text(self.driver)
         textInput.input_by_placeholder('请输入箱号',config.boxNumberOutPlan)
@@ -26,22 +21,15 @@ class Packing_Confirm(BasePage):
         textInput.select_by_index('结算主体', input['结算主体'], 0)
 
     def retrieve(self):
-        """
-        点击检索按钮
-        """
+        """点击检索按钮"""
         self.click('xpath', "//span[text()='检索']")
 
     def reset(self):
-        """
-        点击重置按钮
-        """
+        """点击重置按钮"""
         self.click('xpath', "//span[text()='重置']")
 
-
-    def addBOX_information(self,input):
-        """
-        新增箱货信息
-        """
+    def addbox_information(self,input):
+        """新增箱货信息"""
         self.input_boxnumber(input)
         self.retrieve()
         self.logger.info('装箱确认：新增货物信息')
@@ -66,8 +54,6 @@ class Packing_Confirm(BasePage):
         tableCheck = Table(self.driver,2)
         self.logger.info('check2：添加箱货信息后装箱状态')
         check.equal(tableCheck.get_value("装箱状态"), "初始")
-        #直装货和库内货都有的情况，不会有开始装箱这个状态
-        # check.equal(tableCheck.get_value("装箱状态"), "开始装箱")
         table2 = Table(self.driver, 3)
         table2.moreButton(1)
         table2.menu_complete()
@@ -78,9 +64,7 @@ class Packing_Confirm(BasePage):
         self.check_alert(input["confirmalert"])
 
     def more_information(self,input):
-        """
-        ...鼠标点击
-        """
+        """...鼠标点击"""
         self.logger.info('装箱确认：展开...')
         table = Table(self.driver,3)
         table.moreButton()
@@ -93,7 +77,6 @@ class Packing_Confirm(BasePage):
         check.equal(tableCheck.get_value("装箱状态"),"装箱完成")
         self.check_alert(input["confirmalert"])
 
-
     def choice_process(self,input):
         """
         装箱计划有直装和库内装，直装需要车辆进场，放行，出场而库内装不需要
@@ -105,7 +88,7 @@ class Packing_Confirm(BasePage):
             car_process.into_process(input)
             Tag(self.driver).closeTag("车辆进场登记")
             menu.select_level_Menu("市场部管理,装箱管理,装箱确认")
-            self.addBOX_information(input)
+            self.addbox_information(input)
             self.more_information(input)
             Tag(self.driver).closeTag("装箱确认")
             menu.select_level_Menu("市场部管理,送提货车放行确认")
@@ -121,7 +104,7 @@ class Packing_Confirm(BasePage):
         else:
             menu = Menu(self.driver)
             menu.select_level_Menu("市场部管理,装箱管理,装箱确认")
-            self.addBOX_information(input)
+            self.addbox_information(input)
             Tag(self.driver).closeTag("装箱确认")
 
 

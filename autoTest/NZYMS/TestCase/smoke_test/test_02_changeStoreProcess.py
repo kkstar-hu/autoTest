@@ -1,8 +1,6 @@
 import os
-
 import allure
 import pytest as pytest
-
 from Commons.Controls.tag import Tag
 from Commons.menu import Menu
 from Commons.yamlread import read_yaml
@@ -22,6 +20,7 @@ def testAddChangeStorePlan(driver, input):
     changeStorePlan.addChangePlan(input,config.boxNumberOutPlan)
     Tag(driver).closeTag("转堆计划管理")
 
+
 @allure.story('2.转堆流程')
 @allure.title('2.车载中转推操作')
 def testChangeStore(driver):
@@ -38,12 +37,3 @@ def testChangeStore(driver):
 
 
 
-
-
-
-
-
-
-if __name__ == '__main__':
-    pytest.main(['-vs','--alluredir','../allure-result'])
-    #os.system('allure generate ../allure-result -o ../reports')

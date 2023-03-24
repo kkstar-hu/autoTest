@@ -7,9 +7,7 @@ from NZYMS.config import config
 
 
 class Into_Storage_Query(BasePage):
-    """
-    入库查询
-    """
+    """入库查询"""
     def search_and_check(self,input,number):
         """
         选择结算主体、入库计划号并检索

@@ -1,5 +1,4 @@
 import pytest_check as check
-
 from Base.basepage import BasePage
 from Commons.Controls.table import Table
 from Commons.Controls.text import text
@@ -7,9 +6,7 @@ from NZYMS.config import config
 
 
 class Out_Storage_Query(BasePage):
-    """
-    出库查询
-    """
+    """出库查询"""
     def search_and_check(self,input,number):
         """
         选择结算主体、出库计划号并检索

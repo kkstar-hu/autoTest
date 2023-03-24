@@ -1,13 +1,10 @@
 from Base.basepage import BasePage
-from Commons.Controls.table import Table
 from Commons.Controls.text import text
 from NZYMS.config import config
 
 
 class Storage_Box_Query(BasePage):
-    """
-    存场箱查询页面操作
-    """
+    """存场箱查询页面操作"""
     def select_body(self,input):
         """
         选择结算主体并检索

@@ -1,4 +1,3 @@
-
 from Base.basepage import BasePage
 from Commons.Controls.table import Table
 from Commons.Controls.text import text
@@ -6,36 +5,25 @@ from Commons.DateTime import DataTime
 import pytest_check as check
 from NZYMS.config import config
 
-
 class Bulk_cargo_into_storageConfirm(BasePage):
-    """
-    散货入库确认
-    """
+    """散货入库确认"""
     def input_carnumber(self,input):
-        """
-        输入车牌号
-        """
+        """ 输入车牌号"""
         self.logger.info('散货入库确认：输入车牌号')
         textInput = text(self.driver)
         textInput.input_by_placeholder('请输入车牌号',input['车牌']+input['车号'])
         textInput.select_by_label("结算主体",input['结算主体'])
 
     def retrieve(self):
-        """
-        点击检索按钮
-        """
+        """点击检索按钮"""
         self.click('xpath', "//span[text()='检索']")
 
     def reset(self):
-        """
-        点击重置按钮
-        """
+        """点击重置按钮 """
         self.click('xpath', "//span[text()='重置']")
 
     def addbulk_into(self,input):
-        """
-        新增入库登记信息
-        """
+        """新增入库登记信息"""
         try:
             self.input_carnumber(input)
             self.retrieve()

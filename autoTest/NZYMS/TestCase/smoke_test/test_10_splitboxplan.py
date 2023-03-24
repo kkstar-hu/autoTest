@@ -24,6 +24,7 @@ def testSplit_Plan(driver, input):
     split_box = Split_Box_Plan(driver)
     split_box.addPlan(input)
 
+
 # @pytest.mark.skipif
 @allure.title('2.新增箱信息和车辆信息')
 @allure.story('9、拆箱计划流程')
@@ -35,6 +36,7 @@ def testSplit_PlanAddBox(driver, input):
     split_box.addCar(input)
     split_box.perform_tasks()
     Tag(driver).closeTag("拆箱计划")
+
 
 # @pytest.mark.skipif
 @allure.title('3.拆箱车辆进场')
@@ -48,6 +50,7 @@ def testSplit_into_car(driver,input):
     cars_into.out_process(input)
     Tag(driver).closeTag("车辆进场登记")
 
+
 @allure.title('4.拆箱确认')
 @allure.story('9、拆箱计划流程')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '10_solitboxprocess', 'split_box.yaml')))
@@ -59,6 +62,7 @@ def testSplit_Confirm(driver, input):
     split_confirm.addBOX_information(input)
     Tag(driver).closeChoiceTag("拆箱确认")
 
+
 @allure.title('5.拆箱货车确认放行')
 @allure.story('9、拆箱计划流程')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '10_solitboxprocess', 'split_box.yaml')))
@@ -69,6 +73,7 @@ def testSendMention(driver,input):
     send_and_mention = Send_Mention_CarOut(driver)
     send_and_mention.process(input)
     Tag(driver).closeTag("送提货车放行确认")
+
 
 @allure.title('6.车辆出场')
 @allure.story('9、拆箱计划流程')
@@ -83,10 +88,4 @@ def testSend_Box_Out_Confirm(driver, input):
     out_confirm.confirm_button()
     Tag(driver).closeTag("出场确认")
 
-if __name__ == '__main__':
-    # pytest.main(['-v','--alluredir','./result','--clean-alluredir','test_outplan.py'])
-    # os.system('allure generate ./result -o ./report --clean')
-    # allurechange.set_windos_title('集疏运UI自动化测试')
-    # report_title = allurechange.get_json_data("集疏运测试报告")
-    # allurechange.write_json_data(report_title)
-    pytest.main(['-sv'])
+

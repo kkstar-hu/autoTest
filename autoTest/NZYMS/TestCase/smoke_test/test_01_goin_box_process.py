@@ -73,8 +73,7 @@ def testSend_Box_Load(driver, input):
     """车载操作"""
     menu = Menu(driver)
     menu.select_level_Menu("中控管理,车载")
-    #进人新窗口页面工作
-    cls = driver.window_handles
+    cls = driver.window_handles    #进人新窗口页面工作
     driver.switch_to.window(cls[1])
     car = Car_Load(driver)
     car.findCommand(input)

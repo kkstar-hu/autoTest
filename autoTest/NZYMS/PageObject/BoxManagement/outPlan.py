@@ -1,5 +1,4 @@
 import time
-
 import pytest_check as check
 from Base.basepage import BasePage
 from Commons.Controls.el_table import ELtable
@@ -12,35 +11,23 @@ from Commons.Controls.tag import Tag
 from NZYMS.PageObject.PayManagement.Settlement_charge import Settlement_Charge
 
 class Out_Plan(BasePage):
-    """
-    出场计划
-    """
+    """出场计划"""
     def addPlan(self, input):
-        """
-        新增主计划
-        """
         try:
             self.logger.info('出场计划：添加主计划')
-            # self.refresh()
             self.click('xpath',"//div[@id='add']")
             self.waitloading()
             textInput = text(self.driver)
             self.logger.info('出场计划：输入内容')
             textInput.select_by_index('堆场', input['堆场'],1)
-            #textInput.get_elements('xpath',f'//input[@placeholder="请选择"]')[4].click()
-            #textInput.get_elements('xpath',f"//div[@class='el-scrollbar']//span[text()='{input['堆场']}']")[4].click()
             if input['出场作业类型'] is not None:
                 textInput.select_by_index('出场作业类型',input['出场作业类型'],1)
             self.logger.info('check1：验证计划号可否编辑')
             check.is_false(textInput.text_isenable("计划号"))
             textInput.special_input("申请客户","SHA","SHAPGJHWYS/上海永旭集装箱运输")
-            #textInput.special_input("申请客户","SHA","SHANGJ/上海禾旭货运代理")#收费页面
             textInput.special_input("结算客户", "SHA", "SHAPGJHWYS/上海永旭集装箱运输")
-            #textInput.special_input("结算客户", "SHA", "SHANGJ/上海禾旭货运代理")#收费页面
             if input["委托送港类型"] != None:
                 textInput.select_by_label("委托送港类型",input['委托送港类型'])
-            #self.get_elements('xpath',f'//input[@placeholder="请选择"]')[6].click()
-            #self.get_elements('xpath', f"//div[@class='el-scrollbar']//span[text()='{input['目标堆场']}']")[2].click()
             if input["流向"] != None:
                 textInput.select_by_label("流向", input['流向'])
             if input["去向地"] != None:
@@ -70,12 +57,8 @@ class Out_Plan(BasePage):
         check.less(DataTime.get_dif_time(createTime,tableCheck1.get_value("创建时间")),100)
         check.equal(tableCheck1.get_value("创建人"), config.createName)
 
-
-
     def addBoxPlan(self,input):
-        """
-        新增计划箱
-        """
+        """新增计划箱"""
         self.logger.info('出场计划：添加计划箱')
         self.click_by_index('xpath',"//div[@id='add']",1)
         self.waitloading()
@@ -85,37 +68,14 @@ class Out_Plan(BasePage):
         textInput.input_by_placeholder("请输入箱号", config.boxNumber)
         self.click_by_index("xpath", "(//button//span[text()='检索'])",1)
         tableCheck = ELtable(self.driver)
-        row = self.rows()
         self.logger.info('check1：验证添加作业指令窗口中列表的值正确')
-        check.is_in(tableCheck.get_value("结算主体",row), input['结算主体'])
-        check.is_in(tableCheck.get_value("进场作业类型",row), input['进场作业类型'])
-        check.is_in(tableCheck.get_value("堆场",row), input['堆场'])
-        check.equal(tableCheck.get_value("箱号",row), config.boxNumber)
-        check.equal(tableCheck.get_value("尺寸",row), input['尺寸'])
-        check.equal(tableCheck.get_value("箱型",row), input['箱型'])
-        check.equal(tableCheck.get_value("箱高",row), input['箱高'])
-        tableCheck.click_row(row)
+        check.is_in(tableCheck.get_value_by_trElement("箱号", config.boxNumberOutPlan, "堆场"), input['堆场'])
+        check.equal(tableCheck.get_value_by_trElement("箱号", config.boxNumberOutPlan, "尺寸"), input['尺寸'])
+        check.is_in(tableCheck.get_value_by_trElement("箱号", config.boxNumberOutPlan, "箱型"), input['箱型'])
+        check.equal(tableCheck.get_value_by_trElement("箱号", config.boxNumberOutPlan, "箱高"), input['箱高'])
+        check.equal(tableCheck.get_value_by_trElement("箱号", config.boxNumberOutPlan, "进场作业类型"), input['进场作业类型'])
+        tableCheck.select_row("箱号", config.boxNumber)
         self.click("xpath","//button//span[contains(text(),'确认')]")
-
-    def rows(self):
-        """
-        通过对列表循环，查找对应计划所在行数
-        """
-        pax = []
-        att = []
-        # 根据table xpath定位到表格
-        table = self.get_elements('xpath',
-                                  '//*[@id="app"]/div[3]/section/div[1]/div[2]/div[1]/div/div[2]/div/div/div[2]/div[1]/div[2]/table')
-        # 通过标签名获取表格的所有行
-        table_tr_list = self.get_elements('xpath', "(//div[@class='el-table__body-wrapper is-scrolling-left'])//tr")
-        #  按行查询表格的数据，取出的数据是一整行，按,分隔每一列的数据
-        for tr in table_tr_list:
-            att = (tr.text).split("\n")
-            pax.append(att)
-        for i in pax:
-            if config.boxNumber in i:
-                return i[1]
-
 
     def pay_for_box(self,input):
         """
@@ -152,25 +112,17 @@ class Out_Plan(BasePage):
             se_charge.out_pay(input)
             Tag(self.driver).closeTag("结算收费")
 
-
     def choice_plan(self,input):
         """
         选择主计划
         """
         tableCheck=Table(self.driver)
         textInput = text(self.driver)
-        # if input['结算主体'] is not None:
-        #     textInput.select_by_label('结算主体',input['结算主体'])
         textInput.click_by_index('xpath','//input[@placeholder="请选择"]',1)
         textInput.click('xpath',f"//span[text()='{input['结算主体']}']")
-        # if input['计划状态'] is not None:
-        #     textInput.select_by_label('计划状态',input['计划状态'])
         textInput.click_by_index('xpath','//input[@placeholder="请选择"]',2)
         textInput.click('xpath',f"//span[text()='{input['计划状态']}']")
         self.click('xpath',"//span[text()='检索']")
-        #tableCheck.click('xpath',f"//span[text()='O22112300024']")
-
-
 
     def clk(self,row=1):
         table= Table(self.driver,3)
