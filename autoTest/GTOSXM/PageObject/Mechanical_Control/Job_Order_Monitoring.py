@@ -162,10 +162,11 @@ class Job_Order_Monitoring(BasePage):
         self.logger.info('箱位置：' + config.boxPosition)
         carnumber = a.get_body_values('集卡号')
         self.close_alert(f"{config.boxPosition},获取收箱位成功！")
+        time.sleep(1)
         textclick.click('xpath',"(//span[text()='保存'])[3]")
         time.sleep(1)
-        self.check_alert('作业完成')
-        self.close_alert('作业完成')
+        self.check_alert('卸船确认成功')
+        self.close_alert('卸船确认成功')
         tablecheck = Gtos_table(self.driver)
         check.equal(tablecheck.get_value('作业状态'), '已装车')
         if input['操作过程'] == '船―场':
@@ -215,6 +216,7 @@ class Job_Order_Monitoring(BasePage):
         textclick.select_by_label("作业机械：", input["作业机械"])
         textclick.click('xpath',"(//span[text()='保存'])[3]")
         self.check_alert('作业完成')
+        self.close_alert('作业完成')
 
     def send_box(self,input):
         """

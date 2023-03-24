@@ -13,7 +13,7 @@ from GTOSXM.PageObject.Mechanical_Control.Job_Order_Monitoring import Job_Order_
 from GTOSXM.PageObject.gtos_menu import GtosMenu
 
 # @pytest.mark.skipif
-@allure.story('4.新增进箱计划')
+@allure.story('4.大船新增进箱计划')
 @allure.title('1.进箱流程')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'04_EnterBoxProcess','inboxplan.yaml')))
 def testCheckInBox(driver,input):
@@ -61,7 +61,7 @@ def testCheckInBox(driver,input):
 
 
 # @pytest.mark.skipif
-@allure.story('4.新增进箱计划')
+@allure.story('4.大船新增进箱计划')
 @allure.title('3.堆场收箱')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'04_EnterBoxProcess','inboxplan.yaml')))
 def testReceive_box(driver, input):
@@ -77,7 +77,7 @@ def testReceive_box(driver, input):
 
 
 # @pytest.mark.skipif
-@allure.story('4.新增进箱计划')
+@allure.story('4.大船新增进箱计划')
 @allure.title('4.车辆出场')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'04_EnterBoxProcess','inboxplan.yaml')))
 def testCar_Out(driver, input):

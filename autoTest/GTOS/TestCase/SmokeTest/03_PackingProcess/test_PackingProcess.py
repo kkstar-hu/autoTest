@@ -42,7 +42,8 @@ def testPackingManagement(driver,input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("计划受理,计划管理")
     planmanegement = PlanManagement(driver)
-    planmanegement.process(config.boxNumber)
+    planmanegement.select_value(config.boxNumber)
+    planmanegement.viewing_Plan()
     Tag(driver).closeTagGtos('计划管理')
 
 # @pytest.mark.skipif

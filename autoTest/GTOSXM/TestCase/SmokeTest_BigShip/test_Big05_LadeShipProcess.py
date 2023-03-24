@@ -16,7 +16,7 @@ from GTOSXM.PageObject.Mechanical_Control.Inset_Car import Inset_Car
 from GTOSXM.PageObject.Mechanical_Control.Job_Order_Monitoring import Job_Order_Monitoring
 from GTOSXM.PageObject.Ship_Planning.Structure_Stowage import Structure_Stowage
 from GTOSXM.PageObject.gtos_menu import GtosMenu
-from GTOSXM.TestCase.Interface_Test.InterfacePage import testinterface_getboxno, testmodify_position
+from GTOSXM.TestCase.Interface_Test.InterfacePage import testinterface_getboxno, modify_position
 
 req = RequestHandler()
 login_res = req.visit("post", url=configinterface.url, json=configinterface.BodyXRCT)
@@ -27,7 +27,7 @@ Authorization = 'Bearer ' + a
 configinterface.head['Authorization'] = a
 
 # @pytest.mark.skip
-@allure.story('5.装船流程')
+@allure.story('5.大船装船流程')
 @allure.title('1.装船箱放行')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'05_PutBoxIntoShipProcess','loadship.yaml')))
 def testCheckInBox(driver,input):
@@ -39,7 +39,7 @@ def testCheckInBox(driver,input):
 
 
 # @pytest.mark.skip
-@allure.story('5.装船流程')
+@allure.story('5.大船装船流程')
 @allure.title('2.有结构船舶配载')
 @pytest.mark.parametrize("input",read_yaml(os.path.join(os.getcwd(),'05_PutBoxIntoShipProcess','loadship.yaml')))
 def testship_stowage(driver, input):
@@ -50,7 +50,7 @@ def testship_stowage(driver, input):
     stowage.Retrieve(input)
     stowage.mouse_job()
     #定义船箱位接口
-    testmodify_position('011182')
+    modify_position('010582')
     #配载接口
     testinterface_getboxno(config.outBoxNumber)
     peizai = req.visit('post',url=read_yaml(os.path.join('../Interface_Test','interface.yaml'))[0]['配载url'],
@@ -63,8 +63,8 @@ def testship_stowage(driver, input):
 
 
 # @pytest.mark.skipif
-@allure.story('2.大船卸船流程')
-@allure.title('4、大船发箱')
+@allure.story('5.大船装船流程')
+@allure.title('3、大船发箱')
 @pytest.mark.parametrize("input",read_yaml(os.path.join(os.getcwd(),'05_PutBoxIntoShipProcess','loadship.yaml')))
 def testShip_sendbox(driver, input):
     """大船发箱"""
@@ -88,8 +88,8 @@ def testShip_sendbox(driver, input):
 
 
 # @pytest.mark.skip
-@allure.story('5.装船流程')
-@allure.title('3、内集卡控制')
+@allure.story('5.大船装船流程')
+@allure.title('4、内集卡控制')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'05_PutBoxIntoShipProcess','loadship.yaml')))
 def testCharge_Car(driver, input):
     """查看内集卡"""
@@ -97,12 +97,12 @@ def testCharge_Car(driver, input):
     menu.select_level_Menu("机械控制,内集卡控制")
     inset_car = Inset_Car(driver)
     inset_car.choice_job('ALL')
-    inset_car.choice_cars('作业步骤','等待装车')
+    inset_car.choice_cars('作业步骤','空车')
     Tag(driver).closeTagGtos('内集卡控制')
 
 
 # @pytest.mark.skip
-@allure.story('5.装船流程')
+@allure.story('5.大船装船流程')
 @allure.title('5.作业指令监控')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'05_PutBoxIntoShipProcess','loadship.yaml')))
 def testship_order(driver, input):

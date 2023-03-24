@@ -156,3 +156,11 @@ class Gtos_table(BasePage):
             raise Exception("定位不到元素")
 
         return self.get_attribute_info('x',f"//td[@class='{cla}   el-table__cell']//div//p","textContent").strip()
+
+    def plan_get_value(self,name):
+        '''
+        获取计划管理内容
+        '''
+        cla_ss = self.get_attribute_info('x', f"//div[@class='cell' and text()='{name}']/parent::th", "class")
+        cla = list(cla_ss.split(' '))
+        return self.get_attribute_info('x',f"//td[@class='{cla[0]+' '+cla[2]}  el-table__cell']//div","textContent").strip()

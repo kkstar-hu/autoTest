@@ -17,7 +17,7 @@ from GTOSXM.PageObject.CrossingManagement.carOut import Car_Out
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('packing_process.yaml'))
-@allure.story('3.提箱流程')
+@allure.story('3.大船提箱流程')
 @allure.title('1、新增提箱计划')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'03_PackingProcess', 'packing_process.yaml')))
 def testPacking(driver,input):
@@ -49,7 +49,7 @@ def testPacking(driver,input):
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('packing_process.yaml'))
-@allure.story('3.提箱流程')
+@allure.story('3.大船提箱流程')
 @allure.title('2、办理提箱手续')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'03_PackingProcess', 'packing_process.yaml')))
 def testCheckOutBox(driver,input):
@@ -63,7 +63,7 @@ def testCheckOutBox(driver,input):
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('packing_process.yaml'))
-@allure.story('3.提箱流程')
+@allure.story('3.大船提箱流程')
 @allure.title('3、工作指令堆场发箱')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'03_PackingProcess', 'packing_process.yaml')))
 def testSend_box(driver, input):
@@ -78,7 +78,7 @@ def testSend_box(driver, input):
 
 # @pytest.mark.skipif
 # @pytest.mark.parametrize("input", read_yaml('packing_process.yaml'))
-@allure.story('3.提箱流程')
+@allure.story('3.大船提箱流程')
 @allure.title('4、车辆出场')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'03_PackingProcess', 'packing_process.yaml')))
 def testCar_Out(driver, input):

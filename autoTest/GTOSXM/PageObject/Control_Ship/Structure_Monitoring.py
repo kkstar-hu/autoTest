@@ -30,9 +30,7 @@ class Structure_Monitoring(BasePage):
         框选操作
         """
         self.logger.info('有结构船舶监控-框选')
-        # self.clickandhold("x","//div[@class='nzctos-lateral__hatch__tier__bay']//div[@data-hno='01']")
         self.clickandhold("x","//div[@data-hno='01']")
-        # self.move_mouse_to_element("x","//div[@class='nzctos-lateral__hatch__tier__bay']//div[@data-hno='05']")
         self.move_mouse_to_element("x","//div[@data-hno='05']")
         self.move_release()
         time.sleep(3)
@@ -47,7 +45,7 @@ class Structure_Monitoring(BasePage):
         self.left_click('x',"//button//span[text()='查找']")
         self.click('x',"//button//span[text()='选择箱']")
         self.click('x',"//span[text()='箱号查找']//..//..//button[@aria-label='Collapse']")
-        self.drag_mouse_to_element('x',"//span[text()='箱号查找']",'x',"//span[text()='清除']")
+        self.drag_mouse_to_element('x',"//span[text()='箱号查找']",'x',"//span[text()='关闭所有舱']")
 
     def new_windows_job(self):
         """
