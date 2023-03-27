@@ -4,12 +4,10 @@ import sys
 import allure
 from selenium import webdriver
 import pytest
-from GTOS.Config import config
-from GTOS.PageObject.login import Login
-
+from GTOSXM.Config import config
+from GTOSXM.PageObject.login import Login
 sys.path.append(os.path.join(os.getcwd(), "../"))
 sys.path.append(os.path.join(os.getcwd(), "../../../"))
-
 
 driver = None
 
@@ -19,7 +17,7 @@ def driver():
     driver=webdriver.Chrome()
     login = Login(driver)
     login.geturl(config.host)
-    login.login(config.username, config.password, config.showname,"阳逻二期")
+    login.login(config.username, config.password, config.showname,"海润")
     yield driver
     driver.quit()
     return driver
@@ -48,3 +46,4 @@ def pytest_runtest_makereport(item, call):
             f.write(rep.nodeid + extra + "\n")
             with allure.step('添加失败截图...'):
                 allure.attach(driver.get_screenshot_as_png(), "失败截图", allure.attachment_type.PNG)
+
