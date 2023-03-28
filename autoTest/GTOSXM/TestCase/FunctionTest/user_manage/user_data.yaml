@@ -1,9 +1,14 @@
 #用户基本信息
-- 用户账号: "testAddUser"
-  用户名称: "test_add_user"
+- 用户账号: "testAddUser8"
+  用户名称: "test_add_user8"
   用户密码: "Test@123"
   用户状态: "正常"
-  账户类型: "系统用户"
+  归属码头: "XRCT"
+  操作码头: "XRCT"
+  绑定角色: "测试"
+
+  名称: "test_add_user7"
+  账户类型: ""
   归属码: ""
   操作码: ""
   创建日期: ""

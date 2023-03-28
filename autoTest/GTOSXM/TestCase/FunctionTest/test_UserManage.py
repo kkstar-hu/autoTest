@@ -10,16 +10,23 @@ from GTOSXM.PageObject.gtos_menu import GtosMenu
 
 
 @allure.story('1.系统管理')
-@allure.title('3、用户管理')
+@allure.title('用户管理')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'user_manage','user_data.yaml')))
-def testUserManage01UserAdd(driver, input):
+def testUserAdd(driver, input):
     """添加用户"""
     print("******************************************Test Add User***********************************************")
-    #菜单跳转
+    menu = GtosMenu(driver)  #菜单跳转
+    menu.select_level_Menu("系统管理,用户管理")
+    userManager = User_Manage(driver)
+    userManager.Add_User(input)  #新增用户
+    Tag(driver).closeTagGtos('用户管理')  #关闭用户管理Tag
+
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'user_manage','user_data.yaml')))
+def testNewUserinformation(driver, input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("系统管理,用户管理")
-    #新增用户
     userManager = User_Manage(driver)
-    userManager.Add_User(input)
-    #关闭用户管理Tag
-    Tag(driver).closeTagGtos('用户管理')
+    userManager.New_User_Select(input)  #查询用户
+    Tag(driver).closeTagGtos('用户管理')  #关闭用户管理Tag
+
+
