@@ -1,7 +1,5 @@
 from selenium.common import NoSuchElementException
-
 from Base.basepage import BasePage
-
 
 
 class text(BasePage):
@@ -99,7 +97,7 @@ class text(BasePage):
             self.logger.error(f"定位不到下拉框控件的标签名:{label}")
             raise Exception("定位不到元素")
 
-
+    #点击下拉框值
     def select_clickOption(self, value):
         try:
             self.click("xpath", f"//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]//span[text()='{value}']")

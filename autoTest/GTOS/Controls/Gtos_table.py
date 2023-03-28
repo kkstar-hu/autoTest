@@ -1,7 +1,5 @@
-
 from selenium.common import NoSuchElementException
 from selenium.webdriver import ActionChains
-
 from Base.basepage import BasePage
 from Commons.log import getlogger
 
@@ -149,7 +147,6 @@ class Gtos_table(BasePage):
                               f"(//div[@class='nzctos-v-dialog__body'])//label[@class='el-form-item__label' and contains(text(),'{name}')]/following-sibling::div[@class='el-form-item__content']")
         except NoSuchElementException:
             raise Exception("定位不到元素")
-
         return em.text
 
     def Big_get_value(self,name):
