@@ -6,19 +6,19 @@ from Commons.log import getlogger
 
 class ELtable(BasePage):
 
-    #index 页面中第几个table
     def __init__(self,driver,index=1):
         """
-        运行初始化方法
+        运行初始化方法，index页面中第几个table
         """
         self.driver = driver
         self.logger = getlogger()
         self.index=index
 
-
-    #header:输入表头名,row:行号
-
     def get_value(self,header,row=1):
+        """
+        获取表格某行中某一格值
+        header：表头 ,row:行号
+        """
         try:
             classValueHeader=self.get_attribute_info("xpath",f"(//table[@class='el-table__header'])[{self.index}]//thead/tr/th/div[text()='{header}']//parent::th","class")
             classValue=classValueHeader.split(" ")[0]

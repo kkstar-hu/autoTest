@@ -1,21 +1,16 @@
-
 from selenium.common import NoSuchElementException
-
 from Base.basepage import BasePage
 from Commons.log import getlogger
 
-
 class Table(BasePage):
 
-    #index 页面中第几个table
     def __init__(self,driver,index=1):
         """
-        运行初始化方法
+        运行初始化方法, index页面中第几个table
         """
         self.driver = driver
         self.logger = getlogger()
         self.index=index
-
 
     #header:输入表头名，不可用
     def get_all_headerName(self):
@@ -25,7 +20,12 @@ class Table(BasePage):
             headerName = x.text
             headerlist.append(headerName)
         return headerlist
+
     def get_value(self,header,row=1):
+        """
+        获取表格中某一格值
+        header：表头 ,row:行号
+        """
         try:
             colid=self.get_attribute_info("xpath",f"(//table[@class='vxe-table--header'])[{self.index}]//thead/tr/th//span[text()='{header}']//parent::div//parent::th","colid")
             return self.get_text("xpath",f"(//table[@class='vxe-table--body'])[{self.index}]//tr[{row}]/td[@colid='"+colid+"']//span")
@@ -33,6 +33,10 @@ class Table(BasePage):
             raise Exception("定位不到元素")
 
     def get_value_by_rowid(self,rowid,header):
+        """
+        获取表格中某一格值
+        header：表头 ,rowid: rowid属性值，一般和select_row方法一起用
+        """
         try:
             colid = self.get_attribute_info("xpath",
                                             f"(//table[@class='vxe-table--header'])[{self.index}]//thead/tr/th//span[text()='{header}']//parent::div//parent::th",
@@ -43,8 +47,11 @@ class Table(BasePage):
             self.logger.error(f"定位不到列表头:{header}和rowid={rowid}")
             raise Exception("定位不到元素")
 
-#   获取最后一行的单元格的值
     def get_last_row_value(self,header):
+        """
+        获取最后一行的某单元格的值
+        header：表头
+        """
         try:
             colid=self.get_attribute_info("xpath",f"(//table[@class='vxe-table--header'])[{self.index}]//thead/tr/th//span[text()='{header}']//parent::div//parent::th","colid")
             return self.get_text("xpath",f"(//table[@class='vxe-table--body'])[{self.index}]//tr[last()]/td[@colid='"+colid+"']//span")
@@ -52,8 +59,11 @@ class Table(BasePage):
             self.logger.error(f"定位不到列表头:{header}")
             raise Exception("定位不到元素")
 
-    #列表中选择行传入表头和值，会分页查找
     def select_row(self, header, value):
+        """
+        table中点击选择行，会分页查找
+        header：表头，value：值
+        """
         colid = self.get_attribute_info("xpath",f"(//table[@class='vxe-table--header'])[{self.index}]//thead/tr/th//span[text()='{header}']//parent::div//parent::th","colid")
         while True:
             try:
@@ -101,6 +111,10 @@ class Table(BasePage):
         self.click("xpath",f"(//table[@class='vxe-table--body'])[{self.index + 1}]//tr[@rowid='" + rowid + "']//ul[@role='menubar']")
 
     def input_by_rowid(self, rowid,header,value):
+        """
+        列表中单行文本输入值
+        header：表头 , rowid: rowid属性值，一般和select_row方法一起用 , value:值
+        """
         try:
             colid=self.get_attribute_info("xpath",f"(//table[@class='vxe-table--header'])[{self.index}]//thead/tr/th//span[text()='{header}']//parent::div//parent::th","colid")
             self.input("xpath",f"(//table[@class='vxe-table--body'])[{self.index}]//tr[@rowid='{rowid}']/td[@colid='" + colid + "']//input",value)
@@ -108,8 +122,11 @@ class Table(BasePage):
             self.logger.error(f"定位不到列表头:{header}和值{value}")
             raise Exception("定位不到元素")
 
-    #根据表头输入第row行的值
     def input_by_row(self, header,value,row=1):
+        """
+        列表中单行文本输入值
+        header：表头 , row：行号 , value:值
+        """
         try:
             colid=self.get_attribute_info("xpath",f"(//table[@class='vxe-table--header'])[{self.index}]//thead/tr/th//span[text()='{header}']//parent::div//parent::th","colid")
             self.input("xpath",f"(//table[@class='vxe-table--body'])[{self.index}]//tr[{row}]/td[@colid='" + colid + "']//input",value)
@@ -118,6 +135,10 @@ class Table(BasePage):
             raise Exception("定位不到元素")
 
     def input_select_by_row(self, header,value,row=1):
+        """
+        列表中下拉框输入值
+        header：表头 , row：行号 , value:值
+        """
         try:
             colid = self.get_attribute_info("xpath",f"(//table[@class='vxe-table--header'])[{self.index}]//thead/tr/th//span[text()='{header}']//parent::div//parent::th","colid")
             self.click("xpath",f"(//table[@class='vxe-table--body'])[{self.index}]//tr[{row}]/td[@colid='" + colid + "']//input")
@@ -126,12 +147,12 @@ class Table(BasePage):
             self.logger.error(f"定位不到列表头:{header}和值{value}")
             raise Exception("定位不到元素")
 
-    # 列表里选行击加锁按钮,输入唯一的列表值
-
+    #列表里选行击加锁按钮,输入唯一的列表值
     def superlockButton(self, value):
         rowid = self.get_attribute_info("xpath",f"(//table[@class='vxe-table--body'])[{self.index}]//span[text()='{value}']//parent::div//parent::td//parent::tr","rowid")
         self.click("xpath", f"(//table[@class='vxe-table--body'])[{self.index+1}]//tr[@rowid='"+rowid+"']//div[contains(text(),'加锁(高级)')]")
 
+    #列表里选行击解锁按钮,输入唯一的列表值
     def lockButton(self, value):
         rowid = self.get_attribute_info("xpath",f"(//table[@class='vxe-table--body'])[{self.index}]//span[text()='{value}']//parent::div//parent::td//parent::tr","rowid")
         self.click("xpath",f"(//table[@class='vxe-table--body'])[{self.index + 1}]//tr[@rowid='" + rowid + "']//div[contains(text(),'加锁(常规)')]")
@@ -163,7 +184,6 @@ class Table(BasePage):
     # 点...弹出点击完成按钮
     def menu_complete(self):
         self.click("xpath","//div[@class='el-menu--horizontal tos-el-menu__button__submenu' and not (contains(@style,'display: none'))]//ul[@role='menu']//li[@role='menuitem']//span[text()='完成']")
-
 
     #表格内打钩
     def tick_off_box(self,row):

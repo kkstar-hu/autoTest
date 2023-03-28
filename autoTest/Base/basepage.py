@@ -77,12 +77,13 @@ class BasePage:
         webelement.send_keys(value)
 
 
-    #当页面多个相同的控件用此方法
+    #输入内容带清除，当页面多个相同的控件用此方法
     def input_by_index(self, selector_by, selector_value, value,index=1):
         webelement = self.get_elements(selector_by, selector_value)[index]
         webelement.clear()
         webelement.send_keys(value)
 
+    # 输入内容不带清除
     def input_no_clear(self, selector_by, selector_value, value):
         self.get_element(selector_by, selector_value).send_keys(value)
 
@@ -90,11 +91,11 @@ class BasePage:
         em = self.get_elements(selector_by, selector_value)[index]
         em.send_keys(value)
 
-
+    #点击
     def click(self, by,selector):
         self.get_element(by,selector).click()
 
-    # 当页面多个相同的控件用此方法
+    #点击，当页面多个相同的控件用此方法
     def click_by_index(self, by, selector,index):
         self.get_elements(by, selector)[index].click()
 
@@ -118,10 +119,9 @@ class BasePage:
     def waitloading(self, seconds=3):
         self.driver.implicitly_wait(seconds)
 
-    # 显示等待
     def element_wait(self, by, value, secs=5):
         """
-        等待元素显示
+         显示等待，等待元素显示
         """
         try:
             if by == "id":
@@ -142,10 +142,9 @@ class BasePage:
         except TimeoutException:
             print("查找元素超时请检查元素")
 
-        # 显示等待
     def get_elements_wait(self, by, value, index=0,secs=5):
         """
-        等待元素显示
+        显示等待，等待元素显示，返回元素
         """
         try:
             if by == "id":
@@ -227,8 +226,6 @@ class BasePage:
     def get_text(self,by,selector):
         """
         获得元素文本信息
-        用法:
-        driver.get_text("css=>#el")
         """
         el = self.get_elements_wait(by,selector)
         return el.text
@@ -237,8 +234,6 @@ class BasePage:
     def get_value(self,by,selector):
         """
         获得元素文本信息
-        用法:
-        driver.get_text("css=>#el")
         """
         return self.get_attribute_info(by,selector,'textContent')
 
@@ -248,6 +243,7 @@ class BasePage:
         el = self.get_elements(by,selector)[index]
         return  el.text
 
+    #比较值
     def compareValue(self,by,selector, expect):
         actual = self.get_text(by,selector).strip()
         check.equal(actual,expect)
@@ -258,18 +254,14 @@ class BasePage:
 
     def get_display(self,by,selector,index):
         """
-        获取元素来显示，返回结果为真或假.
-        用法:
-        driver.get_display("css=>#el")
+        获取元素是否显示，返回结果为真或假.
         """
         el = self.get_elements(by,selector)[index]
         return el.is_displayed()
 
     def get_enable(self,by,selector,index):
         """
-        获取元素来显示，返回结果为真或假.
-        用法:
-        driver.get_display("css=>#el")
+        获取元素是否可编辑，为灰，返回结果为真或假.
         """
         el = self.get_elements(by,selector)[index]
         return el.is_enabled()
@@ -311,7 +303,6 @@ class BasePage:
         """
         self.driver.switch_to.window(handle)
 
-
     def switchWindow(self, index):
         """
         切换窗口，通过index第几个窗口，从0开始
@@ -345,7 +336,7 @@ class BasePage:
 
     def get_alert_text(self):
         """
-        获取提示信息
+        获取提示信息内容，未有提示信息返回none
         """
         try:
             return self.get_text("xpath","//div[@role='alert']//p")
@@ -361,9 +352,11 @@ class BasePage:
         """
         return self.elementExist("xpath",f"//div[@role='alert']//p[contains(text(),'{expectAlert}')]")
 
+    #比较实际提示内容和期望提示内容
     def check_alert(self, expectAlert):
         check.equal(self.get_alert_text(),expectAlert)
 
+    # 比较实际提示内容和期望提示内容，并关闭当前提示信息
     def check_alert_and_close(self, expectAlert):
         check.equal(self.get_alert_text(), expectAlert)
         try:
@@ -376,8 +369,6 @@ class BasePage:
         关闭提示信息
         """
         self.click('xpath', f"//div/p[text()='{name}']/following::div[@class='el-notification__closeBtn el-icon-close']")
-
-
 
     def wait_element_appear(self, selector, wait_time=10):
         """
@@ -410,8 +401,6 @@ class BasePage:
     def double_click(self, by,selector):
         """
         双击元素.
-        用法:
-        driver.double_click("css=>#el")
         """
         el = self.get_element(by,selector)
         ActionChains(self.driver).double_click(el).perform()
@@ -423,10 +412,9 @@ class BasePage:
         e1 = self.get_element(by,selector)
         ActionChains(self.driver).move_to_element(e1).perform()
 
-
     def drag_mouse_to_element(self,by1,source,by2,target):
         """
-        鼠标拖动元素
+        鼠标拖动元素到目标位置
         """
         e1 = self.get_element(by1,source)
         e2 = self.get_element(by2,target)
@@ -446,6 +434,9 @@ class BasePage:
         ActionChains(self.driver).move_by_offset(offsetx, offsety).perform()
 
     def move_release(self):
+        """
+        鼠标松开
+        """
         ActionChains(self.driver).release().perform()
 
     def get_page_source(self):
@@ -461,12 +452,16 @@ class BasePage:
         return select_text
 
     def hasInput(self,input,data):
+        """
+        判断yaml中是否存在健input[data]
+        """
         try:
             input[data]
         except KeyError:
             return False
         else:
             return True
+
     def take_screen_shot(self, file_name):
         """
         page 页面截图操作
@@ -477,7 +472,7 @@ class BasePage:
         """
         执行JavaScript脚本.
         用法:
-        driver.js("window.scrollTo(200,1000);")
+        self.js("window.scrollTo(200,1000);")
         """
         self.driver.execute_script(script)
 
@@ -486,14 +481,12 @@ class BasePage:
         self.click("xpath","//button/span[contains(text(),'保存并关闭')]")
         self.waitloading()
 
-
-    # 点击保存并关闭按钮
+    #点击保存按钮
     def save(self):
         self.click("xpath", "//button/span[contains(text(),'保 存')]")
         self.waitloading()
 
-        # 点击保存并关闭按钮
-
+    #点击取消按钮
     def cancel(self):
         self.click("xpath", "//button//span[text()='取消']")
         self.waitloading()
