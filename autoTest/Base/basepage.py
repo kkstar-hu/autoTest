@@ -398,6 +398,13 @@ class BasePage:
         e1 = self.get_element(by,selector)
         ActionChains(self.driver).click(e1).perform()
 
+    def left_clickandsend(self,by,selector,value):
+        """
+        鼠标左键点击,并输入内容（针对input无法使用的情况）
+        """
+        e1 = self.get_element(by,selector)
+        ActionChains(self.driver).click(e1).send_keys(value).perform()
+
     def double_click(self, by,selector):
         """
         双击元素.
