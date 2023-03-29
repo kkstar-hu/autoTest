@@ -11,3 +11,6 @@ from BTOSLJ.PageObject.blj.workhour import Blj
 def test_workhuor(host):
     b = Blj(host)
     b.test_type()
+    b.test_params_01()
+    b.test_params_02()
+    b.test_no_params()

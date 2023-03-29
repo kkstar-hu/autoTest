@@ -17,17 +17,15 @@ class RequestMain:
     def __init__(self, host=None):
         self.session = requests.session()
         self.logger = getlogger()
-        '''
+        self.host = host
         if(host == '10.166.0.70'):
             self.headers = {
             'Content-Type': 'application/json',
             "Authorization": 'Bearer '+ self.get_token()
-        }
-        '''
-        self.host = host
-        #self.host == '10.116.8.16:8520'
-        self.headers = {
-                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        if(host == '10.116.8.16:8520'):
+            self.headers = {
+                    'Content-Type': 'application/x-www-form-urlencoded'
             }
 
 
@@ -44,16 +42,14 @@ class RequestMain:
 	    """
         try:
             header = self.headers if headers == None else headers
-            t1 = time.time()
             res = self.session.request(method, "http://"+self.host+url, params=params, data=data, json=json, headers=header, **kwargs)
-            t2 = time.time()
         except exceptions.RequestException as e:
             self.logger.error("请求失败:", exc_info = True)
         else:
             if res.status_code == 200:
-                t = Decimal(t2 - t1).quantize(Decimal("0.001"), rounding ="ROUND_HALF_UP")
+                t = Decimal(res.elapsed.total_seconds()).quantize(Decimal("0.001"), rounding ="ROUND_HALF_UP")
                 self.logger.info(url + " 耗时:%ss"%t)
-                return res.text
+                return res
             else:
                 if(params):
                     payload = params
@@ -71,9 +67,9 @@ class RequestMain:
 
     # 格式化json
     def format(self, res):
-        if(type(res) == type(dict())):
-            return myjson.dumps(res, indent=4)
-        return myjson.dumps(res.json(), indent=4)
+        if(type(res) != type(dict())):
+            res = myjson.loads(res)
+        return myjson.dumps(res, indent=4, ensure_ascii=False)
 
 
     def get_token(self):
@@ -92,7 +88,7 @@ class RequestMain:
         else:
             return myjson.loads(res)["data"]["access_token"]
 
-
+    '''
     def get_object_data(self, dict_data):
         # 外层dict
         schema_data = {}
@@ -136,12 +132,45 @@ class RequestMain:
             with open(path, mode='w', encoding='utf-8') as f:
                 myjson.dump(schema, f, ensure_ascii=False, sort_keys=False, indent=4, separators=(',',': '))
             return schema
+    '''
+    def generate_schema(cls, data:dict):
+        schema = {"type": "object", "properties": {}}
+        for key, value in data.items():
+            if isinstance(value, bool):
+                schema["properties"][key] = {"type": "boolean"}
+            elif isinstance(value, int):
+                schema["properties"][key] = {"type": "integer"}
+            elif isinstance(value, float):
+                schema["properties"][key] = {"type": "number"}
+            elif isinstance(value, str):
+                schema["properties"][key] = {"type": "string"}
+            elif isinstance(value, list):
+                schema["properties"][key] = {"type": "array", "items": {}}
+                if value:
+                    item_schema = cls.generate_schema(value[0])
+                    if item_schema:
+                        schema["properties"][key]["items"] = item_schema
+            elif isinstance(value, dict):
+                schema["properties"][key] = cls.generate_schema(value)
+        return schema
 
-
-    def load_json(self, path):
+    def save_schema(self, data : dict, path : str):
         try:
-            with open(path,'r',encoding='utf-8') as f:
-                model=json.load(f)
+            if(type(data) != type(dict())):
+                data = myjson.loads(data)
+            schema = self.generate_schema(data)
+            with open(path,'w',encoding='utf-8') as f:
+                myjson.dump(schema, f, indent=4)
+        except FileNotFoundError:
+            self.logger.error("文件不存在:%s"%path, exc_info=True)
+        else:
+            return schema
+
+
+    def load_json(self, path : str):
+        try:
+            with open(path, 'r', encoding='utf-8') as f:
+                model = json.load(f)
         except FileNotFoundError:
             self.logger.error("文件不存在:%s"%path, exc_info=True)
         else:
@@ -152,6 +181,8 @@ class RequestMain:
         try:
             if(type(res_json) != type(dict())):
                 res_json = json.loads(res_json)
+            if(type(schema) != type(dict())):
+                schema = json.loads(schema)
             validate(instance = res_json, schema = schema)
         except SchemaError as e:
             self.logger.info("schema格式错误, 错误位置:{}, 提示信息:{}"
@@ -168,15 +199,16 @@ class RequestMain:
 
 
 if __name__ == "__main__":
-    myrequest = RequestMain(host = "http://10.116.8.16:8520")
+    myrequest = RequestMain(host = "10.116.8.16:8520")
     params = {
         "workdate": "2023-03-24",
         "tenant_id": "SIPGLJ"
     }
 
     res = myrequest.request_main("get","/api/blj/DAYNIGHTWORKHOUR/DAY", params = params)
-    schema = myrequest.generate_schema(res, "1.json")
+    schema = myrequest.generate_schema(myjson.loads(res))
+    print(myrequest.format(schema))
     print(myrequest.check_json(res, schema))
-    myrequest.load_json("1.json")
+    #myrequest.load_json("1.json")
 
 

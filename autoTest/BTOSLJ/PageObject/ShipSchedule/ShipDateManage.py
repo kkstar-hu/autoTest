@@ -1,15 +1,12 @@
 # -*- coding:utf-8 -*-
 import time
-
 import allure
 import pytest_check as check
 from Base.basepage import BasePage
-from Commons.DateTime import DataTime
 from BTOSLJ.Config.config import mydata
 from BTOSLJ.Controls.BTOS_text import BtosText
 from BTOSLJ.Controls.BTOS_table import BTOS_table
 from Commons.DateTime import DataTime
-from BTOSLJ.Config import config
 
 class ShipDate(BasePage):
     '''
@@ -41,14 +38,14 @@ class ShipDate(BasePage):
         self.textInput.input_text_by_label_drawer("船代联系人", input["船代联系人"])
         self.textInput.select_by_label_drawer("贸易类型", input["贸易类型"])
         self.textInput.click("xpath", "//span[text()='保存并关闭']")
-        self.element_wait("xpath", "//div[@role='alert']//p")
+        #self.element_wait("xpath", "//div[@role='alert']//p")
         self.check_alert_and_close("新增成功")
 
     # 检查数据
     @allure.step("检查数据")
     def check_schedule(self, input : dict):
-        self.textInput.select_by_label_correct("船名", input["船舶代码"], 0.5)
-        self.click('xpath', "//span[contains(text(),'检索')]")
+        #self.textInput.select_by_label_correct("船名", input["船舶代码"], 0.5)
+        #self.click('xpath', "//span[contains(text(),'检索')]")
         self.rowid = self.table.select_row("进口航次", input["航次"])
         check.equal(self.table.get_value_by_rowid(self.rowid, '中文船名'), mydata.vsl_cnname)
         check.equal(self.table.get_value_by_rowid(self.rowid, '英文船名'), mydata.vsl_enname)
@@ -78,7 +75,7 @@ class ShipDate(BasePage):
     def divide_region(self, input : dict):
         self.logger.info("分区")
         self.table.click_header_button("分区")
-        self.get_element_wait("xpath", "//span[contains(text(), '保存')]").click()
+        self.get_elements_wait("xpath", "//span[contains(text(), '保存')]").click()
         self.check_alert_and_close("分区成功")
         self.rowid = self.table.select_row("进口航次", input["航次"])
         check.equal(self.table.get_value_by_rowid(self.rowid, '作业区'), '罗泾')
@@ -88,7 +85,7 @@ class ShipDate(BasePage):
     def divide_region_2(self, input : dict):
         self.logger.info("再次分区")
         self.table.click_header_button("分区")
-        self.get_element_wait("xpath", "//span[contains(text(), '保存')]").click()
+        self.get_elements_wait("xpath", "//span[contains(text(), '保存')]").click()
         self.check_alert_and_close("只有未分区的船期可以分区")
         self.rowid = self.table.select_row("进口航次", input["航次"])
         check.equal(self.table.get_value_by_rowid(self.rowid, '作业区'), '罗泾')
@@ -98,7 +95,8 @@ class ShipDate(BasePage):
         self.logger.info("新增靠泊计划")
         self.rowid = self.table.select_row("进口航次", input["航次"])
         self.table.click_inner_button(self.rowid, "修改")
-        self.get_element_wait("xpath", "//span[text()='新增靠泊']/..").click()
+        time.sleep(0.5)
+        self.get_elements_wait("xpath", "//span[text()='新增靠泊']/..").click()
         self.textInput.input_text_by_label_drawer("起始尺码", input["起始尺码"])
         self.textInput.select_by_label_drawer("靠泊方向", input["靠泊方向"])
         self.textInput.select_by_label_drawer("起始泊位", input["起始泊位"])

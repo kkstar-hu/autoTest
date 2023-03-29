@@ -10,10 +10,10 @@ if __name__ == '__main__':
 
 
     pytest.main(['-sv', 'test_01_AddShipSchedule.py',
-                 '--alluredir', '../../Report/result', "--clean-alluredir"])
+                 '--alluredir', 'Report/result', "--clean-alluredir"])
 
     #urllib3.disable_warnings()
-    os.system('allure generate ../../Report/result -o ../../Report/html --clean')
+    os.system('allure generate Report/result -o Report/html --clean')
     allurechange.set_windos_title('罗泾BTOS3.0自动化测试')
     report_title = allurechange.get_json_data("罗泾BTOS3.0测试报告")
     allurechange.write_json_data(report_title)

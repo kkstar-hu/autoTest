@@ -10,7 +10,7 @@ driver = None
 @pytest.fixture(scope="session")
 def driver():
     global driver
-    driver=webdriver.Chrome()
+    driver = webdriver.Chrome()
     driver.maximize_window()
     login = Login(driver)
     login.login()

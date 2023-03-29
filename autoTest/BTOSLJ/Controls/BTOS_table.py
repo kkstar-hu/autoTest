@@ -15,12 +15,10 @@ class BTOS_table(BasePage):
         try:
             #print(f"(//div[contains(@class, 'toscom-panel')])[{self.index}]//span[@class='vxe-cell--title' and text()='{header}']/../..")
             colid = self.get_attribute_info("xpath", f"(//div[contains(@class, 'toscom-panel')])[{self.index}]//span[@class='vxe-cell--title' and text()='{header}']/../..", "colid")
-            #print(colid)
             rowid = self.get_attribute_info("xpath", f"(//div[contains(@class, 'toscom-panel')])[{self.index}]//td[@colid='{colid}']//span[contains(text(),'{value}')]/../../..","rowid")
-            #print(rowid)
             e1 = self.get_elements("xpath", f"(//div[contains(@class, 'toscom-panel')])[{self.index}]//tr[@rowid='{rowid}']")[0]
-        except Exception as e:
-            self.logger.error("定位元素失败:", e)
+        except Exception:
+            self.logger.error(f"定位元素失败:", exc_info=True)
         else:
             # print(f"(//div[contains(@class, 'toscom-panel')])[{self.index}]//tr[@rowid='{rowid}']")
             ActionChains(self.driver).click(e1).perform()
@@ -29,24 +27,24 @@ class BTOS_table(BasePage):
     def get_value_by_rowid(self, rowid : str, header : str):
         try:
             colid = self.get_attribute_info("xpath", f"(//div[contains(@class, 'toscom-panel')])[{self.index}]//span[@class='vxe-cell--title' and text()='{header}']/../..", "colid")
-        except Exception as e:
-            self.logger.error("定位元素失败:", e)
+        except Exception:
+            self.logger.error(f"定位元素失败:", exc_info=True)
         else:
             return self.get_attribute_info("xpath", f"(//div[contains(@class, 'toscom-panel')])[{self.index}]//tr[@rowid='{rowid}']/td[@colid='{colid}']//span", 'textContent')
 
     def click_header_button(self, name : str):
         try:
-            e1 = self.get_element_wait("xpath", f"(//div[contains(@class, 'toscom-panel')])[{self.index}]//div[@class='toscom-buttongroup']//span[text()='{name}']/..")
-        except Exception as e:
-            self.logger.error("定位元素失败:", e)
+            e1 = self.get_elements_wait("xpath", f"(//div[contains(@class, 'toscom-panel')])[{self.index}]//div[@class='toscom-buttongroup']//span[text()='{name}']/..")
+        except Exception:
+            self.logger.error(f"定位元素失败:", exc_info=True)
         else:
             e1.click()
 
     def click_inner_button(self, rowid : str, name : str):
         try:
-            e1 = self.get_element_wait("xpath", f"(//div[contains(@class, 'toscom-panel')])[{self.index}]//tr[@rowid='{rowid}']//span[text()='{name}']/..")
-        except Exception as e:
-            self.logger.error("定位元素失败:", e)
+            e1 = self.get_elements_wait("xpath", f"(//div[contains(@class, 'toscom-panel')])[{self.index}]//tr[@rowid='{rowid}']//span[text()='{name}']/..")
+        except Exception:
+            self.logger.error(f"定位元素失败:", exc_info=True)
         else:
             e1.click()
 
@@ -57,19 +55,9 @@ class BTOS_table(BasePage):
                                             "colid")
             return self.get_text("xpath",
                                  f"(//table[@class='vxe-table--body'])[{self.index}]//tr[{row}]/td[@colid='" + colid + "']//span")
-        except NoSuchElementException:
-            raise Exception("定位不到元素")
+        except Exception:
+            self.logger.error(f"定位元素失败:", exc_info=True)
 
-    def get_value_by_rowid(self, rowid, header):
-        try:
-            colid = self.get_attribute_info("xpath",
-                                            f"(//table[@class='vxe-table--header'])[{self.index}]//thead/tr/th//span[text()='{header}']//parent::div//parent::th",
-                                            "colid")
-            return self.get_text("xpath",
-                                 f"(//table[@class='vxe-table--body'])[{self.index}]//tr[@rowid='{rowid}']/td[@colid='" + colid + "']//span")
-        except NoSuchElementException:
-            self.logger.error(f"定位不到列表头:{header}和rowid={rowid}")
-            raise Exception("定位不到元素")
 
     #   获取最后一行的单元格的值
     def get_last_row_value(self, header):
@@ -83,25 +71,6 @@ class BTOS_table(BasePage):
             self.logger.error(f"定位不到列表头:{header}")
             raise Exception("定位不到元素")
 
-    # 列表中选择行传入表头和值，会分页查找
-    def select_row(self, header, value):
-        colid = self.get_attribute_info("xpath",
-                                        f"(//table[@class='vxe-table--header'])[{self.index}]//thead/tr/th//span[text()='{header}']//parent::div//parent::th",
-                                        "colid")
-        while True:
-            try:
-                self.click("xpath",
-                           f"(//table[@class='vxe-table--body'])[{self.index}]//tr/td[@colid='" + colid + "']//span[text()='" + value + "']")
-                rowid = self.get_attribute_info("xpath",
-                                                f"(//table[@class='vxe-table--body'])[{self.index}]//tr/td[@colid='" + colid + "']//span[text()='" + value + "']//parent::div//parent::td//parent::tr",
-                                                "rowid")
-                return rowid
-            except:
-                if self.elementExist("xpath", "//button[@title ='下一页' and @class='vxe-pager--next-btn']"):
-                    self.click("xpath", "//button[@title ='下一页' and @class='vxe-pager--next-btn']")
-                else:
-                    self.logger.error(f"定位不到列表头:{header}和值{value}")
-                    raise Exception("定位不到元素")
 
     # 列表中选择行传入表头和值，会分页查找,点击修改按钮
     def click_edit(self, header, value):

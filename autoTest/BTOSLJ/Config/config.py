@@ -3,6 +3,8 @@ from BTOSLJ.Controls.BTOS_data import BTOS_TempData, BTOS_CustomData
 
 host = "http://10.166.0.131:20000/#/login"
 
+request_blj_host = "10.116.8.16:8520"
+
 # 账户
 username = "ljadmin"
 password = "q1234567"
