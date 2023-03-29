@@ -1,16 +1,21 @@
-#用户基本信息
-- 用户账号: "testAddUser8"
+#用户基本信息 testAddUser8
+- 用户账号: "dea1"
   用户名称: "test_add_user8"
   用户密码: "Test@123"
   用户状态: "正常"
   归属码头: "XRCT"
   操作码头: "XRCT"
-  绑定角色: "测试"
+  绑定角色: "开发员,测试"
 
-  名称: "test_add_user7"
+  名称: "test_add_user8"
   账户类型: ""
   归属码: ""
   操作码: ""
   创建日期: ""
   最后更新日期: ""
   登录失败次数: ""
+
+  显示名称: "testUpdataUser8"
+  更新的归属码头: "XRCT,XICT"
+  备注: "UPDATE"
+

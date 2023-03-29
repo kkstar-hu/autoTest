@@ -22,11 +22,22 @@ def testUserAdd(driver, input):
     Tag(driver).closeTagGtos('用户管理')  #关闭用户管理Tag
 
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'user_manage','user_data.yaml')))
-def testNewUserinformation(driver, input):
+def testNewUserInformation(driver, input):
+    """查询用户"""
     menu = GtosMenu(driver)
     menu.select_level_Menu("系统管理,用户管理")
     userManager = User_Manage(driver)
     userManager.New_User_Select(input)  #查询用户
     Tag(driver).closeTagGtos('用户管理')  #关闭用户管理Tag
+
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'user_manage','user_data.yaml')))
+def testUserUpdate(driver, input):
+    """更新用户"""
+    menu = GtosMenu(driver)
+    menu.select_level_Menu("系统管理,用户管理")
+    userManager = User_Manage(driver)
+    userManager.New_User_Select(input)  #查询用户
+    userManager.Update_User(input)  #更新用户
+
 
 
