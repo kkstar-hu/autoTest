@@ -1,0 +1,11 @@
+#用户更新信息
+- 用户账号: "testAddUser7"
+  用户名称: "testUpdataUser7"
+  用户状态: "正常"
+  归属码头: "XICT"
+  操作码头: "XRCT"
+  期望操作码头: "XICT,XRCT"
+  绑定角色: "开发员"
+  期望绑定角色: "开发员,测试"
+  名称: "testUpdataUser7"
+  备注: "testUpdateUser7"
