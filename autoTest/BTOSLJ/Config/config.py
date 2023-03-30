@@ -32,4 +32,4 @@ mydata.gtypecd, mydata.pktype = c.get_pktype
 mydata.licese_plate = c.get_license_plate
 mydata.bill = c.get_bill
 mydata.voyage = c.get_Ivoyage
-mydata.print_data
+#mydata.print_data

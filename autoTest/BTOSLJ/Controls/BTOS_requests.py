@@ -48,7 +48,7 @@ class RequestMain:
         else:
             if res.status_code == 200:
                 t = Decimal(res.elapsed.total_seconds()).quantize(Decimal("0.001"), rounding ="ROUND_HALF_UP")
-                self.logger.info(url + " 耗时:%ss"%t)
+                self.logger.info(url + " 用时:%ss"%t)
                 return res
             else:
                 if(params):
@@ -88,51 +88,7 @@ class RequestMain:
         else:
             return myjson.loads(res)["data"]["access_token"]
 
-    '''
-    def get_object_data(self, dict_data):
-        # 外层dict
-        schema_data = {}
-        # 遍历字典中的key
-        for dict_data_k in dict_data.keys():
-            # 如果value是字符串/数字/布尔值/小数/None,则直接存入schema_data
-            if type(dict_data[dict_data_k]) in (str, int, bool, float, list):
-                if type(dict_data[dict_data_k]) is str:
-                    schema_data[dict_data_k] = {"type": "string"}
-                if type(dict_data[dict_data_k]) is int:
-                    schema_data[dict_data_k] = {"type": "integer"}
-                if type(dict_data[dict_data_k]) is bool:
-                    schema_data[dict_data_k] = {"type": "boolean"}
-                if type(dict_data[dict_data_k]) is float:
-                    schema_data[dict_data_k] = {"type": "number"}
-                if type(dict_data[dict_data_k]) is list:
-                    this = {"type": "array", "items" : None }
-                    for i in dict_data[dict_data_k]:
-                        this["items"]=(self.generate_schema(data=i, flag=True))
-                    schema_data[dict_data_k] = this
-            elif dict_data[dict_data_k] is None:
-                schema_data[dict_data_k] = {"type": "null"}
-                continue
-            elif type(dict_data[dict_data_k]) == dict:
-                # 递归
-                schema_temp = {"type": "object", 'properties': self.get_object_data(dict_data[dict_data_k])}
-                schema_data[dict_data_k] = schema_temp
-            else:
-                print(dict_data[dict_data_k] == None)
-        return schema_data
 
-
-    def generate_schema(self, data, path=None, flag=False):
-        # 固定外层kv
-        if(type(data) != type(dict())):
-            data = json.loads(data)
-        if(flag):
-            return {'type': "object", "required": [], 'properties': self.get_object_data(data)}
-        else:
-            schema = {'type': "object", "required": [], 'properties': self.get_object_data(data)}
-            with open(path, mode='w', encoding='utf-8') as f:
-                myjson.dump(schema, f, ensure_ascii=False, sort_keys=False, indent=4, separators=(',',': '))
-            return schema
-    '''
     def generate_schema(cls, data:dict):
         schema = {"type": "object", "properties": {}}
         for key, value in data.items():
@@ -166,7 +122,6 @@ class RequestMain:
         else:
             return schema
 
-
     def load_json(self, path : str):
         try:
             with open(path, 'r', encoding='utf-8') as f:
@@ -184,13 +139,11 @@ class RequestMain:
             if(type(schema) != type(dict())):
                 schema = json.loads(schema)
             validate(instance = res_json, schema = schema)
-        except SchemaError as e:
-            self.logger.info("schema格式错误, 错误位置:{}, 提示信息:{}"
-                             .format("-->".join([i for i in e.path if i]), e.message))
+        except SchemaError:
+            self.logger.error("schema格式错误, 提示信息:", exc_info=True, stack_info=False)
             return False
-        except ValidationError as e:
-            self.logger.info("响应数据不符合schema, 错误字段:{}, 提示信息:{}"
-                             .format("-->".join([i for i in e.path if i]), e.message))
+        except ValidationError:
+            self.logger.error("响应数据不符合schema, 提示信息:", exc_info=True, stack_info=False)
             return False
         else:
             return True
