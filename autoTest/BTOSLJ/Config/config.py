@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 from BTOSLJ.Controls.BTOS_data import BTOS_TempData, BTOS_CustomData
+from Commons.RandomFunction import CommonGenerator
 
 host = "http://10.166.0.131:20000/#/login"
 
@@ -18,6 +19,12 @@ mydata.vsl_cnname = "测试船舶"
 mydata.vsl_enname = "AUTO TEST"
 mydata.vsl_loa = 150
 mydata.hatchamount = 10
+global importNumber
+#importNumber=CommonGenerator.generate_spec("I",4)
+importNumber="B0313J"
+global outportNumber
+#outportNumber=CommonGenerator.generate_spec("E",4)
+outportNumber=None
 
 # 其他数据
 c = BTOS_CustomData()

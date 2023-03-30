@@ -17,11 +17,11 @@ class Login(BasePage):
         self.click("x", "//div[@id='app']/div[3]//span[contains(text(),'登录')]/..")
         bg_img = self.get_elements_wait("xpath","//div[@class='verify-img-panel']/img", 1)
         background_url = bg_img.get_attribute("src")
-        #print(os.getcwd())
-        self.onload_save_img(background_url[22:], r'..\..\..\PageObject\img\background.png')
+        print(os.getcwd())
+        self.onload_save_img(background_url[22:], os.path.join(os.getcwd(), 'background.png'))
         front_img = self.get_elements_wait("xpath","//div[@class='verify-sub-block']/img", 1)
         slider_url = front_img.get_attribute("src")  # 获取图片地址
-        self.onload_save_img(slider_url[22:], r'..\..\..\PageObject\img\slider.png') # 保存图片
+        self.onload_save_img(slider_url[22:], os.path.join(os.getcwd(), 'slider.png')) # 保存图片
         distance = self.identify_gap() + 12  # 滑动距离
         self.clickandhold("xpath","//div[@id='app']/div[3]//div[@class='verify-move-block']")  # 长按滑块
         self.move_by_xy(distance, 0)  # 拖动滑块
@@ -37,11 +37,11 @@ class Login(BasePage):
 
 
     '''计算滑动距离'''
-    def identify_gap(self,out = r'..\..\..\PageObject\img\out.png'):
+    def identify_gap(self,out = os.path.join(os.getcwd(), 'out.png')):
 
         # 读取背景图片和缺口图片
-        bg_img = cv2.imread(r'..\..\..\PageObject\img\background.png') # 背景图片
-        tp_img = cv2.imread(r'..\..\..\PageObject\img\slider.png') # 缺口图片
+        bg_img = cv2.imread(os.path.join(os.getcwd(), 'background.png')) # 背景图片
+        tp_img = cv2.imread(os.path.join(os.getcwd(), 'slider.png')) # 缺口图片
 
         # 边缘检测
         bg_edge = cv2.Canny(bg_img, 100, 200)
