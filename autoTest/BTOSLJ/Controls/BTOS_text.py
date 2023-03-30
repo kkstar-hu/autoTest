@@ -21,30 +21,30 @@ class BtosText(BasePage):
             # 由于前端基础组件的错误，诞生了这段不可名状的xpath
             self.wait_clickable((By.XPATH, f"(//div[@class='dialogCon']//label[text()='{label}']/following-sibling::div/div[1]//input[not(@tabindex)])[1]"))
             e1 = self.get_element("xpath", f"(//div[@class='dialogCon']//label[text()='{label}']/following-sibling::div/div[1]//input[not(@tabindex)])[1]")
-        except Exception as e:
-            self.logger.error("定位不到元素:", e)
+        except Exception:
+            self.logger.error(f"定位元素失败:", exc_info=True)
         else:
             e1.click()
             e1.send_keys(value)
 
     def input_by_for_drawer(self, f : str, value : str):
         try:
-            e1 = self.get_element_wait("xpath", f"(//div[@class='dialogCon']//label[@for='{f}']/following-sibling::div/div[1]//input[not(@tabindex)])[1]")
-        except Exception as e:
-            self.logger.error("定位不到元素:", e)
+            e1 = self.get_elements_wait("xpath", f"(//div[@class='dialogCon']//label[@for='{f}']/following-sibling::div/div[1]//input[not(@tabindex)])[1]")
+        except Exception:
+            self.logger.error(f"定位元素失败:", exc_info=True)
         else:
             e1.click()
             e1.send_keys(value)
 
     def select_by_label_drawer(self, label : str, value : str, t = 0):
         try:
-            e1 = self.get_element_wait("xpath", f"(//div[@class='dialogCon']//label[text()='{label}']/following-sibling::div/div[1]//input[not(@tabindex)])[1]")
+            e1 = self.get_elements_wait("xpath", f"(//div[@class='dialogCon']//label[text()='{label}']/following-sibling::div/div[1]//input[not(@tabindex)])[1]")
             e1.click()
             e1.send_keys(value)
             path = f"//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]//span[text()='{value}']/.."
             self.wait_visible((By.XPATH,path))
-        except Exception as e:
-            self.logger.error("定位不到元素:", e)
+        except Exception:
+            self.logger.error(f"定位元素失败:", exc_info=True)
         else:
             if(t):   # 针对模糊搜索调接口的下拉框，需要等待
                 time.sleep(t)
@@ -52,19 +52,19 @@ class BtosText(BasePage):
 
     def select_by_label_index(self, label : str, index : int):
         try:
-            e1 = self.get_element_wait("xpath", f"(//div[@class='dialogCon']//label[text()='{label}']/following-sibling::div/div[1]//input[not(@tabindex)])[1]")
+            e1 = self.get_elements_wait("xpath", f"(//div[@class='dialogCon']//label[text()='{label}']/following-sibling::div/div[1]//input[not(@tabindex)])[1]")
             e1.click()
-        except Exception as e:
-            self.logger.error("定位不到元素:", e)
+        except Exception:
+            self.logger.error(f"定位元素失败:", exc_info=True)
         else:
             self.click("xpath", f"//div[starts-with(@class,'el-select-dropdown el-popper') and not(contains(@style,'display: none'))]//li[{index+1}]")
 
 
     def input_time_by_label_drawer(self, label : str, time : str):
         try:
-            e1 = self.get_element_wait("xpath", f"(//div[@class='dialogCon']//label[text()='{label}']/following-sibling::div/div[1]//input[not(@tabindex)])[1]")
-        except Exception as e:
-            self.logger.error("定位不到元素:", e)
+            e1 = self.get_elements_wait("xpath", f"(//div[@class='dialogCon']//label[text()='{label}']/following-sibling::div/div[1]//input[not(@tabindex)])[1]")
+        except Exception:
+            self.logger.error(f"定位元素失败:", exc_info=True)
         else:
             e1.click()
             e1.send_keys(time, Keys.ENTER)
@@ -76,8 +76,8 @@ class BtosText(BasePage):
             e1.click()
             for x in value.split(","):
                 e1.send_keys(x, Keys.ENTER)
-        except Exception as e:
-            self.logger.error("定位不到元素:", e)
+        except Exception:
+            self.logger.error(f"定位元素失败:", exc_info=True)
         else:
             # self.click("xpath", "//div[@class='vue-treeselect__control-arrow-container']")
             pass
@@ -85,37 +85,37 @@ class BtosText(BasePage):
     # 多选框，按索引选择一个
     def mul2_select_by_label_index(self, label : str, index : int):
         try:
-            e1 = self.get_element_wait("xpath", f"(//div[@class='dialogCon']//label[text()='{label}']/following-sibling::div/div[1]//input[not(@tabindex)])[1]")
+            e1 = self.get_elements_wait("xpath", f"(//div[@class='dialogCon']//label[text()='{label}']/following-sibling::div/div[1]//input[not(@tabindex)])[1]")
             e1.click()
             self.wait_clickable((By.XPATH, f"//div[starts-with(@class,'el-select-dropdown el-popper') and not(contains(@style,'display: none'))]//li[{index+1}]"))
             self.click("xpath", f"//div[starts-with(@class,'el-select-dropdown el-popper') and not(contains(@style,'display: none'))]//li[{index+1}]")
-        except Exception as e:
-            self.logger.error("定位不到元素:", e)
+        except Exception:
+            self.logger.error(f"定位元素失败:", exc_info=True)
         else:
             self.click("xpath", f"//div[@class='dialogCon']//label[text()='{label}']")
 
     def wait_visible(self, locator : set, ses = 5):
         try:
             WebDriverWait(self.driver, 5, 1).until(EC.visibility_of_element_located(locator))
-        except Exception as e:
-            self.logger.error("等待元素可见失败:", e)
+        except Exception:
+            self.logger.error(f"等待元素可见失败:", exc_info=True)
 
     def wait_clickable(self, locator : set, ses = 5):
         try:
             WebDriverWait(self.driver, 5, 1).until(EC.element_to_be_clickable(locator))
-        except Exception as e:
-            self.logger.error("等待元素可点击失败:", e)
+        except Exception:
+            self.logger.error(f"等待元素可点击失败:", exc_info=True)
 
     # 如果前端正确，应该使用这个进行下拉选择
     def select_by_label_correct(self, label : str, value : str, t = 0):
         try:
-            e1 = self.get_element_wait("xpath", f"//label[contains(text(),'{label}')]/following-sibling::div//input")
+            e1 = self.get_elements_wait("xpath", f"//label[contains(text(),'{label}')]/following-sibling::div//input")
             e1.click()
             e1.send_keys(value)
             path = f"//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]//span[text()='{value}']/.."
             self.wait_visible((By.XPATH,path))
-        except Exception as e:
-            self.logger.error("定位不到元素:", e)
+        except Exception:
+            self.logger.error(f"定位元素失败:", exc_info=True)
         else:
             if(t):   # 针对模糊搜索调接口的下拉框，需要等待
                 time.sleep(t)

@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 
 import base64
+import os
 import time
 
 import cv2
@@ -14,19 +15,15 @@ class Login(BasePage):
         self.input_by_index("x", "//input[@name='useraccount']", config.username, 1)
         self.input_by_index("x", "//input[@name='password']", config.password, 1)
         self.click("x", "//div[@id='app']/div[3]//span[contains(text(),'登录')]/..")
-        #k = 1
-        # 获取原图
-        bg_img = self.get_element_wait("xpath","//div[@class='verify-img-panel']/img", 1)
+        bg_img = self.get_elements_wait("xpath","//div[@class='verify-img-panel']/img", 1)
         background_url = bg_img.get_attribute("src")
-        self.onload_save_img(background_url[22:], '../../../img/background.png')
-        # 获取缺块
-        front_img = self.get_element_wait("xpath","//div[@class='verify-sub-block']/img", 1)
+        #print(os.getcwd())
+        self.onload_save_img(background_url[22:], r'..\..\..\PageObject\img\background.png')
+        front_img = self.get_elements_wait("xpath","//div[@class='verify-sub-block']/img", 1)
         slider_url = front_img.get_attribute("src")  # 获取图片地址
-        self.onload_save_img(slider_url[22:], '../../../img/slider.png') # 保存图片
-        # 获取滑块
-        slide_element = self.get_element_wait("xpath","//div[@class='verify-move-block']", 1)
+        self.onload_save_img(slider_url[22:], r'..\..\..\PageObject\img\slider.png') # 保存图片
         distance = self.identify_gap() + 12  # 滑动距离
-        self.clickandhold(slide_element)  # 长按滑块
+        self.clickandhold("xpath","//div[@id='app']/div[3]//div[@class='verify-move-block']")  # 长按滑块
         self.move_by_xy(distance, 0)  # 拖动滑块
         self.move_release()  # 松开滑块
         # yz = self.get_element.("xpath", "//div[@class='verify-img-panel']/span").text
@@ -35,17 +32,16 @@ class Login(BasePage):
 
     def onload_save_img(self,url,filename):
         img = base64.b64decode(url)  #base64转图片
-        file = open(filename,'wb')
-        file.write(img)
-        file.close()
+        with open(filename,'wb') as f:
+            f.write(img)
 
 
     '''计算滑动距离'''
-    def identify_gap(self,out = "../../../img/out.png"):
+    def identify_gap(self,out = r'..\..\..\PageObject\img\out.png'):
 
         # 读取背景图片和缺口图片
-        bg_img = cv2.imread("../../../img/background.png") # 背景图片
-        tp_img = cv2.imread("../../../img/slider.png") # 缺口图片
+        bg_img = cv2.imread(r'..\..\..\PageObject\img\background.png') # 背景图片
+        tp_img = cv2.imread(r'..\..\..\PageObject\img\slider.png') # 缺口图片
 
         # 边缘检测
         bg_edge = cv2.Canny(bg_img, 100, 200)

@@ -3,7 +3,7 @@ import psycopg2
 from psycopg2 import Error
 from Base.basepage import BasePage
 from psycopg2.extras import RealDictCursor
-
+from selenium import webdriver
 
 class GetPg(BasePage):
     def __init__(self, driver):
