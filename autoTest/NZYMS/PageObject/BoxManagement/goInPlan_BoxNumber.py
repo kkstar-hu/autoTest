@@ -23,10 +23,10 @@ class GoInPlan_BoxNumber(BasePage):
             textInput=text(self.driver)
             self.logger.info('check1：验证计划号可否编辑')
             check.is_false(textInput.text_isenable("计划号"))
-            textInput.special_input("申请客户","SHA","SHAPGJHWYS/上海永旭集装箱运输")
-            textInput.special_input("结算客户", "SHA", "SHAPGJHWYS/上海永旭集装箱运输")
+            textInput.special_input("申请客户", "SHA", input["客户"])
+            textInput.special_input("申请客户", "SHA", input["客户"])
             if input["送港类型"] != None:
-                textInput.select_by_label("送港类型",input['送港类型'])
+                textInput.select_by_label("送港类型", input['送港类型'])
             if input["外部编号"] != None:
                 textInput.input_by_number("外部编号", input['外部编号'])
             if input["计划来源"] != None:
@@ -42,15 +42,15 @@ class GoInPlan_BoxNumber(BasePage):
         except:
             self.cancel()
         if input["addplanalert"]=='新增成功':
-            tableCheckfixed=Table(self.driver,2)
+            tableCheckfixed=Table(self.driver, 2)
             self.logger.info('check3：验证添加后列表的值正确')
             config.planNumber=tableCheckfixed.get_value("计划号")
-            check.is_in(tableCheckfixed.get_value("进场作业类型"),input['进场作业类型'])
+            check.is_in(tableCheckfixed.get_value("进场作业类型"), input['进场作业类型'])
             tableCheck = Table(self.driver)
             check.is_in(tableCheck.get_value("堆场"), input['堆场'])
             check.equal(tableCheck.get_value("计划状态"), "计划")
-            check.equal(tableCheck.get_value("申请客户"), "上海永旭集装箱运输")
-            check.equal(tableCheck.get_value("结算客户"), "上海永旭集装箱运输")
+            check.is_in(tableCheck.get_value("申请客户"), input['客户'])
+            check.is_in(tableCheck.get_value("结算客户"), input['客户'])
             check.is_in(tableCheck.get_value("计划来源"), input['计划来源'])
             check.is_in(tableCheck.get_value("来源地"), input['来源地'])
             check.equal(tableCheck.get_value("送港类型"), input['送港类型'])
@@ -60,27 +60,27 @@ class GoInPlan_BoxNumber(BasePage):
             check.less(DataTime.get_dif_time(createTime,tableCheck.get_value("创建时间")),100)
             check.equal(tableCheck.get_value("创建人"), config.createName)
 
-    def addBoxPlan(self,input,boxNumber):
+    def addBoxPlan(self, input, boxNumber):
         try:
             self.logger.info('进箱计划：添加计划箱')
             self.element_wait("xpath", "(//div[@id='add'])[2]")
-            self.click("xpath","(//div[@id='add'])[2]")
+            self.click("xpath", "(//div[@id='add'])[2]")
             textInput = text(self.driver)
-            textInput.input_by_number("箱号",boxNumber)
+            textInput.input_by_number("箱号", boxNumber)
             if input["尺寸"] != None:
-                textInput.select_by_label("尺寸",input['尺寸'])
+                textInput.select_by_label("尺寸", input['尺寸'])
             if input["箱型"] != None:
-                textInput.select_by_label("箱型",input['箱型'])
+                textInput.select_by_label("箱型", input['箱型'])
             if input["箱高"] != None:
-                textInput.select_by_label("箱高",input["箱高"])
+                textInput.select_by_label("箱高", input["箱高"])
             if input["持箱人"] != None:
-                textInput.select_by_label("持箱人",input['持箱人'])
+                textInput.select_by_label("持箱人", input['持箱人'])
             self.save_and_close()
             time.sleep(0.3)
         except:
-            self.click("x","//button//span[text()='取消 ']")
+            self.click("x", "//button//span[text()='取消 ']")
         self.check_alert(input["addplanalert"])
-        tableCheckfixed = Table(self.driver,5)
+        tableCheckfixed = Table(self.driver, 5)
         check.equal(tableCheckfixed.get_value("箱号"), boxNumber)
         self.logger.info('添加箱号为：'+tableCheckfixed.get_value("箱号"))
         print('添加箱号为：'+tableCheckfixed.get_value("箱号"))
