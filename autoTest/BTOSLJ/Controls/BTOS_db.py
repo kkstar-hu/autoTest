@@ -1,13 +1,14 @@
 # -*- coding:utf-8 -*-
 import psycopg2
-from psycopg2 import Error
-from Base.basepage import BasePage
 from psycopg2.extras import RealDictCursor
-from selenium import webdriver
+from psycopg2 import Error
+from Commons.log import getlogger
+import pandas as pd
+from prettytable import from_db_cursor
 
-class GetPg(BasePage):
-    def __init__(self, driver):
-        super(GetPg, self).__init__(driver)
+class GetPg():
+    def __init__(self):
+        self.logger = getlogger()
         try:
             self.conn = psycopg2.connect(database="btopsdb", user="btops",password="tCXd#0DWK-brIk", host="10.166.0.137", port="6432")
         except Error as e:
@@ -22,9 +23,9 @@ class GetPg(BasePage):
     def execute_sql(self, sql : str):
         try:
             self.cur.execute(sql)
-        except Error as e:
+            self.conn.commit()
+        except Error:
+            self.conn.rollback()
             self.logger.error("Sql error:", exc_info=True)
-        else:
-            res = self.cur.fetchall()
-            return res
+
 
