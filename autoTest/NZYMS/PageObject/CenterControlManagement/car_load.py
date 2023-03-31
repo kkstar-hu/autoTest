@@ -28,7 +28,7 @@ class Car_Load(BasePage):
         self.click("xpath", "//span[text()='确认 ']")
 
     def switchNewWindow(self):   #先切换到新窗口
-        self.switchWindow(1)
+        self.switch_window(1)
 
     def closeWindow(self):
         self.driver.close()
