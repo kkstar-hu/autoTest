@@ -1,30 +1,29 @@
 import time
-
 import pytest_check as check
 from Base.basepage import BasePage
+from GTOSXM.Config import config
 from GTOSXM.Controls.Gtos_table import Gtos_table
 from GTOSXM.Controls.text import Gtos_text
 from GTOSXM.PageObject.login import Login
-from GTOSXM.TestCase.conftest import driver
-
 
 class User_Manage(BasePage):
     def Add_User(self, input):
-        self.click('xpath', "//span[contains(text(),'新增用户')]")  #点击新增
+        self.click('x', "//span[contains(text(),'新增用户')]")  #点击新增
         textInput = Gtos_text(self.driver)  #输入新增用户信息
         textInput.input_by_label("用户账号", input["用户账号"])  #输入框
         textInput.input_by_label("用户名称", input["用户名称"])
         textInput.input_by_label("用户密码", input["用户密码"])
-        textInput.select_by_label("用户状态", input["用户状态"])  #单选框
-        textInput.select_by_label("归属码头", input["归属码头"])
-        textInput.select_by_label("操作码头", input["操作码头"])
+        textInput.select_by_label_time("用户状态", input["用户状态"])  #单选框
+        textInput.select_by_label_time("归属码头", input["归属码头"])
+        textInput.select_by_label_time("操作码头", input["操作码头"])
         self.click('x', "//span[@class='el-checkbox__label' and text()='测试']")  #多选框
         self.save()  #点击保存
         self.check_alert("添加成功")  #校验是否添加成功
 
     def User_Search(self, input):
-        self.left_clickandsend('xpath', "//input[@aria-label='用户账号 Filter Input']", input['用户账号'])
-        self.element_wait('xpath', f"//div[text()='{input['用户账号']}']")
+        time.sleep(1)
+        self.left_clickandsend('x', "//input[@aria-label='用户账号 Filter Input']", input['用户账号'])
+        time.sleep(1)
 
     def User_Check(self, input):
         tablecheck = Gtos_table(self.driver, 1)
@@ -65,12 +64,12 @@ class User_Manage(BasePage):
 
 
     def Update_User(self, input):
-        self.left_clickandsend('xpath', "//input[@aria-label='用户账号 Filter Input']", input['用户账号'])
-        self.element_wait('xpath', f"//div[text()='{input['用户账号']}']")
-        self.left_click('xpath', "//span[text()='修改']")
+        # self.left_clickandsend('x', "//input[@aria-label='用户账号 Filter Input']", input['用户账号'])
+        # time.sleep(0.5)
+        self.left_click('x', "//span[text()='修改']")
         textInput = Gtos_text(self.driver)  # 输入更新的用户信息
         textInput.input_by_label("显示名称", input["用户名称"])  # 输入框
-        textInput.select_by_label("归属码头", input["归属码头"])
+        textInput.select_by_label_time("归属码头", input["归属码头"])
         textInput.select_by_label_time("操作码头", input["操作码头"])
         role = input["绑定角色"]
         self.click('x', f"//span[@class='el-checkbox__label' and text()='{role}']")  # 多选框
@@ -78,6 +77,7 @@ class User_Manage(BasePage):
         self.check_alert("修改成功")  # 校验是否修改成功
 
     def Forbidden_User(self, input):
+        time.sleep(1)
         self.left_click('x', "//span[text()='禁用']")
         message_element = self.get_element('x', "//div[@class='el-message-box__message']")
         message = message_element.text
@@ -127,4 +127,31 @@ class User_Manage(BasePage):
 
     def Clear_Input_Box(self):
         self.refresh()
+
+    def Loop_Util_Lock_User(self, input):
+        lock_driver = Login(self.driver)
+        lock_driver.login(input["用户账号"], input["错误密码"], input["提示信息"])
+        i = 0
+        while i < 9:
+            self.get_elements("xpath", "//button[@class='el-button login-btn el-button--primary el-button--bg']")[1].click()
+            time.sleep(0.5)
+            print("点击次数: ", i)
+            i = i + 1
+        self.has_alert("错误信息:账号已被锁定")
+        self.refresh()
+
+    def Use_Unlock_User_Login(self):
+        unlock_driver = Login(self.driver)
+        unlock_driver.login(config.username, config.password, f"用户{config.username}登录成功", "海润", config.showname)
+        self.left_click('x', "//li[@role='menuitem']//span[text()='系统管理']")
+        self.left_click('x', "//span[text()='用户管理']")
+
+    def Deblocking_User(self, input):
+        self.left_click('x', "//span[text()='解锁']")
+        self.check_alert("已成功解锁")
+
+    def Check_User_Delocking(self, input):
+        username = input["用户账号"]
+        lock_driver = Login(self.driver)
+        lock_driver.login(input["用户账号"], input["用户密码"], f"用户{username}登录成功", "海润", input["showname"])
 

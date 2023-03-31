@@ -170,8 +170,7 @@ class Gtos_text(BasePage):
     # 点击下拉框值
     def select_clickOption(self, value):
         try:
-            self.click("xpath",
-                       f"//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]//span[text()='{value}']")
+            self.click("xpath", f"//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]//span[text()='{value}']")
         except NoSuchElementException:
             self.logger.error(f"定位不到下拉框控件值:{value}")
             raise Exception("定位不到元素")

@@ -1,0 +1,16 @@
+#用户基本信息
+#用户添加时使用到的
+- 用户账号: "testAddUser7"
+  用户名称: "test_add_user7"
+  用户密码: "Test@123"
+  用户状态: "正常"
+  归属码头: "XICT"
+  操作码头: "XICT"
+  绑定角色: "测试"
+
+#查询使用到的
+  名称: "testUpdataUser7"
+  更新名称: "testUpdataUser7"
+  期望操作码头: "XICT"
+  期望绑定角色: "测试"
+
