@@ -1,5 +1,4 @@
 import os.path
-
 import allure
 import pytest
 from Commons.Controls.tag import Tag
@@ -8,10 +7,9 @@ from GTOSXM.PageObject.User_Manage.user_manage import User_Manage
 from GTOSXM.PageObject.gtos_menu import GtosMenu
 from GTOSXM.PageObject.login import Login
 
-
 @allure.story('1.系统管理')
 @allure.title('用户管理')
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'user_manage','user_data.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), 'user_manage', 'user_data.yaml')))
 def testUserAdd(driver, input):
     """添加用户"""
     print("******************************************Test Add User***********************************************")
@@ -19,12 +17,12 @@ def testUserAdd(driver, input):
     menu.select_level_Menu("系统管理,用户管理")
     userManager = User_Manage(driver)
     userManager.Add_User(input)  #新增用户
-    userManager.testUserSearch(input)  # 查询用户
+    userManager.User_Search(input)  # 查询用户
     Tag(driver).closeTagGtos('用户管理')  #关闭用户管理Tag
 
 @allure.story('1.系统管理')
 @allure.title('用户管理')
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'user_manage','user_data.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), 'user_manage', 'user_data.yaml')))
 def testUserSearch(driver, input):
     """查询用户"""
     menu = GtosMenu(driver)
@@ -37,7 +35,7 @@ def testUserSearch(driver, input):
 
 @allure.story('1.系统管理')
 @allure.title('用户管理')
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'user_manage','user_update_data.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), 'user_manage', 'user_update_data.yaml')))
 def testUserUpdate(driver, input):
     """更新用户"""
     menu = GtosMenu(driver)
@@ -50,16 +48,58 @@ def testUserUpdate(driver, input):
 
 @allure.story('1.系统管理')
 @allure.title('用户管理')
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'user_manage','user_forbidden_data.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), 'user_manage', 'user_forbidden_data.yaml')))
 def testUserForbidden(driver, input):
     """禁用用户"""
-    # menu = GtosMenu(driver)
-    # menu.select_level_Menu("系统管理,用户管理")
+    menu = GtosMenu(driver)
+    menu.select_level_Menu("系统管理,用户管理")
     userManager = User_Manage(driver)
-    # userManager.User_Search(input)  #定位到要禁用的用户
-    # userManager.Forbidden_User(input)
-    # userManager.User_Check(input)  #校验禁用后的用户信息
+    userManager.User_Search(input)  #定位到要禁用的用户
+    userManager.Forbidden_User(input)
+    userManager.User_Check(input)  #校验禁用后的用户信息
     userManager.Logout_User()  #退出当前用户
-    # forbidden_driver = Login(driver)  #以被禁用的用户身份登录
-    # forbidden_driver.login(input["用户账号"], input["密码"], input["归属码头"], input["码头中文名称"])
-    userManager.Login_As_Forbidden_User(input)  #以被禁用的用户身份登录
+    forbidden_driver = Login(driver)  #以被禁用的用户身份登录
+    forbidden_driver.login(input["用户账号"], input["密码"], input["归属码头"], input["码头中文名称"])
+    userManager.Check_Forbidden(input)  #校验禁止登录的信息
+
+@allure.story('1.系统管理')
+@allure.title('用户管理')
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), 'user_manage', 'user_resume_data.yaml')))
+def testUserResume(driver, input):
+    """恢复用户"""
+    menu = GtosMenu(driver)
+    menu.select_level_Menu("系统管理,用户管理")
+    userManager = User_Manage(driver)
+    userManager.User_Search(input)  #定位到要恢复的用户
+    userManager.Resume_User(input)  #执行恢复方法
+    userManager.User_Check(input)  #校验恢复后的用户信息
+    userManager.Logout_User()  #退出当前用户
+    resume_driver = Login(driver)
+    resume_driver.login(input["用户账号"], input["密码"], input["归属码头"], input["码头中文名称"])
+    userManager.Check_Login_Success(input)
+
+@allure.story('1.系统管理')
+@allure.title('用户管理')
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), 'user_manage', 'user_reset_password_data.yaml')))
+def testResetPassword(driver, input):
+    """重置密码"""
+    menu = GtosMenu(driver)
+    menu.select_level_Menu("系统管理,用户管理")
+    userManager = User_Manage(driver)
+    userManager.User_Search(input)  #定位到要重置密码的用户
+    userManager.Reset_Password(input)  #重置密码
+    userManager.Logout_User()  #退出当前用户
+    old_password_driver = Login(driver)  #以旧的密码登录
+    old_password_driver.login(input["用户账号"], input["密码"], input["归属码头"], input["码头中文名称"])
+    userManager.Check_Old_Password_Error(input)  #验证旧的密码登录失败
+    driver.refresh()
+    new_password_driver = Login(driver)  #用新的密码进行登录
+    new_password_driver.login(input["用户账号"], input["重置密码"], input["归属码头"], input["码头中文名称"])
+    userManager.Check_Login_Success(input)  #验证登录成功
+
+@allure.story('1.系统管理')
+@allure.title('用户管理')
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), 'user_manage', 'user_deblocking_data.yaml')))
+def testUserDeblocking(driver, input):
+    """解锁用户"""
+

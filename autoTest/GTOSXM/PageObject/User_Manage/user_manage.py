@@ -87,18 +87,44 @@ class User_Manage(BasePage):
         if message == data_message:
             self.left_click('x', "//span[text()=' 确定 ']")
         else:
-            print("禁用用户与弹窗信息不匹配！")
-        self.elementExist("x","//div[@class='nzctos-grid__operation__column-container']//div[@class='buttongroup__item'][3]")  #判断界面元素存在”恢复“
+            print("禁用用户信息与弹窗用户信息不匹配！")
+        self.elementExist("x", "//div[@class='nzctos-grid__operation__column-container']//div[@class='buttongroup__item'][3]")  #判断界面元素存在”恢复“
 
     def Logout_User(self):
         self.click('x', "//i[@class='el-icon-user user-avatar']")  #点击用户头像
         self.click('x', "//span[text()='退出登录']")  #点击退出登录
         self.click('x', "//button[@type='button']//span[text()=' 退出 ']")
 
-    def Login_As_Forbidden_User(self, input):
-        forbidden_driver = Login(driver)
-        forbidden_driver.login(input["用户账号"], input["密码"], input["归属码头"], input["码头中文名称"])
-        self.wait_element_appear('x', "//div[@role='alert']")
+    def Check_Forbidden(self, input):
         self.check_alert("账户已被禁用。账户:"+input["用户账号"])
 
+    def Resume_User(self, input):
+        self.left_click("x", "//span[text()='恢复']")
+        message_element = self.get_element('x', "//div[@class='el-message-box__message']")
+        message = message_element.text
+        print(message)
+        data_message = "此操作将恢复用户："+input["用户名称"]+"，是否继续?"
+        print(data_message)
+        if message == data_message:
+            self.left_click('x', "//span[text()=' 确定 ']")
+        else:
+            print("恢复用户信息与弹窗用户信息不匹配！")
+        self.elementExist("x", "//div[@class='nzctos-grid__operation__column-container']//div[@class='buttongroup__item'][2]")  # 判断界面元素存在”恢复“
+
+    def Check_Login_Success(self, input):
+        self.check_alert("密码已过期")
+
+    def Reset_Password(self, input):
+        self.left_click('x', "//span[text()='重置密码']")
+        self.left_clickandsend('x', "//input[@type='text' and @class='el-input__inner']", input["重置密码"])
+        self.left_click('x', "//span[text()=' 确定 ']")
+        self.check_alert("重置密码成功")
+
+    def Check_Old_Password_Error(self, input):
+        error_text = self.get_alert_text()
+        print(error_text)
+        self.has_alert("错误信息:用户名或密码错误")
+
+    def Clear_Input_Box(self):
+        self.refresh()
 

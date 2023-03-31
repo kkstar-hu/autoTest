@@ -22,7 +22,6 @@ def driver():
     driver.quit()
     return driver
 
-
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_runtest_makereport(item, call):
     '''
