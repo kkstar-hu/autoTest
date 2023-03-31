@@ -8,9 +8,10 @@ from Commons.log import getlogger
 import pytest_check as check
 import time
 
+
 class BasePage:
 
-    def __init__(self,driver):
+    def __init__(self, driver):
         """
         运行初始化方法
         """
@@ -43,7 +44,6 @@ class BasePage:
         time.sleep(0.2)
         return w_element
 
-
     def get_elements(self, selector_by, selector_value):
         """
         获取元素列表，通过，区分开，类别 内容
@@ -71,46 +71,45 @@ class BasePage:
 
     # 输入内容带清除
     def input(self, selector_by, selector_value, value):
-        webelement = self.get_element(selector_by, selector_value)
-        webelement.clear()
+        web_element = self.get_element(selector_by, selector_value)
+        web_element.clear()
         time.sleep(0.5)
-        webelement.send_keys(value)
+        web_element.send_keys(value)
 
-
-    #输入内容带清除，当页面多个相同的控件用此方法
-    def input_by_index(self, selector_by, selector_value, value,index=1):
-        webelement = self.get_elements(selector_by, selector_value)[index]
-        webelement.clear()
-        webelement.send_keys(value)
+    # 输入内容带清除，当页面多个相同的控件用此方法
+    def input_by_index(self, selector_by, selector_value, value, index=1):
+        web_element = self.get_elements(selector_by, selector_value)[index]
+        web_element.clear()
+        web_element.send_keys(value)
 
     # 输入内容不带清除
     def input_no_clear(self, selector_by, selector_value, value):
         self.get_element(selector_by, selector_value).send_keys(value)
 
-    def input_no_clear_index(self,selector_by, selector_value, value,index=1):
+    def input_no_clear_index(self, selector_by, selector_value, value, index=1):
         em = self.get_elements(selector_by, selector_value)[index]
         em.send_keys(value)
 
-    #点击
-    def click(self, by,selector):
-        self.get_element(by,selector).click()
+    # 点击
+    def click(self, by, selector):
+        self.get_element(by, selector).click()
 
-    #点击，当页面多个相同的控件用此方法
-    def click_by_index(self, by, selector,index):
+    # 点击，当页面多个相同的控件用此方法
+    def click_by_index(self, by, selector, index):
         self.get_elements(by, selector)[index].click()
 
     # 输入url地址访问网站
-    def geturl(self, url, time=8):
+    def geturl(self, url, times=8):
         self.driver.get(url)
         self.driver.maximize_window()
-        self.driver.implicitly_wait(time)
+        self.driver.implicitly_wait(times)
 
-    def elementExist(self,by,selector):
+    def elementExist(self, by, selector):
         """
         判断元素是否存在
         """
         try:
-            self.get_element(by,selector)
+            self.get_element(by, selector)
             return True
         except Exception as e:
             return False
@@ -142,7 +141,7 @@ class BasePage:
         except TimeoutException:
             print("查找元素超时请检查元素")
 
-    def get_elements_wait(self, by, value, index=0,secs=5):
+    def get_elements_wait(self, by, value, index=0, secs=5):
         """
         显示等待，等待元素显示，返回元素
         """
@@ -212,58 +211,56 @@ class BasePage:
         """
         滚动到元素
         """
-        e1 = self.get_element("xpath",selector)
-        self.driver.execute_script('arguments[0].scrollIntoView(false);', e1)
+        e1 = self.get_element("xpath", selector)
+        self.driver.execute_script('arguments[0].scrollIntoView();', e1)
 
-    def get_attribute_info(self,by,selector, attribute_kind):
+    def get_attribute_info(self, by, selector, attribute_kind):
         """
         获取元素的信息，
         """
-        e1 = self.get_element(by,selector)
+        e1 = self.get_element(by, selector)
         r_a = e1.get_attribute(attribute_kind)
         return r_a
 
-    def get_text(self,by,selector):
+    def get_text(self, by, selector):
         """
         获得元素文本信息
         """
-        el = self.get_elements_wait(by,selector)
+        el = self.get_elements_wait(by, selector)
         return el.text
 
-
-    def get_value(self,by,selector):
+    def get_value(self, by, selector):
         """
         获得元素文本信息
         """
-        return self.get_attribute_info(by,selector,'textContent')
+        return self.get_attribute_info(by, selector, 'textContent')
 
-
-    #从0开始
-    def get_text_index(self,by,selector,index):
-        el = self.get_elements(by,selector)[index]
+    # 从0开始
+    def get_text_index(self, by, selector, index):
+        el = self.get_elements(by, selector)[index]
         return  el.text
 
-    #比较值
-    def compareValue(self,by,selector, expect):
-        actual = self.get_text(by,selector).strip()
-        check.equal(actual,expect)
+    # 比较值
+    def compareValue(self, by, selector, expect):
+        actual = self.get_text(by, selector).strip()
+        check.equal(actual, expect)
 
-    def containValue(self,by,selector, expect):
-        actual = self.get_text(by,selector).strip()
-        check.is_in(actual,expect)
+    def containValue(self, by, selector, expect):
+        actual = self.get_text(by, selector).strip()
+        check.is_in(actual, expect)
 
-    def get_display(self,by,selector,index):
+    def get_display(self, by, selector, index):
         """
         获取元素是否显示，返回结果为真或假.
         """
-        el = self.get_elements(by,selector)[index]
+        el = self.get_elements(by, selector)[index]
         return el.is_displayed()
 
-    def get_enable(self,by,selector,index):
+    def get_enable(self, by, selector, index):
         """
         获取元素是否可编辑，为灰，返回结果为真或假.
         """
-        el = self.get_elements(by,selector)[index]
+        el = self.get_elements(by, selector)[index]
         return el.is_enabled()
 
     def get_title(self):
@@ -303,7 +300,7 @@ class BasePage:
         """
         self.driver.switch_to.window(handle)
 
-    def switchWindow(self, index):
+    def switch_window(self, index):
         """
         切换窗口，通过index第几个窗口，从0开始
         """
@@ -331,7 +328,7 @@ class BasePage:
             for one_h in all_handles:
                 if one_h != target_handle:
                     self.switch_to_window(one_h)
-                    self.close_brower()
+                    self.close_current_page()
                     self.switch_to_window(target_handle)
 
     def get_alert_text(self):
@@ -339,95 +336,80 @@ class BasePage:
         获取提示信息内容，未有提示信息返回none
         """
         try:
-            return self.get_text("xpath","//div[@role='alert']//p")
+            return self.get_text("xpath", "//div[@role='alert']//p")
         except:
             self.logger.info("未发现提示信息,返回none")
             return None
 
-
-    #判断是否存在提示信息
-    def has_alert(self,expectAlert):
+    # 判断是否存在提示信息
+    def has_alert(self, expect_alert):
         """
         获取提示信息
         """
-        return self.elementExist("xpath",f"//div[@role='alert']//p[contains(text(),'{expectAlert}')]")
+        return self.elementExist("xpath", f"//div[@role='alert']//p[contains(text(),'{expect_alert}')]")
 
-    #比较实际提示内容和期望提示内容
-    def check_alert(self, expectAlert):
-        check.equal(self.get_alert_text(),expectAlert)
+    # 比较实际提示内容和期望提示内容
+    def check_alert(self, expect_alert):
+        check.equal(self.get_alert_text(), expect_alert)
 
     # 比较实际提示内容和期望提示内容，并关闭当前提示信息
-    def check_alert_and_close(self, expectAlert):
-        check.equal(self.get_alert_text(), expectAlert)
+    def check_alert_and_close(self, expect_alert):
+        check.equal(self.get_alert_text(), expect_alert)
         try:
-            self.click('xpath',f"//div[@role='alert']//p[text()='{expectAlert}']/following::div[@class='el-notification__closeBtn el-icon-close']")
+            self.click('xpath', f"//div[@role='alert']//p[text()='{expect_alert}']/following::div[@class='el-notification__closeBtn el-icon-close']")
         except:
-            self.click('xpath',f"//div[@class='el-notification__closeBtn el-icon-close']")
+            self.click('xpath', f"//div[@class='el-notification__closeBtn el-icon-close']")
 
-    def close_alert(self,name):
+    def close_alert(self, name):
         """
         关闭提示信息
         """
         self.click('xpath', f"//div/p[text()='{name}']/following::div[@class='el-notification__closeBtn el-icon-close']")
 
-    def wait_element_appear(self, selector, wait_time=10):
-        """
-        等待元素出现
-        """
-        time.sleep(1)
-        flag = True
-        while self.element_exist(selector):
-            time.sleep(1)
-            wait_time -= 1
-            if wait_time == 0:
-                flag = False
-                break
-        return flag
-
-    def right_click(self,by,selector):
+    def right_click(self, by, selector):
         """
         鼠标右键点击
         """
-        e1 = self.get_element(by,selector)
+        e1 = self.get_element(by, selector)
         ActionChains(self.driver).context_click(e1).perform()
 
-    def left_click(self,by,selector):
+    def left_click(self, by, selector):
         """
         鼠标左键点击
         """
-        e1 = self.get_element(by,selector)
+        e1 = self.get_element(by, selector)
         ActionChains(self.driver).click(e1).perform()
 
-    def left_clickandsend(self,by,selector,value):
+    def left_clickandsend(self, by, selector, value):
         """
         鼠标左键点击,并输入内容（针对input无法使用的情况）
         """
-        e1 = self.get_element(by,selector)
+        e1 = self.get_element(by, selector)
         ActionChains(self.driver).click(e1).send_keys(value).perform()
 
-    def double_click(self, by,selector):
+    def double_click(self, by, selector):
         """
         双击元素.
         """
-        el = self.get_element(by,selector)
+        el = self.get_element(by, selector)
         ActionChains(self.driver).double_click(el).perform()
 
-    def move_mouse_to_element(self,by, selector):
+    def move_mouse_to_element(self, by, selector):
         """
         鼠标移动元素上，悬浮
         """
-        e1 = self.get_element(by,selector)
+        e1 = self.get_element(by, selector)
         ActionChains(self.driver).move_to_element(e1).perform()
 
-    def drag_mouse_to_element(self,by1,source,by2,target):
+    def drag_mouse_to_element(self, by1, source, by2, target):
         """
         鼠标拖动元素到目标位置
         """
-        e1 = self.get_element(by1,source)
-        e2 = self.get_element(by2,target)
+        e1 = self.get_element(by1, source)
+        e2 = self.get_element(by2, target)
         ActionChains(self.driver).drag_and_drop(e1, e2).perform()
 
-    def clickandhold(self,by, selector):
+    def clickandhold(self, by, selector):
         """
         鼠标左键按住不放
         """
@@ -458,7 +440,7 @@ class BasePage:
         select_text = e1.get_attribute('text')
         return select_text
 
-    def hasInput(self,input,data):
+    def hasInput(self, input, data):
         """
         判断yaml中是否存在健input[data]
         """
@@ -483,22 +465,22 @@ class BasePage:
         """
         self.driver.execute_script(script)
 
-    #点击保存并关闭按钮
+    # 点击保存并关闭按钮
     def save_and_close(self):
-        self.click("xpath","//button/span[contains(text(),'保存并关闭')]")
+        self.click("xpath", "//button/span[contains(text(),'保存并关闭')]")
         self.waitloading()
 
-    #点击保存按钮
+    # 点击保存按钮
     def save(self):
         self.click("xpath", "//button/span[contains(text(),'保 存')]")
         self.waitloading()
 
-    #点击取消按钮
+    # 点击取消按钮
     def cancel(self):
         self.click("xpath", "//button//span[text()='取消']")
         self.waitloading()
 
-     #关闭窗口X
+    # 关闭窗口X
     def close(self):
-        self.click('xpath','//i[@class="el-dialog__close el-icon el-icon-close"]')
+        self.click('xpath', '//i[@class="el-dialog__close el-icon el-icon-close"]')
         self.waitloading()

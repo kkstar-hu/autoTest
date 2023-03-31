@@ -58,8 +58,7 @@ class BTOS_table(BasePage):
         except Exception:
             self.logger.error(f"定位元素失败:", exc_info=True)
 
-
-    #   获取最后一行的单元格的值
+    # 获取最后一行的单元格的值
     def get_last_row_value(self, header):
         try:
             colid = self.get_attribute_info("xpath",
@@ -70,7 +69,6 @@ class BTOS_table(BasePage):
         except NoSuchElementException:
             self.logger.error(f"定位不到列表头:{header}")
             raise Exception("定位不到元素")
-
 
     # 列表中选择行传入表头和值，会分页查找,点击修改按钮
     def click_edit(self, header, value):
@@ -146,7 +144,6 @@ class BTOS_table(BasePage):
             raise Exception("定位不到元素")
 
     # 列表里选行击加锁按钮,输入唯一的列表值
-
     def superlockButton(self, value):
         rowid = self.get_attribute_info("xpath",
                                         f"(//table[@class='vxe-table--body'])[{self.index}]//span[text()='{value}']//parent::div//parent::td//parent::tr",
