@@ -121,6 +121,18 @@ class BtosText(BasePage):
                 time.sleep(t)
             self.click("xpath", path)
 
+    def select_by_label_ship(self, label, value):
+        """
+        船名航次特殊控件选择
+        """
+        try:
+            self.input_no_clear("xpath",f"//label[contains(text(),'{label}')]//following-sibling::div//input",value)
+            self.click("xpath",
+                       f"//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]"
+                       f"//li[starts-with(@class,'el-select-dropdown__item')]/div[contains(text(),'{value}')]")
+        except NoSuchElementException:
+            self.logger.error(f"定位不到下拉控件标签名:{label}")
+            raise Exception("定位不到元素")
 
     def search_select_by_label(self, label, value):
         try:
@@ -173,6 +185,15 @@ class BtosText(BasePage):
     def select_by_label(self, label, value):
         try:
             self.click("xpath",f"//label[contains(text(),'{label}')]//following-sibling::div//input")
+            self.click("xpath",f"//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]//span[text()='{value}']")
+        except NoSuchElementException:
+            self.logger.error(f"定位不到下拉控件标签名:{label}")
+            raise Exception("定位不到元素")
+
+    def select_by_label_time(self, label, value):
+        try:
+            self.click("xpath",f"//label[contains(text(),'{label}')]//following-sibling::div//input")
+            time.sleep(0.5)
             self.click("xpath",f"//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]//span[text()='{value}']")
         except NoSuchElementException:
             self.logger.error(f"定位不到下拉控件标签名:{label}")

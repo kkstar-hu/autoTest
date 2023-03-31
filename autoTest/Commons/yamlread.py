@@ -15,7 +15,7 @@ def generate_yaml(driver,name,index=1):
     label= {}
     for x in labelelement:
        label[x.text]=" "
-    with open("./"+name+".yaml", "w",encoding='utf-8') as f:  # 写文件
+    with open("./"+name+".yaml", "a",encoding='utf-8') as f:  # 写文件
         yaml.safe_dump(data=label, stream=f,allow_unicode=True)
 
 def generate_yaml_gtos(driver,name,index=1):
