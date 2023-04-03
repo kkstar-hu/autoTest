@@ -109,7 +109,7 @@ class User_Manage(BasePage):
             print("恢复用户信息与弹窗用户信息不匹配！")
         self.elementExist("x", "//div[@class='nzctos-grid__operation__column-container']//div[@class='buttongroup__item'][2]")  # 判断界面元素存在”恢复“
 
-    def Check_Login_Success(self, input):
+    def Check_Login_Success(self):
         self.check_alert("密码已过期")
 
     def Reset_Password(self, input):
@@ -144,7 +144,7 @@ class User_Manage(BasePage):
         self.left_click('x', "//li[@role='menuitem']//span[text()='系统管理']")
         self.left_click('x', "//span[text()='用户管理']")
 
-    def Deblocking_User(self, input):
+    def Deblocking_User(self):
         self.left_click('x', "//span[text()='解锁']")
         self.check_alert("已成功解锁")
 

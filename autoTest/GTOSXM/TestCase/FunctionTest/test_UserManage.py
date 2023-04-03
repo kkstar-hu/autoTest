@@ -10,7 +10,7 @@ from GTOSXM.PageObject.gtos_menu import GtosMenu
 from GTOSXM.PageObject.login import Login
 
 @allure.story('1.用户管理')
-@allure.title('添加用户')
+@allure.title('1、添加用户')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), 'user_manage', 'user_data.yaml')))
 def testUserAdd(driver, input):
     """添加用户"""
@@ -23,11 +23,13 @@ def testUserAdd(driver, input):
     userManager.Add_User(input)
 
 @allure.story('1.用户管理')
-@allure.title('查询用户')
+@allure.title('2、查询用户')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), 'user_manage', 'user_search_data.yaml')))
 def testUserSearch(driver, input):
     """查询用户"""
-    # 菜单跳转
+    # 菜单跳转(单个用例执行时把本段注释去掉，执行菜单跳转)
+    # menu = GtosMenu(driver)
+    # menu.select_level_Menu("系统管理,用户管理")
     userManager = User_Manage(driver)
     # 查询用户
     userManager.User_Search(input)
@@ -35,11 +37,13 @@ def testUserSearch(driver, input):
     userManager.Check_Role(input)  # 校验用户角色
 
 @allure.story('1.用户管理')
-@allure.title('更新用户')
+@allure.title('3、更新用户')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), 'user_manage', 'user_update_data.yaml')))
 def testUserUpdate(driver, input):
     """更新用户"""
-    # 菜单跳转
+    # 菜单跳转(单个用例执行时把本段注释去掉，执行菜单跳转)
+    # menu = GtosMenu(driver)
+    # menu.select_level_Menu("系统管理,用户管理")
     userManager = User_Manage(driver)
     # 更新用户
     userManager.Update_User(input)
@@ -49,11 +53,11 @@ def testUserUpdate(driver, input):
     userManager.Logout_User()
 
 @allure.story('1.用户管理')
-@allure.title('禁用用户')
+@allure.title('4、禁用用户')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), 'user_manage', 'user_forbidden_data.yaml')))
 def testUserForbidden(driver, input):
     """禁用用户"""
-    # 登录(单个测试时注释本段)
+    # 登录(单个用例执行时注释本段，无需重复登录)
     login = Login(driver)
     login.login(config.username, config.password, "用户admin登录成功", "海润", config.showname)
     # 菜单跳转
@@ -70,11 +74,11 @@ def testUserForbidden(driver, input):
     forbidden_driver.login(input["用户账号"], input["密码"], "账户已被禁用。账户:testAddUser6", input["码头中文名称"], config.showname)
 
 @allure.story('1.用户管理')
-@allure.title('恢复用户')
+@allure.title('5、恢复用户')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), 'user_manage', 'user_resume_data.yaml')))
 def testUserResume(driver, input):
     """恢复用户"""
-    # 以未被禁用的用户身份登录(单个测试时注释本段）
+    # 以未被禁用的用户身份登录(单个用例执行时注释本段)
     page = BasePage(driver)
     page.refresh()
     login = Login(driver)
@@ -94,11 +98,11 @@ def testUserResume(driver, input):
     userManager.Logout_User()
 
 @allure.story('1.用户管理')
-@allure.title('重置密码')
+@allure.title('6、重置密码')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), 'user_manage', 'user_reset_password_data.yaml')))
 def testResetPassword(driver, input):
     """重置密码"""
-    # 登录(单个测试时注释本段)
+    # 登录(单个用例执行时注释本段)
     page = BasePage(driver)
     page.refresh()
     login = Login(driver)
@@ -121,11 +125,11 @@ def testResetPassword(driver, input):
     userManager.Logout_User()
 
 @allure.story('1.用户管理')
-@allure.title('解锁用户')
+@allure.title('7、解锁用户')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), 'user_manage', 'user_deblocking_data.yaml')))
 def testUserDeblocking(driver, input):
     """解锁用户"""
-    # 登录(单个测试时注释本段)
+    # 登录(单个用例执行时注释本段)
     page = BasePage(driver)
     page.refresh()
     login = Login(driver)
@@ -138,8 +142,6 @@ def testUserDeblocking(driver, input):
     userManager.Use_Unlock_User_Login()
     userManager = User_Manage(driver)
     userManager.User_Search(input)  # 定位到要解锁的用户
-    userManager.Deblocking_User(input)  # 解锁用户
+    userManager.Deblocking_User()  # 解锁用户
     userManager.Logout_User()
     userManager.Check_User_Delocking(input)  # 验证解锁后能成功登录
-
-
