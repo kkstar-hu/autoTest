@@ -64,8 +64,6 @@ class User_Manage(BasePage):
 
 
     def Update_User(self, input):
-        # self.left_clickandsend('x', "//input[@aria-label='用户账号 Filter Input']", input['用户账号'])
-        # time.sleep(0.5)
         self.left_click('x', "//span[text()='修改']")
         textInput = Gtos_text(self.driver)  # 输入更新的用户信息
         textInput.input_by_label("显示名称", input["用户名称"])  # 输入框
@@ -154,4 +152,3 @@ class User_Manage(BasePage):
         username = input["用户账号"]
         lock_driver = Login(self.driver)
         lock_driver.login(input["用户账号"], input["用户密码"], f"用户{username}登录成功", "海润", input["showname"])
-
