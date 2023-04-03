@@ -17,7 +17,7 @@ class Login(BasePage):
             textInput=Gtos_text(self.driver)
             textInput.select_clickOption(select)
         self.get_elements("xpath", "//button[@class='el-button login-btn el-button--primary el-button--bg']")[1].click()
-        self.check_alert(alert)
+        self.has_alert(alert)
         if alert == f"用户{username}登录成功":
             self.compareValue("xpath", "//div[@class='el-badge item el-dropdown-selfdefine']//span", showname)
 
