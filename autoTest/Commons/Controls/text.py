@@ -21,7 +21,7 @@ class text(BasePage):
         name:输入属性placeholder，value：输入值
         """
         try:
-            self.input("xpath",f"//input[@placeholder='{name}']",value)
+            self.input("xpath", f"//input[@placeholder='{name}']", value)
         except NoSuchElementException:
             self.logger.error(f"定位不到单行文本控件placeholder:{name}")
             raise Exception("定位不到元素")

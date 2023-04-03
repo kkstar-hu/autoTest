@@ -6,12 +6,12 @@ from selenium.webdriver import ActionChains
 from Base.basepage import BasePage
 
 class BTOS_table(BasePage):
-    def __init__(self, driver, index = 1):
+    def __init__(self, driver, index=1):
         super(BTOS_table, self).__init__(driver)
         self.index = index
 
     # 获取行号并点击该行
-    def select_row(self, header : str, value : str):
+    def select_row(self, header: str, value: str):
         try:
             #print(f"(//div[contains(@class, 'toscom-panel')])[{self.index}]//span[@class='vxe-cell--title' and text()='{header}']/../..")
             colid = self.get_attribute_info("xpath", f"(//div[contains(@class, 'toscom-panel')])[{self.index}]//span[@class='vxe-cell--title' and text()='{header}']/../..", "colid")
@@ -85,7 +85,7 @@ class BTOS_table(BasePage):
         try:
             rowid = self.select_row(header, value)
             self.click("xpath",
-                       f"(//table[@class='vxe-table--body'])[{self.index + 1}]//tr[@rowid='" + rowid + "']/td//span[@class='vxe-cell--checkbox']")
+                       f"(//table[@class='vxe-table--body'])[{self.index}]//tr[@rowid='" + rowid + "']/td//span[@class='vxe-cell--checkbox']")
         except NoSuchElementException:
             self.logger.error(f"定位不到列表头:{header}和值{value}")
             raise Exception("定位不到元素")
@@ -142,21 +142,6 @@ class BTOS_table(BasePage):
         except NoSuchElementException:
             self.logger.error(f"定位不到列表头:{header}和值{value}")
             raise Exception("定位不到元素")
-
-    # 列表里选行击加锁按钮,输入唯一的列表值
-    def superlockButton(self, value):
-        rowid = self.get_attribute_info("xpath",
-                                        f"(//table[@class='vxe-table--body'])[{self.index}]//span[text()='{value}']//parent::div//parent::td//parent::tr",
-                                        "rowid")
-        self.click("xpath",
-                   f"(//table[@class='vxe-table--body'])[{self.index + 1}]//tr[@rowid='" + rowid + "']//div[contains(text(),'加锁(高级)')]")
-
-    def lockButton(self, value):
-        rowid = self.get_attribute_info("xpath",
-                                        f"(//table[@class='vxe-table--body'])[{self.index}]//span[text()='{value}']//parent::div//parent::td//parent::tr",
-                                        "rowid")
-        self.click("xpath",
-                   f"(//table[@class='vxe-table--body'])[{self.index + 1}]//tr[@rowid='" + rowid + "']//div[contains(text(),'加锁(常规)')]")
 
     # 列表里选行点击修改按钮row从1开始
     def editButton(self, row):
