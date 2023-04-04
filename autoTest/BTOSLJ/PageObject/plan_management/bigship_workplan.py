@@ -7,7 +7,8 @@ from Base.basepage import BasePage
 from BTOSLJ.Controls.BTOS_text import BtosText
 from BTOSLJ.Controls.BTOS_table import BTOS_table
 from Commons.DateTime import DataTime
-from Commons.RandomFunction import CommonGenerator
+
+global plan_number
 
 
 class BigShipWorkPlan(BasePage):
@@ -37,8 +38,8 @@ class BigShipWorkPlan(BasePage):
         time.sleep(1)
         self.click("x", "(//div[@class='toscom-buttongroup']//span[text()='安排计划'])[2]")
         self.waitloading()
-        self.click("x", "//div[@class='el-message-box__btns']//span[contains(text(),'确定')]")
-        self.textInput.input_by_label("货名", "煤炭及制品")
+        self.click("x", "//div[@class='el-message-box__btns']//span[contains(text(),'取消')]")
+        #self.textInput.input_by_label("货名", "煤炭及制品")
         self.get_element("x", "//label[contains(text(),'货名')]//following-sibling::div//input").send_keys(Keys.ENTER)
         self.textInput.input_by_label("计划吨位", input["计划吨位"])
         self.textInput.input_by_label("昼夜剩余吨位", input["昼夜剩余吨位"])
@@ -51,27 +52,18 @@ class BigShipWorkPlan(BasePage):
         self.textInput.input_by_number("人数", input['人数'], 1)
         self.textInput.select_by_index("类型", input['类型'], 2)
         self.textInput.input_by_number("数量", input['数量'], 1)
-        self.textInput.click("xpath", "(//span[text()='保存'])[1]")
+        self.textInput.click("xpath", "(//span[text()='保存并关闭'])[1]")
         self.check_alert(input["alert"])
 
-    def check_table_bill(self, input):
-        self.rowid = self.table_bill.select_row("舱单号", self.billNumber)
-        check.equal(self.table_bill.get_value_by_rowid(self.rowid, '来源港'), input["来源港"])
-        check.equal(self.table_bill.get_value_by_rowid(self.rowid, '货代'), input["货代"])
-        check.equal(self.table_bill.get_value_by_rowid(self.rowid, '货主'), input["货主"])
-        check.equal(self.table_bill.get_value_by_rowid(self.rowid, '总件数'), input["件数"])
-        check.equal(self.table_bill.get_value_by_rowid(self.rowid, '总重量'), input["重量"])
-        check.equal(self.table_bill.get_value_by_rowid(self.rowid, '总体积'), input["体积"])
-        check.equal(self.table_bill.get_value_by_rowid(self.rowid, '贸易条款'), input["贸易条款"])
-        check.equal(self.table_bill.get_value_by_rowid(self.rowid, '备注'), input["备注"])
+    def check_table_plan(self, input):
+        check.equal(self.table_work.get_value("装/卸"), input["装/卸"])
+        check.equal(self.table_work.get_value("作业区"), input["作业区"])
+        check.equal(self.table_work.get_value("贸易类型"), input["贸易类型"])
+        check.equal(self.table_work.get_value("操作过程"), input["操作过程"])
+        check.equal(self.table_work.get_value("货名"), input["货名"])
+        check.equal(self.table_work.get_value("计划备注"), input["计划备注"])
 
-    def check_table_goods(self, input):
-        self.rowid = self.table_goods.select_row("货名", "煤炭及制品")
-        check.equal(self.table_goods.get_value_by_rowid(self.rowid, '唛头'), input["唛头"])
-        check.equal(self.table_goods.get_value_by_rowid(self.rowid, '件数'), input["件数"])
-        check.equal(self.table_goods.get_value_by_rowid(self.rowid, '重量'), input["重量"])
-        check.equal(self.table_goods.get_value_by_rowid(self.rowid, '体积'), input["体积"])
-        check.equal(self.table_goods.get_value_by_rowid(self.rowid, '包装'), input["包装"])
+
 
 
 

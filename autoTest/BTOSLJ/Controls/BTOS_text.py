@@ -240,6 +240,7 @@ class BtosText(BasePage):
     def select_by_index(self, label, value, index=1):
         try:
             self.click_by_index("xpath", f"//label[contains(text(),'{label}')]//following-sibling::div//input", index)
+            time.sleep(0.5)
             self.click("xpath", f"//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]//span[text()='{value}']")
         except NoSuchElementException:
             self.logger.error(f"定位不到下拉框控件标签名:{label}")
