@@ -173,6 +173,9 @@ class BtosText(BasePage):
             raise Exception("定位不到元素")
 
     def input_by_number(self, label, value, index=1):
+        """
+        页面多个控件，传入index,从0开始
+        """
         try:
             self.input_by_index("xpath", f"//label[contains(text(),'{label}')]//following-sibling::div//input", value, index)
         except NoSuchElementException:
