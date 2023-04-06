@@ -162,6 +162,10 @@ class NO_Structure_Monitoring(BasePage):
         textinput = Gtos_text(self.driver)
         textinput.input_by_label('靠泊吃水','1')
         self.click('x',"//span[text()='提交']")
+        if self.get_text('xpath',"//div[@role='alert']//p") == '靠泊时间不能大于当前时间.':
+            self.close_alert('靠泊时间不能大于当前时间.')
+            time.sleep(10)
+            self.click('x', "//span[text()='提交']")
         self.check_alert('提交成功')
         self.close_alert('提交成功')
         check.equal(tablecheck.get_value('靠泊状态'),'靠泊')
@@ -202,12 +206,11 @@ class NO_Structure_Monitoring(BasePage):
         textInput = Gtos_text(self.driver)
         textInput.input_by_label('离泊吃水', '100')
         self.click('x', "//span[text()='提交']")
-        if self.elementExist("x","//div[@class='el-message-box__message']"):
-            self.click("x","//div[@class='el-message-box__btns']//span[text()=' 确定 ']")
-        if self.get_text('x',"//div[@role='alert']//p") == '离泊时间应不大于当前时间！':
+        if self.get_text('xpath',"//div[@role='alert']//p") == '离泊时间应不大于当前时间！':
             self.close_alert('离泊时间应不大于当前时间！')
-            time.sleep(1)
+            time.sleep(10)
             self.click('x', "//span[text()='提交']")
-            if self.elementExist("x", "//div[@class='el-message-box__message']"):
-                self.click("x", "//div[@class='el-message-box__btns']//span[text()=' 确定 ']")
+            # if self.elementExist("x", "//div[@class='el-message-box__message']"):
+            #     self.click("x", "//div[@class='el-message-box__btns']//span[text()=' 确定 ']")
         self.check_alert("提交成功")
+        self.close_alert("提交成功")

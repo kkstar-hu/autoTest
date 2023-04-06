@@ -44,7 +44,7 @@ class InBox_Acceptance(BasePage):
             Gtextinput.select_by_label('持箱人', input['持箱人'])
             Gtextinput.input_by_label('箱货总重', input['箱货总重'])
             Gtextinput.select_by_label('卸货港', input['卸货港'])
-            Gtextinput.select_by_label('目的港', input['目的港'])
+            Gtextinput.select_by_label_time('目的港', input['目的港'])
             self.save()
             self.check_alert('保存成功')
             tablecheck = Gtos_table(self.driver)

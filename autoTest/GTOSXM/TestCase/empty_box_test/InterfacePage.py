@@ -16,7 +16,6 @@ class Interface(BasePage):
 
     def interface_login(self):
         """登录接口获取token"""
-        self.logger.info('获取Token')
         req = RequestHandler()
         login_res = req.visit("post", url=configinterface.url, json=configinterface.BodyXRCT)
         login_text = login_res.json()
@@ -24,6 +23,7 @@ class Interface(BasePage):
         a = login_text['data']['Token']
         Authorization = 'Bearer '+a
         configinterface.head['Authorization'] = a
+        self.logger.info(f'获取Token：{Authorization}')
         # print(Authorization)
 
     # @pytest.mark.skipif
@@ -38,6 +38,7 @@ class Interface(BasePage):
             cross = req.visit('post', url=read_yaml(os.path.join('interface.yaml'))[0]['智能道口url'],
                                 data=json.dumps(read_json(os.path.join(os.getcwd(),'Intelligent_crossing.json'))),
                                 headers= configinterface.head)
+            print(cross.json())
             assert cross.json()['result'] == 0
             if cross.json()['data']['Msg'] != 0:
                 configinterface.boxNumber = cross.json()['data']['OutConNo1']

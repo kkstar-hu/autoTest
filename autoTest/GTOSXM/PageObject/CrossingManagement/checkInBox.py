@@ -35,7 +35,7 @@ class CheckInBox(BasePage):
         textInput.select_by_label("出口航次", config.outportNumber)
         textInput.select_by_label("装货港", input['装货港'])
         textInput.select_by_label("卸货港", input['卸货港'])
-        textInput.select_by_label("目的港", input['目的港'])
+        textInput.select_by_label_time("目的港", input['目的港'])
         textInput.select_by_label("箱门方向", input['箱门方向'])
         check.is_false(textInput.text_isenable("进口航次"))
         #提单信息

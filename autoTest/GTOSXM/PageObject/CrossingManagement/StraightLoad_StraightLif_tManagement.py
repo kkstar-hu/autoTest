@@ -40,7 +40,7 @@ class StraightLoad_StraightLift_Management(BasePage):
         textInput = Gtos_text(self.driver)
         textInput.select_by_label("船名航次", config.importNumber)
         textInput.input_by_label('箱号',boxnumber)
-        self.logger.info('步骤2：检索')
+        self.logger.info('直装直提管理：检索')
         self.click('xpath',"//span[text()='检索']")
         tablecheck = Gtos_table(self.driver,2)
         check.equal(tablecheck.get_value('箱号'),boxnumber)

@@ -2,12 +2,10 @@ import json
 import os
 import allure
 import pytest
-
 from Base.baseinterface import RequestHandler
 from Commons.Controls.tag import Tag
 from Commons.jsonread import read_json
 from GTOSXM.Config import config, configinterface
-from GTOSXM.PageObject.Control_Ship.No_Structure_Monitoring import NO_Structure_Monitoring
 from GTOSXM.PageObject.Control_Ship.Structure_Monitoring import Structure_Monitoring
 from GTOSXM.PageObject.CrossingManagement.carOut import Car_Out
 from GTOSXM.PageObject.Mechanical_Control.Job_Order_Monitoring import Job_Order_Monitoring
@@ -16,9 +14,8 @@ from GTOSXM.PageObject.gtos_menu import GtosMenu
 from Commons.yamlread import read_yaml
 from GTOSXM.PageObject.Acceptance_Plan.InBoxAcceptance import InBox_Acceptance
 from GTOSXM.PageObject.DataManagement.ExitInformation_manifest import Manifest
-from GTOSXM.PageObject.Ship_Planning.No_Structure_Stowage import No_Structure_Stowage
 from GTOSXM.PageObject.CrossingManagement.StraightLoad_StraightLif_tManagement import StraightLoad_StraightLift_Management
-from GTOSXM.TestCase.Interface_Test.InterfacePage import  testinterface_getboxno, modify_position
+from GTOSXM.TestCase.Interface_Test.InterfacePage import Interface_Page
 
 req = RequestHandler()
 login_res = req.visit("post", url=configinterface.url, json=configinterface.BodyXRCT)
@@ -72,10 +69,11 @@ def testship_stowage(driver, input):
     stowage.Retrieve(input)
     stowage.mouse_job()
     stowage.choice_table()
+    htps = Interface_Page(driver)
     #定义船箱位接口
-    modify_position('010382')
+    htps.modify_position('010982')
     # #配载接口
-    testinterface_getboxno(config.boxNumberThree)
+    htps.interface_getboxno(config.boxNumberThree)
     peizai = req.visit('post',url=read_yaml(os.path.join('../Interface_Test','interface.yaml'))[0]['配载url'],
                        data=json.dumps(read_json(os.path.join(os.getcwd(),'../Interface_Test/JSOn','peizai.json'))),
                        headers=configinterface.head)

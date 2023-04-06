@@ -52,12 +52,12 @@ class Manifest(BasePage):
         Gtextinput = Gtos_text(self.driver)
         Gtextinput.search_select_by_label('出口船名航次', config.outportNumber)
         Gtextinput.input_by_label('箱号',config.outBoxNumber)
-        self.logger.info('步骤2：检索')
+        self.logger.info('码头人放行：检索')
         self.click('xpath', "//span[text()='检索']")
 
 
     def permitthrough(self):
-        self.logger.info('步骤4：码头人工放行')
+        self.logger.info('码头人放行：码头人工放行')
         tablecheck = Gtos_table(self.driver)
         tablecheck.tick_off_box(1)
         tablecheck1 = Gtos_table(self.driver, 2)

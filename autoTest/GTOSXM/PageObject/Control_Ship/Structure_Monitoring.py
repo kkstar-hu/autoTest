@@ -1,8 +1,6 @@
 import time
 import pytest_check as check
-from selenium.webdriver import ActionChains
 from Base.basepage import BasePage
-from Commons.DateTime import DataTime
 from GTOSXM.Controls.text import Gtos_text
 from GTOSXM.Config import config
 from GTOSXM.Controls.Gtos_table import Gtos_table
@@ -153,9 +151,9 @@ class Structure_Monitoring(BasePage):
         textInput = Gtos_text(self.driver)
         textInput.input_by_label("靠泊吃水",'1')
         self.click('x',"//span[text()='提交']")
-        if  self.get_text('xpath',"//div[@role='alert']//p") == '靠泊时间不能大于当前时间.':
+        if self.get_text('xpath',"//div[@role='alert']//p") == '靠泊时间不能大于当前时间.':
             self.close_alert('靠泊时间不能大于当前时间.')
-            time.sleep(6)
+            time.sleep(10)
             self.click('x', "//span[text()='提交']")
         self.check_alert('提交成功')
         self.close_alert('提交成功')
@@ -222,7 +220,7 @@ class Structure_Monitoring(BasePage):
         self.click('x',"//span[text()='提交']")
         if self.get_text('xpath',"//div[@role='alert']//p") == '离泊时间应不大于当前时间！':
             self.close_alert('离泊时间应不大于当前时间！')
-            time.sleep(7)
+            time.sleep(10)
             self.click('x', "//span[text()='提交']")
         self.check_alert('提交成功')
         self.close_alert('提交成功')

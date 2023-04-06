@@ -4,9 +4,7 @@ import allure
 import pytest
 from Base.baseinterface import RequestHandler
 from Commons.Controls.tag import Tag
-from Commons.jsonread import read_json
 from GTOSXM.Config import config, configinterface
-from GTOSXM.PageObject.Control_Ship.No_Structure_Monitoring import NO_Structure_Monitoring
 from GTOSXM.PageObject.Control_Ship.Structure_Monitoring import Structure_Monitoring
 from GTOSXM.PageObject.CrossingManagement.StraightLoad_StraightLif_tManagement import StraightLoad_StraightLift_Management
 from GTOSXM.PageObject.DataManagement.ImportDataVerification import Import_data_verification
@@ -95,7 +93,7 @@ def testSImport_data_verification(driver, input):
     menu.select_level_Menu("资料管理,进口资料,进口资料校验")
     idv = Import_data_verification(driver)
     idv.retrieval()
-    idv.verification('010182')
+    idv.verification('010982')
     Tag(driver).closeTagGtos('进口资料校验')
 
 

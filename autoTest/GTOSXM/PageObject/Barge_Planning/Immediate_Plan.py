@@ -59,6 +59,7 @@ class Immediate_plan(BasePage):
 
     def checkPlan(self,number):
         self.click('x', "//span[text()='检索']")
+        time.sleep(1)
         tablecheck = Gtos_table(self.driver, number)
         rowid=tablecheck.select_row("进口航次",config.importNumber)
         self.logger.info('进口航次号为：'+tablecheck.get_value_by_rowid(rowid,'进口航次'))

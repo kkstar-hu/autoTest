@@ -16,7 +16,7 @@ from GTOSXM.PageObject.Mechanical_Control.Inset_Car import Inset_Car
 from GTOSXM.PageObject.Mechanical_Control.Job_Order_Monitoring import Job_Order_Monitoring
 from GTOSXM.PageObject.Ship_Planning.Structure_Stowage import Structure_Stowage
 from GTOSXM.PageObject.gtos_menu import GtosMenu
-from GTOSXM.TestCase.Interface_Test.InterfacePage import testinterface_getboxno, modify_position
+from GTOSXM.TestCase.Interface_Test.InterfacePage import Interface_Page
 
 req = RequestHandler()
 login_res = req.visit("post", url=configinterface.url, json=configinterface.BodyXRCT)
@@ -49,10 +49,11 @@ def testship_stowage(driver, input):
     stowage = Structure_Stowage(driver)
     stowage.Retrieve(input)
     stowage.mouse_job()
-    #定义船箱位接口
-    modify_position('010582')
+    htps = Interface_Page(driver)
+    #修改船箱位接口
+    htps.modify_position('011182')
     #配载接口
-    testinterface_getboxno(config.outBoxNumber)
+    htps.interface_getboxno(config.outBoxNumber)
     peizai = req.visit('post',url=read_yaml(os.path.join('../Interface_Test','interface.yaml'))[0]['配载url'],
                        data=json.dumps(read_json(os.path.join(os.getcwd(),'../Interface_Test/JSOn','peizai.json'))),
                        headers=configinterface.head)
@@ -97,7 +98,7 @@ def testCharge_Car(driver, input):
     menu.select_level_Menu("机械控制,内集卡控制")
     inset_car = Inset_Car(driver)
     inset_car.choice_job('ALL')
-    inset_car.choice_cars('作业步骤','空车')
+    inset_car.choice_cars('作业步骤','等待装车')
     Tag(driver).closeTagGtos('内集卡控制')
 
 
