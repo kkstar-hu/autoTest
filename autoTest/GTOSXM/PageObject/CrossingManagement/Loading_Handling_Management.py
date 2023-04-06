@@ -15,7 +15,7 @@ class Loading_Management(BasePage):
         """
         直装内容
         """
-        self.logger.info('步骤1：输入数据')
+        self.logger.info('直装：输入数据')
         textInput = Gtos_text(self.driver)
         textInput.select_by_label("船名航次", input["船名航次"])
         textInput.input_by_label('箱号',config.boxNumber)

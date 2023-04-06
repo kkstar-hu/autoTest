@@ -1,0 +1,7 @@
+2023-03-31 16:58:44,761 - INFO login.py [line:8]: 登录：输入用户名
+2023-03-31 16:58:45,017 - INFO login.py [line:11]: 登录：输入密码
+2023-03-31 16:58:45,593 - INFO login.py [line:16]: 登录：选择码头
+2023-03-31 16:59:02,218 - INFO basepage.py [line:344]: 未发现提示信息,返回none
+2023-03-31 16:59:02,219 - INFO ImportInformation_manifest.py [line:25]: 舱单-新增舱单货资料XCTX4931625
+2023-03-31 16:59:12,513 - INFO ImportInformation_manifest.py [line:80]: 舱单-新增舱单箱信息XCTX4931625
+2023-03-31 16:59:27,995 - INFO No_Structure_Monitoring.py [line:20]: 无结构船舶监控-查询：输入航名航次I7068

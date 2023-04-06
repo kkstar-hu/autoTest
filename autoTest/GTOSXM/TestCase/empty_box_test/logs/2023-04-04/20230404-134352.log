@@ -1,0 +1,9 @@
+2023-04-04 13:43:54,007 - INFO login.py [line:8]: 登录：输入用户名
+2023-04-04 13:43:54,261 - INFO login.py [line:11]: 登录：输入密码
+2023-04-04 13:43:54,833 - INFO login.py [line:16]: 登录：选择码头
+2023-04-04 13:44:00,439 - INFO InterfacePage.py [line:19]: 获取Token
+2023-04-04 13:44:00,776 - INFO InterfacePage.py [line:27]: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyQWNjb3VudCI6ImFkbWluIiwiT1BfVEVSTUNEIjoiWFJDVCIsIkF1dGhUb2tlbiI6IjJlZjRlZDdkOTVkMDRkNWM5YWRiMGYwMGM3YzRhMDQ2IiwiU2Vzc2lvbklkIjoiNzA0ODlkZDg5YmFiNDU2ODk0MzhjOWY0MjViZmIzODQiLCJTZWN1cml0eUtleSI6Ijc2QUIyQThFIiwibmJmIjoxNjgwNTg3MDMyLCJleHAiOjE2ODU3NzEwMzIsImlhdCI6MTY4MDU4NzAzMiwiaXNzIjoibnV6YXJzdXJmLmNvbSIsImF1ZCI6IndlYkFwaSJ9.-AvzvOBbMSGnf5tzJZUVVzD_uuzYeNrehXt2YwSGhCY
+2023-04-04 13:44:00,778 - INFO InterfacePage.py [line:35]: 发送智能道口
+2023-04-04 13:44:01,228 - INFO InterfacePage.py [line:41]: {'result': 0, 'message': None, 'data': {'IsPass': False, 'InIsDangerous1': False, 'InIsDangerous2': False, 'InLocation1': None, 'InLocation2': None, 'InEir1': None, 'InEir2': None, 'OutLocation1': None, 'OutLocation2': None, 'OutEir1': None, 'OutEir2': None, 'OutConNo1': None, 'OutConNo2': None, 'InType1': None, 'InType2': None, 'OutType1': None, 'OutType2': None, 'MsgInDic': {}, 'MsgOutDic': {'348': '无作业计划'}, 'TermCD': None, 'Msg': [{'Key': '348', 'Value': '无作业计划'}]}}
+2023-04-04 13:44:01,229 - INFO Job_Order_Monitoring.py [line:19]: 作业指令监控-查询
+2023-04-04 13:44:04,032 - INFO InterfacePage.py [line:63]: RPS获取内容，修改TaskID，倍位

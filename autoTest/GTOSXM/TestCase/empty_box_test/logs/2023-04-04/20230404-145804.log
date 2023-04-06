@@ -1,0 +1,5 @@
+2023-04-04 14:58:06,089 - INFO login.py [line:8]: 登录：输入用户名
+2023-04-04 14:58:06,365 - INFO login.py [line:11]: 登录：输入密码
+2023-04-04 14:58:06,929 - INFO login.py [line:16]: 登录：选择码头
+2023-04-04 14:58:12,890 - INFO InterfacePage.py [line:19]: 获取Token
+2023-04-04 14:58:13,286 - INFO InterfacePage.py [line:34]: 发送智能道口

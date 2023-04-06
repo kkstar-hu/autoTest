@@ -386,6 +386,7 @@ class BasePage:
         """
         e1 = self.get_element(by, selector)
         ActionChains(self.driver).click(e1).send_keys(value).perform()
+        time.sleep(1)
 
     def double_click(self, by, selector):
         """

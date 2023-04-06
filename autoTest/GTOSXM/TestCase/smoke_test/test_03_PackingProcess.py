@@ -9,7 +9,6 @@ from GTOSXM.PageObject.Mechanical_Control.Job_Order_Monitoring import Job_Order_
 from GTOSXM.PageObject.gtos_menu import GtosMenu
 from Commons.yamlread import read_yaml
 from GTOSXM.PageObject.Acceptance_Plan.Pick_up_Acceptance import Packing_up
-from GTOSXM.PageObject.Acceptance_Plan.Planmanagement import PlanManagement
 from GTOSXM.PageObject.CrossingManagement.carOut import Car_Out
 
 

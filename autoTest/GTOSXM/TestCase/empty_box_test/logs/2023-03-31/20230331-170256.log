@@ -1,0 +1,8 @@
+2023-03-31 17:02:58,892 - INFO login.py [line:8]: 登录：输入用户名
+2023-03-31 17:02:59,151 - INFO login.py [line:11]: 登录：输入密码
+2023-03-31 17:02:59,712 - INFO login.py [line:16]: 登录：选择码头
+2023-03-31 17:03:16,004 - INFO basepage.py [line:344]: 未发现提示信息,返回none
+2023-03-31 17:03:16,004 - INFO ImportInformation_manifest.py [line:25]: 舱单-新增舱单货资料XCTX0924815
+2023-03-31 17:03:37,801 - INFO ImportInformation_manifest.py [line:51]: 舱单-新增舱单后校验字段
+2023-03-31 17:03:40,988 - INFO ImportInformation_manifest.py [line:55]: 本次箱号:XCTX0924815!!!!!!!!!!!!!!!!!
+2023-03-31 17:03:47,642 - INFO ImportInformation_manifest.py [line:80]: 舱单-新增舱单箱信息XCTX0924815

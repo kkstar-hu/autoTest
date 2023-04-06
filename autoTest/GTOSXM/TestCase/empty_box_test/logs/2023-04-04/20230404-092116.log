@@ -1,0 +1,4 @@
+2023-04-04 09:21:17,982 - INFO login.py [line:8]: 登录：输入用户名
+2023-04-04 09:21:18,247 - INFO login.py [line:11]: 登录：输入密码
+2023-04-04 09:21:18,807 - INFO login.py [line:16]: 登录：选择码头
+2023-04-04 09:21:26,641 - INFO ImportInformation_manifest.py [line:80]: 舱单-新增舱单箱信息XCTX9120536

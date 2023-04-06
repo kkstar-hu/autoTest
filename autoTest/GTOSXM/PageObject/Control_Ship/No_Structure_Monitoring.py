@@ -44,7 +44,7 @@ class NO_Structure_Monitoring(BasePage):
 
 
 
-    def Send_Box(self,input,boxnumber):
+    def Send_Box(self,boxnumber):
         """
         发箱
         """

@@ -1,0 +1,6 @@
+2023-03-29 09:26:40,339 - INFO login.py [line:8]: 登录：输入用户名
+2023-03-29 09:26:40,620 - INFO login.py [line:11]: 登录：输入密码
+2023-03-29 09:26:41,260 - INFO login.py [line:16]: 登录：选择码头
+2023-03-29 09:26:47,696 - INFO Empty_Box_Dredge_Plan.py [line:22]: 新增计划
+2023-03-29 09:27:00,328 - INFO Empty_Box_Dredge_Plan.py [line:90]: 获取信息：计划保存成功,预约号67341475
+2023-03-29 09:27:01,066 - INFO Empty_Box_Dredge_Plan.py [line:93]: 提取预约号：67341475

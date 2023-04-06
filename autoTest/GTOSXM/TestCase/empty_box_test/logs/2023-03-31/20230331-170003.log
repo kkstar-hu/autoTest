@@ -1,0 +1,11 @@
+2023-03-31 17:00:10,081 - INFO login.py [line:8]: 登录：输入用户名
+2023-03-31 17:00:10,353 - INFO login.py [line:11]: 登录：输入密码
+2023-03-31 17:00:10,922 - INFO login.py [line:16]: 登录：选择码头
+2023-03-31 17:00:27,687 - INFO basepage.py [line:344]: 未发现提示信息,返回none
+2023-03-31 17:00:27,687 - INFO ImportInformation_manifest.py [line:25]: 舱单-新增舱单货资料XCTX9502673
+2023-03-31 17:00:37,720 - INFO ImportInformation_manifest.py [line:80]: 舱单-新增舱单箱信息XCTX9502673
+2023-03-31 17:00:45,847 - INFO No_Structure_Monitoring.py [line:20]: 无结构船舶监控-查询：输入航名航次I7068
+2023-03-31 17:00:46,709 - INFO No_Structure_Monitoring.py [line:29]: 无结构船舶监控-验证卸船列表信息XCTX9502673
+2023-03-31 17:00:49,984 - ERROR Gtos_table.py [line:88]: 定位不到列表头:箱号和值XCTX9502673
+2023-03-31 17:00:53,738 - INFO Inset_Car.py [line:20]: 内集卡控制-查看可用内集卡号
+2023-03-31 17:01:00,355 - INFO Job_Order_Monitoring.py [line:19]: 作业指令监控-查询

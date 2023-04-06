@@ -1,0 +1,13 @@
+2023-04-04 17:25:07,815 - INFO login.py [line:8]: 登录：输入用户名
+2023-04-04 17:25:08,073 - INFO login.py [line:11]: 登录：输入密码
+2023-04-04 17:25:08,653 - INFO login.py [line:16]: 登录：选择码头
+2023-04-04 17:25:14,159 - INFO InterfacePage.py [line:19]: 获取Token
+2023-04-04 17:25:14,495 - INFO InterfacePage.py [line:36]: 发送智能道口
+2023-04-04 17:25:17,755 - INFO InterfacePage.py [line:46]: 箱号：KX124
+2023-04-04 17:25:17,755 - INFO InterfacePage.py [line:47]: 场位置: Q9017011
+2023-04-04 17:25:17,755 - INFO Incoming_job_list.py [line:18]: 进场作业列表：输入数据
+2023-04-04 17:25:19,304 - INFO InterfacePage.py [line:76]: RPS获取内容，修改TaskID，倍位
+2023-04-04 17:25:19,305 - INFO InterfacePage.py [line:61]: RPS登录
+2023-04-04 17:25:19,752 - INFO InterfacePage.py [line:107]: RPS获取内容，修改CntrId，Ylocation
+2023-04-04 17:25:20,034 - INFO InterfacePage.py [line:126]: RPS发箱
+2023-04-04 17:25:20,502 - INFO InterfacePage.py [line:131]: {'result': 0, 'message': 'R1CHJXBY122304', 'data': None}

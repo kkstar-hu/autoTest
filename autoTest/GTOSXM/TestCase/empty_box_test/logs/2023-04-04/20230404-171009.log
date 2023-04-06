@@ -1,0 +1,14 @@
+2023-04-04 17:10:11,221 - INFO login.py [line:8]: 登录：输入用户名
+2023-04-04 17:10:11,493 - INFO login.py [line:11]: 登录：输入密码
+2023-04-04 17:10:12,066 - INFO login.py [line:16]: 登录：选择码头
+2023-04-04 17:10:12,944 - INFO InterfacePage.py [line:19]: 获取Token
+2023-04-04 17:10:13,283 - INFO InterfacePage.py [line:36]: 发送智能道口
+2023-04-04 17:10:16,159 - INFO InterfacePage.py [line:45]: 箱号：KX123
+2023-04-04 17:10:16,159 - INFO InterfacePage.py [line:46]: 场位置: Q9009011
+2023-04-04 17:10:16,159 - INFO InterfacePage.py [line:75]: RPS获取内容，修改TaskID，倍位
+2023-04-04 17:10:16,160 - INFO InterfacePage.py [line:60]: RPS登录
+2023-04-04 17:10:16,562 - INFO InterfacePage.py [line:106]: RPS获取内容，修改CntrId，Ylocation
+2023-04-04 17:10:16,813 - INFO InterfacePage.py [line:125]: RPS发箱
+2023-04-04 17:10:17,223 - INFO InterfacePage.py [line:130]: {'result': 0, 'message': 'R1CHJXBY122299', 'data': None}
+2023-04-04 17:10:24,236 - INFO Incoming_job_list.py [line:18]: 进场作业列表：输入数据
+2023-04-04 17:10:27,550 - ERROR text.py [line:97]: 定位不到下拉控件标签名:箱号

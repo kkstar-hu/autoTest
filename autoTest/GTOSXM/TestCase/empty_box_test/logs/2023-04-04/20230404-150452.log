@@ -1,0 +1,15 @@
+2023-04-04 15:04:54,320 - INFO login.py [line:8]: 登录：输入用户名
+2023-04-04 15:04:54,579 - INFO login.py [line:11]: 登录：输入密码
+2023-04-04 15:04:55,168 - INFO login.py [line:16]: 登录：选择码头
+2023-04-04 15:05:01,819 - INFO Empty_Box_Dredge_Plan.py [line:21]: 新增计划
+2023-04-04 15:05:02,637 - INFO Empty_Box_Dredge_Plan.py [line:40]: 码头选箱：输入内容
+2023-04-04 15:05:13,804 - INFO Empty_Box_Dredge_Plan.py [line:87]: 码头选箱获取信息：计划保存成功,预约号49553622
+2023-04-04 15:05:14,043 - INFO Empty_Box_Dredge_Plan.py [line:90]: 码头选箱提取预约号：49553622
+2023-04-04 15:05:17,845 - INFO Empty_Box_Dredge_Plan.py [line:95]: 码头选箱：添加选箱范围
+2023-04-04 15:05:21,621 - INFO Empty_Box_Dredge_Plan.py [line:100]: 码头选箱：保存内容
+2023-04-04 15:05:27,527 - INFO Empty_Box_Dredge_Monitor.py [line:21]: 监控：查看监控状态
+2023-04-04 15:05:29,637 - INFO Empty_Box_Dredge_Monitor.py [line:25]: 监控：操作启用
+2023-04-04 15:05:33,657 - INFO InterfacePage.py [line:19]: 获取Token
+2023-04-04 15:05:33,996 - INFO InterfacePage.py [line:34]: 发送智能道口
+2023-04-04 15:05:36,349 - INFO InterfacePage.py [line:42]: {'result': 0, 'message': None, 'data': {'IsPass': True, 'InIsDangerous1': False, 'InIsDangerous2': False, 'InLocation1': None, 'InLocation2': None, 'InEir1': None, 'InEir2': None, 'OutLocation1': 'Q9007011', 'OutLocation2': None, 'OutEir1': None, 'OutEir2': None, 'OutConNo1': 'KX115', 'OutConNo2': None, 'InType1': None, 'InType2': None, 'OutType1': '普通提箱', 'OutType2': None, 'MsgInDic': {}, 'MsgOutDic': {}, 'TermCD': 'XRCT', 'Msg': []}}
+2023-04-04 15:05:40,211 - INFO carOut.py [line:18]: 车辆出场操作

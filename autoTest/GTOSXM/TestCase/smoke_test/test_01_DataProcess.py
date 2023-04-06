@@ -3,7 +3,6 @@ import allure
 import pytest
 from Commons.Controls.tag import Tag
 from GTOSXM.Config import config
-from GTOSXM.Controls.Gtos_table import Gtos_table
 from GTOSXM.PageObject.gtos_menu import GtosMenu
 from GTOSXM.PageObject.Barge_Planning.Immediate_Plan import Immediate_plan
 from GTOSXM.PageObject.Barge_Planning.Bridge_Crane_distribution import Bridge_Crane_Distribution

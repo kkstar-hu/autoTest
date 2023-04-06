@@ -1,0 +1,5 @@
+2023-04-03 15:01:21,836 - INFO login.py [line:8]: 登录：输入用户名
+2023-04-03 15:01:22,110 - INFO login.py [line:11]: 登录：输入密码
+2023-04-03 15:01:22,687 - INFO login.py [line:16]: 登录：选择码头
+2023-04-03 15:01:48,129 - INFO Empty_Box_Dredge_Monitor.py [line:19]: 监控：查看监控状态
+2023-04-03 15:01:49,256 - INFO Empty_Box_Dredge_Monitor.py [line:23]: 监控：停用状态操作启用，启用状态无操作

@@ -1,0 +1,8 @@
+2023-03-29 14:38:05,133 - INFO login.py [line:8]: 登录：输入用户名
+2023-03-29 14:38:05,423 - INFO login.py [line:11]: 登录：输入密码
+2023-03-29 14:38:06,019 - INFO login.py [line:16]: 登录：选择码头
+2023-03-29 14:38:12,506 - INFO Empty_Box_Dredge_Plan.py [line:23]: 新增计划
+2023-03-29 14:38:13,470 - INFO Empty_Box_Dredge_Plan.py [line:109]: 指定选箱：输入内容
+2023-03-29 14:38:16,488 - INFO Empty_Box_Dredge_Plan.py [line:147]: 指定选箱：选择指定箱
+2023-03-29 14:38:21,277 - ERROR Gtos_table.py [line:65]: 定位不到列表头:预约号和值XH03281664
+2023-03-29 14:38:21,277 - ERROR Gtos_table.py [line:100]: 定位不到列表头:预约号和值XH03281664

@@ -2,10 +2,8 @@ import os
 import allure
 import pytest as pytest
 from Commons.Controls.tag import Tag
-from Commons.RandomFunction import CommonGenerator
 from Commons.yamlread import read_yaml
 from GTOSXM.Config import config
-from GTOSXM.Config.config import takeNumber
 from GTOSXM.PageObject.Acceptance_Plan.InBoxAcceptance import InBox_Acceptance
 from GTOSXM.PageObject.CrossingManagement.carOut import Car_Out
 from GTOSXM.PageObject.CrossingManagement.checkInBox import CheckInBox

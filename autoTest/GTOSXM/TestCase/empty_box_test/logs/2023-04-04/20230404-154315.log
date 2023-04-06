@@ -1,0 +1,12 @@
+2023-04-04 15:43:17,065 - INFO login.py [line:8]: 登录：输入用户名
+2023-04-04 15:43:17,333 - INFO login.py [line:11]: 登录：输入密码
+2023-04-04 15:43:17,898 - INFO login.py [line:16]: 登录：选择码头
+2023-04-04 15:43:23,420 - INFO InterfacePage.py [line:19]: 获取Token
+2023-04-04 15:43:23,938 - INFO InterfacePage.py [line:36]: 发送智能道口
+2023-04-04 15:43:24,438 - INFO InterfacePage.py [line:45]: 智能道口存在延迟，再次请求
+2023-04-04 15:43:24,438 - INFO InterfacePage.py [line:36]: 发送智能道口
+2023-04-04 15:43:25,250 - INFO InterfacePage.py [line:45]: 智能道口存在延迟，再次请求
+2023-04-04 15:43:25,250 - INFO InterfacePage.py [line:36]: 发送智能道口
+2023-04-04 15:43:25,811 - INFO InterfacePage.py [line:45]: 智能道口存在延迟，再次请求
+2023-04-04 15:43:25,812 - INFO InterfacePage.py [line:77]: RPS获取内容，修改TaskID，倍位
+2023-04-04 15:43:25,814 - INFO InterfacePage.py [line:62]: RPS登录

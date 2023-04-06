@@ -1,0 +1,10 @@
+2023-04-04 15:33:22,032 - INFO login.py [line:8]: 登录：输入用户名
+2023-04-04 15:33:22,301 - INFO login.py [line:11]: 登录：输入密码
+2023-04-04 15:33:22,867 - INFO login.py [line:16]: 登录：选择码头
+2023-04-04 15:33:28,282 - INFO InterfacePage.py [line:19]: 获取Token
+2023-04-04 15:33:28,625 - INFO InterfacePage.py [line:36]: 发送智能道口
+2023-04-04 15:33:29,471 - INFO InterfacePage.py [line:50]: 智能道口存在延迟，再次请求
+2023-04-04 15:33:29,472 - INFO InterfacePage.py [line:36]: 发送智能道口
+2023-04-04 15:33:30,240 - INFO InterfacePage.py [line:50]: 智能道口存在延迟，再次请求
+2023-04-04 15:33:30,240 - INFO InterfacePage.py [line:36]: 发送智能道口
+2023-04-04 15:33:30,785 - INFO InterfacePage.py [line:50]: 智能道口存在延迟，再次请求

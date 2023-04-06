@@ -1,0 +1,8 @@
+2023-04-04 16:16:20,731 - INFO login.py [line:8]: 登录：输入用户名
+2023-04-04 16:16:21,013 - INFO login.py [line:11]: 登录：输入密码
+2023-04-04 16:16:21,591 - INFO login.py [line:16]: 登录：选择码头
+2023-04-04 16:16:27,222 - INFO InterfacePage.py [line:19]: 获取Token
+2023-04-04 16:16:27,527 - INFO InterfacePage.py [line:36]: 发送智能道口
+2023-04-04 16:16:28,924 - INFO InterfacePage.py [line:47]: {'result': 0, 'message': None, 'data': {'IsPass': True, 'InIsDangerous1': False, 'InIsDangerous2': False, 'InLocation1': None, 'InLocation2': None, 'InEir1': None, 'InEir2': None, 'OutLocation1': 'Q9003011', 'OutLocation2': None, 'OutEir1': None, 'OutEir2': None, 'OutConNo1': 'KX121', 'OutConNo2': None, 'InType1': None, 'InType2': None, 'OutType1': '普通提箱', 'OutType2': None, 'MsgInDic': {}, 'MsgOutDic': {}, 'TermCD': 'XRCT', 'Msg': []}}
+2023-04-04 16:16:28,926 - INFO InterfacePage.py [line:48]: 箱号：KX121
+2023-04-04 16:16:28,927 - INFO InterfacePage.py [line:49]: 场位置: Q9003011

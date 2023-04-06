@@ -1,0 +1,6 @@
+2023-03-29 14:23:52,617 - INFO login.py [line:8]: 登录：输入用户名
+2023-03-29 14:23:52,905 - INFO login.py [line:11]: 登录：输入密码
+2023-03-29 14:23:53,502 - INFO login.py [line:16]: 登录：选择码头
+2023-03-29 14:23:59,955 - INFO Empty_Box_Dredge_Plan.py [line:22]: 新增计划
+2023-03-29 14:24:00,882 - INFO Empty_Box_Dredge_Plan.py [line:108]: 指定选箱：输入内容
+2023-03-29 14:24:03,892 - INFO Empty_Box_Dredge_Plan.py [line:146]: 指定选箱：选择指定箱

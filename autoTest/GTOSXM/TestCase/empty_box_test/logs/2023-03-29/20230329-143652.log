@@ -1,0 +1,8 @@
+2023-03-29 14:36:53,576 - INFO login.py [line:8]: 登录：输入用户名
+2023-03-29 14:36:53,863 - INFO login.py [line:11]: 登录：输入密码
+2023-03-29 14:36:54,474 - INFO login.py [line:16]: 登录：选择码头
+2023-03-29 14:37:00,992 - INFO Empty_Box_Dredge_Plan.py [line:23]: 新增计划
+2023-03-29 14:37:01,920 - INFO Empty_Box_Dredge_Plan.py [line:109]: 指定选箱：输入内容
+2023-03-29 14:37:04,882 - INFO Empty_Box_Dredge_Plan.py [line:147]: 指定选箱：选择指定箱
+2023-03-29 14:37:09,919 - ERROR Gtos_table.py [line:65]: 定位不到列表头:预约号和值SUPER222
+2023-03-29 14:37:09,919 - ERROR Gtos_table.py [line:100]: 定位不到列表头:预约号和值SUPER222

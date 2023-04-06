@@ -11,10 +11,10 @@ class CloseFlight(BasePage):
         """
         输入内容，检索
         """
-        self.logger.info('步骤1：输入航名航次')
+        self.logger.info('关闭航次：输入航名航次')
         textinput = Gtos_text(self.driver)
         textinput.search_select_by_label('船名航次',number)
-        self.logger.info('步骤2：检索')
+        self.logger.info('关闭航次：检索')
         self.click('xpath', "//span[text()='检索']")
 
 

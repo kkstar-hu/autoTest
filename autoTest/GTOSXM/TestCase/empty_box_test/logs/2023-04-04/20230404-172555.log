@@ -1,0 +1,22 @@
+2023-04-04 17:25:57,182 - INFO login.py [line:8]: 登录：输入用户名
+2023-04-04 17:25:57,454 - INFO login.py [line:11]: 登录：输入密码
+2023-04-04 17:25:58,034 - INFO login.py [line:16]: 登录：选择码头
+2023-04-04 17:26:04,667 - INFO Empty_Box_Dredge_Plan.py [line:20]: 新增计划
+2023-04-04 17:26:05,480 - INFO Empty_Box_Dredge_Plan.py [line:39]: 码头选箱：输入内容
+2023-04-04 17:26:16,391 - INFO Empty_Box_Dredge_Plan.py [line:86]: 码头选箱获取信息：计划保存成功,预约号79037435
+2023-04-04 17:26:16,630 - INFO Empty_Box_Dredge_Plan.py [line:89]: 码头选箱提取预约号：79037435
+2023-04-04 17:26:20,440 - INFO Empty_Box_Dredge_Plan.py [line:94]: 码头选箱：添加选箱范围
+2023-04-04 17:26:25,202 - INFO Empty_Box_Dredge_Plan.py [line:100]: 码头选箱：保存内容
+2023-04-04 17:26:31,035 - INFO Empty_Box_Dredge_Monitor.py [line:14]: 监控：查看监控状态
+2023-04-04 17:26:33,097 - INFO Empty_Box_Dredge_Monitor.py [line:18]: 监控：操作启用
+2023-04-04 17:26:37,694 - INFO InterfacePage.py [line:19]: 获取Token
+2023-04-04 17:26:38,013 - INFO InterfacePage.py [line:36]: 发送智能道口
+2023-04-04 17:26:41,128 - INFO InterfacePage.py [line:46]: 箱号：KX128
+2023-04-04 17:26:41,128 - INFO InterfacePage.py [line:47]: 场位置: Q9019011
+2023-04-04 17:26:41,129 - INFO Incoming_job_list.py [line:18]: 进场作业列表：输入数据
+2023-04-04 17:26:42,706 - INFO InterfacePage.py [line:76]: RPS获取内容，修改TaskID，倍位
+2023-04-04 17:26:42,706 - INFO InterfacePage.py [line:61]: RPS登录
+2023-04-04 17:26:43,129 - INFO InterfacePage.py [line:107]: RPS获取内容，修改CntrId，Ylocation
+2023-04-04 17:26:43,382 - INFO InterfacePage.py [line:126]: RPS发箱
+2023-04-04 17:26:43,786 - INFO InterfacePage.py [line:131]: {'result': 0, 'message': 'R1CHJXBY122305', 'data': None}
+2023-04-04 17:26:51,241 - INFO carOut.py [line:18]: 车辆出场操作

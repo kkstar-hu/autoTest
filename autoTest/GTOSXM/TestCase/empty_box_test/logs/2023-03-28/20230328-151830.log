@@ -1,0 +1,7 @@
+2023-03-28 15:18:31,743 - INFO login.py [line:8]: 登录：输入用户名
+2023-03-28 15:18:32,011 - INFO login.py [line:11]: 登录：输入密码
+2023-03-28 15:18:32,578 - INFO login.py [line:16]: 登录：选择码头
+2023-03-28 15:18:38,892 - INFO Empty_Box_Dredge_Plan.py [line:22]: 新增计划
+2023-03-28 15:18:50,081 - INFO Empty_Box_Dredge_Plan.py [line:83]: 获取信息：计划保存成功,预约号23299343
+2023-03-28 15:18:50,626 - INFO Empty_Box_Dredge_Plan.py [line:86]: 提取预约号：23299343
+2023-03-28 15:18:53,651 - ERROR Gtos_table.py [line:57]: 定位不到列表头:预约号和值23299343

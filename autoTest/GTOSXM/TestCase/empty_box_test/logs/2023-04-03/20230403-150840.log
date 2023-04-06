@@ -1,0 +1,9 @@
+2023-04-03 15:08:41,481 - INFO login.py [line:8]: 登录：输入用户名
+2023-04-03 15:08:41,750 - INFO login.py [line:11]: 登录：输入密码
+2023-04-03 15:08:42,320 - INFO login.py [line:16]: 登录：选择码头
+2023-04-03 15:08:49,018 - INFO Empty_Box_Dredge_Plan.py [line:19]: 新增计划
+2023-04-03 15:08:49,907 - INFO Empty_Box_Dredge_Plan.py [line:106]: 指定选箱：输入内容
+2023-04-03 15:08:52,444 - INFO Empty_Box_Dredge_Plan.py [line:144]: 指定选箱：选择指定箱
+2023-04-03 15:08:54,458 - INFO Empty_Box_Dredge_Plan.py [line:149]: 指定选箱：选择流向
+2023-04-03 15:08:59,221 - INFO Empty_Box_Dredge_Plan.py [line:159]: 指定选箱获取信息：计划保存成功,预约号34628134
+2023-04-03 15:08:59,683 - INFO Empty_Box_Dredge_Plan.py [line:162]: 指定选箱提取预约号：34628134

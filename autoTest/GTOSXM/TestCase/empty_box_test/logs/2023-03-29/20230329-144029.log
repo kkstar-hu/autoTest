@@ -1,0 +1,8 @@
+2023-03-29 14:40:31,224 - INFO login.py [line:8]: 登录：输入用户名
+2023-03-29 14:40:31,504 - INFO login.py [line:11]: 登录：输入密码
+2023-03-29 14:40:32,115 - INFO login.py [line:16]: 登录：选择码头
+2023-03-29 14:40:38,501 - INFO Empty_Box_Dredge_Plan.py [line:23]: 新增计划
+2023-03-29 14:40:39,440 - INFO Empty_Box_Dredge_Plan.py [line:109]: 指定选箱：输入内容
+2023-03-29 14:40:42,455 - INFO Empty_Box_Dredge_Plan.py [line:147]: 指定选箱：选择指定箱
+2023-03-29 14:40:47,205 - ERROR Gtos_table.py [line:88]: 定位不到列表头:预约号和值COLDDR777
+2023-03-29 14:40:47,205 - ERROR Gtos_table.py [line:113]: 定位不到列表头:预约号和值COLDDR777

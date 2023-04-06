@@ -1,0 +1,6 @@
+2023-04-04 15:07:47,165 - INFO login.py [line:8]: 登录：输入用户名
+2023-04-04 15:07:47,447 - INFO login.py [line:11]: 登录：输入密码
+2023-04-04 15:07:48,019 - INFO login.py [line:16]: 登录：选择码头
+2023-04-04 15:07:53,658 - INFO InterfacePage.py [line:19]: 获取Token
+2023-04-04 15:07:53,980 - INFO InterfacePage.py [line:34]: 发送智能道口
+2023-04-04 15:07:56,546 - INFO InterfacePage.py [line:42]: {'result': 0, 'message': None, 'data': {'IsPass': True, 'InIsDangerous1': False, 'InIsDangerous2': False, 'InLocation1': None, 'InLocation2': None, 'InEir1': None, 'InEir2': None, 'OutLocation1': 'Q9009011', 'OutLocation2': None, 'OutEir1': None, 'OutEir2': None, 'OutConNo1': 'KX116', 'OutConNo2': None, 'InType1': None, 'InType2': None, 'OutType1': '普通提箱', 'OutType2': None, 'MsgInDic': {}, 'MsgOutDic': {}, 'TermCD': 'XRCT', 'Msg': []}}

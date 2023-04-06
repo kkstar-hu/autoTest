@@ -1,0 +1,18 @@
+2023-04-04 17:21:07,399 - INFO login.py [line:8]: 登录：输入用户名
+2023-04-04 17:21:07,673 - INFO login.py [line:11]: 登录：输入密码
+2023-04-04 17:21:08,250 - INFO login.py [line:16]: 登录：选择码头
+2023-04-04 17:21:15,158 - INFO Empty_Box_Dredge_Plan.py [line:20]: 新增计划
+2023-04-04 17:21:15,982 - INFO Empty_Box_Dredge_Plan.py [line:39]: 码头选箱：输入内容
+2023-04-04 17:21:27,034 - INFO Empty_Box_Dredge_Plan.py [line:86]: 码头选箱获取信息：计划保存成功,预约号30077312
+2023-04-04 17:21:27,273 - INFO Empty_Box_Dredge_Plan.py [line:89]: 码头选箱提取预约号：30077312
+2023-04-04 17:21:31,110 - INFO Empty_Box_Dredge_Plan.py [line:94]: 码头选箱：添加选箱范围
+2023-04-04 17:21:35,914 - INFO Empty_Box_Dredge_Plan.py [line:100]: 码头选箱：保存内容
+2023-04-04 17:21:41,808 - INFO Empty_Box_Dredge_Monitor.py [line:14]: 监控：查看监控状态
+2023-04-04 17:21:43,933 - INFO Empty_Box_Dredge_Monitor.py [line:18]: 监控：操作启用
+2023-04-04 17:21:45,112 - INFO InterfacePage.py [line:19]: 获取Token
+2023-04-04 17:21:45,433 - INFO InterfacePage.py [line:36]: 发送智能道口
+2023-04-04 17:21:46,344 - INFO InterfacePage.py [line:45]: 箱号：None
+2023-04-04 17:21:46,345 - INFO InterfacePage.py [line:46]: 场位置: None
+2023-04-04 17:21:46,345 - INFO InterfacePage.py [line:75]: RPS获取内容，修改TaskID，倍位
+2023-04-04 17:21:46,345 - INFO InterfacePage.py [line:60]: RPS登录
+2023-04-04 17:21:50,215 - INFO carOut.py [line:18]: 车辆出场操作

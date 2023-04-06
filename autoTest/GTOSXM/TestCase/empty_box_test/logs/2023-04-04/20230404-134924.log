@@ -1,0 +1,40 @@
+2023-04-04 13:49:25,815 - INFO login.py [line:8]: 登录：输入用户名
+2023-04-04 13:49:26,073 - INFO login.py [line:11]: 登录：输入密码
+2023-04-04 13:49:26,641 - INFO login.py [line:16]: 登录：选择码头
+2023-04-04 13:49:42,500 - INFO basepage.py [line:344]: 未发现提示信息,返回none
+2023-04-04 13:49:42,500 - INFO ImportInformation_manifest.py [line:25]: 舱单-新增舱单货资料XCTX8269431
+2023-04-04 13:50:01,931 - INFO ImportInformation_manifest.py [line:51]: 舱单-新增舱单后校验字段
+2023-04-04 13:50:05,233 - INFO ImportInformation_manifest.py [line:55]: 本次箱号:XCTX8269431!!!!!!!!!!!!!!!!!
+2023-04-04 13:50:12,133 - INFO ImportInformation_manifest.py [line:80]: 舱单-新增舱单箱信息XCTX8269431
+2023-04-04 13:50:23,463 - INFO ImportInformation_manifest.py [line:100]: 舱单-新增舱单箱保存后校验字段
+2023-04-04 13:50:27,757 - INFO ImportInformation_manifest.py [line:117]: 舱单-转船图箱,整船操作
+2023-04-04 13:50:34,534 - INFO No_Structure_Monitoring.py [line:20]: 无结构船舶监控-查询：输入航名航次I7068
+2023-04-04 13:50:35,923 - INFO No_Structure_Monitoring.py [line:29]: 无结构船舶监控-验证卸船列表信息XCTX8269431
+2023-04-04 13:50:42,568 - INFO No_Structure_Monitoring.py [line:51]: 无结构船舶监控-卸船发箱XCTX8269431
+2023-04-04 13:50:50,795 - INFO Inset_Car.py [line:20]: 内集卡控制-查看可用内集卡号
+2023-04-04 13:50:57,351 - INFO Job_Order_Monitoring.py [line:19]: 作业指令监控-查询
+2023-04-04 13:51:00,155 - INFO Job_Order_Monitoring.py [line:69]: 作业指令监控-校验列表数据
+2023-04-04 13:51:10,184 - INFO Job_Order_Monitoring.py [line:129]: 作业指令监控-改配集卡操作
+2023-04-04 13:51:15,182 - INFO Job_Order_Monitoring.py [line:142]: 作业指令监控-自动分配集卡
+2023-04-04 13:51:17,074 - INFO Job_Order_Monitoring.py [line:155]: 作业指令监控-卸船确认
+2023-04-04 13:51:19,290 - INFO Job_Order_Monitoring.py [line:162]: 箱位置：Q9001011
+2023-04-04 13:51:24,638 - INFO Job_Order_Monitoring.py [line:212]: 作业指令监控-堆场收箱
+2023-04-04 13:51:32,344 - INFO Empty_Box_Dredge_Plan.py [line:19]: 新增计划
+2023-04-04 13:51:33,175 - INFO Empty_Box_Dredge_Plan.py [line:106]: 指定选箱：输入内容
+2023-04-04 13:51:37,014 - INFO Empty_Box_Dredge_Plan.py [line:144]: 指定选箱：选择指定箱
+2023-04-04 13:51:39,677 - INFO Empty_Box_Dredge_Plan.py [line:149]: 指定选箱：选择流向
+2023-04-04 13:51:43,942 - INFO Empty_Box_Dredge_Plan.py [line:159]: 指定选箱获取信息：计划保存成功,预约号71672512
+2023-04-04 13:51:44,368 - INFO Empty_Box_Dredge_Plan.py [line:162]: 指定选箱提取预约号：71672512
+2023-04-04 13:51:51,156 - INFO Empty_Box_Dredge_Monitor.py [line:21]: 监控：查看监控状态
+2023-04-04 13:51:54,874 - INFO Empty_Box_Dredge_Monitor.py [line:26]: 监控：停用状态操作启用，启用状态无操作
+2023-04-04 13:51:59,175 - INFO InterfacePage.py [line:19]: 获取Token
+2023-04-04 13:51:59,498 - INFO InterfacePage.py [line:27]: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyQWNjb3VudCI6ImFkbWluIiwiT1BfVEVSTUNEIjoiWFJDVCIsIkF1dGhUb2tlbiI6Ijk3ZjBiZmMxYjBiNzQ3MDVhODliMmMyNDFmN2UyZWE0IiwiU2Vzc2lvbklkIjoiNTk4ZjQyZGJiMWE3NDYwOWJkZTgxZTY1Y2RjOTI0NWUiLCJTZWN1cml0eUtleSI6Ijc2QUIyQThFIiwibmJmIjoxNjgwNTg3NTExLCJleHAiOjE2ODU3NzE1MTEsImlhdCI6MTY4MDU4NzUxMSwiaXNzIjoibnV6YXJzdXJmLmNvbSIsImF1ZCI6IndlYkFwaSJ9.kDf_mHLpe_NWC4ur9ei3tGN6Q739nKOD5xZB69fynFk
+2023-04-04 13:51:59,499 - INFO InterfacePage.py [line:35]: 发送智能道口
+2023-04-04 13:52:00,931 - INFO InterfacePage.py [line:41]: {'result': 0, 'message': None, 'data': {'IsPass': True, 'InIsDangerous1': False, 'InIsDangerous2': False, 'InLocation1': None, 'InLocation2': None, 'InEir1': None, 'InEir2': None, 'OutLocation1': 'Q9001011', 'OutLocation2': None, 'OutEir1': None, 'OutEir2': None, 'OutConNo1': 'XCTX8269431', 'OutConNo2': None, 'InType1': None, 'InType2': None, 'OutType1': '普通提箱', 'OutType2': None, 'MsgInDic': {}, 'MsgOutDic': {}, 'TermCD': 'XRCT', 'Msg': []}}
+2023-04-04 13:52:00,932 - INFO InterfacePage.py [line:63]: RPS获取内容，修改TaskID，倍位
+2023-04-04 13:52:00,932 - INFO InterfacePage.py [line:48]: RPS登录
+2023-04-04 13:52:01,378 - INFO InterfacePage.py [line:94]: RPS获取内容，修改CntrId，Ylocation
+2023-04-04 13:52:01,661 - INFO InterfacePage.py [line:113]: RPS发箱
+2023-04-04 13:52:02,011 - INFO InterfacePage.py [line:119]: {'result': 0, 'message': 'R1CHJXBY122189', 'data': None}
+2023-04-04 13:52:02,012 - INFO Job_Order_Monitoring.py [line:19]: 作业指令监控-查询
+2023-04-04 13:52:08,670 - INFO carOut.py [line:18]: 车辆出场操作

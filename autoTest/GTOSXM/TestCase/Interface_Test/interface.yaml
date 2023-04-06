@@ -18,3 +18,5 @@
   直提顺序url : http://apserver.cloudtos.com/api/cranework/workunit/setorderbylocation
   #允许直提
   允许直提url : http://apserver.cloudtos.com/api/vms/ship/allowDirectDischargeGateIn
+  #智能道口
+  智能道口url: http://apserver.cloudtos.com/api/gts/SmartGate/TruckInYard

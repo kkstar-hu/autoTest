@@ -1,0 +1,15 @@
+2023-04-04 13:39:18,907 - INFO login.py [line:8]: 登录：输入用户名
+2023-04-04 13:39:19,167 - INFO login.py [line:11]: 登录：输入密码
+2023-04-04 13:39:19,747 - INFO login.py [line:16]: 登录：选择码头
+2023-04-04 13:39:25,956 - INFO Empty_Box_Dredge_Plan.py [line:19]: 新增计划
+2023-04-04 13:39:26,803 - INFO Empty_Box_Dredge_Plan.py [line:106]: 指定选箱：输入内容
+2023-04-04 13:39:30,508 - INFO Empty_Box_Dredge_Plan.py [line:144]: 指定选箱：选择指定箱
+2023-04-04 13:39:33,206 - INFO Empty_Box_Dredge_Plan.py [line:149]: 指定选箱：选择流向
+2023-04-04 13:39:37,572 - INFO Empty_Box_Dredge_Plan.py [line:159]: 指定选箱获取信息：计划保存成功,预约号85472360
+2023-04-04 13:39:38,036 - INFO Empty_Box_Dredge_Plan.py [line:162]: 指定选箱提取预约号：85472360
+2023-04-04 13:39:44,773 - INFO Empty_Box_Dredge_Monitor.py [line:21]: 监控：查看监控状态
+2023-04-04 13:39:48,417 - INFO Empty_Box_Dredge_Monitor.py [line:26]: 监控：停用状态操作启用，启用状态无操作
+2023-04-04 13:39:52,705 - INFO Job_Order_Monitoring.py [line:19]: 作业指令监控-查询
+2023-04-04 13:39:55,846 - INFO InterfacePage.py [line:33]: 发送智能道口
+2023-04-04 13:39:57,322 - INFO InterfacePage.py [line:60]: RPS获取内容，修改文件
+2023-04-04 13:40:00,901 - INFO carOut.py [line:18]: 车辆出场操作

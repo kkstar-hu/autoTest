@@ -65,11 +65,19 @@ class Immediate_plan(BasePage):
         self.logger.info('出口航次号为：'+tablecheck.get_value_by_rowid(rowid,'出口航次'))
         check.equal(tablecheck.get_value_by_rowid(rowid,'船期状态'), '预报')
         check.equal(tablecheck.get_value_by_rowid(rowid, '靠泊状态'), '未靠')
+
+    def checkPlan_over(self,number):
+        self.click('x', "//span[text()='检索']")
+        tablecheck = Gtos_table(self.driver, number)
+        rowid=tablecheck.select_row("进口航次",config.importNumber)
+        self.logger.info('进口航次号为：'+tablecheck.get_value_by_rowid(rowid,'进口航次'))
+        self.logger.info('出口航次号为：'+tablecheck.get_value_by_rowid(rowid,'出口航次'))
+        check.equal(tablecheck.get_value_by_rowid(rowid,'船期状态'), '离港')
+        check.equal(tablecheck.get_value_by_rowid(rowid, '靠泊状态'), '离泊')
+
     def Sure_ShipPlan(self,number):
         self.logger.info('近期计划-确保船期')
         textInput = Gtos_text(self.driver)
-        # textInput.search_select_by_label('船名航次',config.outportNumber)
-        # self.click('x',"//span[text()='检索']")
         actualarriveDay = DataTime.Get_Current_Date()
         actuallarriveTime = actualarriveDay + " 00:00:00"
         self.click('x', "//span[text()='确报船期']")

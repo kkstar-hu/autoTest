@@ -16,3 +16,8 @@ head = {
     "Authorization": "Bearer",
     "Content-Type": "application/json; charset=UTF-8"
 }
+
+global boxNumber
+# boxNumber = 'KX123'
+
+global boxPosition
