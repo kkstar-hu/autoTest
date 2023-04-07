@@ -1,16 +1,15 @@
-import random
-import re
-import time
 import pytest_check as check
 from Base.basepage import BasePage
 from GTOSXM.Controls.text import Gtos_text
-from GTOSXM.Config import config, configinterface
+from GTOSXM.Config import configinterface
 from GTOSXM.Controls.Gtos_table import Gtos_table
+
 
 class Incoming_job_list(BasePage):
     """
     进场作业列表
     """
+
     def input_values(self):
         """
         输入查询内容
@@ -23,7 +22,7 @@ class Incoming_job_list(BasePage):
         """
         第一次查验
         """
-        self.click('xpath',"//span[text()='检索']")
+        self.click('xpath', "//span[text()='检索']")
         tablecheck = Gtos_table(self.driver)
         check.equal(tablecheck.get_value('作业状态'), '允许作业')
 
@@ -31,7 +30,6 @@ class Incoming_job_list(BasePage):
         """
         第二次查验
         """
-        self.click('xpath',"//span[text()='检索']")
+        self.click('xpath', "//span[text()='检索']")
         tablecheck = Gtos_table(self.driver)
         check.equal(tablecheck.get_value('作业状态'), '完成')
-

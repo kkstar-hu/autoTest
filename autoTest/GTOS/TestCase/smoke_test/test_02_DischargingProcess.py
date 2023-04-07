@@ -52,7 +52,7 @@ def testSend_box(driver, input):
     send_box = NO_Structure_Monitoring(driver)
     send_box.Retrieve()
     send_box.SendBox_check_values(input, config.boxNumber)
-    send_box.Send_Box(input, config.boxNumber)
+    send_box.Send_Box(config.boxNumber)
     Tag(driver).closeTagGtos('无结构船舶监控')
 
 

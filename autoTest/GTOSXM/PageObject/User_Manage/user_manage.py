@@ -6,19 +6,20 @@ from GTOSXM.Controls.Gtos_table import Gtos_table
 from GTOSXM.Controls.text import Gtos_text
 from GTOSXM.PageObject.login import Login
 
+
 class User_Manage(BasePage):
     def Add_User(self, input):
-        self.click('x', "//span[contains(text(),'新增用户')]")  #点击新增
-        textInput = Gtos_text(self.driver)  #输入新增用户信息
-        textInput.input_by_label("用户账号", input["用户账号"])  #输入框
+        self.click('x', "//span[contains(text(),'新增用户')]")  # 点击新增
+        textInput = Gtos_text(self.driver)  # 输入新增用户信息
+        textInput.input_by_label("用户账号", input["用户账号"])  # 输入框
         textInput.input_by_label("用户名称", input["用户名称"])
         textInput.input_by_label("用户密码", input["用户密码"])
-        textInput.select_by_label_time("用户状态", input["用户状态"])  #单选框
+        textInput.select_by_label_time("用户状态", input["用户状态"])  # 单选框
         textInput.select_by_label_time("归属码头", input["归属码头"])
         textInput.select_by_label_time("操作码头", input["操作码头"])
-        self.click('x', "//span[@class='el-checkbox__label' and text()='测试']")  #多选框
-        self.save()  #点击保存
-        self.check_alert("添加成功")  #校验是否添加成功
+        self.click('x', "//span[@class='el-checkbox__label' and text()='测试']")  # 多选框
+        self.save()  # 点击保存
+        self.check_alert("添加成功")  # 校验是否添加成功
 
     def User_Search(self, input):
         time.sleep(1)
@@ -62,7 +63,6 @@ class User_Manage(BasePage):
                 print("role_list：" + role_list[i] + "与" + role[i] + "不相符")
                 break
 
-
     def Update_User(self, input):
         self.left_click('x', "//span[text()='修改']")
         textInput = Gtos_text(self.driver)  # 输入更新的用户信息
@@ -80,34 +80,38 @@ class User_Manage(BasePage):
         message_element = self.get_element('x', "//div[@class='el-message-box__message']")
         message = message_element.text
         print(message)
-        data_message = "此操作将禁用用户："+input["用户名称"]+"，是否继续?"
+        data_message = "此操作将禁用用户：" + input["用户名称"] + "，是否继续?"
         print(data_message)
         if message == data_message:
             self.left_click('x', "//span[text()=' 确定 ']")
         else:
             print("禁用用户信息与弹窗用户信息不匹配！")
-        self.elementExist("x", "//div[@class='nzctos-grid__operation__column-container']//div[@class='buttongroup__item'][3]")  #判断界面元素存在”恢复“
+        self.elementExist("x",
+                          "//div[@class='nzctos-grid__operation__column-container']//div[@class='buttongroup__item'][3]")
+        # 判断界面元素存在”恢复“
 
     def Logout_User(self):
-        self.click('x', "//i[@class='el-icon-user user-avatar']")  #点击用户头像
-        self.click('x', "//span[text()='退出登录']")  #点击退出登录
+        self.click('x', "//i[@class='el-icon-user user-avatar']")  # 点击用户头像
+        self.click('x', "//span[text()='退出登录']")  # 点击退出登录
         self.click('x', "//button[@type='button']//span[text()=' 退出 ']")
 
     def Check_Forbidden(self, input):
-        self.check_alert("账户已被禁用。账户:"+input["用户账号"])
+        self.check_alert("账户已被禁用。账户:" + input["用户账号"])
 
     def Resume_User(self, input):
         self.left_click("x", "//span[text()='恢复']")
         message_element = self.get_element('x', "//div[@class='el-message-box__message']")
         message = message_element.text
         print(message)
-        data_message = "此操作将恢复用户："+input["用户名称"]+"，是否继续?"
+        data_message = "此操作将恢复用户：" + input["用户名称"] + "，是否继续?"
         print(data_message)
         if message == data_message:
             self.left_click('x', "//span[text()=' 确定 ']")
         else:
             print("恢复用户信息与弹窗用户信息不匹配！")
-        self.elementExist("x", "//div[@class='nzctos-grid__operation__column-container']//div[@class='buttongroup__item'][2]")  # 判断界面元素存在”恢复“
+        self.elementExist("x",
+                          "//div[@class='nzctos-grid__operation__column-container']//div[@class='buttongroup__item'][2]")
+        # 判断界面元素存在”恢复“
 
     def Check_Login_Success(self):
         self.check_alert("密码已过期")
@@ -131,7 +135,8 @@ class User_Manage(BasePage):
         lock_driver.login(input["用户账号"], input["错误密码"], input["提示信息"])
         i = 0
         while i < 9:
-            self.get_elements("xpath", "//button[@class='el-button login-btn el-button--primary el-button--bg']")[1].click()
+            self.get_elements("xpath", "//button[@class='el-button login-btn el-button--primary el-button--bg']")[
+                1].click()
             time.sleep(0.5)
             print("点击次数: ", i)
             i = i + 1

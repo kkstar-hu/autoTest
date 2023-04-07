@@ -1,9 +1,6 @@
 import time
 
-import pytest_check as check
 from Base.basepage import BasePage
-from GTOS.Config import config
-from GTOS.Controls.Gtos_table import Gtos_table
 from GTOS.Controls.text import Gtos_text
 
 
@@ -11,7 +8,8 @@ class Car_Out(BasePage):
     """
     车辆出场
     """
-    def input_values(self,input,boxnumber):
+
+    def input_values(self, input):
         """
         输入车辆，箱号
         """
@@ -26,11 +24,8 @@ class Car_Out(BasePage):
         """
         检索
         """
-        self.click('xpath',"//span[text()='检索']")
+        self.click('xpath', "//span[text()='检索']")
         time.sleep(2)
-
-
-
 
     def confirm_out_picking(self):
         """
@@ -38,9 +33,8 @@ class Car_Out(BasePage):
         """
         self.click('xpath', "//span[text()='确认出场']")
         time.sleep(1)
-        self.click('xpath',"//span[contains(text(),'否')]")
+        self.click('xpath', "//span[contains(text(),'否')]")
         self.check_alert('车辆出场成功')
-
 
     def confirm_out_loadingAndLifting(self):
         """
@@ -48,5 +42,3 @@ class Car_Out(BasePage):
         """
         self.click('xpath', "//span[text()='确认出场']")
         self.check_alert('车辆出场成功')
-
-
