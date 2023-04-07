@@ -48,7 +48,7 @@ def testSImport_data_verification(driver, input):
     menu.select_level_Menu("资料管理,进口资料,进口资料校验")
     idv = Import_data_verification(driver)
     idv.retrieval()
-    idv.verification('010382')
+    idv.verification('010782')
     Tag(driver).closeTagGtos('进口资料校验')
 
 
@@ -86,7 +86,7 @@ def testCharge_Car(driver, input):
     menu.select_level_Menu("机械控制,内集卡控制")
     inset_car = Inset_Car(driver)
     inset_car.choice_job('ALL')
-    inset_car.choice_cars('作业步骤','空车')
+    inset_car.choice_cars('作业步骤','等待装车')
     Tag(driver).closeTagGtos('内集卡控制')
 
 # @pytest.mark.skipif
