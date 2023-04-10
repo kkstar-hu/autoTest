@@ -10,19 +10,26 @@ class BTOS_table(BasePage):
         super(BTOS_table, self).__init__(driver)
         self.index = index
 
-    # 获取行号并点击该行
-    def select_row(self, header: str, value: str):
-        try:
-            #print(f"(//div[contains(@class, 'toscom-panel')])[{self.index}]//span[@class='vxe-cell--title' and text()='{header}']/../..")
-            colid = self.get_attribute_info("xpath", f"(//div[contains(@class, 'toscom-panel')])[{self.index}]//span[@class='vxe-cell--title' and text()='{header}']/../..", "colid")
-            rowid = self.get_attribute_info("xpath", f"(//div[contains(@class, 'toscom-panel')])[{self.index}]//td[@colid='{colid}']//span[contains(text(),'{value}')]/../../..","rowid")
-            e1 = self.get_elements("xpath", f"(//div[contains(@class, 'toscom-panel')])[{self.index}]//tr[@rowid='{rowid}']")[0]
-        except Exception:
-            self.logger.error(f"定位元素失败:", exc_info=True)
-        else:
-            # print(f"(//div[contains(@class, 'toscom-panel')])[{self.index}]//tr[@rowid='{rowid}']")
-            ActionChains(self.driver).click(e1).perform()
-            return rowid
+    def select_row(self, header, value):
+        """
+        table中点击选择行，会分页查找
+        header：表头，value：值
+        """
+        colid = self.get_attribute_info("xpath", f"(//table[@class='vxe-table--header'])[{self.index}]//thead/tr/th//span[text()='{header}']//parent::div//parent::th","colid")
+        while True:
+            try:
+                time.sleep(0.5)
+                self.click("xpath", f"(//table[@class='vxe-table--body'])[{self.index}]//tr/td[@colid='{colid}']//span[contains(text(),'{value}') and not (contains(@style,'display: none'))]")
+                time.sleep(0.5)
+                rowid = self.get_attribute_info("xpath",f"(//table[@class='vxe-table--body'])[{self.index}]//tr/td[@colid='{colid}']//span[contains(text(),'{value}') and not (contains(@style,'display: none'))]//ancestor::tr",
+                                                "rowid")
+                return rowid
+            except:
+                if self.elementExist("xpath", "//button[@title ='下一页' and @class='vxe-pager--next-btn']"):
+                    self.click("xpath", "//button[@title ='下一页' and @class='vxe-pager--next-btn']")
+                else:
+                    self.logger.error(f"定位不到列表头:{header}和值{value}")
+                    raise Exception("定位不到元素")
 
     def get_value_by_rowid(self, rowid : str, header : str):
         try:

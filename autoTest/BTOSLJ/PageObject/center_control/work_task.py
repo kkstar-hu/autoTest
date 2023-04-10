@@ -1,5 +1,7 @@
 import allure
 import pytest_check as check
+
+from BTOSLJ.Config import config
 from Base.basepage import BasePage
 from BTOSLJ.Controls.BTOS_text import BtosText
 from BTOSLJ.Controls.BTOS_table import BTOS_table
@@ -13,6 +15,7 @@ class WorkTask(BasePage):
         super(WorkTask, self).__init__(driver)
         self.textInput = BtosText(self.driver)
         self.table_work = BTOS_table(self.driver, 1)
+        self.table_arrange = BTOS_table(self.driver, 3)
 
     # 新增舱单号
     @allure.step("当班作业任务-昼夜计划导入")
@@ -24,7 +27,8 @@ class WorkTask(BasePage):
         self.waitloading()
         colid = self.get_attribute_info("xpath", f"(//table[@class='vxe-table--header'])[3]//thead/tr/th//span[text()='操作']//parent::div//parent::th",
                                         "colid")
-        self.click("x", f"(//tr/td[@colid='{colid}']//div[@class='operate']//span[text()='安排作业路'])[2]")
+        rowid=self.table_arrange.select_row("船名航次", config.importNumber)
+        self.click("x", f"(//tr[@rowid='{rowid}']/td[@colid='{colid}']//div[@class='operate']//span[text()='安排作业路'])[2]")
         self.click("xpath", "//label[contains(text(),'舱口')]//following-sibling::div//input")
         self.waitloading()
         self.click("xpath", "//div[@class='nz-flex-col']//div[text()='01']")
