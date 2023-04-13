@@ -25,7 +25,7 @@ class ShipDate(BasePage):
     # 新增船期
     @allure.step("新增船期")
     def add_schedule(self, input : dict):
-        self.logger.info("新增船期")
+        self.logger.info(f"新增船期:{config.importNumber}")
         self.click("id", "add")
         self.textInput.select_by_label_drawer("船舶代码", input["船舶代码"], 0.5)
         self.textInput.select_by_label_drawer("上一港", input["上一港"])
@@ -40,7 +40,6 @@ class ShipDate(BasePage):
         self.textInput.input_text_by_label_drawer("船代联系人", input["船代联系人"])
         self.textInput.select_by_label_drawer("贸易类型", input["贸易类型"])
         self.textInput.click("xpath", "//span[text()='保存并关闭']")
-        #self.element_wait("xpath", "//div[@role='alert']//p")
         self.check_alert_and_close("新增成功")
 
     # 检查数据

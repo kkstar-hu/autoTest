@@ -20,7 +20,7 @@ class BTOS_table(BasePage):
             try:
                 time.sleep(0.5)
                 self.click("xpath", f"(//table[@class='vxe-table--body'])[{self.index}]//tr/td[@colid='{colid}']//span[contains(text(),'{value}') and not (contains(@style,'display: none'))]")
-                time.sleep(0.5)
+                time.sleep(1)
                 rowid = self.get_attribute_info("xpath",f"(//table[@class='vxe-table--body'])[{self.index}]//tr/td[@colid='{colid}']//span[contains(text(),'{value}') and not (contains(@style,'display: none'))]//ancestor::tr",
                                                 "rowid")
                 return rowid
@@ -31,13 +31,46 @@ class BTOS_table(BasePage):
                     self.logger.error(f"定位不到列表头:{header}和值{value}")
                     raise Exception("定位不到元素")
 
-    def get_value_by_rowid(self, rowid : str, header : str):
+    # def get_value_by_rowid(self, rowid : str, header : str):
+    #     try:
+    #         colid = self.get_attribute_info("xpath", f"(//div[contains(@class, 'toscom-panel')])[{self.index}]//span[@class='vxe-cell--title' and text()='{header}']/../..", "colid")
+    #     except Exception:
+    #         self.logger.error(f"定位元素失败:", exc_info=True)
+    #     else:
+    #         return self.get_attribute_info("xpath", f"(//div[contains(@class, 'toscom-panel')])[{self.index}]//tr[@rowid='{rowid}']/td[@colid='{colid}']//span", 'textContent')
+
+    def get_value_by_rowid(self, rowid, header):
+        """
+        获取表格中某一格值
+        header：表头 ,rowid: rowid属性值，一般和select_row方法一起用
+        """
         try:
-            colid = self.get_attribute_info("xpath", f"(//div[contains(@class, 'toscom-panel')])[{self.index}]//span[@class='vxe-cell--title' and text()='{header}']/../..", "colid")
-        except Exception:
-            self.logger.error(f"定位元素失败:", exc_info=True)
-        else:
-            return self.get_attribute_info("xpath", f"(//div[contains(@class, 'toscom-panel')])[{self.index}]//tr[@rowid='{rowid}']/td[@colid='{colid}']//span", 'textContent')
+            colid = self.get_attribute_info("xpath",
+                                            f"(//table[@class='vxe-table--header'])[{self.index}]//thead/tr/th//span[text()='{header}']//parent::div//parent::th",
+                                            "colid")
+            return self.get_text("xpath",
+                                 f"(//table[@class='vxe-table--body'])[{self.index}]//tr[@rowid='{rowid}']/td[@colid='" + colid + "']//span")
+        except NoSuchElementException:
+            self.logger.error(f"定位不到列表头:{header}和rowid={rowid}")
+            raise Exception("定位不到元素")
+
+    def hasValue(self, header, value):
+        """
+        table中是否存在值
+        header：表头，value：值
+        return bool
+        """
+        colid = self.get_attribute_info("xpath", f"(//table[@class='vxe-table--header'])[{self.index}]//thead/tr/th//span[text()='{header}']//parent::div//parent::th","colid")
+        while True:
+            try:
+                time.sleep(0.5)
+                return self.elementExist("xpath", f"(//table[@class='vxe-table--body'])[{self.index}]//tr/td[@colid='{colid}']//span[contains(text(),'{value}') and not (contains(@style,'display: none'))]")
+            except:
+                if self.elementExist("xpath", "//button[@title ='下一页' and @class='vxe-pager--next-btn']"):
+                    self.click("xpath", "//button[@title ='下一页' and @class='vxe-pager--next-btn']")
+                else:
+                    self.logger.error(f"定位不到列表头:{header}和值{value}")
+                    raise Exception("定位不到元素")
 
     def click_header_button(self, name : str):
         try:
@@ -131,7 +164,7 @@ class BTOS_table(BasePage):
             colid = self.get_attribute_info("xpath",
                                             f"(//table[@class='vxe-table--header'])[{self.index}]//thead/tr/th//span[text()='{header}']//parent::div//parent::th",
                                             "colid")
-            self.input("xpath",
+            self.input_no_clear("xpath",
                        f"(//table[@class='vxe-table--body'])[{self.index}]//tr[{row}]/td[@colid='" + colid + "']//input",
                        value)
         except NoSuchElementException:

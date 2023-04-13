@@ -38,8 +38,6 @@ class BigShipWorkPlan(BasePage):
         time.sleep(1)
         self.click("x", "(//div[@class='toscom-buttongroup']//span[text()='安排计划'])[2]")
         self.waitloading()
-        self.click("x", "//div[@class='el-message-box__btns']//span[contains(text(),'取消')]")
-        #self.textInput.input_by_label("货名", "煤炭及制品")
         self.get_element("x", "//label[contains(text(),'货名')]//following-sibling::div//input").send_keys(Keys.ENTER)
         self.textInput.input_by_label("计划吨位", input["计划吨位"])
         self.textInput.input_by_label("昼夜剩余吨位", input["昼夜剩余吨位"])

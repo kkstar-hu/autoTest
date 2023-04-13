@@ -25,20 +25,28 @@ class MechanicalAttendance(BasePage):
     @allure.step("机械出勤-安排机械")
     def arrange_mechanical(self, input):
         self.logger.info("机械出勤：安排机械")
-        self.click("x", "//span[text()='安排机械']")
-        self.waitloading()
-        self.click("x", "//div[@role='treeitem']//span[text()='全选']")
-        try:
+        if not self.table_check.hasValue("机械号", input['机械号']):
+            self.click("x", "//span[text()='安排机械']")
+            self.waitloading()
+            self.click("x", "//div[@role='treeitem']//span[text()='全选']")
             self.table_input.check("机械号", input['机械号'])
-        except:
-            pass
-        self.left_click('x', "//span[text()='保存']")
+            self.left_click('x', "//span[text()='保存']")
+            self.check_alert("保存成功")
+
+    @allure.step("机械出勤-安排司机")
+    def arrange_driver(self, input):
+        self.logger.info("机械出勤：安排司机")
+        self.click("x", "//span[text()='安排司机']")
+        self.waitloading()
+        self.click("x", "//div[@role='treeitem']//span[text()='机械运行部']")
+        self.table_input.check("工号", input['司机工号'])
+        self.waitloading()
+        self.click('x', "//span[text()='保存']")
         self.check_alert("保存成功")
 
-    def check_table_task(self, input):
-        check.equal(self.table_work.get_value("作业类型"), "大船作业任务")
-        check.equal(self.table_work.get_value("舱口"), "01")
-        check.equal(self.table_work.get_value("作业区"), input["作业区"])
-        check.equal(self.table_work.get_value("工艺"), input["作业工艺"])
-        check.equal(self.table_work.get_value("操作过程"), input["操作过程"])
-        check.equal(self.table_work.get_value("货名"), input["货名"])
+    def check_table(self, input):
+        rowid = self.table_check.select_row("机械号", input["机械号"])
+        check.equal(self.table_check.get_value_by_rowid(rowid, "部门"), input["出勤部门"])
+        check.equal(self.table_check.get_value_by_rowid(rowid, "机械类型"), input["机械类型"])
+        check.equal(self.table_check.get_value_by_rowid(rowid, "状态"), "启用")
+        check.equal(self.table_check.get_value_by_rowid(rowid, "已安排司机"), input['司机'])

@@ -2,6 +2,8 @@ import time
 import allure
 import pytest_check as check
 from selenium.webdriver import Keys
+
+from BTOSLJ.Config import config
 from Base.basepage import BasePage
 from BTOSLJ.Controls.BTOS_text import BtosText
 from BTOSLJ.Controls.BTOS_table import BTOS_table
@@ -18,7 +20,6 @@ class ImStoreBill(BasePage):
         self.table_bill = BTOS_table(self.driver, 1)
         self.table_goods = BTOS_table(self.driver, 2)
         self.rowid = None
-        self.billNumber = CommonGenerator.generate_verify_code(4)
 
     def search(self, number):
         self.textInput.select_by_label_ship("船名航次", number)
@@ -27,11 +28,11 @@ class ImStoreBill(BasePage):
     # 新增舱单号
     @allure.step("新增舱单号")
     def add_bill(self, number, input):
-        self.logger.info("内贸进口舱单管理-新增舱单号")
+        self.logger.info(f"内贸进口舱单管理-新增舱单号:{config.billNumber}")
         self.textInput.select_by_label_ship("船名航次", number)
         self.waitloading()
         self.click("x", "//div[@id='add']/span[text()='新增']")
-        self.textInput.input_by_label("舱单号", self.billNumber)
+        self.textInput.input_by_label("舱单号", config.billNumber)
         self.textInput.select_by_label("货代", input["货代"])
         self.textInput.select_by_label_time("货主", input["货主"])
         self.textInput.select_by_label("来源港", input["来源港"])
@@ -53,7 +54,7 @@ class ImStoreBill(BasePage):
         self.check_alert(input["alert"])
 
     def check_table_bill(self, input):
-        self.rowid = self.table_bill.select_row("舱单号", self.billNumber)
+        self.rowid = self.table_bill.select_row("舱单号", config.billNumber)
         check.equal(self.table_bill.get_value_by_rowid(self.rowid, '来源港'), input["来源港"])
         check.equal(self.table_bill.get_value_by_rowid(self.rowid, '货代'), input["货代"])
         check.equal(self.table_bill.get_value_by_rowid(self.rowid, '货主'), input["货主"])

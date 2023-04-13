@@ -5,6 +5,7 @@ from BTOSLJ.Config import config
 from Base.basepage import BasePage
 from BTOSLJ.Controls.BTOS_text import BtosText
 from BTOSLJ.Controls.BTOS_table import BTOS_table
+from Commons.DateTime import DataTime
 
 
 class WorkTask(BasePage):
@@ -16,6 +17,10 @@ class WorkTask(BasePage):
         self.textInput = BtosText(self.driver)
         self.table_work = BTOS_table(self.driver, 1)
         self.table_arrange = BTOS_table(self.driver, 3)
+
+    def search(self, input):
+        self.textInput.select_by_label("工班", input['工班'])
+        self.click('x', "//span[text()='检索 ']")
 
     # 新增舱单号
     @allure.step("当班作业任务-昼夜计划导入")
