@@ -2,7 +2,7 @@ import time
 import pytest_check as check
 from Base.basepage import BasePage
 from GTOSXM.Controls.text import Gtos_text
-from GTOSXM.Config import config
+from GTOSXM.Config import config, configinterface
 from GTOSXM.Controls.Gtos_table import Gtos_table
 
 
@@ -11,7 +11,7 @@ class Job_Order_Monitoring(BasePage):
     作业指令监控
     """
 
-    def Retrieve(self, input, shipname=None, boxnumber=None):
+    def Retrieve(self, input, shipname=None, boxnumber=None, carnumber=None):
         """
         输入内容，检索
         """
@@ -23,6 +23,18 @@ class Job_Order_Monitoring(BasePage):
             textinput.search_select_by_label('船名航次', shipname)
         if boxnumber is not None:
             textinput.input_by_label("箱号", boxnumber)
+        if carnumber is not None:
+            self.click('x', "//span[text()=' 更多']")
+            textinput.input_by_label('机械号', carnumber)
+        self.click('xpath', "//span[text()='检索']")
+
+    def choice_boxnumber(self,boxnumber):
+        """
+        输入箱号,检索
+        """
+        self.logger.info('作业指令监控-查询')
+        textinput = Gtos_text(self.driver)
+        textinput.input_by_label('箱号', boxnumber)
         self.click('xpath', "//span[text()='检索']")
 
     def order_info_check(self, input, boxnumber):
@@ -113,9 +125,33 @@ class Job_Order_Monitoring(BasePage):
                 check.equal(tablecheck.get_value('当前位置'), input['车牌'] + input['集卡编号'])
                 check.equal(tablecheck.get_value('当前位置'), input['车牌'] + input['集卡编号'])
 
-    def selectRow(self):
+    def dredge_check(self, boxnumber):
+        """
+        空箱疏运查验
+        """
+        self.logger.info('作业指令监控-空箱输运信息查验')
+        tablecheck = Gtos_table(self.driver)
+        self.waitloading()
+        rowid = self.get_attribute_info('x', f"(//div[@class='ag-center-cols-container'])[1]//div[@col-id='Cntrno' and text()='{boxnumber}']//ancestor::div[@row-id]",'row-id')
+        check.equal(tablecheck.get_value_by_rowid(rowid, '箱号'), boxnumber)
+        check.equal(tablecheck.get_value_by_rowid(rowid, '作业方式'), '疏运')
+        check.equal(tablecheck.get_value_by_rowid(rowid, '作业状态'), '等待作业')
+
+    def selectRow_check(self, boxnumber):
+        """
+        多条数据查验
+        """
+        self.logger.info('作业指令监控-空箱输运多条信息查验')
         table = Gtos_table(self.driver)
-        table.select_row("箱号", config.boxNumber)
+        self.left_click('x', f"//div[text()='{boxnumber}']")
+        rowid = self.get_attribute_info('x', f"(//div[@class='ag-center-cols-container'])[1]//div[@col-id='Cntrno' and text()='{boxnumber}']//ancestor::div[@row-id]",'row-id')
+        check.equal(table.get_value_by_rowid(rowid, '箱号'), boxnumber)
+        check.equal(table.get_value_by_rowid(rowid, '作业方式'), '疏运')
+        if boxnumber == configinterface.boxNumber:
+            check.equal(table.get_value_by_rowid(rowid, '作业状态'), '待退箱')
+        if boxnumber == configinterface.boxNumbertwo:
+            check.equal(table.get_value_by_rowid(rowid, '作业状态'), '暂停')
+
 
     def charge_car(self, input):
         """
@@ -226,6 +262,7 @@ class Job_Order_Monitoring(BasePage):
         textclick.select_by_label("作业机械：", input["作业机械"])
         textclick.click('xpath', "(//span[text()='保存'])[3]")
         self.check_alert('作业完成')
+        self.close_alert('作业完成')
         tablecheck = Gtos_table(self.driver)
         check.equal(tablecheck.get_value('作业状态'), input["作业状态"])
         if self.hasInput(input, '操作过程'):
