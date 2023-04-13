@@ -3,6 +3,7 @@ import time
 import allure
 import pytest
 from Commons.Controls.tag import Tag
+from GTOSXM.Config import configinterface
 from GTOSXM.PageObject.CrossingManagement.Incoming_job_list import Incoming_job_list
 from GTOSXM.PageObject.CrossingManagement.carOut import Car_Out
 from GTOSXM.PageObject.Yard_Planning.Empty_Box_Dredge_Monitor import Empty_Box_Dredge_Monitor
@@ -23,7 +24,7 @@ def testImmediatePlan(driver, input):
     menu.select_level_Menu("堆场策划,空箱,安排空箱疏运计划")
     plan = Empty_Box_Dredge_Plan(driver)
     plan.addplan()
-    plan.input_values('指定选箱', input)
+    plan.input_values('码头选箱', input)
     Tag(driver).closeTagGtos('安排空箱疏运计划')
 
 
@@ -52,12 +53,12 @@ def testJob(driver, input):
     incoming = Incoming_job_list(driver)
     htps.interface_login()
     htps.Intelligent_crossing()
-    incoming.input_values()
+    incoming.input_values(configinterface.boxNumber)
     incoming.check_first()
     htps.RPSAreaBayList()
     htps.RPSBayInfo()
     htps.RPSSend()
-    time.sleep(3)
+    time.sleep(1)
     incoming.check_second()
     Tag(driver).closeTagGtos('进场作业列表')
 

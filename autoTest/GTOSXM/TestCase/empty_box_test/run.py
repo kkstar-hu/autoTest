@@ -11,8 +11,8 @@ warnings.filterwarnings("ignore")
 if __name__ == '__main__':
     # pytest.main(['-sv','--alluredir', '../../report/result', "--clean-alluredir"])
     pytest.main(['-sv',
-                 # '../empty_box_test/test_01_DischargingProcess.py',
-                 '../empty_box_test/test_02_DataProcess.py',  # 需要在此文件中修改选箱方式（码头选箱，指定选箱）
+                 # '../empty_box_test/test_01_BoxMaking.py',
+                 '../empty_box_test/test_02_DredgeProcess.py',  # 需要在此文件中修改选箱方式（码头选箱，指定选箱）
                  '--alluredir', '../../report/result', "--clean-alluredir"])
 
     os.system('allure generate ../../report/result -o ../../report/html --clean')
