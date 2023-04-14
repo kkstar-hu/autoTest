@@ -5,6 +5,7 @@ import allure
 import pytest
 from BTOSLJ.Config.config import mydata
 from BTOSLJ.Controls.BTOS_menu import BtosMenu
+from Commons.Controls.tag import Tag
 from Commons.yamlread import read_yaml
 from BTOSLJ.PageObject.ShipSchedule.ShipDateManage import ShipDate
 
@@ -43,4 +44,5 @@ def test_Divide_Region(driver, input : dict):
 def test_Add_BerthPlan(driver, input : dict):
     schedule = ShipDate(driver)
     schedule.add_berth_plan(input)
+    Tag(driver).closeTag("船期管理")
 

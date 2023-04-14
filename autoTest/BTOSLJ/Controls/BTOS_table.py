@@ -31,14 +31,6 @@ class BTOS_table(BasePage):
                     self.logger.error(f"定位不到列表头:{header}和值{value}")
                     raise Exception("定位不到元素")
 
-    # def get_value_by_rowid(self, rowid : str, header : str):
-    #     try:
-    #         colid = self.get_attribute_info("xpath", f"(//div[contains(@class, 'toscom-panel')])[{self.index}]//span[@class='vxe-cell--title' and text()='{header}']/../..", "colid")
-    #     except Exception:
-    #         self.logger.error(f"定位元素失败:", exc_info=True)
-    #     else:
-    #         return self.get_attribute_info("xpath", f"(//div[contains(@class, 'toscom-panel')])[{self.index}]//tr[@rowid='{rowid}']/td[@colid='{colid}']//span", 'textContent')
-
     def get_value_by_rowid(self, rowid, header):
         """
         获取表格中某一格值

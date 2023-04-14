@@ -13,7 +13,6 @@ from BTOSLJ.PageObject.piece_wage.job_slip_center_personnel import JobSlipPerson
 from BTOSLJ.PageObject.plan_management.bigship_workplan import BigShipWorkPlan
 from BTOSLJ.PageObject.store_management.Import_store_bill_management import ImStoreBill
 from BTOSLJ.PageObject.store_management.tallyman_manage import Tallyman
-from Commons.Controls.tag import Tag
 from Commons.menu import Menu
 from Commons.yamlread import read_yaml
 
@@ -28,7 +27,6 @@ def test_add_store_bill(driver, input):
     ship_bill.add_bill(config.importNumber, input)
     ship_bill.check_table_bill(input)
     ship_bill.check_table_goods(input)
-    Tag(driver).closeTag("内贸进口舱单管理")
 
 
 @allure.story('一、卸船流程')
@@ -40,8 +38,6 @@ def test_add_work_plan(driver, input):
     ship_work_plan = BigShipWorkPlan(driver)
     ship_work_plan.add_plan(config.importNumber, input)
     ship_work_plan.check_table_plan(input)
-    Tag(driver).closeTag("大船作业计划")
-
 
 
 @allure.story('一、卸船流程')
@@ -55,7 +51,6 @@ def test_add_work_task(driver, input):
     work_task.add_plan(input)
     time.sleep(0.5)
     work_task.check_table_task(input)
-    Tag(driver).closeTag("当班作业任务")
 
 
 @allure.story('一、卸船流程')
@@ -66,7 +61,6 @@ def test_tallyman_work(driver, input):
     menu.select_level_Menu("仓库管理,理货员出勤")
     tallyman = Tallyman(driver)
     tallyman.select_people(input)
-    Tag(driver).closeTag("理货员出勤")
 
 
 @allure.story('一、卸船流程')
@@ -79,7 +73,6 @@ def test_tallyman_arrange(driver, input):
     tallyman.search(input)
     tallyman.check_table_task(input)
     tallyman.arrange_tallyman(input)
-    Tag(driver).closeTag("作业任务管理")
 
 
 @allure.story('一、卸船流程')
@@ -93,7 +86,6 @@ def test_mechanical_attend(driver, input):
     mechanical.arrange_mechanical(input)
     mechanical.arrange_driver(input)
     mechanical.check_table(input)
-    Tag(driver).closeTag("机械出勤")
 
 
 @allure.story('一、卸船流程')
@@ -116,7 +108,6 @@ def test_report_config(driver, input):
     report_config = JobTask(driver)
     report_config.search(input)
     report_config.report_config(input)
-    Tag(driver).closeTag("作业任务管理")
 
 
 @allure.story('一、卸船流程')
@@ -128,7 +119,6 @@ def test_ship_leave_stop(driver, input):
     stop = Ship_Leave_Stop(driver)
     stop.search()
     stop.berthing_by()
-    Tag(driver).closeTag("大船靠离泊管理")
 
 
 @allure.story('一、卸船流程')
@@ -141,7 +131,6 @@ def test_task_report(driver, input):
     task_report.search(input)
     task_report.report(input)
     task_report.check_table_task(input)
-    Tag(driver).closeTag("作业任务汇报")
 
 
 @allure.story('一、卸船流程')
@@ -155,7 +144,7 @@ def test_job_slip_control(driver, input):
     job_slip.generate()
     job_slip.check_table(input)
     job_slip.audit()
-    Tag(driver).closeTag("装卸船作业票-中控")
+
 
 @allure.story('一、卸船流程')
 @allure.title('12.装卸船作业票-人事')
@@ -168,4 +157,3 @@ def test_job_slip_personnel(driver, input):
     personnel.audit()
     time.sleep(1)
     personnel.check_table(input)
-    Tag(driver).closeTag("装卸船作业票-人事")

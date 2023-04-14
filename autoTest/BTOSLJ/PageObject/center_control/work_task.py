@@ -1,3 +1,5 @@
+import time
+
 import allure
 import pytest_check as check
 
@@ -32,10 +34,11 @@ class WorkTask(BasePage):
         self.waitloading()
         colid = self.get_attribute_info("xpath", f"(//table[@class='vxe-table--header'])[3]//thead/tr/th//span[text()='操作']//parent::div//parent::th",
                                         "colid")
-        rowid=self.table_arrange.select_row("船名航次", config.importNumber)
+        rowid = self.table_arrange.select_row("船名航次", config.importNumber)
         self.click("x", f"(//tr[@rowid='{rowid}']/td[@colid='{colid}']//div[@class='operate']//span[text()='安排作业路'])[2]")
         self.click("xpath", "//label[contains(text(),'舱口')]//following-sibling::div//input")
         self.waitloading()
+        time.sleep(0.5)
         self.click("xpath", "//div[@class='nz-flex-col']//div[text()='01']")
         self.textInput.input_by_label("任务吨位", input["任务吨位"])
         self.textInput.select_by_index("作业工艺", input['作业工艺'], 0)

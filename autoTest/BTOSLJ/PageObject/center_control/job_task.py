@@ -78,6 +78,7 @@ class JobTask(BasePage):
             self.click('x', "//i[@class='el-icon-arrow-right']")
             self.arrange_team_right.select_row("队组", input['队组'])
             self.click('x', "(//span[text()='保存'])[2]")
+        self.click("x","//div[@class='el-drawer__wrapper' and not (contains(@style,'display: none'))]/div/div/header/button")
 
     def check_table_task(self, input):
         rowid = self.table_work.select_row("船名航次", config.importNumber)

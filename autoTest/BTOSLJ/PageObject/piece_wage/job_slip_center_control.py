@@ -20,9 +20,6 @@ class JobSlipControl(BasePage):
 
     def search(self, input):
         self.textInput.select_by_label("工班", input['工班'])
-        workDay = DataTime.Get_Date_X_Number_Of_Days(-1)
-        workTime = workDay + " 00:00:00"
-        self.textInput.input_by_label("作业日期", workTime)
         self.click('x', "//span[text()='检索 ']")
         self.waitloading()
 
