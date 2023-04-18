@@ -108,7 +108,7 @@ union all
 select * from shift3)
 select *
 from daywork
-where daywork.日期='2023-04-10'
+where daywork.日期='{workdate}' and daywork.组别 is not null
 union all
 select DATE_FORMAT(daywork.日期,'%Y-%m') as 日期, daywork.组别, '月度' as 时间,
 	sum(daywork.大船吨位) as 大船吨位, sum(daywork.大船工时) as 大船工时,
@@ -118,7 +118,7 @@ select DATE_FORMAT(daywork.日期,'%Y-%m') as 日期, daywork.组别, '月度' a
     sum(daywork.进出栈吨位) as 进出栈吨位, sum(daywork.进出栈工时) as 进出栈工时,
     sum(daywork.杂项吨位) as 杂项吨位, sum(daywork.杂项工时) as 杂项工时
 from daywork
-where daywork.日期>='2023-04-01' and daywork.日期<='2023-04-10' and daywork.时间='昼夜'
+where daywork.日期>=DATE_FORMAT('{workdate}' ,'%Y-%m-01') and daywork.日期<='{workdate}' and daywork.时间='昼夜' and daywork.组别 is not null
 group by daywork.组别, DATE_FORMAT(daywork.日期,'%Y-%m')
 union all
 select DATE_FORMAT(daywork.日期,'%Y') as 日期, daywork.组别, '年度' as 时间,
@@ -129,7 +129,7 @@ select DATE_FORMAT(daywork.日期,'%Y') as 日期, daywork.组别, '年度' as �
     sum(daywork.进出栈吨位) as 进出栈吨位, sum(daywork.进出栈工时) as 进出栈工时,
     sum(daywork.杂项吨位) as 杂项吨位, sum(daywork.杂项工时) as 杂项工时
 from daywork
-where daywork.日期>='2023-01-01' and daywork.日期<='2023-04-10' and daywork.时间='昼夜'
+where daywork.日期>=DATE_FORMAT('{workdate}' ,'%Y-01-01') and daywork.日期<='{workdate}' and daywork.时间='昼夜' and daywork.组别 is not null
 group by daywork.组别, DATE_FORMAT(daywork.日期,'%Y')
 union all
 select daywork.日期, '合计' as 组别, daywork.时间,
@@ -140,7 +140,7 @@ select daywork.日期, '合计' as 组别, daywork.时间,
     sum(daywork.进出栈吨位) as 进出栈吨位, sum(daywork.进出栈工时) as 进出栈工时,
     sum(daywork.杂项吨位) as 杂项吨位, sum(daywork.杂项工时) as 杂项工时
 from daywork
-where daywork.日期='2023-04-10'
+where daywork.日期='{workdate}' and daywork.组别 is not null
 group by daywork.日期, daywork.时间
 union all
 select DATE_FORMAT(daywork.日期,'%Y-%m') as 日期, '合计' as 组别, '月度' as 时间,
@@ -151,7 +151,7 @@ select DATE_FORMAT(daywork.日期,'%Y-%m') as 日期, '合计' as 组别, '月�
     sum(daywork.进出栈吨位) as 进出栈吨位, sum(daywork.进出栈工时) as 进出栈工时,
     sum(daywork.杂项吨位) as 杂项吨位, sum(daywork.杂项工时) as 杂项工时
 from daywork
-where daywork.日期>='2023-04-01' and daywork.日期<='2023-04-10' and daywork.时间='昼夜'
+where daywork.日期>=DATE_FORMAT('{workdate}' ,'%Y-%m-01') and daywork.日期<='{workdate}' and daywork.时间='昼夜' and daywork.组别 is not null
 group by DATE_FORMAT(daywork.日期,'%Y-%m')
 union all
 select DATE_FORMAT(daywork.日期,'%Y') as 日期, '合计' as 组别, '年度' as 时间,
@@ -162,6 +162,6 @@ select DATE_FORMAT(daywork.日期,'%Y') as 日期, '合计' as 组别, '年度' 
     sum(daywork.进出栈吨位) as 进出栈吨位, sum(daywork.进出栈工时) as 进出栈工时,
     sum(daywork.杂项吨位) as 杂项吨位, sum(daywork.杂项工时) as 杂项工时
 from daywork
-where daywork.日期>='2023-01-01' and daywork.日期<='2023-04-10' and daywork.时间='昼夜' and daywork.组别 is not null
+where daywork.日期>=DATE_FORMAT('{workdate}' ,'%Y-01-01') and daywork.日期<='{workdate}' and daywork.时间='昼夜' and daywork.组别 is not null
 group by DATE_FORMAT(daywork.日期,'%Y')
 ;

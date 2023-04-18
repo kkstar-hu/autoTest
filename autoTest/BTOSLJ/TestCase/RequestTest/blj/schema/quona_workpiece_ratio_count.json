@@ -1,0 +1,35 @@
+{
+    "$id": "api/blj/quona_workpiece_ratio_count/day",
+    "title": "分类定额效率统计表",
+    "type": "object",
+    "required": ["data", "success"],
+    "properties": {
+        "data": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "rpt_wsw_work_hours": {"type": "number", "minimum": 0, "description": "作业小时"},
+                    "rpt_wsw_real_hour": {"type": "number", "minimum": 0, "description": "实际工时"},
+                    "rpt_opc_name": {"type": "string", "description": "操作过程"},
+                    "rpt_percentage_complete_quota": {"type": "number", "minimum": 0, "description": "定额完成率"},
+                    "rpt_wsw_quotano": {"type": "string", "description": "定额编号"},
+                    "rpt_quo_work_num": {"type": "number", "minimum": 0, "description": "定额装卸工人数"},
+                    "rpt_wsw_gtwg_hour": {"type": "number", "minimum": 0, "description": "实际作业小时量"},
+                    "rpt_wsw_gtwgs": {"type": "number", "minimum": 0, "description": "完成操作吨"},
+                    "rpt_pck_kind_name": {"type": "string", "description": "定额分类"},
+                    "rpt_pws_hr_audit_tag": {"type": "string", "description": "人事审核标志"},
+                    "rpt_wsw_work_start_time": {"description": "作业开始时间"},
+                    "rpt_quo_time_quota": {"type": "number", "minimum": 0, "description": "工时定额"},
+                    "rpt_wsw_work_end_time": {"description": "作业结束时间"},
+                    "rpt_quo_hatch_hour": {"type": "string", "description": "定额作业小时量"},
+                    "rpt_wsw_pws_no": {"type": "number", "minimum": 0, "description": "定额使用次数"},
+                    "rpt_wsw_quo": {"type": "string", "description": "定额编号前缀"},
+                    "rpt_practical_work_num": {"type": "number", "minimum": 0, "description": "实际装卸工人数"},
+                    "rpt_quo_time_quotawork": {"type": "number", "minimum": 0, "description": "定额工时"}
+                }
+            }
+        },
+        "success": {"type": "boolean"}
+    }
+}

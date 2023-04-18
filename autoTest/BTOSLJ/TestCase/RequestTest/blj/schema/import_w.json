@@ -1,0 +1,40 @@
+{
+    "$id": "/api/blj/import_W",
+    "title": "外贸进口船舶作业情况统计表",
+    "type": "object",
+    "required": ["data", "success"],
+    "properties": {
+        "data": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "yt_goa_gtwg": {"type": "number", "minimum": 0, "description": "库场提货重量"},
+                    "vb_goa_gtpks": {"type": "number", "minimum": 0, "description": "驳直提件数"},
+                    "vy_goa_gtpks": {"type": "number", "minimum": 0, "description": "进场件数"},
+                    "scd_ata": {"description": "实际抵港时间"},
+                    "voy_voyage": {"type": "string", "description": "航次"},
+                    "voy_id": {"type": "string", "minLength": 32, "maxLength": 32, "description": "航次ID"},
+                    "scd_atd": {"description": "实际离港时间"},
+                    "vbt_adptdt": {"description": "实际离泊时间"},
+                    "vt_goa_gtpks": {"type": "number", "minimum": 0, "description": "车直提件数"},
+                    "vt_goa_gtwg": {"type": "number", "minimum": 0, "description": "车直提重量"},
+                    "VGS_BALANCE_STATUS": {"description": "溢缺"},
+                    "bil_gtpks_total": {"type": "number", "minimum": 0, "description": "舱单件数"},
+                    "voy_trade": {"const": "W", "description": "贸易类型"},
+                    "voy_iefg": {"const": "I", "description": "进出口"},
+                    "bil_gtwg_total": {"type": "number", "minimum": 0, "description": "舱单重量"},
+                    "IN_YARD_GTPKS": {"type": "number", "minimum": 0, "description": "剩余件数"},
+                    "TENANT_ID": {"const": "SIPGLJ", "description": "租户"},
+                    "vbt_abthdt": {"description": "实际靠泊时间"},
+                    "vy_goa_gtwg": {"type": "number", "minimum": 0, "description": "进场重量"},
+                    "IN_YARD_GTWG": {"type": "number", "minimum": 0, "description": "剩余重量"},
+                    "vb_goa_gtwg": {"type": "number", "minimum": 0, "description": "驳直提重量"},
+                    "vsl_cnname": {"type": "string", "description": "船舶中文名"},
+                    "yt_goa_gtpks": {"type": "number", "minimum": 0, "description": "库场提货件数"}
+                }
+            }
+        },
+        "success": {"type": "boolean"}
+    }
+}

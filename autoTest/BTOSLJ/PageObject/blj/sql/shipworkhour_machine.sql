@@ -7,4 +7,6 @@ select pws.pws_voy_id as 航次, wsm.wsm_route_sign as 作业路标识,
 from ODS_BLJ_PWS_WORK_SHEET_MACHINE_DF wsm
 join ODS_BLJ_PWS_WORK_SHEET_DF pws on wsm.wsm_pws_id  = pws.pws_id
 where wsm.tenant_id = 'SIPGLJ' and pws.pws_hr_audit_tag = 'Y' and wsm.wsm_quo_id is not null and wsm.wsm_quo_id <> ''
+    and DATE_FORMAT(pws.pws_opdate ,'%Y-%m-%d')>='{startdate}' and DATE_FORMAT(pws.pws_opdate ,'%Y-%m-%d')<='{enddate}'
+	and pws.pws_voy_id = '{pws_voy_id}' {route_sign}
 order by wsm.wsm_route_sign;

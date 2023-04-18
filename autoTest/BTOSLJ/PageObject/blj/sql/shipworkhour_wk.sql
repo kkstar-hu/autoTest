@@ -1,4 +1,4 @@
--- 昼夜工时表-装卸队
+-- 装卸队
 select pws.pws_voy_id as 航次, wsw.wsw_route_sign as 作业路标识, pck.pck_kind_name as 货名, pkg.pkg_cnname as 包装, wsw.wsw_gtpks as 件数, wsw.wsw_gtwg as 吨位,
 	wsw.wsw_ptwg as 件重, pwl.pwl_name as 重量分类, opc.opc_code as 操作过程,
 	wsw.wsw_oper_start_point as 起点, wsw.wsw_start_point_down as 起点下舱,
@@ -14,4 +14,6 @@ join ODS_BLJ_PUB_PACKAGE_DF pkg on wsw.wsw_pktype = pkg.pkg_code and wsw.tenant_
 join ODS_BLJ_PUB_WEIGHT_LEVEL_DF pwl on wsw.wsw_weight_level = pwl.pwl_code and wsw.tenant_id = pwl.tenant_id
 join ODS_BLJ_PUB_OPPROC_DF opc on wsw.wsw_opproc = opc.opc_id and wsw.tenant_id = opc.tenant_id
 where wsw.tenant_id = 'SIPGLJ' and pws.pws_hr_audit_tag = 'Y' and wsw.wsw_quo_id is not null and wsw.wsw_quo_id <> ''
+	and DATE_FORMAT(pws.pws_opdate ,'%Y-%m-%d')>='{startdate}' and DATE_FORMAT(pws.pws_opdate ,'%Y-%m-%d')<='{enddate}'
+	and pws.pws_voy_id = '{pws_voy_id}' {route_sign}
 order by wsw.wsw_route_sign;

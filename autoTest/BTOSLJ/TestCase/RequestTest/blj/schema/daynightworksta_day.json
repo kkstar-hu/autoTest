@@ -1,0 +1,69 @@
+{
+    "$id": "/api/blj/DAYNIGHTWORKSTA/DAY",
+    "title": "昼夜作业情况统计表",
+    "type": "object",
+    "required": ["data","success"],
+    "properties": {
+        "data": {
+            "oneof": [
+                {
+                    "type": "array",
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "wg": {"type": "number", "minimum": 0, "description": "重量"},
+                                "workname": {"type": "string", "enum": ["车提纸浆","落驳纸浆","进场钢材"]},
+                                "pks": {"type": "number", "minimum": 0,"description": "件数"}
+                            }
+                        }
+                    }
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "ybkcount": {"type": "number", "minimum": 0,"description": "桩脚数量"},
+                                "ybkname": {"type": "string", "description": "场地区域"}
+                            }
+                        }
+                    }
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "wopks": {"type": "number", "minimum": 0,"description": "本日外贸出口件数"},
+                                "nipks": {"type": "number", "minimum": 0,"description": "本日内贸进口件数"},
+                                "nowg": {"type": "number", "minimum": 0,"description": "本日内贸出口重量"},
+                                "yestodaynpks": {"type": "number", "minimum": 0,"description": "上日内贸结存件数"},
+                                "pckname": {"type": "string", "description": "货名"},
+                                "yestodaynwg": {"type": "number", "minimum": 0,"description": "上日内贸结存重量"},
+                                "yestodaywwg": {"type": "number", "minimum": 0,"description": "上日外贸结存重量"},
+                                "todaynwg": {"type": "number", "minimum": 0,"description": "本日内贸结存重量"},
+                                "yestodaywpks": {"type": "number", "minimum": 0,"description": "上日外贸结存件数"},
+                                "wiwg": {"type": "number", "minimum": 0,"description": "本日外贸进口重量"},
+                                "nopks": {"type": "number", "minimum": 0,"description": "本日内贸出口件数"},
+                                "todaywwg": {"type": "number", "minimum": 0,"description": "本日外贸结存重量"},
+                                "wipks": {"type": "number", "minimum": 0,"description": "本日外贸进口件数"},
+                                "niwg": {"type": "number", "minimum": 0,"description": "本日内贸进口重量"},
+                                "todaywpks": {"type": "number", "minimum": 0,"description": "本日外贸结存件数"},
+                                "todaynpks": {"type": "number", "minimum": 0,"description": "本日内贸结存件数"},
+                                "pck_kind_code": {"type": "string", "description": "货类代码"},
+                                "wowg": {"type": "number", "minimum": 0,"description": "本日外贸出口重量"}
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "success": {"type": "boolean"}
+    }
+}

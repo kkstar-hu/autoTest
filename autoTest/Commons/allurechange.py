@@ -9,7 +9,7 @@ def set_windos_title(new_title):
     @return: 没有返回内容，调用此方法传入需要更改的文案即可修改窗体标题文案
     """
     # report_title_filepath：这里主要是去拿到你的HTML测试报告的绝对路径【记得换成你自己的】
-    report_title_filepath = r"..\..\report\html\index.html"
+    report_title_filepath = r"Report\html\index.html"
     # 定义为只读模型，并定义名称为: f
     with open(report_title_filepath, 'r+',encoding="utf-8") as f:
         # 读取当前文件的所有内容
@@ -21,7 +21,11 @@ def set_windos_title(new_title):
             f.write(line.replace("Allure Report", new_title))
         # 关闭文件
         f.close()
-title_filepath = r"..\..\report\html\widgets\summary.json"
+
+
+title_filepath = r"Report\html\widgets\summary.json"
+environment_filepath = r"Report\result\environment.properties"
+
 
 # 获取 summary.json 文件的数据内容
 def get_json_data(name):
@@ -46,3 +50,11 @@ def write_json_data(dict):
         json.dump(dict, r, ensure_ascii=False, indent=4)
     # 关闭json写模式
     r.close()
+
+
+# 设置环境变量
+def set_environment(dict):
+    with open(environment_filepath, 'w', encoding="utf-8") as r:
+        # 将dict写入名称为r的文件中
+        for (key,value) in dict.items():
+            r.write(key+"="+value+"\n")
