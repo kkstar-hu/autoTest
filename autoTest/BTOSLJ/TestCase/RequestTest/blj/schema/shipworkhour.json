@@ -1,0 +1,62 @@
+{
+    "$id": "/api/blj/SHIPWORKHOUR/DAY",
+    "title": "船舶工时表",
+    "type": "object",
+    "required": ["data", "success"],
+    "properties": {
+        "data": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "wsw_oper_start_point": {"type": "string", "description": "操作起点"},
+                    "tenant_id": {"const": "SIPGLJ", "description": "租户"},
+                    "wsw_overtime_rate": {"type": "number", "minimum": 0, "description": "加班率"},
+                    "wsw_gtypecd": {"type": "string", "description": "货名"},
+                    "wsw_vessel": {"type": "string", "description": "船舶代码"},
+                    "pwl_name": {"type": "string", "description": "重量分类"},
+                    "wsw_real_hour": {"type": "number", "minimum": 0, "description": "折算工时"},
+                    "wsm_percentage": {"type": "number", "minimum": 0, "description": "百分比"},
+                    "wsw_work_num": {"type": "number", "minimum": 0, "description": "计时工人数"},
+                    "wsw_oper_horizontal": {"type": "string", "description": "操作水平"},
+                    "wsw_start_point_down": {"type": "string", "description": "起点下舱"},
+                    "wsw_quotano": {"type": "string", "description": "定额编号"},
+                    "wsw_machineno": {"type": "string", "description": "机械号"},
+                    "pws_voy_id": {"type": "string", "description": "航次ID"},
+                    "wsw_base_hour": {"type": "number", "minimum": 0, "description": "原始工时"},
+                    "wsm_overtime_rate": {"type": "number", "minimum": 0, "description": "加班率"},
+                    "wsw_worker_complemen": {"type": "number", "minimum": 0, "description": "加人"},
+                    "wsw_route_sign": {"type": "string", "description": "作业路标识"},
+                    "wsm_adjust_factor": {"type": "number", "minimum": 0, "description": "调节系数"},
+                    "wsw_gtpks": {"type": "number", "minimum": 0, "description": "件数"},
+                    "wsw_plus_minus_hour": {"type": "number", "description": "加减工时"},
+                    "opc_code": {"type": "string", "description": "操作过程代码"},
+                    "wsw_ptwg": {"type": "number", "minimum": 0, "description": "件重"},
+                    "wsw_tc_tag": {"type": "string", "description": "抬铲标志"},
+                    "wsm_type": {"type": "string", "description": "员工作业票类型"},
+                    "wsm_gtpks": {"type": "number", "minimum": 0, "description": "件数"},
+                    "wsm_plus_minus_hour": {"type": "number", "description": "加减工时"},
+                    "workdate": {"description": "作业日期"},
+                    "wsw_end_point_down": {"type": "string", "description": "终点下舱"},
+                    "wsm_base_hour": {"type": "number", "minimum": 0, "description": "原始工时"},
+                    "wsw_remark": {"type": "string", "description": "备注"},
+                    "wsm_real_hour": {"type": "number", "minimum": 0, "description": "折算工时"},
+                    "wsw_work_hour": {"type": "number", "minimum": 0, "description": "工作时间"},
+                    "wsw_pktype": {"type": "string", "description": "包装"},
+                    "wsw_oper_end_point": {"type": "string", "description": "操作终点"},
+                    "wsm_gtwg": {"type": "number", "minimum": 0, "description": "吨位"},
+                    "wsm_truck_order": {"type": "number", "minimum": 0, "description": "车次"},
+                    "wsw_td_tag": {"type": "string", "description": "抬吊标志"},
+                    "wsw_gtwg": {"type": "number", "minimum": 0, "description": "吨位"},
+                    "wsm_work_hour": {"type": "number", "minimum": 0, "description": "工作时间"},
+                    "wsm_factor": {"type": "number", "minimum": 0, "description": "系数"},
+                    "wsw_work_start_time": {"description": "作业开始时间"},
+                    "wsw_work_end_time": {"description": "作业结束时间"},
+                    "wsw_adjust_factor": {"type": "number", "minimum": 0, "description": "调节系数"},
+                    "wsw_empno": {"type": "string", "description": "工号"}
+                }
+            }
+        },
+        "success": {"type": "boolean"}
+    }
+}

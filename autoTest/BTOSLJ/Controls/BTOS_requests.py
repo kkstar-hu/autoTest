@@ -48,7 +48,8 @@ class RequestMain:
         else:
             if res.status_code == 200:
                 t = Decimal(res.elapsed.total_seconds()).quantize(Decimal("0.001"), rounding ="ROUND_HALF_UP")
-                self.logger.info(url + " 用时:%ss"%t)
+                s = "警告:用时较长" if t>=1 else ""
+                self.logger.info(url + " 用时:{}s {}".format(t,s))
                 return res
             else:
                 if(params):

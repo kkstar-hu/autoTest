@@ -1,0 +1,31 @@
+{
+    "$id": "/api/blj/BONDEDCASE/DAY",
+    "title": "保税仓库库场情况表",
+    "type": "object",
+    "required": ["data", "success"],
+    "properties": {
+        "data": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "storeGoodsPieces": {"type": "number", "minimum": 0, "description": "结存数量"},
+                    "billNbr": {"type": "string", "description": "提单号"},
+                    "bod_no": {"type": "string", "description": "项号"},
+                    "voyage": {"type": "string", "description": "航次"},
+                    "outGoodsPieces": {"type": "number", "minimum": 0, "description": "出库件数"},
+                    "inGoodsWeight": {"type": "number", "minimum": 0, "description": "进库重量"},
+                    "outGoodsWeight": {"type": "number", "minimum": 0, "description": "出库重量"},
+                    "totalGoodsWeight": {"type": "number", "minimum": 0, "description": "舱单总重量"},
+                    "totalGoodsPieces": {"type": "number", "minimum": 0, "description": "舱单总件数"},
+                    "inGoodsPieces": {"type": "number", "minimum": 0, "description": "进库件数"},
+                    "vslname": {"type": "string", "description": "船名"},
+                    "totalGoodsWeightNet": {"type": "number", "minimum": 0, "description": "舱单总重量(净)"},
+                    "storeGoodsWeight": {"type": "number", "minimum": 0, "description": "结存重量"},
+                    "goodsName": {"type": "string", "description": "货名"}
+                }
+            }
+        },
+        "success": {"type": "boolean"}
+    }
+}
