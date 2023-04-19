@@ -157,6 +157,7 @@ def test_job_slip_control(driver, input):
     job_slip.audit()
     Tag(driver).closeTag("装卸船作业票-中控")
 
+
 @allure.story('一、卸船流程')
 @allure.title('12.装卸船作业票-人事')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '02_unship.yaml')))

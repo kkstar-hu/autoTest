@@ -125,7 +125,7 @@ class BtosText(BasePage):
         船名航次特殊控件选择
         """
         try:
-            self.input_no_clear("xpath", f"//label[contains(text(),'{label}')]//following-sibling::div//input", value)
+            self.click("xpath", f"//label[text()='{label}']//following-sibling::div//input")
             time.sleep(0.5)
             self.click("xpath",
                        f"//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]"
@@ -136,7 +136,7 @@ class BtosText(BasePage):
 
     def search_select_by_label(self, label, value):
         try:
-            self.input_no_clear("xpath", f"//label[contains(text(),'{label}')]//following-sibling::div//input",value)
+            self.input_no_clear("xpath", f"//label[contains(text(),'{label}')]//following-sibling::div//div[not (@ style='display: none;')] // input[not (@ disabled)]",value)
             self.click("xpath",
                        f"//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]//span[contains(text(),'{value}')]")
         except NoSuchElementException:
@@ -159,7 +159,7 @@ class BtosText(BasePage):
 
     def input_by_label(self, label, value):
         try:
-            self.input("xpath", f"//label[contains(text(),'{label}')]//following-sibling::div//input",value)
+            self.input("xpath", f"//label[contains(text(),'{label}')]//following-sibling::div//div[not (@ style='display: none;')] // input[not (@ disabled)]",value)
         except NoSuchElementException:
             self.logger.error(f"定位不到单行文本控件标签名:{label}")
             raise Exception("定位不到元素")
@@ -177,7 +177,7 @@ class BtosText(BasePage):
         页面多个控件，传入index,从0开始
         """
         try:
-            self.input_by_index("xpath", f"//label[contains(text(),'{label}')]//following-sibling::div//input", value, index)
+            self.input_by_index("xpath", f"//label[contains(text(),'{label}')]//following-sibling::div//div[not (@ style='display: none;')] // input[not (@ disabled)]", value, index)
         except NoSuchElementException:
             self.logger.error(f"定位不到单行文本控件标签名:{label}")
             raise Exception("定位不到元素")
@@ -187,7 +187,7 @@ class BtosText(BasePage):
 
     def select_by_label(self, label, value):
         try:
-            self.click("xpath", f"//label[contains(text(),'{label}')]//following-sibling::div//input")
+            self.click("xpath", f"//label[contains(text(),'{label}')]//following-sibling::div//div[not (@ style='display: none;')] // input[not (@ disabled)]")
             self.click("xpath", f"//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]//span[text()='{value}']")
         except NoSuchElementException:
             self.logger.error(f"定位不到下拉控件标签名:{label}")
@@ -195,7 +195,7 @@ class BtosText(BasePage):
 
     def select_by_label_time(self, label, value):
         try:
-            self.click("xpath", f"//label[contains(text(),'{label}')]//following-sibling::div//input")
+            self.click("xpath", f"//label[contains(text(),'{label}')]//following-sibling::div//div[not (@ style='display: none;')] // input[not (@ disabled)]")
             time.sleep(0.5)
             self.click("xpath", f"//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]//span[text()='{value}']")
         except NoSuchElementException:
@@ -214,7 +214,7 @@ class BtosText(BasePage):
 
     def select_by_label_exact(self, label, value):
         try:
-            self.click("xpath",f"//label[text()='{label}']//following-sibling::div//input")
+            self.click("xpath",f"//label[text()='{label}']//following-sibling::div//div[not (@ style='display: none;')] // input[not (@ disabled)]")
             self.click("xpath",f"//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]//span[text()='{value}']")
         except NoSuchElementException:
             self.logger.error(f"定位不到下拉控件标签名:{label}")
@@ -239,7 +239,7 @@ class BtosText(BasePage):
 
     def select_by_index(self, label, value, index=1):
         try:
-            self.click_by_index("xpath", f"//label[contains(text(),'{label}')]//following-sibling::div//input", index)
+            self.click_by_index("xpath", f"//label[contains(text(),'{label}')]//following-sibling::div//div[not (@ style='display: none;')] // input[not (@ disabled)]", index)
             time.sleep(0.5)
             self.click("xpath", f"//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]//span[text()='{value}']")
         except NoSuchElementException:

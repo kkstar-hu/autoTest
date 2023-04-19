@@ -3,6 +3,7 @@ import time
 import allure
 import pytest
 from BTOSLJ.Config import config
+from BTOSLJ.PageObject.business_accept.domestic_trade_accept_goods import DomesticTradeAcceptGoods
 from BTOSLJ.PageObject.center_control.job_task import JobTask
 from BTOSLJ.PageObject.center_control.mechanical_attendance import MechanicalAttendance
 from BTOSLJ.PageObject.center_control.ship_stop_leave import Ship_Leave_Stop
@@ -11,38 +12,42 @@ from BTOSLJ.PageObject.center_control.work_task_report import WorkTaskReport
 from BTOSLJ.PageObject.piece_wage.job_slip_center_control import JobSlipControl
 from BTOSLJ.PageObject.piece_wage.job_slip_center_personnel import JobSlipPersonnel
 from BTOSLJ.PageObject.plan_management.bigship_workplan import BigShipWorkPlan
+from BTOSLJ.PageObject.plan_management.carship_workplan import CarShipWorkPlan
 from BTOSLJ.PageObject.store_management.Import_store_bill_management import ImStoreBill
 from BTOSLJ.PageObject.store_management.tallyman_manage import Tallyman
 from Commons.menu import Menu
 from Commons.yamlread import read_yaml
 
 
-@allure.story('一、卸船流程')
-@allure.title('1.新增仓单')
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '02_unship.yaml')))
+@allure.story('一、内贸提货流程')
+@allure.title('1.新增内贸提货受理')
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '03_acceptgoods.yaml')))
 def test_add_store_bill(driver, input):
     menu = Menu(driver)
-    menu.select_level_Menu("仓库管理,内贸进口仓库管理,内贸进口舱单管理")
-    ship_bill = ImStoreBill(driver)
-    ship_bill.add_bill(config.importNumber, input)
-    ship_bill.check_table_bill(input)
-    ship_bill.check_table_goods(input)
+    menu.select_level_Menu("业务受理,提货受理,内贸提货受理")
+    accept_goods = DomesticTradeAcceptGoods(driver)
+    accept_goods.add_acceptance_information(input)
+    time.sleep(0.5)
+    accept_goods.check_table_bill(input)
+    accept_goods.click_next_button()
+    accept_goods.deal_acceptance_information(input)
 
 
-@allure.story('一、卸船流程')
-@allure.title('2.安排大船作业计划')
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '02_unship.yaml')))
+@allure.story('一、内贸提货流程')
+@allure.title('2.新增车驳作业计划')
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '03_acceptgoods.yaml')))
 def test_add_work_plan(driver, input):
     menu = Menu(driver)
-    menu.select_level_Menu("计划管理,大船作业计划")
-    ship_work_plan = BigShipWorkPlan(driver)
-    ship_work_plan.add_plan(config.importNumber, input)
-    ship_work_plan.check_table_plan(input)
+    menu.select_level_Menu("计划管理,车驳作业计划")
+    car_work_plan = CarShipWorkPlan(driver)
+    car_work_plan.search()
+    car_work_plan.add_plan(input)
+
 
 
 @allure.story('一、卸船流程')
 @allure.title('3.当班作业任务')
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '02_unship.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '03_acceptgoods.yaml')))
 def test_add_work_task(driver, input):
     menu = Menu(driver)
     menu.select_level_Menu("中控调度,当班作业任务")
@@ -55,7 +60,7 @@ def test_add_work_task(driver, input):
 
 @allure.story('一、卸船流程')
 @allure.title('5.理货员出勤')
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '02_unship.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '03_acceptgoods.yaml')))
 def test_tallyman_work(driver, input):
     menu = Menu(driver)
     menu.select_level_Menu("仓库管理,理货员出勤")
@@ -65,7 +70,7 @@ def test_tallyman_work(driver, input):
 
 @allure.story('一、卸船流程')
 @allure.title('5.理货员安排')
-@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '02_unship.yaml')))
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '03_acceptgoods.yaml')))
 def test_tallyman_arrange(driver, input):
     menu = Menu(driver)
     menu.select_level_Menu("中控调度,作业任务管理")

@@ -61,6 +61,7 @@ class JobTask(BasePage):
         self.table_work.select_row("船名航次", config.importNumber)
         self.click("id", "reportConfig")
         self.waitloading()
+        time.sleep(0.1)
         self.config.select_row("配置类型", "指导员配置")
         self.click("id", "machinePeopleConfig")
         self.waitloading()
