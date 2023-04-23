@@ -53,6 +53,7 @@ def test_add_work_task(driver, input):
     work_task = WorkTask(driver)
     work_task.search(input)
     work_task.add_plan(input)
+    work_task.ship_work(input)
     time.sleep(0.5)
     work_task.check_table_task(input)
     Tag(driver).closeTag("当班作业任务")
@@ -104,6 +105,7 @@ def test_mechanical_arrange(driver, input):
     menu.select_level_Menu("中控调度,作业任务管理")
     mechanical = JobTask(driver)
     mechanical.search(input)
+    mechanical.select_row_ship()
     mechanical.arrange_machine(input)
 
 
@@ -115,7 +117,9 @@ def test_report_config(driver, input):
     menu.select_level_Menu("中控调度,作业任务管理")
     report_config = JobTask(driver)
     report_config.search(input)
+    report_config.select_row_ship()
     report_config.report_config(input)
+    report_config.mechanical_config(input)
     Tag(driver).closeTag("作业任务管理")
 
 
@@ -139,6 +143,7 @@ def test_task_report(driver, input):
     menu.select_level_Menu("中控调度,作业任务汇报")
     task_report = WorkTaskReport(driver)
     task_report.search(input)
+    task_report.select_row_ship()
     task_report.report(input)
     task_report.check_table_task(input)
     Tag(driver).closeTag("作业任务汇报")

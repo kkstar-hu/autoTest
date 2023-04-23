@@ -33,7 +33,6 @@ class JobTask(BasePage):
     # 新增舱单号
     @allure.step("理货员安排")
     def arrange_tallyman(self, input):
-        self.table_work.select_row("船名航次", config.importNumber)
         self.click("id", "Tallyman")
         if self.elementExist('x', f"(//table[@class='vxe-table--body'])[5]//span[text()='{input['工号值']}']"):
             self.table_left.check("理货员编号", input['工号值'])
@@ -41,9 +40,14 @@ class JobTask(BasePage):
             self.table_right.select_row("理货员编号", input['工号值'])
             self.left_click('x', "//span[text()='保存']")
 
+    def select_row_ship(self):
+        self.table_work.select_row("船名航次", config.importNumber)
+
+    def select_row_accept_number(self):
+        self.table_work.select_row("受理号", config.acceptNumber)
+
     @allure.step("机械安排")
     def arrange_machine(self, input):
-        self.table_work.select_row("船名航次", config.importNumber)
         self.click("id", "Machine")
         self.waitloading()
         time.sleep(2)
@@ -56,19 +60,29 @@ class JobTask(BasePage):
         check.is_true(self.team.hasValue("工号", input['司机工号']))
         self.click('x', "//span[text()='保存']")
 
+    def arrange_warehouse(self, input):
+        self.click("id", "Yard")
+        self.waitloading()
+        time.sleep(1)
+        self.table_left.check("货位号", input['货位号'])
+        self.left_click('x', "//i[@class='el-icon-arrow-right']")
+        self.table_right.select_row("货位", input['货位号'])
+        self.left_click('x', "//span[text()='保存']")
+
     @allure.step("作业票汇报配置")
     def report_config(self, input):
-        self.table_work.select_row("船名航次", config.importNumber)
         self.click("id", "reportConfig")
         self.waitloading()
-        time.sleep(0.1)
-        self.config.select_row("配置类型", "指导员配置")
+        time.sleep(1)
+        self.config.select_row("配置类型", input["配置类型"])
+
+
+    def mechanical_config(self, input):
         self.click("id", "machinePeopleConfig")
         self.waitloading()
         time.sleep(3)
         self.click("id", "ArrangeMachine")
         self.waitloading()
-        time.sleep(2)
         self.table_mechanical.check("机械号", input['机械号'])
         self.click('x', "//span[text()='安排']")
         check.is_true(self.mechanical.hasValue("机械号", input['机械号']))
@@ -79,7 +93,18 @@ class JobTask(BasePage):
             self.click('x', "//i[@class='el-icon-arrow-right']")
             self.arrange_team_right.select_row("队组", input['队组'])
             self.click('x', "(//span[text()='保存'])[2]")
-        self.click("x","//div[@class='el-drawer__wrapper' and not (contains(@style,'display: none'))]/div/div/header/button")
+        self.click("x", "//div[@class='el-drawer__wrapper' and not (contains(@style,'display: none'))]/div/div/header/button")
+
+    def labor_team_config(self, input):
+        self.click("id", "serviceTeamConfig")
+        self.waitloading()
+        time.sleep(3)
+        if self.team.hasValue("队组", input['队组']):
+            self.team.check("队组", input['队组'])
+            self.click('x', "//i[@class='el-icon-arrow-right']")
+            self.mechanical.select_row("队组", input['队组'])
+            self.click('x', "//span[text()='保存']")
+        self.click("x", "//div[@class='el-drawer__wrapper' and not (contains(@style,'display: none'))]/div/div/header/button")
 
     def check_table_task(self, input):
         rowid = self.table_work.select_row("船名航次", config.importNumber)
@@ -89,3 +114,13 @@ class JobTask(BasePage):
         check.equal(self.table_work.get_value_by_rowid(rowid, "作业工艺"), input["作业工艺"])
         check.equal(self.table_work.get_value_by_rowid(rowid, "操作过程"), input["操作过程"])
         check.equal(self.table_work.get_value_by_rowid(rowid, "货名"), input["货名"])
+
+    def check_car_task(self, input):
+        rowid = self.table_work.select_row("受理号", config.acceptNumber)
+        check.equal(self.table_work.get_value_by_rowid(rowid, "作业类型"), "车驳作业任务")
+        check.equal(self.table_work.get_value_by_rowid(rowid, "工班"), input["工班"])
+        check.equal(self.table_work.get_value_by_rowid(rowid, "作业区"), input["作业区"])
+        check.equal(self.table_work.get_value_by_rowid(rowid, "作业工艺"), input["作业工艺"])
+        check.equal(self.table_work.get_value_by_rowid(rowid, "操作过程"), input["操作过程"])
+        check.equal(self.table_work.get_value_by_rowid(rowid, "货名"), input["货名"])
+        check.equal(self.table_work.get_value_by_rowid(rowid, "作业方式"), input["作业方式"])

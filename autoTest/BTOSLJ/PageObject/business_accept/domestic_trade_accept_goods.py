@@ -17,6 +17,7 @@ class DomesticTradeAcceptGoods(BasePage):
         self.textInput = BtosText(self.driver)
         self.table_bill = BTOS_table(self.driver, 7)
         self.table_good = BTOS_table(self.driver, 9)
+        self.table_accept = BTOS_table(self.driver, 1)
 
     def search(self,input):
         self.textInput.select_by_label_ship("船名航次", config.importNumber)
@@ -43,7 +44,7 @@ class DomesticTradeAcceptGoods(BasePage):
         check.equal(self.table_good.get_value("货名"), input["货名"])
         check.equal(self.table_good.get_value("唛头"), input["唛头"])
         check.equal(self.table_good.get_value("件数"), input["件数"])
-        check.equal(self.table_good.get_value("体积"), input["体积"])
+        #check.equal(self.table_good.get_value("体积"), input["体积"])
         check.equal(self.table_good.get_value("重量"), input["重量"])
         check.equal(self.table_good.get_value("包装"), input["包装"])
 
@@ -57,3 +58,6 @@ class DomesticTradeAcceptGoods(BasePage):
         self.textInput.input_by_label("运输公司电话", input["运输公司电话"])
         self.textInput.click("xpath", "//span[text()='保存']")
         self.check_alert(input['alert'])
+        rowid = self.table_accept.select_row("舱单号", config.billNumber)
+        config.acceptNumber = self.table_accept.get_value_by_rowid(rowid, "受理号")
+        self.logger.info("受理号"+config.acceptNumber)

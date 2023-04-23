@@ -32,11 +32,14 @@ class WorkTask(BasePage):
         self.waitloading()
         self.click("id", "add_1")
         self.waitloading()
+        self.click("xpath", f"//div[contains(@class, 'panel-header__title') and text()=' {input['作业']} ']")
         colid = self.get_attribute_info("xpath", f"(//table[@class='vxe-table--header'])[3]//thead/tr/th//span[text()='操作']//parent::div//parent::th",
                                         "colid")
         rowid = self.table_arrange.select_row("船名航次", config.importNumber)
         self.click("x", f"(//tr[@rowid='{rowid}']/td[@colid='{colid}']//div[@class='operate']//span[text()='安排作业路'])[2]")
         time.sleep(0.5)
+
+    def ship_work(self, input):
         self.click("xpath", "//label[contains(text(),'舱口')]//following-sibling::div//input")
         self.waitloading()
         time.sleep(0.5)
@@ -45,15 +48,24 @@ class WorkTask(BasePage):
         self.textInput.select_by_label("作业工艺", input['作业工艺'])
         self.textInput.select_by_label("作业节点", input['作业节点'])
         self.textInput.select_by_index("作业节点", input['作业节点'], 2)
-        self.textInput.click("xpath", "(//span[text()='保存'])[1]")
+        self.textInput.click("xpath", "//span[text()='保存']")
+        self.check_alert(input["work_task_alert"])
+        self.click("xpath", "//button[@aria-label='close 作业任务']")
+        self.click("xpath", "//button[@aria-label='close 昼夜计划导入']")
+
+    def car_work(self, input):
+        self.textInput.select_by_label("作业工艺", input['作业工艺'])
+        self.textInput.select_by_label("作业节点", input['作业节点'])
+        self.textInput.click("xpath", "//span[text()='保存']")
         self.check_alert(input["work_task_alert"])
         self.click("xpath", "//button[@aria-label='close 作业任务']")
         self.click("xpath", "//button[@aria-label='close 昼夜计划导入']")
 
     def check_table_task(self, input):
-        check.equal(self.table_work.get_value("作业类型"), "大船作业任务")
-        check.equal(self.table_work.get_value("舱口"), "01")
-        check.equal(self.table_work.get_value("作业区"), input["作业区"])
-        check.equal(self.table_work.get_value("工艺"), input["作业工艺"])
-        check.equal(self.table_work.get_value("操作过程"), input["操作过程"])
-        check.equal(self.table_work.get_value("货名"), input["货名"])
+        rowid = self.table_work.select_row("作业类型", input["作业类型"])
+        if self.hasInput(input, "舱口"):
+            check.equal(self.table_work.get_value_by_rowid(rowid, "舱口"), input["舱口"])
+        check.equal(self.table_work.get_value_by_rowid(rowid, "作业区"), input["作业区"])
+        check.equal(self.table_work.get_value_by_rowid(rowid, "工艺"), input["作业工艺"])
+        check.equal(self.table_work.get_value_by_rowid(rowid, "操作过程"), input["操作过程"])
+        check.equal(self.table_work.get_value_by_rowid(rowid, "货名"), input["货名"])
