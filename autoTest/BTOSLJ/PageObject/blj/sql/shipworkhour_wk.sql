@@ -4,7 +4,7 @@ select pws.pws_voy_id as 航次, wsw.wsw_route_sign as 作业路标识, pck.pck_
 	wsw.wsw_oper_start_point as 起点, wsw.wsw_start_point_down as 起点下舱,
 	wsw.wsw_oper_end_point as 终点, wsw.wsw_end_point_down as 终点下舱, wsw.wsw_oper_horizontal as 水平,
 	wsw.wsw_work_hour as 工作时间,wsw.wsw_quotano as 定额编号, wsw.wsw_work_num as 计时工人数,
-	wsw.wsw_plus_minus_hour as 工时加减, wsw.wsw_adjust_factor as 调节系数, wsw.wsw_plus_minus_rate as 加班率,
+	wsw.wsw_plus_minus_hour as 工时加减, wsw.wsw_adjust_factor as 调节系数, wsw.wsw_overtime_rate as 加班率,
 	wsw.wsw_tc_tag as 抬铲, wsw.wsw_td_tag as 抬吊, wsw.wsw_worker_complemen as 加人,
 	wsw.wsw_base_hour as 原始工时, wsw.wsw_real_hour as 折算工时, wsw.wsw_remark as 备注
 from ODS_BLJ_PWS_WORK_SHEET_WK_DF wsw

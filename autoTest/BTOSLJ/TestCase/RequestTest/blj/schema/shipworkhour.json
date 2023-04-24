@@ -30,7 +30,7 @@
                     "wsm_adjust_factor": {"type": "number", "minimum": 0, "description": "调节系数"},
                     "wsw_gtpks": {"type": "number", "minimum": 0, "description": "件数"},
                     "wsw_plus_minus_hour": {"type": "number", "description": "加减工时"},
-                    "opc_code": {"type": "string", "description": "操作过程代码"},
+                    "opc_code": {"type": "string", "description": "操作过程"},
                     "wsw_ptwg": {"type": "number", "minimum": 0, "description": "件重"},
                     "wsw_tc_tag": {"type": "string", "description": "抬铲标志"},
                     "wsm_type": {"type": "string", "description": "员工作业票类型"},

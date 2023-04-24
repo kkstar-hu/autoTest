@@ -12,11 +12,11 @@ if __name__ == '__main__':
 
     #urllib3.disable_warnings()
     environment = {
-        "device": platform.node(),
-        "system": platform.platform(),
-        "python": platform.python_version(),
-        "server_host": "10.116.8.16:8520",
-        "db_host": "10.116.8.20"
+        "device-name": platform.node(),
+        "operating-system": platform.platform(),
+        "python version": platform.python_version(),
+        "server host": "10.116.8.16:8520",
+        "database host": "10.116.8.20"
     }
     allurechange.set_environment(environment)
     #os.system('allure generate Report/result -o Report/html')

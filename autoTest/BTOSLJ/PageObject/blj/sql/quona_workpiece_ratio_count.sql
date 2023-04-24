@@ -16,7 +16,7 @@ with finaldata as(
 		group by wsw_quotano, quo.quo_time_quota, quo.quo_hatch_hour, quo.quo_work_num, wli.wli_name
 	)
 	select base.定额编号 , base.使用次数 , base.定额分类, base.操作过程 , base.工时定额 , base.作业小时 , base.完成操作吨 , base.定额装卸工人数 ,
-		   (base.配工组别人数*1./base.使用次数) as 实际装卸工人数 ,
+		   ROUND(base.配工组别人数*1./base.使用次数, 0) as 实际装卸工人数 ,
 		   (base.完成操作吨*1.*base.工时定额) as 定额工时, base.实际工时,
 		   base.定额作业小时量, ROUND(base.完成操作吨*1./base.作业小时, 2) as 实际作业小时量
 	from base

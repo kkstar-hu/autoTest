@@ -1,0 +1,30 @@
+{
+    "$id": "/api/VAGT/WGOOD",
+    "title": "船代外贸进出口",
+    "type": "object",
+    "required": ["data", "success"],
+    "properties": {
+        "data": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "wino": {"type": "number", "minimum": 0, "description": "外贸进口艘次"},
+                    "totalno": {"type": "number", "minimum": 0, "description": "合计艘次"},
+                    "totalbilwg": {"type": "number", "minimum": 0, "description": "合计计费吨"},
+                    "wewg": {"type": "number", "minimum": 0, "description": "外贸出口吨位"},
+                    "yearno": {"type": "number", "minimum": 0, "description": "年度合计艘次"},
+                    "wibilwg": {"type": "number", "minimum": 0, "description": "外贸进口计费吨"},
+                    "webilwg": {"type": "number", "minimum": 0, "description": "外贸出口计费吨"},
+                    "yearbilwg": {"type": "number", "minimum": 0, "description": "年度合计计费吨"},
+                    "wiwg": {"type": "number", "minimum": 0, "description": "外贸进口吨位"},
+                    "cst_shrtnm": {"type": "string", "minimum": 0, "description": "船代"},
+                    "weno": {"type": "number", "minimum": 0, "description": "外贸出口艘次"},
+                    "totalwg": {"type": "number", "minimum": 0, "description": "合计吨位"},
+                    "yearwg": {"type": "number", "minimum": 0, "description": "年度合计吨位"}
+                }
+            }
+        },
+        "success": {"type": "boolean"}
+    }
+}

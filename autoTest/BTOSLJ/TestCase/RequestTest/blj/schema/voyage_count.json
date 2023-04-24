@@ -1,0 +1,25 @@
+{
+    "$id": "/api/voyage/count",
+    "title": "航线统计表",
+    "type": "object",
+    "required": ["data", "success"],
+    "properties": {
+        "data": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "mm": {"type": "string", "description": "月份"},
+                    "yyyylast": {"type": "string", "description": "上年"},
+                    "tenant_id": {"const": "SIPGLJ","description": "租户"},
+                    "gwtg": {"type": "number", "minimum": 0, "description": "吨位"},
+                    "gwtg_last": {"type": "number", "minimum": 0, "description": "上年吨位"},
+                    "cnname": {"type": "string", "description": "航线中文名"},
+                    "yyyy": {"type": "string", "description": "年份"},
+                    "yoy_gtwg": {"type": "string", "description": "同比"}
+                }
+            }
+        },
+        "success": {"type": "boolean"}
+    }
+}

@@ -1,0 +1,36 @@
+{
+    "$id": "/api/blj/BOATCOMPANY/DAY",
+    "title": "船公司外贸进出口",
+    "type": "object",
+    "required": ["data", "success"],
+    "properties": {
+        "data": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "weequipwg": {"type": "number", "minimum": 0, "description": "外出设备"},
+                    "wiothwg": {"type": "number", "minimum": 0, "description": "外进其他"},
+                    "YEARwvol": {"type": "number", "minimum": 0, "description": "年度合计体积"},
+                    "wwg": {"type": "number", "minimum": 0, "description": "外贸重量"},
+                    "num": {"type": "number", "minimum": 0},
+                    "wiironwg": {"type": "number", "minimum": 0, "description": "外进钢铁"},
+                    "wvol": {"type": "number", "minimum": 0, "description": "外贸体积"},
+                    "weironwg": {"type": "number", "minimum": 0, "description": "外出钢铁"},
+                    "YEARwwg": {"type": "number", "minimum": 0, "description": "年度合计吨位"},
+                    "totcoun": {"type": "number", "minimum": 0, "description": "合计艘次"},
+                    "weothwg": {"type": "number", "minimum": 0, "description": "外出其他"},
+                    "wiwoodwg": {"type": "number", "minimum": 0, "description": "外进原木"},
+                    "ecoun": {"type": "number", "minimum": 0, "description": "出口航次数量"},
+                    "wipapwg": {"type": "number", "minimum": 0, "description": "外进纸浆"},
+                    "bmname": {"type": "string", "minimum": 0, "description": "船公司"},
+                    "icoun": {"type": "number", "minimum": 0, "description": "进口航次数量"},
+                    "wiequipwg": {"type": "number", "minimum": 0, "description": "外进设备"},
+                    "wedwg": {"type": "number", "minimum": 0, "description": "外出吨袋货"},
+                    "YEARtotcoun": {"type": "number", "minimum": 0, "description": "年度合计艘次"}
+                }
+            }
+        },
+        "success": {"type": "boolean"}
+    }
+}

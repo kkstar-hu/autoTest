@@ -16,12 +16,13 @@ class GetPg():
         self.logger = getlogger()
         self.engine = None
         try:
-            if(host == "10.166.0.137"):
+            if (host == "10.166.0.137"):
                 self.engine = create_engine('postgres://%s:%s@%s:%s/%s?charset=utf8'
-                           % ("btops", "tCXd#0DWK-brIk", "10.166.0.137", "6432", "btopsdb"))
-            elif(host == "10.116.8.20"):
+                                            % ("btops", "tCXd#0DWK-brIk", "10.166.0.137", "6432", "btopsdb"))
+            elif (host == "10.116.8.20"):
                 self.engine = create_engine('mysql+pymysql://%s:%s@%s:%s/%s?charset=utf8'
-                           % ("root", urllib.parse.quote_plus("nezha@2023"), "10.116.8.20", "9030", "ODS"))
+                                            % ("root", urllib.parse.quote_plus("nezha@2023"), "10.116.8.20", "9030",
+                                               "ODS"))
         except e1:
             self.logger.error("Error while connecting PostgreSQL:", exc_info=True, stack_info=False)
         except e2:
@@ -29,12 +30,10 @@ class GetPg():
         else:
             self.conn = self.engine.connect()
 
-
     def __del__(self):
         self.conn.close()
 
-
-    def execute_sql(self, sql : str):
+    def execute_sql(self, sql: str):
         try:
             self.conn.execute(sql)
             self.conn.commit()
@@ -43,7 +42,7 @@ class GetPg():
             self.logger.error("Sql error:", exc_info=True)
 
     # 仅用于select
-    def read_from_table(self, filename : str):
+    def read_from_table(self, filename: str):
         pd.set_option('display.max_columns', 20)
         pd.set_option('display.max_rows', 20)
         sql = text(self.load_sql(filename))
@@ -51,12 +50,11 @@ class GetPg():
         return data
 
     # 仅用于select
-    def select_from_table(self, sql : str):
+    def select_from_table(self, sql: str):
         sql = text(sql)
         return pd.read_sql(sql, self.conn)
 
-
-    def load_sql(self, filename : str):
+    def load_sql(self, filename: str):
         try:
             with open(filename, encoding='utf-8', mode='r') as f:
                 return f.read()
@@ -65,10 +63,12 @@ class GetPg():
 
     def to_json(self, res):
         res = res.to_json(orient='records', force_ascii=False)
-        if(type(res) != type(dict())):
+        if (type(res) != type(dict())):
             res = json.loads(res)
         return json.dumps(res, indent=4, ensure_ascii=False)
 
-
-
-
+    def to_json_dict(self, res):
+        res = res.to_json(orient='records', force_ascii=False)
+        if (type(res) != type(dict())):
+            res = json.loads(res)
+        return res

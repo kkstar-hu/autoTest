@@ -1,0 +1,28 @@
+{
+    "$id": "/api/MAINGOODS/DCLDDTL",
+    "title": "主要货种完成量",
+    "type": "object",
+    "required": ["data", "success"],
+    "properties": {
+        "data": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "mm": {"type": "string", "desstringcription": "作业月"},
+                    "rpt_goa_gtwg_year_last": {"type": "number", "minimum": 0, "description": "上年合计吨位"},
+                    "rpt_goa_gtwg_year": {"type": "number", "minimum": 0, "description": "年合计吨位"},
+                    "rpt_goa_opdate_year": {"type": "string", "description": "作业年"},
+                    "rpt_yoy_year": {"type": "number", "minimum": 0, "description": "年同比"},
+                    "rpt_goa_opdate_year_last": {"type": "string", "description": "上作业年"},
+                    "rpt_yoy_month": {"type": "number", "minimum": 0, "description": "月同比"},
+                    "rpt_goa_gtwg_month_last": {"type": "number", "minimum": 0, "description": "上年作业月"},
+                    "gs": {"type": "string", "description": "主要货种"},
+                    "rpt_goa_gtwg_month": {"type": "number", "minimum": 0, "description": "月作业吨位"},
+                    "ts": {"type": "string", "description": "性质"}
+                }
+            }
+        },
+        "success": {"type": "boolean"}
+    }
+}

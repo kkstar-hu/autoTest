@@ -1,7 +1,7 @@
 -- 昼夜工时表
 with daywork as(
 with shift1 as(
-	select DATE_FORMAT(pws.pws_opdate,'%Y-%m-%d') as 日期, '工人' as 组别 , (case when pws.pws_shift='1' then '夜班' when pws.pws_shift='2' then '白班' end) as 时间,
+	select DATE_FORMAT(pws.pws_opdate,'%Y-%m-%d') as 日期, '员工' as 组别 , (case when pws.pws_shift='1' then '夜班' when pws.pws_shift='2' then '白班' end) as 时间,
 	    sum(case when pws_type = 'N' or pws_type = 'W' then wsw_gtwg else 0 end)      as 大船吨位,
 	    sum(case when pws_type = 'N' or pws_type = 'W' then wsw_real_hour else 0 end) as 大船工时,
 	    sum(case when pws_type = 'N' then wsw_gtwg else 0 end)                        as 内贸吨位,
@@ -68,7 +68,7 @@ with shift1 as(
 	order by pws.pws_opdate desc, pws.pws_shift, 组别
 	limit 9999
 )
-select shift1.日期, '工人' as 组别 , '昼夜' as 时间,
+select shift1.日期, '员工' as 组别 , '昼夜' as 时间,
     sum(shift1.大船吨位) as 大船吨位, sum(shift1.大船工时) as 大船工时,
     sum(shift1.内贸吨位) as 内贸吨位, sum(shift1.内贸工时) as 内贸工时,
 	sum(shift1.外贸吨位) as 外贸吨位, sum(shift1.外贸工时) as 外贸工时,
