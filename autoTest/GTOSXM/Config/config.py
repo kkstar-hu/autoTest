@@ -1,53 +1,41 @@
 from Commons.RandomFunction import CommonGenerator
 
-host = "http://web.cloudtos.com/#/login"
+host = "http://web.cloudtos-xm.com/#/login"   #β环境
+
+#host = "http://web.cloudtos.com/#/login"   #α环境
 
 # 驳船内容
-# 卸船提箱箱号
 global boxNumber
-boxNumber = CommonGenerator.generate_spec("XCTX", 7)
-# boxNumber="XCTX3596087"
+#boxNumber = CommonGenerator.generate_spec("XCTX", 7)   # 卸船提箱箱号
+boxNumber="XCTX0317298"
 
-# 直提箱编号
 global boxNumberTwo
-boxNumberTwo = CommonGenerator.generate_spec("ZTXZ", 7)
-# boxNumberTwo ='ZTXZ6409318'
+#boxNumberTwo = CommonGenerator.generate_spec("ZTXZ", 7)  # 直提箱编号
+boxNumberTwo ='ZTXZ0589473'
 
-# 直装箱编号
 global boxNumberThree
-boxNumberThree = CommonGenerator.generate_spec("ZZXZ", 7)
-# boxNumberThree ='ZZXZ9836102'
+#boxNumberThree = CommonGenerator.generate_spec("ZZXZ", 7)   # 直装箱编号
+boxNumberThree ='ZZXZ5869137'
 
-# 闲置集卡号
-global carnumber
+global carnumber  # 闲置集卡号
+carnumber='008'
 
-# 箱位置
-global boxPosition
-# boxPosition='Q9001011'
+global boxPosition   # 箱位置
+boxPosition='B1049012'
 
-# 进箱、装箱流程
 global outBoxNumber
-outBoxNumber = CommonGenerator.generate_spec("JXZX", 7)
-# outBoxNumber="JXZX2369071"
+#outBoxNumber = CommonGenerator.generate_spec("JXZX", 7)    # 进箱、装箱流程
+outBoxNumber="JXZX5716930"
 
-# 航次随机数
-voyage = CommonGenerator.generate_verify_code(4)
+voyage = CommonGenerator.generate_verify_code(4)    # 航次随机数
 
 global importNumber
-# importNumber = 'I'+voyage
-# importNumber="I4627" #驳船
-# importNumber="I4139" #大船
-importNumber = "I7068"  # 空箱输运航次
-# importNumber=CommonGenerator.generate_spec("I",4)
+importNumber="I6893" #驳船
+#importNumber=CommonGenerator.generate_spec("I",4)
 
-# 出口航次
-global outportNumber
-# outportNumber = 'E'+voyage
-# outportNumber="E4627" #驳船
-# outportNumber="E4139" #大船
-importNumber = "E7068"  # 空箱输运航次
-# outportNumber=CommonGenerator.generate_spec("E",4)
-
+global outportNumber     # 出口航次
+outportNumber="E1923" #驳船
+#outportNumber=CommonGenerator.generate_spec("E",4)
 
 # 提箱预约号
 global Number
@@ -63,6 +51,10 @@ takeNumber = CommonGenerator.generate_verify_code(4)  # 进箱提单号
 # takeNumber='JXZX1362480'
 # 登录信息
 
-username = "admin"
-password = "ctos@12345"
+username = "admintst"    #β环境
+password = "ctos@123"
 showname = "XRCT"
+
+# username = "admin"          #α环境
+# password = "ctos@1234"
+# showname = "XRCT"
