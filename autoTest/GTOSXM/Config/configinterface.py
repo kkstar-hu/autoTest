@@ -23,7 +23,7 @@ global boxPosition
 # boxPosition = 'Q9033011'
 
 global boxNumbertwo    # 换箱操作的第一个箱号
-boxNumbertwo = 'KX140'
+# boxNumbertwo = 'KX140'
 
 global boxNumberthree  # 换箱操作的第二个箱号
 # boxNumberthree = 'KX133'
