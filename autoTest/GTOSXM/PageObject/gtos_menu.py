@@ -6,7 +6,8 @@ class GtosMenu(Menu):
 
     def selectMenu(self, name):
         if self.elementExist("xpath", "//li[@role='menuitem']//span[text()='" + name + "']"):
-            self.get_element("xpath", "//li[@role='menuitem']//span[text()='" + name + "']").click()
+            self.left_click("xpath", "//li[@role='menuitem']//span[text()='" + name + "']")
+            #self.get_element("xpath", "//li[@role='menuitem']//span[text()='" + name + "']").click()
             time.sleep(0.3)
             return
         elif self.elementExist("xpath", "//div[@class='left-menu']//button[@style='display: none;']"):

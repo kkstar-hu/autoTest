@@ -16,7 +16,7 @@ class StraightLoad_StraightLift_Management(BasePage):
         """
         self.logger.info('直装直提管理-查询')
         textInput = Gtos_text(self.driver)
-        textInput.select_by_label("船名航次", config.outportNumber)
+        textInput.search_select_by_label("船名航次", config.outportNumber)
         textInput.input_by_label('箱号', boxnumber)
         self.click('xpath', "//span[text()='检索']")
         tablecheck = Gtos_table(self.driver)
@@ -37,7 +37,7 @@ class StraightLoad_StraightLift_Management(BasePage):
         """
         self.logger.info('直装直提管理-查询')
         textInput = Gtos_text(self.driver)
-        textInput.select_by_label("船名航次", config.importNumber)
+        textInput.search_select_by_label("船名航次", config.importNumber)
         textInput.input_by_label('箱号', boxnumber)
         self.logger.info('直装直提管理：检索')
         self.click('xpath', "//span[text()='检索']")

@@ -18,7 +18,6 @@ from Commons.yamlread import read_yaml
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '01_DataProcess', 'immediata_plan.yaml')))
 def testImmediatePlan(driver, input):
     """近期计划"""
-    print("******************************************Smoke Test Start***********************************************")
     menu = GtosMenu(driver)
     menu.select_level_Menu("泊位策划,近期计划")
     plan = Immediate_plan(driver)
@@ -81,8 +80,11 @@ def testStockpiling_Planning_into(driver, input):
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '01_DataProcess', 'immediata_plan.yaml')))
 def testStockpiling_Planning_out(driver, input):
     """堆存计划-卸船"""
+    menu = GtosMenu(driver)
+    menu.select_level_Menu("堆场策划,堆存,堆存计划")
     stockpiling = Stockpiling_Planning(driver)
     stockpiling.search("卸船", config.importNumber)
+    stockpiling.close_alert('未找到相关堆存计划')
     stockpiling.Add_into_plan()
     stockpiling.Add_box_OUT()
     Tag(driver).closeTagGtos('堆存计划')

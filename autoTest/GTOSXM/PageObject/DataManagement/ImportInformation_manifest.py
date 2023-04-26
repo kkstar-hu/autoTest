@@ -15,8 +15,8 @@ class Manifest(BasePage):
         """
         新增舱单
         """
-        Gtextinput = Gtos_text(self.driver)
-        Gtextinput.search_select_by_label('进口船名航次', config.importNumber)
+        textinput = Gtos_text(self.driver)
+        textinput.search_select_by_label('进口船名航次', config.importNumber)
         self.click('xpath', "//span[text()='检索']")
         try:
             if self.get_alert_text() == '未找到相关舱单信息':
@@ -24,12 +24,14 @@ class Manifest(BasePage):
             self.logger.info('舱单-新增舱单货资料' + boxnumber)
             self.click("xpath", "(//div[@id='add'])[1]")
             time.sleep(1)
-            textinput = Gtos_text(self.driver)
-            textinput.input_by_label('提单号', boxnumber)
-            textinput.select_by_label_time('装货港', input['装货港'])
-            textinput.select_by_label_time('卸货港', input['卸货港'])
-            textinput.select_by_label_time('目的港', input['目的港'])
-            textinput.select_by_label_time('交货地', input['交货地'])
+            try:
+                textinput.input_by_number('提单号', boxnumber)
+            except:
+                textinput.input_by_label('提单号', boxnumber)
+            textinput.search_select_by_label('装货港', input['装货港'])
+            textinput.search_select_by_label('卸货港', input['卸货港'])
+            textinput.search_select_by_label('目的港', input['目的港'])
+            textinput.search_select_by_label('交货地', input['交货地'])
             textinput.select_by_label('货主', input['货主'])
             textinput.select_by_label('货代', input['货代'])
             textinput.select_by_label('运输方式', input['运输方式'])
@@ -80,7 +82,10 @@ class Manifest(BasePage):
             textinput = Gtos_text(self.driver)
             self.click("xpath", "(//div[@id='add'])[2]")
             time.sleep(1)
-            textinput.input_by_label('箱号', boxnumber)
+            try:
+                textinput.input_by_number('箱号', boxnumber)
+            except:
+                textinput.input_by_label('箱号', boxnumber)
             textinput.select_by_label('尺寸', input['尺寸'])
             textinput.select_by_label('箱型', '00')
             textinput.select_by_label('箱高', input['箱高'])

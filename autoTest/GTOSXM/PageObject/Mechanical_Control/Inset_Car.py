@@ -23,4 +23,8 @@ class Inset_Car(BasePage):
 
         textable = Gtos_table(self.driver, 2)
         self.left_click('x', "//span[text()='作业步骤']")
+        self.left_clickandsend('x',
+                               "(//div[@class='ag-header-container'])[2]//input[@aria-label='危品资质 Filter Input']",
+                               '无资质')
         config.carnumber = textable.select_row(f'{job}', f'{value}')
+        self.logger.info("集卡号:"+config.carnumber)

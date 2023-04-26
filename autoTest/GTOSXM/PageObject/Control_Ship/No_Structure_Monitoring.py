@@ -9,14 +9,8 @@ from GTOSXM.Controls.Gtos_table import Gtos_table
 
 
 class NO_Structure_Monitoring(BasePage):
-    """
-    无结构船舶监控
-    """
-
+    """无结构船舶监控 """
     def Retrieve(self):
-        """
-        输入内容，检索
-        """
         self.logger.info('无结构船舶监控-查询：输入航名航次' + config.importNumber)
         textinput = Gtos_text(self.driver)
         textinput.search_select_by_label('船名航次', config.importNumber)
@@ -28,7 +22,6 @@ class NO_Structure_Monitoring(BasePage):
         """
         self.logger.info('无结构船舶监控-验证卸船列表信息' + boxnumber)
         table = Gtos_table(self.driver, 3)
-        # row = self.rows_value(3)
         rowid = table.select_row2("箱号", boxnumber)
         check.is_in(boxnumber, table.get_value_by_rowid(rowid, '箱号'))
         check.equal(table.get_value_by_rowid(rowid, '装货港'), input['装货港'])
@@ -154,21 +147,16 @@ class NO_Structure_Monitoring(BasePage):
         arriveTime = arriveDay + " 00:00:00"
         leaveDay = DataTime.Get_Date_X_Number_Of_Days(20)
         leaveTime = leaveDay + " 00:00:00"
+        stopTime = DataTime.Get_Current_Date() + " 00:00:00"
         check.equal(tablecheck.get_value('计划靠泊时间'), arriveTime)
         check.equal(tablecheck.get_value('计划离泊时间'), leaveTime)
         check.equal(tablecheck.get_value('计划泊位'), '1')
         self.click('x', "//span[text()='靠泊确认']")
-        self.click('x', "//input[@placeholder='靠泊时间']")
-        self.click('x', "//span[contains(text(),'此刻')]")
         textinput = Gtos_text(self.driver)
         textinput.input_by_label('靠泊吃水', '1')
+        textinput.input_by_label('靠泊时间', stopTime)
         self.click('x', "//span[text()='提交']")
-        if self.get_text('xpath', "//div[@role='alert']//p") == '靠泊时间不能大于当前时间.':
-            self.close_alert('靠泊时间不能大于当前时间.')
-            time.sleep(10)
-            self.click('x', "//span[text()='提交']")
-        self.check_alert('提交成功')
-        self.close_alert('提交成功')
+        self.check_alert_and_close('提交成功')
         check.equal(tablecheck.get_value('靠泊状态'), '靠泊')
         check.equal(tablecheck.get_value('实际泊位'), '1')
         self.logger.info('无结构船舶监控-分配桥吊')
@@ -200,17 +188,13 @@ class NO_Structure_Monitoring(BasePage):
         tablecheck = Gtos_table(self.driver)
         tablecheck.check("进口航次", number)
         self.click('x', "//span[text()='离泊/离港确认']")
-        self.click('x', "//input[@placeholder='离泊时间']")
-        self.click('x', "//span[contains(text(),'此刻')]")
+        leaveTime = DataTime.Get_Current_Date() + " 00:00:00"
         self.click('x', "//span[@class='el-checkbox__inner']")
         textInput = Gtos_text(self.driver)
+        textInput.input_by_label('离泊时间', leaveTime)
         textInput.input_by_label('离泊吃水', '100')
         self.click('x', "//span[text()='提交']")
-        if self.get_text('xpath', "//div[@role='alert']//p") == '离泊时间应不大于当前时间！':
-            self.close_alert('离泊时间应不大于当前时间！')
-            time.sleep(10)
-            self.click('x', "//span[text()='提交']")
-            # if self.elementExist("x", "//div[@class='el-message-box__message']"):
-            #     self.click("x", "//div[@class='el-message-box__btns']//span[text()=' 确定 ']")
-        self.check_alert("提交成功")
-        self.close_alert("提交成功")
+        if self.elementExist("x", "//div[@class='el-message-box__message']"):
+            self.click("x", "//div[@class='el-message-box__btns']//span[text()=' 确定 ']")
+        self.check_alert_and_close("提交成功")
+

@@ -32,19 +32,6 @@ def testPacking(driver, input):
 
 
 # @pytest.mark.skipif
-# @allure.story('3.提箱流程')
-# @allure.title('2、获取箱预约号')
-# @pytest.mark.parametrize("input", read_yaml('packing_process.yaml'))
-# @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'03_PackingProcess', 'packing_process.yaml')))
-# def testPackingManagement(driver,input):
-#     """计划管理--获取箱预约号"""
-#     menu = GtosMenu(driver)
-#     menu.select_level_Menu("计划受理,计划管理")
-#     planmanegement = PlanManagement(driver)
-#     planmanegement.process(config.boxNumber)
-#     Tag(driver).closeTagGtos('计划管理')
-
-# @pytest.mark.skipif
 @allure.story('3.提箱流程')
 @allure.title('2、办理提箱手续')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '03_PackingProcess', 'packing_process.yaml')))
@@ -78,7 +65,7 @@ def testSend_box(driver, input):
 @allure.title('4、车辆出场')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '03_PackingProcess', 'packing_process.yaml')))
 def testCar_Out(driver, input):
-    """工作指令-堆场发箱"""
+    """车辆出场"""
     menu = GtosMenu(driver)
     menu.select_level_Menu("道口管理,车辆出场")
     car_out = Car_Out(driver)

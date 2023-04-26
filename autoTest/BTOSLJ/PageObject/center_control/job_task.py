@@ -73,7 +73,7 @@ class JobTask(BasePage):
     def report_config(self, input):
         self.click("id", "reportConfig")
         self.waitloading()
-        time.sleep(1)
+        time.sleep(2)
         self.config.select_row("配置类型", input["配置类型"])
 
 

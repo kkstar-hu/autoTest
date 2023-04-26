@@ -31,6 +31,6 @@ class Voyage_Attached(BasePage):
         self.click('x', "(//span[text()='新增'])[1]")
         textInput = Gtos_text(self.driver)
         textInput.click('x', "(//input[@placeholder='请选择'])[1]")
-        textInput.click('x', "//span[text()='ARENS']")
+        textInput.search_select_by_label("港口代码", "ARENS")
         textInput.click('x', "//span[text()='保 存']")
         check.equal(self.get_text("xpath", "//div[@role='alert']//h2"), "保存成功")

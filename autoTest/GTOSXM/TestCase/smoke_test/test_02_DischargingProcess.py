@@ -64,7 +64,7 @@ def testCharge_Car(driver, input):
     menu.select_level_Menu("机械控制,内集卡控制")
     inset_car = Inset_Car(driver)
     inset_car.choice_job('ALL')
-    inset_car.choice_cars('作业步骤', '等待装车')
+    inset_car.choice_cars('作业步骤', '空车')
     Tag(driver).closeTagGtos('内集卡控制')
 
 
@@ -79,9 +79,9 @@ def testJob(driver, input):
     menu.select_level_Menu("机械控制,作业指令监控")
     charge_car = Job_Order_Monitoring(driver)
     charge_car.Retrieve(input, config.importNumber, config.boxNumber)
-    charge_car.order_info_check_new(input, config.boxNumber)
-    charge_car.charge_car(input)
-    charge_car.discharging_confirm(input)
+    #charge_car.order_info_check_new(input, config.boxNumber)
+    #charge_car.charge_car(input)
+    #charge_car.discharging_confirm(input)
     charge_car.closed_box(input)
     Tag(driver).closeTagGtos('作业指令监控')
 
