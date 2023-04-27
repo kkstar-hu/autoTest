@@ -10,7 +10,6 @@ from GTOSXM.PageObject.Mechanical_Control.Job_Order_Monitoring import Job_Order_
 from GTOSXM.PageObject.gtos_menu import GtosMenu
 
 
-# @pytest.mark.skipif
 @allure.story('4.大船新增进箱计划')
 @allure.title('1.进箱流程')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '04_EnterBoxProcess', 'inboxplan.yaml')))
@@ -26,39 +25,6 @@ def testCheckInBox(driver, input):
     Tag(driver).closeTagGtos('办理进箱手续V1')
 
 
-# @pytest.mark.skipif
-# @allure.story('4.新增进箱计划')
-# @allure.title('1、新增进箱计划')
-# @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'04_EnterBoxProcess', 'inboxplan.yaml')))
-# def testAddPlan(driver,input):
-#     """新增进场计划"""
-#     menu = GtosMenu(driver)
-#     menu.select_level_Menu("计划受理,安排计划,进箱受理")
-#     inbox = InBox_Acceptance(driver)
-#     inbox.choice_tree_straight(input)
-#     inbox.select_value()
-#     inbox.addPlan(input, config.outBoxNumber)
-#     inbox.Add_value(config.outBoxNumber)
-#     inbox.build_plan(input)
-#     Tag(driver).closeTagGtos('进箱受理')
-
-
-# @pytest.mark.skipif
-# @allure.story('4.新增进箱计划')
-# @allure.title('2.办理进场')
-# @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'04_EnterBoxProcess','inboxplan.yaml')))
-# def testCheckInBox(driver,input):
-#     menu = GtosMenu(driver)
-#     menu.select_level_Menu("道口管理,办理进箱手续V1")
-#     checkInBox = CheckInBox(driver)
-#     checkInBox.search(input,config.outBoxNumber)
-#     checkInBox.other_information(input)
-#     checkInBox.input_info(input)
-#     checkInBox.confirm_button(input)
-#     Tag(driver).closeTagGtos('办理进箱手续V1')
-
-
-# @pytest.mark.skipif
 @allure.story('4.大船新增进箱计划')
 @allure.title('3.堆场收箱')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '04_EnterBoxProcess', 'inboxplan.yaml')))
@@ -73,7 +39,6 @@ def testReceive_box(driver, input):
     Tag(driver).closeTagGtos('作业指令监控')
 
 
-# @pytest.mark.skipif
 @allure.story('4.大船新增进箱计划')
 @allure.title('4.车辆出场')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '04_EnterBoxProcess', 'inboxplan.yaml')))
@@ -87,7 +52,3 @@ def testCar_Out(driver, input):
     Tag(driver).closeTagGtos('车辆出场')
 
 
-if __name__ == '__main__':
-    # pytest.main(['-vs'])
-    pytest.main(['-s', '-v', 'test_EnterBoxProcess.py', '--html=../report/report.html', '--alluredir',
-                 '../report/allure-results'])

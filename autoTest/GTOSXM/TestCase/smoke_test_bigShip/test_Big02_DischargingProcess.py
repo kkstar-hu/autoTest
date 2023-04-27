@@ -15,29 +15,15 @@ import warnings
 warnings.filterwarnings("ignore")
 
 
-# @pytest.mark.skipif
-# @pytest.mark.parametrize("input", read_yaml('discharging_process.yaml'))
 @allure.story('2.大船卸船流程')
 @allure.title('1、新增舱单')
-@pytest.mark.parametrize("input",
-                         read_yaml(os.path.join(os.getcwd(), '02_DischargingProcess', 'discharging_process.yaml')))
+@pytest.mark.parametrize("input",read_yaml(os.path.join(os.getcwd(), '02_DischargingProcess', 'discharging_process.yaml')))
 def testManifest(driver, input):
     """新增舱单资料"""
     menu = GtosMenu(driver)
     menu.select_level_Menu("资料管理,进口资料,舱单")
     manifest = Manifest(driver)
     manifest.AddManifest(input, config.boxNumber)
-
-
-# @pytest.mark.skipif
-# @pytest.mark.parametrize("input", read_yaml('discharging_process.yaml'))
-@allure.story('2.大船卸船流程')
-@allure.title('2、新增舱单箱')
-@pytest.mark.parametrize("input",
-                         read_yaml(os.path.join(os.getcwd(), '02_DischargingProcess', 'discharging_process.yaml')))
-def testManifest_box(driver, input):
-    """新增舱单箱资料"""
-    manifest = Manifest(driver)
     manifest.AddBox(input, config.boxNumber)
     manifest.choice_ship()
     Tag(driver).closeTagGtos('舱单')
@@ -45,7 +31,7 @@ def testManifest_box(driver, input):
 
 # @pytest.mark.skipif
 @allure.story('2.大船卸船流程')
-@allure.title('3、箱校验安排箱位置')
+@allure.title('2、箱校验安排箱位置')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '01_DataProcess', 'immediata_plan.yaml')))
 def testSImport_data_verification(driver, input):
     """资料校验"""
@@ -53,13 +39,13 @@ def testSImport_data_verification(driver, input):
     menu.select_level_Menu("资料管理,进口资料,进口资料校验")
     idv = Import_data_verification(driver)
     idv.retrieval()
-    idv.verification('010782')
+    idv.verification('010582')
     Tag(driver).closeTagGtos('进口资料校验')
 
 
 # @pytest.mark.skipif
 @allure.story('2.大船卸船流程')
-@allure.title('4、大船发箱')
+@allure.title('3、大船发箱')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '01_DataProcess', 'immediata_plan.yaml')))
 def testShip_sendbox(driver, input):
     """有结构发箱"""
@@ -71,9 +57,9 @@ def testShip_sendbox(driver, input):
     # 切换窗口
     cls = driver.window_handles
     driver.switch_to.window(cls[1])
-    nostructure.new_windows_choicebox(config.boxNumber)
-    nostructure.new_windows_job()
-    nostructure.new_windows_sendbox()
+    nostructure.new_windows_choicebox(config.boxNumber)     # 箱查找
+    nostructure.new_windows_job()    # 作业顺序
+    nostructure.new_windows_sendbox()      # 发箱
     nostructure.selective_bridge(config.boxNumber)
     driver.close()
     # 切回原来窗口
@@ -115,6 +101,3 @@ def testJob(driver, input):
     charge_car.closed_box(input)
     Tag(driver).closeTagGtos('作业指令监控')
 
-
-if __name__ == '__main__':
-    pytest.main(['-sv'])

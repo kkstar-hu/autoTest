@@ -49,12 +49,13 @@ def testship_stowage(driver, input):
     stowage.mouse_job()
     htps = Interface_Page(driver)
     # 修改船箱位接口
-    htps.modify_position('011182')
+    htps.modify_position('010582')
     # 配载接口
     htps.interface_getboxno(config.outBoxNumber)
     peizai = req.visit('post', url=read_yaml(os.path.join('../Interface_Test', 'interface.yaml'))[0]['配载url'],
-                       data=json.dumps(read_json(os.path.join(os.getcwd(), '../Interface_Test/JSOn', 'peizai.json'))),
+                       data=json.dumps(read_json(os.path.join(os.getcwd(), '../Interface_Test/json', 'peizai.json'))),
                        headers=configinterface.head)
+    print(peizai.json())
     stowage.mouse_job_once()
     stowage.send_box()
     Tag(driver).closeTagGtos('有结构船舶配载')
@@ -114,8 +115,3 @@ def testship_order(driver, input):
     work.LadeShip_confirm(input)
     Tag(driver).closeTagGtos('作业指令监控')
 
-
-if __name__ == '__main__':
-    # pytest.main(['-vs'])
-    pytest.main(['-s', '-v', 'test_EnterBoxProcess.py', '--html=../report/report.html', '--alluredir',
-                 '../report/allure-results'])

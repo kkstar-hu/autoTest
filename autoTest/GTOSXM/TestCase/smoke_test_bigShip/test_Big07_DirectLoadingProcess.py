@@ -80,7 +80,7 @@ def testship_stowage(driver, input):
     # #配载接口
     htps.interface_getboxno(config.boxNumberThree)
     peizai = req.visit('post', url=read_yaml(os.path.join('../Interface_Test', 'interface.yaml'))[0]['配载url'],
-                       data=json.dumps(read_json(os.path.join(os.getcwd(), '../Interface_Test/JSOn', 'peizai.json'))),
+                       data=json.dumps(read_json(os.path.join(os.getcwd(), '../Interface_Test/json', 'peizai.json'))),
                        headers=configinterface.head)
     stowage.mouse_job_once()
     stowage.send_box()

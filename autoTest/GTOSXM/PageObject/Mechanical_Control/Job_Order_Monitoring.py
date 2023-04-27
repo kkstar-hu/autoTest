@@ -108,19 +108,19 @@ class Job_Order_Monitoring(BasePage):
                 check.equal(tablecheck.get_value('起始位置'), input['作业路'])
                 check.equal(tablecheck.get_value('拖运机械'), car)
                 check.equal(tablecheck.get_value('当前位置'), '')
-            if input['操作过程'] == '场―车':
+            elif input['操作过程'] == '场―车':
                 check.equal(tablecheck.get_value('起始位置'), config.boxPosition)
                 check.equal(tablecheck.get_value('拖运机械'), input['车牌'] + input['集卡编号'])
                 check.equal(tablecheck.get_value('当前位置'), config.boxPosition)
-            if input['操作过程'] == '船―车':
+            elif input['操作过程'] == '船―车':
                 check.equal(tablecheck.get_value('起始位置'), 'Q002')
                 check.equal(tablecheck.get_value('拖运机械'), input['车牌'] + input['集卡编号'])
                 check.equal(tablecheck.get_value('当前位置'), '')
-            if input['操作过程'] == '车―船':
+            elif input['操作过程'] == '车―船':
                 check.equal(tablecheck.get_value('起始位置'), input['车牌'] + input['集卡编号'])
                 check.equal(tablecheck.get_value('拖运机械'), input['车牌'] + input['集卡编号'])
                 check.equal(tablecheck.get_value('当前位置'), input['车牌'] + input['集卡编号'])
-            if input['操作过程'] == '车―场':
+            elif input['操作过程'] == '车―场':
                 check.equal(tablecheck.get_value('拖运机械'), input['车牌'] + input['集卡编号'])
                 check.equal(tablecheck.get_value('当前位置'), input['车牌'] + input['集卡编号'])
                 check.equal(tablecheck.get_value('当前位置'), input['车牌'] + input['集卡编号'])

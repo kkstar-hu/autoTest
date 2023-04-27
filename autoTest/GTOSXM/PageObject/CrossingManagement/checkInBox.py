@@ -85,7 +85,7 @@ class CheckInBox(BasePage):
             textInput.input_by_label("提单号", boxnumber)
             textInput.input_by_label("订舱号", input['订舱号'])
             textInput.select_by_label("交付方式", input['交付方式'])
-            textInput.select_by_label("交货地", input['交货地'])
+            textInput.search_select_by_label("交货地", input['交货地'])
             textInput.input_by_label("分件数", input['分件数'])
             textInput.input_by_label("分重量", input['分重量'])
             textInput.input_by_label("分体积", input['分体积'])

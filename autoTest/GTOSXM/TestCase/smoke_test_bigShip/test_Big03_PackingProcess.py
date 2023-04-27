@@ -12,8 +12,6 @@ from GTOSXM.PageObject.Acceptance_Plan.Pick_up_Acceptance import Packing_up
 from GTOSXM.PageObject.CrossingManagement.carOut import Car_Out
 
 
-# @pytest.mark.skipif
-# @pytest.mark.parametrize("input", read_yaml('packing_process.yaml'))
 @allure.story('3.大船提箱流程')
 @allure.title('1、新增提箱计划')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '03_PackingProcess', 'packing_process.yaml')))
@@ -32,21 +30,6 @@ def testPacking(driver, input):
     Tag(driver).closeTagGtos('提箱受理')
 
 
-# @pytest.mark.skipif
-# @pytest.mark.parametrize("input", read_yaml('packing_process.yaml'))
-# @allure.story('3.提箱流程')
-# @allure.title('2、获取箱预约号')
-# @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'03_PackingProcess', 'packing_process.yaml')))
-# def testPackingManagement(driver,input):
-#     """计划管理--获取箱预约号"""
-#     menu = GtosMenu(driver)
-#     menu.select_level_Menu("计划受理,计划管理")
-#     planmanegement = PlanManagement(driver)
-#     planmanegement.process(config.boxNumber)
-#     Tag(driver).closeTagGtos('计划管理')
-
-# @pytest.mark.skipif
-# @pytest.mark.parametrize("input", read_yaml('packing_process.yaml'))
 @allure.story('3.大船提箱流程')
 @allure.title('2、办理提箱手续')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '03_PackingProcess', 'packing_process.yaml')))
@@ -60,8 +43,6 @@ def testCheckOutBox(driver, input):
     Tag(driver).closeTagGtos('办理提箱手续V1')
 
 
-# @pytest.mark.skipif
-# @pytest.mark.parametrize("input", read_yaml('packing_process.yaml'))
 @allure.story('3.大船提箱流程')
 @allure.title('3、工作指令堆场发箱')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '03_PackingProcess', 'packing_process.yaml')))
@@ -76,8 +57,6 @@ def testSend_box(driver, input):
     Tag(driver).closeTagGtos('作业指令监控')
 
 
-# @pytest.mark.skipif
-# @pytest.mark.parametrize("input", read_yaml('packing_process.yaml'))
 @allure.story('3.大船提箱流程')
 @allure.title('4、车辆出场')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '03_PackingProcess', 'packing_process.yaml')))
@@ -90,7 +69,3 @@ def testCar_Out(driver, input):
     car_out.retrieve()
     car_out.confirm_out_picking()
     Tag(driver).closeTagGtos('车辆出场')
-
-
-if __name__ == '__main__':
-    pytest.main(['-sv'])

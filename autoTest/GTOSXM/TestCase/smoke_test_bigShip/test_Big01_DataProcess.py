@@ -95,11 +95,8 @@ def testShip_operation(driver, input):
     """有结构靠泊、吊桥分配"""
     menu = GtosMenu(driver)
     menu.select_level_Menu("船舶监控,有结构船舶监控")
-    nostructure = Structure_Monitoring(driver)
-    nostructure.Retrieve(input, config.importNumber)
-    nostructure.ship_operation()
+    structure = Structure_Monitoring(driver)
+    structure.Retrieve(input, config.importNumber)
+    structure.ship_operation()
     Tag(driver).closeTagGtos('有结构船舶监控')
 
-
-if __name__ == '__main__':
-    pytest.main(['-sv'])

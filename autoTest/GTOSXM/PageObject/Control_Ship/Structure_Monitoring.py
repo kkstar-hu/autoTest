@@ -1,6 +1,7 @@
 import time
 import pytest_check as check
 from Base.basepage import BasePage
+from Commons.DateTime import DataTime
 from GTOSXM.Controls.text import Gtos_text
 from GTOSXM.Config import config
 from GTOSXM.Controls.Gtos_table import Gtos_table
@@ -142,24 +143,18 @@ class Structure_Monitoring(BasePage):
         self.click('x', "//span[text()='靠离泊']")
         time.sleep(1)
         self.click('x', "//span[text()='靠泊确认']")
-        self.click('x', "//input[@placeholder='靠泊时间']")
-        self.click('x', "//span[contains(text(),'此刻')]")
         textInput = Gtos_text(self.driver)
+        stopTime = DataTime.Get_Current_Date() + " 00:00:00"
+        textInput.input_by_label('靠泊时间', stopTime)
         textInput.input_by_label("靠泊吃水", '1')
         self.click('x', "//span[text()='提交']")
-        if self.get_text('xpath', "//div[@role='alert']//p") == '靠泊时间不能大于当前时间.':
-            self.close_alert('靠泊时间不能大于当前时间.')
-            time.sleep(10)
-            self.click('x', "//span[text()='提交']")
-        self.check_alert('提交成功')
-        self.close_alert('提交成功')
+        self.check_alert_and_close('提交成功')
         self.logger.info('有结构船舶监控-分配桥吊')
         self.click('x', "//span[text()='作业路']")
         time.sleep(1)
         self.click('x', "//span[text()='加载作业路']")
         self.left_click('x', "(//div[@class='grid'])[1]//span[text()='导入']")
-        self.check_alert('保存成功')
-        self.close_alert('保存成功')
+        self.check_alert_and_close('保存成功')
         self.click('x', "//i[@class='el-dialog__close el-icon el-icon-close']")
         self.logger.info('有结构船舶监控-桥吊开工')
         self.click('x', "//span[text()='作业路']")
@@ -173,8 +168,7 @@ class Structure_Monitoring(BasePage):
         self.input_by_index('x', "//input[@type='code']", 2, 1)
         self.click('x', "//span[text()='开工']")
         check.equal(tablecheck1.Big_get_value('状态'), '作业/开工')
-        self.check_alert('开工成功。')
-        self.close_alert('开工成功。')
+        self.check_alert_and_close('开工成功。')
         self.click('x', "//i[@class='el-dialog__close el-icon el-icon-close']")
 
     def close_bridge(self):
@@ -207,15 +201,10 @@ class Structure_Monitoring(BasePage):
         self.click('x', "//span[text()='离泊确认']")
         time.sleep(0.5)
         self.click('x', "//span[@class='el-checkbox__inner']")
-        # time.sleep(0.5)
-        self.click('x', "//input[@placeholder='离泊时间']")
-        self.click('x', "//span[contains(text(),'此刻')]")
-        textInput = Gtos_table(self.driver)
+        leaveTime = DataTime.Get_Current_Date() + " 00:00:00"
+        textInput = Gtos_text(self.driver)
         textInput.input_no_clear('x', "//input[@placeholder='离泊吃水']", '1')
+        textInput.input_by_label('离泊时间', leaveTime)
         self.click('x', "//span[text()='提交']")
-        if self.get_text('xpath', "//div[@role='alert']//p") == '离泊时间应不大于当前时间！':
-            self.close_alert('离泊时间应不大于当前时间！')
-            time.sleep(10)
-            self.click('x', "//span[text()='提交']")
         self.check_alert('提交成功')
         self.close_alert('提交成功')
