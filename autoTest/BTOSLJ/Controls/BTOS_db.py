@@ -16,10 +16,10 @@ class GetPg():
         self.logger = getlogger()
         self.engine = None
         try:
-            if (host == "10.166.0.137"):
+            if host == "10.166.0.137":
                 self.engine = create_engine('postgresql://%s:%s@%s:%s/%s'
                                             % ("btops", "tCXd#0DWK-brIk", "10.166.0.137", "6432", "btopsdb"))
-            elif (host == "10.116.8.20"):
+            elif host == "10.116.8.20":
                 self.engine = create_engine('mysql+pymysql://%s:%s@%s:%s/%s?charset=utf8'
                                             % ("root", urllib.parse.quote_plus("nezha@2023"), "10.116.8.20", "9030",
                                                "ODS"))

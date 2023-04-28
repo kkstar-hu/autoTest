@@ -1,5 +1,7 @@
 # -*- coding:utf-8 -*-
 import os
+import weakref
+
 import allure
 import pytest
 from pytest_check import check
@@ -177,6 +179,7 @@ def test_12_rollback(host):
         obj.test_delete_schedule()
     with allure.step("删除大船"):
         obj.test_delete_vessel()
+    print(weakref.ref(obj))
 
 
 

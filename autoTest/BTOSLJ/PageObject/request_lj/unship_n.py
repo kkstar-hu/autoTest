@@ -1,9 +1,11 @@
 import json
+import weakref
+
 from pytest_check import check
 import pytest
 from BTOSLJ.Controls.BTOS_requests import ExcelHandler, RequestMain
 from BTOSLJ.Controls.BTOS_db import GetPg
-from BTOSLJ.Controls.BTOS_data import BTOS_TempData, BTOS_CustomData
+from BTOSLJ.Controls.BTOS_data import BtosTempData, BtosCustomData
 import os
 
 
@@ -17,10 +19,10 @@ class UnshipN(RequestMain):
 
     def __init__(self, host):
         super().__init__(host)
-        self.env = BTOS_TempData(os.path.join(os.path.dirname(__file__) + r"\Excel\test_env_i.txt"))
+        self.env = BtosTempData(os.path.join(os.path.dirname(__file__) + r"\Excel\test_env_i.txt"))
         self.handler = ExcelHandler(os.path.join(os.path.dirname(__file__) + r"\Excel\mainflow.xlsx"))
         self.sheet = self.handler.read_sheet("卸船")
-        self.cus = BTOS_CustomData()
+        self.cus = BtosCustomData()
         self.db = GetPg("10.166.0.137")
 
     def __del__(self):

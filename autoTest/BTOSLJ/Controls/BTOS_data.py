@@ -4,9 +4,10 @@ import string
 import time
 from datetime import datetime, timedelta
 from decimal import Decimal
+import weakref
 
 
-class BTOS_TempData(object):
+class BtosTempData(object):
     _instance = None
 
     # 单例模式
@@ -26,6 +27,8 @@ class BTOS_TempData(object):
             d[key] = value
         self.__dict__.update(d)
         self.file_w = open(self.filename, mode='w', encoding='utf-8')
+        weakref.ref(self, self.__del__())
+
 
     # 获取属性
     def __getattribute__(self, item):
@@ -52,7 +55,7 @@ class BTOS_TempData(object):
         print(vars(self))
 
 
-class BTOS_CustomData(object):
+class BtosCustomData(object):
     _instance = None
         # 单例模式
     def __new__(cls, *args, **kw):
