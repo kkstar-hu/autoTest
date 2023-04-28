@@ -1,0 +1,34 @@
+{
+    "$id": "/api/blj/IOABYGOODSTYPE/DAY",
+    "title": "分货类进出存日报表",
+    "type": "object",
+    "required": ["data", "success"],
+    "properties": {
+        "data": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "wopks": {"type": "integer", "pattern": "^d{1,20}$", "minimum": 0, "description": "今日外贸出件数"},
+                    "nipks": {"type": "integer", "pattern": "^d{1,20}$", "minimum": 0, "description": "今日内贸进件数"},
+                    "nowg": {"type": "number", "pattern": "^d{1,10}(.d{1,3})?$", "minimum": 0, "description": "今日内贸出重量"},
+                    "pckname": {"type": "string", "description": "货类"},
+                    "yestodaynpks": {"type": "integer", "pattern": "^d{1,20}$", "minimum": 0, "description": "上日结存内贸件数"},
+                    "yestodaynwg": {"type": "number", "pattern": "^d{1,10}(.d{1,3})?$", "minimum": 0, "description": "上日结存内贸重量"},
+                    "yestodaywwg": {"type": "number", "pattern": "^d{1,10}(.d{1,3})?$", "minimum": 0, "description": "上日结存外贸重量"},
+                    "yestodaywpks": {"type": "integer", "pattern": "^d{1,20}$", "minimum": 0, "description": "上日结存外贸件数"},
+                    "wiwg": {"type": "number", "pattern": "^d{1,10}(.d{1,3})?$", "minimum": 0, "description": "今日外贸进重量"},
+                    "nopks": {"type": "integer", "pattern": "^d{1,20}$", "minimum": 0, "description": "今日内贸出件数"},
+                    "todaynwg": {"type": "number", "pattern": "^d{1,10}(.d{1,3})?$", "minimum": 0, "description": "本日结存内贸重量"},
+                    "todaywwg": {"type": "number", "pattern": "^d{1,10}(.d{1,3})?$", "minimum": 0, "description": "本日结存外贸重量"},
+                    "wipks": {"type": "integer", "pattern": "^d{1,20}$", "minimum": 0, "description": "今日外贸进件数"},
+                    "niwg": {"type": "number", "pattern": "^d{1,10}(.d{1,3})?$", "minimum": 0, "description": "今日内贸进重量"},
+                    "todaywpks": {"type": "integer", "pattern": "^d{1,20}$", "minimum": 0, "description": "本日结存外贸件数"},
+                    "todaynpks": {"type": "integer", "pattern": "^d{1,20}$", "minimum": 0, "description": "本日结存内贸件数"},
+                    "wowg": {"type": "number", "pattern": "^d{1,10}(.d{1,3})?$", "minimum": 0, "description": "今日外贸出重量"}
+                }
+            }
+        },
+        "success": {"type": "boolean"}
+    }
+}

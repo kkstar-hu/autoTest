@@ -1,14 +1,15 @@
 # -*- coding:utf-8 -*-
 import json
-import json as myjson
 import os
 import time
+import openpyxl
 import requests
 from Commons.log import getlogger
 from requests import exceptions
 from decimal import Decimal
 from jsonschema import validate
 from jsonschema.exceptions import SchemaError, ValidationError
+from copy import copy
 
 
 class RequestMain:
@@ -17,7 +18,7 @@ class RequestMain:
         self.session = requests.session()
         self.logger = getlogger()
         self.host = host
-        if (host == '10.166.0.70'):
+        if (host == '10.166.0.131:20000'):
             self.headers = {
                 'Content-Type': 'application/json',
                 "Authorization": 'Bearer ' + self.get_token()
@@ -45,20 +46,19 @@ class RequestMain:
         except exceptions.RequestException as e:
             self.logger.error("请求失败:", exc_info=True)
         else:
-            if res.status_code == 200:
-                t = Decimal(res.elapsed.total_seconds()).quantize(Decimal("0.001"), rounding="ROUND_HALF_UP")
-                s = "警告:用时较长" if t >= 1 else ""
-                self.logger.info(url + " 用时:{}s {}".format(t, s))
-                return res
-            else:
-                if (params):
+            t = Decimal(res.elapsed.total_seconds()).quantize(Decimal("0.001"), rounding="ROUND_HALF_UP")
+            s = "警告:用时较长" if t >= 1 else ""
+            self.logger.info(method+ ":" + url + " 用时:{}s {}".format(t, s))
+            if res.status_code == 500:
+                if params:
                     payload = params
-                elif (data):
-                    payload = data
-                else:
+                elif json:
                     payload = json
-                self.logger.info("请求错误:%s 状态码:%s\n请求参数:\n%s\n响应内容:\n%s"
-                                 % (url, res.status_code, self.format(payload), self.format(res)))
+                else:
+                    payload = {}
+                self.logger.info("请求错误 %s:%s 状态码:%s\n请求参数:\n%s\n响应内容:\n%s"
+                                 % (method, url, res.status_code, payload, res.text))
+            return res
 
     def __del__(self):
         self.session.close()
@@ -66,24 +66,24 @@ class RequestMain:
     # 格式化json
     def format(self, res):
         if (type(res) != type(dict())):
-            res = myjson.loads(res)
-        return myjson.dumps(res, indent=4, ensure_ascii=False)
+            res = json.loads(res)
+        return json.dumps(res, indent=4, ensure_ascii=False)
 
     def get_token(self):
         payload = {
-            "little_girl": "BAISHIJUN",
-            "little_boy": "q1234567!",
+            "little_girl": "ljadmin",
+            "little_boy": "q1234567",
             "verification": "xxx"
         }
         header = {
             'Content-Type': 'application/json'
         }
         try:
-            res = self.request_main("post", "/auth/saas/authorization/login/simple", headers=header, json=payload)
+            res = self.request_main("POST", "/auth/saas/authorization/login/simple", headers=header, json=payload)
         except exceptions.RequestException as e:
             self.logger.error("获取token失败:", exc_info=True)
         else:
-            return myjson.loads(res)["data"]["access_token"]
+            return json.loads(res.text)["data"]["access_token"]
 
     def generate_schema(cls, data: dict):
         schema = {"type": "object", "properties": {}}
@@ -109,10 +109,10 @@ class RequestMain:
     def save_schema(self, data: dict, path: str):
         try:
             if (type(data) != type(dict())):
-                data = myjson.loads(data)
+                data = json.loads(data)
             schema = self.generate_schema(data)
             with open(path, 'w', encoding='utf-8') as f:
-                myjson.dump(schema, f, indent=4)
+                json.dump(schema, f, indent=4)
         except FileNotFoundError:
             self.logger.error("文件不存在:%s" % path, exc_info=True)
         else:
@@ -144,15 +144,70 @@ class RequestMain:
             return True
 
 
-if __name__ == "__main__":
-    myrequest = RequestMain(host="10.116.8.16:8520")
-    params = {
-        "workdate": "2023-03-24",
-        "tenant_id": "SIPGLJ"
-    }
 
-    res = myrequest.request_main("get", "/api/blj/DAYNIGHTWORKHOUR/DAY", params=params)
-    schema = myrequest.generate_schema(myjson.loads(res))
-    print(myrequest.format(schema))
-    print(myrequest.check_json(res, schema))
-    # myrequest.load_json("1.json")
+class ExcelHandler:
+    def __init__(self, file):
+        self.file = file
+        self.wb = openpyxl.load_workbook(self.file)
+
+    def open_sheet(self, sheet_name):
+        """
+        获取sheet对象
+        :param sheet_name:
+        :return:
+        """
+        sheet = self.wb[sheet_name]
+        return sheet
+
+    def get_header(self, sheet_name):
+        """
+        获取sheet表头
+        :param sheet_name:
+        :return:
+        """
+        sh = self.open_sheet(sheet_name)
+        header = []
+        # 遍历第一行
+        for i in sh[1]:
+            # 将遍历出来的表头字段加入列表
+            header.append(i.value)
+        return header
+
+    def read_sheet(self, sheet_name):
+        """
+        读取sheet的全部数据
+        :param sheet_name: 表格sheet名称
+        :return: dict
+        """
+        sheet = self.open_sheet(sheet_name)
+        rows = list(sheet.rows)
+        data = []
+        data_dict = None
+        for row in rows[1:]:
+            row_data = []
+            for cell in row:
+                row_data.append(cell.value)
+                data_dict = dict(zip(self.get_header(sheet_name), row_data))
+            data.append(data_dict)
+        return data
+
+    def write_sheet(self, sheet_name, row, column, data):
+        """
+        写入单元格
+        :param sheet_name: 表格sheet名称
+        :param row: 单元格行号
+        :param column: 单元格列号
+        :param data: 待写入单元格的值
+        :return:
+        """
+        sheet = self.wb[sheet_name]
+        cell = sheet.cell(row=row, column=column)
+        new_cell = sheet.cell(row=row, column=column, value=data)
+        if cell.has_style:
+            new_cell._style = copy(cell._style)
+        self.wb.save(self.file)
+
+    def __del__(self):
+        self.wb.close()
+
+

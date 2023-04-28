@@ -17,7 +17,7 @@ class GetPg():
         self.engine = None
         try:
             if (host == "10.166.0.137"):
-                self.engine = create_engine('postgres://%s:%s@%s:%s/%s?charset=utf8'
+                self.engine = create_engine('postgresql://%s:%s@%s:%s/%s'
                                             % ("btops", "tCXd#0DWK-brIk", "10.166.0.137", "6432", "btopsdb"))
             elif (host == "10.116.8.20"):
                 self.engine = create_engine('mysql+pymysql://%s:%s@%s:%s/%s?charset=utf8'
@@ -52,7 +52,8 @@ class GetPg():
     # 仅用于select
     def select_from_table(self, sql: str):
         sql = text(sql)
-        return pd.read_sql(sql, self.conn)
+        res = pd.read_sql(sql, self.conn)
+        return res
 
     def load_sql(self, filename: str):
         try:
@@ -72,3 +73,8 @@ class GetPg():
         if (type(res) != type(dict())):
             res = json.loads(res)
         return res
+
+
+
+
+
