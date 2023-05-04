@@ -1,5 +1,5 @@
 from Base.basepage import BasePage
-from GTOS.Controls.text import Gtos_text
+from GTOSXM.Controls.text import Gtos_text
 
 
 class CloseFlight(BasePage):

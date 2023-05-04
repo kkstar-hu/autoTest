@@ -176,7 +176,7 @@ class Structure_Monitoring(BasePage):
         离泊，桥吊完工操作
         """
         self.logger.info('有结构船舶监控-桥吊完工')
-        self.click('x', "//span[text()='作业路']")
+        self.click('x', "(//span[text()='作业路'])[2]")
         time.sleep(0.5)
         self.click('x', "//span[text()='作业路管理']")
         tablecheck1 = Gtos_table(self.driver)

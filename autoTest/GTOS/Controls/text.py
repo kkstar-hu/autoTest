@@ -1,3 +1,5 @@
+import time
+
 from selenium.common import NoSuchElementException
 from selenium.webdriver import ActionChains
 from Base.basepage import BasePage

@@ -60,32 +60,17 @@ class Interface_Page(BasePage):
 
         assert faxiang.json()['result'] == 0
 
-    # @pytest.mark.skipif
+
     def interface_getboxno(self, boxnumber):
         """查箱id"""
+        box_id_json = {"commonSearch": {"QueryType": ["IYC"], "CtnNos": [f"{boxnumber}"], "Termcode": ["XRCT"]}}
         req = RequestHandler()
-        with open((os.path.join(os.getcwd(), 'json', 'boxID.json')), 'rb') as a:
-            file_a = json.load(a)
-            file_a['commonSearch']['CtnNos'] = [f'{boxnumber}']
-            with open((os.path.join(os.getcwd(), 'json', 'boxID.json')), 'w') as b:
-                json.dump(file_a, b)
-        boxid = req.visit('post',
-                          url=read_yaml(os.path.join(os.getcwd(), '../Interface_Test/interface.yaml'))[0]['箱号url'],
-                          data=json.dumps(read_json(os.path.join(os.getcwd(), 'json', 'boxID.json'))),
-                          headers=configinterface.head)
-        for i in boxid.json()['data']:
-            with open((os.path.join(os.getcwd(), 'json', 'peizai.json')), 'rb') as f:
-                file = json.load(f)
-                for j in file['StowageContainers']:
-                    j['ContainerID'] = i['ContainerID']
-                    with open((os.path.join(os.getcwd(), 'json', 'peizai.json')), 'w') as r:
-                        json.dump(file, r)
-            with open((os.path.join(os.getcwd(), 'json', 'zhuangchuanfaxiang.json')), 'rb') as zf:
-                file_zf = json.load(zf)
-                file_zf['cntrID'] = i['ContainerID']
-                with open((os.path.join(os.getcwd(), 'json', 'zhuangchuanfaxiang.json')), 'w') as zr:
-                    json.dump(file_zf, zr)
-        self.ShipID(boxnumber)
+        response = req.visit('post', url=configinterface.url+"/api/generic/portal?nameSpace=SHB.Cloud.TOS.DMS.Contract.Query&className=IQuery&methodName=QueryCtnInOutHistories",
+                              json=box_id_json, headers=configinterface.head)
+        print(response.json())
+        boxid=response.json()['data'][0]['ContainerID']
+        voyid=response.json()['data'][0]['ExportVoyageID']
+        return boxid, voyid
 
     # @pytest.mark.skipif
     def interface_getsendboxno(self, boxnumber):

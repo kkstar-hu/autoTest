@@ -1,13 +1,13 @@
-url = 'http://apserver.cloudtos.com/api/auth'
-
+loginurl = 'http://apserver.cloudtos-xm.com/api/auth'
+url = 'http://apserver.cloudtos-xm.com'
 BodyXICT = {
     "useraccount" : "admin",
     "password" : "77B7707169951B7246393E8395FB656C",
     "ExtendProperties": {"OP_TERMCD": "XICT"}
 }
 
-BodyXRCT = {
-    "useraccount" : "admin",
+BodyXRCT = {                                         # β环境账号密码
+    "useraccount" : "autotest",
     "password" : "77B7707169951B7246393E8395FB656C",
     "ExtendProperties" : {"OP_TERMCD":"XRCT"}
 }

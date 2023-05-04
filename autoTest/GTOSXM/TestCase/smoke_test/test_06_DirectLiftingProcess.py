@@ -14,8 +14,6 @@ from GTOSXM.PageObject.Acceptance_Plan.Pick_up_Acceptance import Packing_up
 from GTOSXM.PageObject.CrossingManagement.carOut import Car_Out
 
 
-# @pytest.mark.skipif
-# @pytest.mark.parametrize("input", read_yaml('direct_liftin_process.yaml'))
 @allure.story('6.直提流程')
 @allure.title('1、新增舱单计划')
 @pytest.mark.parametrize("input",
@@ -25,27 +23,15 @@ def testManifest(driver, input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("资料管理,进口资料,舱单")
     manifest = Manifest(driver)
+    manifest.search()
     manifest.AddManifest(input, config.boxNumberTwo)
-
-
-# @pytest.mark.skipif
-# @pytest.mark.parametrize("input", read_yaml('direct_liftin_process.yaml'))
-@allure.story('6.直提流程')
-@allure.title('2、新增提箱计划')
-@pytest.mark.parametrize("input",
-                         read_yaml(os.path.join(os.getcwd(), '06_DirectLiftingProcess', 'direct_liftin_process.yaml')))
-def testManifest_box(driver, input):
-    """新增舱单箱资料"""
-    manifest = Manifest(driver)
     manifest.AddBox(input, config.boxNumberTwo)
     manifest.choice_ship()
     Tag(driver).closeTagGtos('舱单')
 
 
-# @pytest.mark.skipif
-# @pytest.mark.parametrize("input", read_yaml('direct_liftin_process.yaml'))
 @allure.story('6.直提流程')
-@allure.title('3、生成直提计划')
+@allure.title('2、生成直提计划')
 @pytest.mark.parametrize("input",
                          read_yaml(os.path.join(os.getcwd(), '06_DirectLiftingProcess', 'direct_liftin_process.yaml')))
 def testPacking(driver, input):
@@ -63,10 +49,8 @@ def testPacking(driver, input):
     Tag(driver).closeTagGtos('提箱受理')
 
 
-# @pytest.mark.skipif
-# @pytest.mark.parametrize("input", read_yaml('direct_liftin_process.yaml'))
 @allure.story('6.直提流程')
-@allure.title('4、直提报到')
+@allure.title('3、直提报到')
 @pytest.mark.parametrize("input",
                          read_yaml(os.path.join(os.getcwd(), '06_DirectLiftingProcess', 'direct_liftin_process.yaml')))
 def testDirectLoading(driver, input):
@@ -80,10 +64,8 @@ def testDirectLoading(driver, input):
     Tag(driver).closeTagGtos('直装/直提管理')
 
 
-# @pytest.mark.skipif
-# @pytest.mark.parametrize("input", read_yaml('direct_liftin_process.yaml'))
 @allure.story('6.直提流程')
-@allure.title('5、无结构船舶监控允许直提')
+@allure.title('4、无结构船舶监控允许直提')
 @pytest.mark.parametrize("input",
                          read_yaml(os.path.join(os.getcwd(), '06_DirectLiftingProcess', 'direct_liftin_process.yaml')))
 def testLifting(driver, input):
@@ -95,10 +77,8 @@ def testLifting(driver, input):
     Tag(driver).closeTagGtos('无结构船舶监控')
 
 
-# @pytest.mark.skipif
-# @pytest.mark.parametrize("input", read_yaml('direct_liftin_process.yaml'))
 @allure.story('6.直提流程')
-@allure.title('6、工作指令卸船确认')
+@allure.title('5、工作指令卸船确认')
 @pytest.mark.parametrize("input",
                          read_yaml(os.path.join(os.getcwd(), '06_DirectLiftingProcess', 'direct_liftin_process.yaml')))
 def testOrder(driver, input):
@@ -112,8 +92,6 @@ def testOrder(driver, input):
     Tag(driver).closeTagGtos('作业指令监控')
 
 
-# @pytest.mark.skipif
-# @pytest.mark.parametrize("input", read_yaml('direct_liftin_process.yaml'))
 @allure.title('7、车辆出场')
 @allure.story('6.直提流程')
 @pytest.mark.parametrize("input",

@@ -79,9 +79,9 @@ def testJob(driver, input):
     menu.select_level_Menu("机械控制,作业指令监控")
     charge_car = Job_Order_Monitoring(driver)
     charge_car.Retrieve(input, config.importNumber, config.boxNumber)
-    #charge_car.order_info_check_new(input, config.boxNumber)
-    #charge_car.charge_car(input)
-    #charge_car.discharging_confirm(input)
+    charge_car.order_info_check_new(input, config.boxNumber)
+    charge_car.charge_car(input)
+    charge_car.discharging_confirm(input)
     charge_car.closed_box(input)
     Tag(driver).closeTagGtos('作业指令监控')
 

@@ -11,13 +11,19 @@ class Manifest(BasePage):
     进口资料
     """
 
-    def AddManifest(self, input, boxnumber):
+    def search(self):
         """
         新增舱单
         """
         textinput = Gtos_text(self.driver)
         textinput.search_select_by_label('进口船名航次', config.importNumber)
         self.click('xpath', "//span[text()='检索']")
+
+    def AddManifest(self, input, boxnumber):
+        """
+        新增舱单
+        """
+        textinput = Gtos_text(self.driver)
         try:
             if self.get_alert_text() == '未找到相关舱单信息':
                 self.close_alert('未找到相关舱单信息')
@@ -79,6 +85,8 @@ class Manifest(BasePage):
         """
         try:
             self.logger.info('舱单-新增舱单箱信息' + boxnumber)
+            tablecheck = Gtos_table(self.driver, 1)
+            tablecheck.select_row("提单号",boxnumber)
             textinput = Gtos_text(self.driver)
             self.click("xpath", "(//div[@id='add'])[2]")
             time.sleep(1)

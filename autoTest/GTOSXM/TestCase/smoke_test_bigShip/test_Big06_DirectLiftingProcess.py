@@ -15,17 +15,7 @@ from Commons.yamlread import read_yaml
 from GTOSXM.PageObject.Acceptance_Plan.Pick_up_Acceptance import Packing_up
 from GTOSXM.PageObject.CrossingManagement.carOut import Car_Out
 
-req = RequestHandler()
-login_res = req.visit("post", url=configinterface.url, json=configinterface.BodyXRCT)
-login_text = login_res.json()
-assert login_text['result'] == 0
-a = login_text['data']['Token']
-Authorization = 'Bearer ' + a
-configinterface.head['Authorization'] = a
 
-
-# @pytest.mark.skipif
-# @pytest.mark.parametrize("input", read_yaml('direct_liftin_process.yaml'))
 @allure.story('6.大船直提流程')
 @allure.title('1、新增舱单计划')
 @pytest.mark.parametrize("input",
@@ -35,27 +25,15 @@ def testManifest(driver, input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("资料管理,进口资料,舱单")
     manifest = Manifest(driver)
+    manifest.search()
     manifest.AddManifest(input, config.boxNumberTwo)
-
-
-# @pytest.mark.skipif
-# @pytest.mark.parametrize("input", read_yaml('direct_liftin_process.yaml'))
-@allure.story('6.大船直提流程')
-@allure.title('2、新增提箱计划')
-@pytest.mark.parametrize("input",
-                         read_yaml(os.path.join(os.getcwd(), '06_DirectLiftingProcess', 'direct_liftin_process.yaml')))
-def testManifest_box(driver, input):
-    """新增舱单箱资料"""
-    manifest = Manifest(driver)
     manifest.AddBox(input, config.boxNumberTwo)
     manifest.choice_ship()
     Tag(driver).closeTagGtos('舱单')
 
 
-# @pytest.mark.skipif
-# @pytest.mark.parametrize("input", read_yaml('direct_liftin_process.yaml'))
 @allure.story('6.大船直提流程')
-@allure.title('3、生成直提计划')
+@allure.title('2、生成直提计划')
 @pytest.mark.parametrize("input",
                          read_yaml(os.path.join(os.getcwd(), '06_DirectLiftingProcess', 'direct_liftin_process.yaml')))
 def testPacking(driver, input):
@@ -73,10 +51,8 @@ def testPacking(driver, input):
     Tag(driver).closeTagGtos('提箱受理')
 
 
-# @pytest.mark.skipif
-# @pytest.mark.parametrize("input", read_yaml('direct_liftin_process.yaml'))
 @allure.story('6.大船直提流程')
-@allure.title('4、直提报到')
+@allure.title('3、直提报到')
 @pytest.mark.parametrize("input",
                          read_yaml(os.path.join(os.getcwd(), '06_DirectLiftingProcess', 'direct_liftin_process.yaml')))
 def testDirectLoading(driver, input):
@@ -92,7 +68,7 @@ def testDirectLoading(driver, input):
 
 # @pytest.mark.skipif
 @allure.story('6.大船直提流程')
-@allure.title('5、箱校验安排箱位置')
+@allure.title('4、箱校验安排箱位置')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '01_DataProcess', 'immediata_plan.yaml')))
 def testSImport_data_verification(driver, input):
     """进口资料校验-安排位置"""
@@ -100,12 +76,10 @@ def testSImport_data_verification(driver, input):
     menu.select_level_Menu("资料管理,进口资料,进口资料校验")
     idv = Import_data_verification(driver)
     idv.retrieval()
-    idv.verification('010982')
+    idv.verification('010382')
     Tag(driver).closeTagGtos('进口资料校验')
 
 
-# @pytest.mark.skipif
-# @pytest.mark.parametrize("input", read_yaml('direct_liftin_process.yaml'))
 @allure.story('6.大船直提流程')
 @allure.title('6、有结构船舶监控允许直提')
 @pytest.mark.parametrize("input",
@@ -130,8 +104,6 @@ def testLifting(driver, input):
     Tag(driver).closeTagGtos('有结构船舶监控')
 
 
-# @pytest.mark.skipif
-# @pytest.mark.parametrize("input", read_yaml('direct_liftin_process.yaml'))
 @allure.story('6.大船直提流程')
 @allure.title('7、工作指令卸船确认')
 @pytest.mark.parametrize("input",
@@ -147,8 +119,6 @@ def testOrder(driver, input):
     Tag(driver).closeTagGtos('作业指令监控')
 
 
-# @pytest.mark.skipif
-# @pytest.mark.parametrize("input", read_yaml('direct_liftin_process.yaml'))
 @allure.story('6.大船直提流程')
 @allure.title('8、车辆出场')
 @pytest.mark.parametrize("input",

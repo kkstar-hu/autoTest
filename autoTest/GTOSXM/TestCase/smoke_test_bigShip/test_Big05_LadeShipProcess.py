@@ -2,9 +2,9 @@ import json
 import os
 import allure
 import pytest as pytest
+import pytest_check as check
 from Base.baseinterface import RequestHandler
 from Commons.Controls.tag import Tag
-from Commons.jsonread import read_json
 from Commons.yamlread import read_yaml
 from GTOSXM.Config import config, configinterface
 from GTOSXM.PageObject.Control_Ship.Structure_Monitoring import Structure_Monitoring
@@ -16,7 +16,7 @@ from GTOSXM.PageObject.gtos_menu import GtosMenu
 from GTOSXM.TestCase.Interface_Test.InterfacePage import Interface_Page
 
 req = RequestHandler()
-login_res = req.visit("post", url=configinterface.url, json=configinterface.BodyXRCT)
+login_res = req.visit("post", url=configinterface.loginurl, json=configinterface.BodyXRCT)
 login_text = login_res.json()
 assert login_text['result'] == 0
 a = login_text['data']['Token']
@@ -48,14 +48,17 @@ def testship_stowage(driver, input):
     stowage.Retrieve(input)
     stowage.mouse_job()
     htps = Interface_Page(driver)
-    # 修改船箱位接口
-    htps.modify_position('010582')
     # 配载接口
-    htps.interface_getboxno(config.outBoxNumber)
-    peizai = req.visit('post', url=read_yaml(os.path.join('../Interface_Test', 'interface.yaml'))[0]['配载url'],
-                       data=json.dumps(read_json(os.path.join(os.getcwd(), '../Interface_Test/json', 'peizai.json'))),
+    boxid = htps.interface_getboxno(config.outBoxNumber)[0]
+    voyid = htps.interface_getboxno(config.outBoxNumber)[1]
+    peizaijson={"LogID": 0, "VoyID": voyid, "StowageMode": "1", "Direction": "2",
+     "StowageLocs": [{"VoyID": voyid, "VLocation": "010582", "BigNo": "02", "SeqNo": 1, "HatchID": 143473}],
+     "StowageContainers": [{"ContainerID": boxid}]}
+    peizai = req.visit('post', url=configinterface.url+"/api/vesselload/Stowage",
+                       json=peizaijson,
                        headers=configinterface.head)
-    print(peizai.json())
+    check.equal
+
     stowage.mouse_job_once()
     stowage.send_box()
     Tag(driver).closeTagGtos('有结构船舶配载')
@@ -108,7 +111,7 @@ def testship_order(driver, input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("机械控制,作业指令监控")
     work = Job_Order_Monitoring(driver)
-    work.Retrieve(input, config.outportNumber, config.outBoxNumber)
+    work.Retrieve(input,shipname=None,boxnumber=config.outBoxNumber)
     work.order_info_check(input, config.outBoxNumber)
     work.charge_car(input)
     work.send_box(input)

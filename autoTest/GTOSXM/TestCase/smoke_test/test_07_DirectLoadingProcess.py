@@ -15,8 +15,6 @@ from GTOSXM.PageObject.CrossingManagement.StraightLoad_StraightLif_tManagement i
     StraightLoad_StraightLift_Management
 
 
-# @pytest.mark.skipif
-# @pytest.mark.parametrize("input", read_yaml('direct_loadingp_rocess.yaml'))
 @allure.story('7.直装流程')
 @allure.title('1、新建进场直装计划')
 @pytest.mark.parametrize("input",
@@ -34,8 +32,6 @@ def testAddPlan(driver, input):
     Tag(driver).closeTagGtos('进箱受理')
 
 
-# @pytest.mark.skipif
-# @pytest.mark.parametrize("input", read_yaml('direct_loadingp_rocess.yaml'))
 @allure.story('7.直装流程')
 @allure.title('2、码头人放行')
 @pytest.mark.parametrize("input",
@@ -49,8 +45,6 @@ def testWharfrelease(driver, input):
     Tag(driver).closeTagGtos('装船箱放行')
 
 
-# @pytest.mark.skipif
-# @pytest.mark.parametrize("input", read_yaml('direct_loadingp_rocess.yaml'))
 @allure.story('7.直装流程')
 @allure.title('3、无结构船舶配载')
 @pytest.mark.parametrize("input",
@@ -66,8 +60,6 @@ def testNoStowage(driver, input):
     Tag(driver).closeTagGtos('无结构船舶配载')
 
 
-# @pytest.mark.skipif
-# @pytest.mark.parametrize("input", read_yaml('direct_loadingp_rocess.yaml'))
 @allure.story('7.直装流程')
 @allure.title('4、直装/直提管理')
 @pytest.mark.parametrize("input",
@@ -85,7 +77,6 @@ def testDirectLoading(driver, input):
 # @pytest.mark.skipif
 @allure.story('7.直装流程')
 @allure.title('5、无结构监控允许直装')
-# @pytest.mark.parametrize("input", read_yaml('direct_loadingp_rocess.yaml'))
 @pytest.mark.parametrize("input",
                          read_yaml(os.path.join(os.getcwd(), '07_DirectLoadingProcess', 'direct_loadingp_rocess.yaml')))
 def testSend_box(driver, input):
@@ -100,7 +91,6 @@ def testSend_box(driver, input):
 # @pytest.mark.skipif
 @allure.story('7.直装流程')
 @allure.title('6、工作指令操作')
-# @pytest.mark.parametrize("input", read_yaml('direct_loadingp_rocess.yaml'))
 @pytest.mark.parametrize("input",
                          read_yaml(os.path.join(os.getcwd(), '07_DirectLoadingProcess', 'direct_loadingp_rocess.yaml')))
 def testOrder(driver, input):

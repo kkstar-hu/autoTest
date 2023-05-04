@@ -84,7 +84,7 @@ def testStockpiling_Planning_out(driver, input):
     menu.select_level_Menu("堆场策划,堆存,堆存计划")
     stockpiling = Stockpiling_Planning(driver)
     stockpiling.search("卸船", config.importNumber)
-    stockpiling.close_alert('未找到相关堆存计划')
+    #stockpiling.close_alert('未找到相关堆存计划')
     stockpiling.Add_into_plan()
     stockpiling.Add_box_OUT()
     Tag(driver).closeTagGtos('堆存计划')
