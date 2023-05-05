@@ -12,7 +12,7 @@ if __name__ == '__main__':
         "device-name": platform.node(),
         "operating-system": platform.platform(),
         "python version": platform.python_version(),
-        "host": "10.166.0.131:20000",
+        "host": "10.166.0.131:20000"
     }
     allurechange.set_environment(environment)
     os.system('allure generate Report/result -o Report/html --clean')

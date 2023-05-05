@@ -14,50 +14,45 @@ from copy import copy
 
 class RequestMain:
 
-    def __init__(self, host=None):
+    def __init__(self, host=None, headers=None):
         self.session = requests.session()
         self.logger = getlogger()
         self.host = host
-        if (host == '10.166.0.131:20000'):
-            self.headers = {
-                'Content-Type': 'application/json',
-                "Authorization": 'Bearer ' + self.get_token()
-            }
-        if (host == '10.116.8.16:8520'):
-            self.headers = {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
+        self.header = headers
 
     def request_main(self, method, url, params=None, data=None, json=None, headers=None, **kwargs):
         """
-            :param method: 请求方式
-	        :param url: 请求地址
-	        :param params: 字典作为参数增加到url中
-			:param data: Request传参, 字典格式
-	        :param json: Request传参, json格式
-	        :param headers: 请求头，字典格式
-	        :param kwargs: 若还有其他的参数，使用可变参数字典形式进行传递
-	        :return: 响应内容的文本
-	    """
+        :param method: 请求方式
+        :param url: 请求地址
+        :param params: 字典作为参数增加到url中
+        :param data: Request传参, 字典格式
+        :param json: Request传参, json格式
+        :param headers: 请求头，字典格式
+        :param kwargs: 若还有其他的参数，使用可变参数字典形式进行传递
+        :return: 响应内容的文本
+        """
         try:
-            header = self.headers if headers == None else headers
+            # header = self.headers if headers is None else headers
             res = self.session.request(method, "http://" + self.host + url, params=params, data=data, json=json,
-                                       headers=header, **kwargs)
+                                       headers=self.header, **kwargs)
         except exceptions.RequestException as e:
             self.logger.error("请求失败:", exc_info=True)
         else:
-            t = Decimal(res.elapsed.total_seconds()).quantize(Decimal("0.001"), rounding="ROUND_HALF_UP")
-            s = "警告:用时较长" if t >= 1 else ""
-            self.logger.info(method+ ":" + url + " 用时:{}s {}".format(t, s))
-            if res.status_code == 500:
+            if res.status_code == 200:
+                t = Decimal(res.elapsed.total_seconds()).quantize(Decimal("0.001"), rounding="ROUND_HALF_UP")
+                s = "警告:用时较长" if t >= 1 else ""
+                self.logger.info(method + ":" + url + " 用时:{}s {}".format(t, s))
+            elif res.status_code == 500:
                 if params:
                     payload = params
                 elif json:
                     payload = json
                 else:
                     payload = {}
-                self.logger.info("请求错误 %s:%s 状态码:%s\n请求参数:\n%s\n响应内容:\n%s"
-                                 % (method, url, res.status_code, payload, res.text))
+                self.logger.error("%s:%s 状态码:%s\n请求参数:\n%s\n响应内容:\n%s"
+                                  % (method, url, res.status_code, payload, res.text))
+            else:
+                self.logger.error("%s:%s 状态码:%s" % (method, url, res.status_code), exc_info=True)
             return res
 
     def __del__(self):
@@ -65,7 +60,7 @@ class RequestMain:
 
     # 格式化json
     def format(self, res):
-        if (type(res) != type(dict())):
+        if type(res) != type(dict()):
             res = json.loads(res)
         return json.dumps(res, indent=4, ensure_ascii=False)
 
@@ -108,7 +103,7 @@ class RequestMain:
 
     def save_schema(self, data: dict, path: str):
         try:
-            if (type(data) != type(dict())):
+            if isinstance(data, dict):
                 data = json.loads(data)
             schema = self.generate_schema(data)
             with open(path, 'w', encoding='utf-8') as f:
@@ -129,9 +124,9 @@ class RequestMain:
 
     def check_json(self, res_json: dict, schema: dict):
         try:
-            if (type(res_json) != type(dict())):
+            if isinstance(res_json, dict):
                 res_json = json.loads(res_json)
-            if (type(schema) != type(dict())):
+            if isinstance(schema, dict):
                 schema = json.loads(schema)
             validate(instance=res_json, schema=schema)
         except SchemaError:
@@ -142,7 +137,6 @@ class RequestMain:
             return False
         else:
             return True
-
 
 
 class ExcelHandler:
@@ -209,5 +203,3 @@ class ExcelHandler:
 
     def __del__(self):
         self.wb.close()
-
-
