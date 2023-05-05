@@ -1,6 +1,8 @@
 import os
+import sys
+
 import pytest
-import urllib3
+sys.path.append(os.path.join(os.getcwd(), "../../../"))
 
 from Commons import allurechange
 
