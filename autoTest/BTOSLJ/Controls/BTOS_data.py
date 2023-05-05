@@ -1,10 +1,9 @@
 # -*- coding:utf-8 -*-
+import atexit
 import random
 import string
 import time
 from datetime import datetime, timedelta
-from decimal import Decimal
-import weakref
 
 
 class BtosTempData(object):
@@ -17,18 +16,20 @@ class BtosTempData(object):
         return cls._instance
 
     def __init__(self, filename=None):
+        self.file_w = None
+        # print("实例对象创建:Tempdata", id(self))
+        atexit.register(self.record)
         self.filename = filename
         self.file_obj = open(self.filename, mode='r', encoding='utf-8')
         data = self.file_obj.read().splitlines()
         self.file_obj.close()
         d = dict()
         for line in data:
-            key, value = line.split('=')
-            d[key] = value
+            l = line.split('=')
+            if len(l) == 2:
+                key, value = l
+                d[key] = value
         self.__dict__.update(d)
-        self.file_w = open(self.filename, mode='w', encoding='utf-8')
-        weakref.ref(self, self.__del__())
-
 
     # 获取属性
     def __getattribute__(self, item):
@@ -43,11 +44,13 @@ class BtosTempData(object):
         object.__delattr__(self, item)
 
     # 存储变量
-    def __del__(self):
+    def record(self):
+        self.file_w = open(self.filename, mode='w', encoding='utf-8')
         for (key, value) in self.__dict__.items():
             if key != 'filename' and key != 'file_obj' and key != 'file_w':
-                self.file_w.write(str(key)+'='+str(value)+'\n')
+                self.file_w.write(str(key) + '=' + str(value) + '\n')
         self.file_w.close()
+        # print("实例对象销毁:Tempdata", id(self))
 
     # 打印变量
     @property
@@ -146,6 +149,4 @@ class BtosCustomData(object):
         return (datetime.strptime(time, "%Y-%m-%d %H:%M:%S")).strftime("%Y-%m-%d 00:00:00")
 
 
-if __name__ == '__main__':
-    c = BTOS_CustomData()
-    t = BTOS_TempData()
+
