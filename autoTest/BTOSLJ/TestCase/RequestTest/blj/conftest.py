@@ -1,12 +1,11 @@
 # -*- coding:utf-8 -*-
 import os
 import allure
-from selenium import webdriver
 import pytest
-from BTOSLJ.PageObject.login import Login
 
 server_host = None
 db_host = None
+
 
 @pytest.fixture(scope="session")
 def server_host():

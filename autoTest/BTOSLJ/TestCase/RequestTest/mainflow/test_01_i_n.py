@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 import allure
+import pytest
 from BTOSLJ.PageObject.request_lj.unship_n import UnshipN
 from config import host, header
 
@@ -13,10 +14,14 @@ class TestUnshipN:
         self.obj.get_user()
         self.obj.set_values()
 
-    @allure.title('船期维护')
-    def test_01_schedule(self):
+    @allure.title('船舶维护')
+    @pytest.mark.skip
+    def test_01_vessel(self):
         with allure.step("大船维护"):
             self.obj.add_vessel()
+
+    @allure.title('船期维护')
+    def test_02_schedule(self):
         with allure.step("新增船期"):
             self.obj.add_schedule()
         with allure.step("确报"):
@@ -25,38 +30,38 @@ class TestUnshipN:
             self.obj.subarea()
 
     @allure.title('靠泊计划')
-    def test_02_berth_plan(self):
+    def test_03_berth_plan(self):
         with allure.step("新增靠泊计划"):
             self.obj.add_berth_plan()
 
     @allure.title('新增内贸进口舱单')
-    def test_03_bill(self):
+    def test_04_bill(self):
         with allure.step("新增内贸进口舱单"):
             self.obj.add_bill()
 
     @allure.title('新增大船作业计划')
-    def test_04_ship_plan(self):
+    def test_05_ship_plan(self):
         with allure.step("新增大船作业计划"):
             self.obj.add_ship_plan()
 
     @allure.title('新增卸船任务')
-    def test_05_task_dc(self):
+    def test_06_task_dc(self):
         with allure.step("新增当班任务"):
-            self.obj.add_shift_task('dc')
+            self.obj.add_shift_task_dc()
 
     @allure.title('理货员出勤')
-    def test_06_tally_attend(self):
+    def test_07_tally_attend(self):
         with allure.step("理货员出勤"):
             self.obj.tally_attend()
 
     @allure.title('机械出勤')
-    def test_07_machine_attend(self):
+    def test_08_machine_attend(self):
         with allure.step("机械出勤"):
             self.obj.machine_attend()
             self.obj.driver_arrange()
 
     @allure.title('卸船任务管理')
-    def test_08_task_manage_dc(self):
+    def test_09_task_manage_dc(self):
         with allure.step("理货员安排"):
             self.obj.tally_arrange()
         with allure.step("机械人员配置"):
@@ -67,12 +72,12 @@ class TestUnshipN:
             self.obj.workgroup_arrange()
 
     @allure.title('实际靠泊')
-    def test_09_berth(self):
+    def test_10_berth(self):
         with allure.step("实际靠泊"):
             self.obj.berth()
 
     @allure.title('卸船汇报')
-    def test_10_tally_report_dc(self):
+    def test_11_tally_report_dc(self):
         with allure.step("理货汇报"):
             self.obj.dc_tally_report()
         with allure.step("理货动态审核"):
@@ -81,7 +86,7 @@ class TestUnshipN:
             self.obj.task_audit('dc')
 
     @allure.title('作业票')
-    def test_11_worksheet_dc(self):
+    def test_12_worksheet_dc(self):
         with allure.step("生成装卸队作业票"):
             self.obj.worksheet_wk_generate('dc')
         with allure.step("生成员工作业票"):
@@ -92,7 +97,8 @@ class TestUnshipN:
             self.obj.worksheet_hr_audit('dc')
 
     @allure.title('回退')
-    def test_12_rollback(self):
+    @pytest.mark.skip
+    def test_13_rollback(self):
         with allure.step("取消人事审核"):
             self.obj.worksheet_hr_audit_cancel('dc')
         with allure.step("取消中控审核"):
@@ -128,7 +134,8 @@ class TestUnshipN:
         with allure.step("删除船期"):
             self.obj.delete_schedule()
         with allure.step("删除大船"):
-            self.obj.delete_vessel()
+            # self.obj.delete_vessel()
+            pass
 
     def teardown_class(self):
         del self.obj

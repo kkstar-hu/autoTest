@@ -56,23 +56,24 @@ class BtosTempData(object):
     @property
     def print_data(self):
         print(vars(self))
+        return 0
 
 
 class BtosCustomData(object):
     _instance = None
-        # 单例模式
+
     def __new__(cls, *args, **kw):
         if cls._instance is None:
             cls._instance = object.__new__(cls)
         return cls._instance
 
     def __init__(self):
-        self.pktype = self.dict_pktype()
+        self.pktype = self.dict_pktype
         self.billno = 1
         self.markno = 1
 
-    @staticmethod
-    def dict_pktype():
+    @property
+    def dict_pktype(self):
         d = dict()
         d["041303"] = "11"
         d["124"] = "14"
@@ -98,6 +99,7 @@ class BtosCustomData(object):
     def get_Ivoyage(self):
         return "B" + time.strftime('%m%d', time.localtime(time.time())) + "I"
 
+    @property
     def get_Evoyage(self):
         return "B" + time.strftime('%m%d', time.localtime(time.time())) + "E"
 
@@ -126,11 +128,11 @@ class BtosCustomData(object):
 
     @property
     def get_gtwg(self):
-        return random.randint(200, 8000)
+        return round(random.uniform(200, 8000), 3)
 
     @property
     def get_gtpks(self):
-        return random.randint(100, 3000)
+        return random.randint(10, 3000)
 
     @property
     def get_gtvol(self):
@@ -140,13 +142,28 @@ class BtosCustomData(object):
     def get_datetime_now(self):
         return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-
-    def get_datetime_add(self, time, day=0, hour=0, minute=0):
-        return (datetime.strptime(time, "%Y-%m-%d %H:%M:%S") + timedelta(days=day, hours=hour, minutes=minute))\
+    @staticmethod
+    def get_datetime_add(t, day=0, hour=0, minute=0):
+        return (datetime.strptime(t, "%Y-%m-%d %H:%M:%S") + timedelta(days=day, hours=hour, minutes=minute)) \
             .strftime("%Y-%m-%d %H:%M:%S")
 
-    def to_date(self, time):
-        return (datetime.strptime(time, "%Y-%m-%d %H:%M:%S")).strftime("%Y-%m-%d 00:00:00")
+    @staticmethod
+    def to_date(t):
+        return (datetime.strptime(t, "%Y-%m-%d %H:%M:%S")).strftime("%Y-%m-%d 00:00:00")
 
+    @property
+    def get_phone(self):
+        second = [3, 4, 5, 7, 8][random.randint(0, 4)]
+        third = {
+            3: random.randint(0, 9),
+            4: [5, 7, 9][random.randint(0, 2)],
+            5: [i for i in range(10) if i != 4][random.randint(0, 8)],
+            7: [i for i in range(10) if i not in [4, 9]][random.randint(0, 7)],
+            8: random.randint(0, 9)
+        }[second]
+        suffix = ''
+        for x in range(8):
+            suffix = suffix + str(random.randint(0, 9))
+        return "1{}{}{}".format(second, third, suffix)
 
 

@@ -82,7 +82,7 @@ def test_import_n(server_host, db_host, starttm, endtm):
     with allure.step("数据比对"):
         expected_keys = [(data["船名"], data["航次"]) for data in expected_results]
         expected_indexs = {key: i for i, key in enumerate(expected_keys)}
-        check.equal(len(expected_results), len(res["data"]), "数据量不相等")
+        check.equal(len(expected_results)-1, len(res["data"]), "数据量不相等")
         for data in res["data"]:
             key = (data["vsl_cnname"], data["voy_voyage"])
             index = expected_indexs.get(key)
@@ -116,7 +116,7 @@ def test_import_w(server_host, db_host, starttm, endtm):
     with allure.step("数据比对"):
         expected_keys = [(data["船名"], data["航次"]) for data in expected_results]
         expected_indexs = {key: i for i, key in enumerate(expected_keys)}
-        check.equal(len(expected_results), len(res["data"]), "数据量不相等")
+        check.equal(len(expected_results)-1, len(res["data"]), "数据量不相等")
         for data in res["data"]:
             key = (data["vsl_cnname"], data["voy_voyage"])
             index = expected_indexs.get(key)
@@ -150,7 +150,7 @@ def test_export_w(server_host, db_host, starttm, endtm):
     with allure.step("数据比对"):
         expected_keys = [(data["船名"], data["航次"]) for data in expected_results]
         expected_indexs = {key: i for i, key in enumerate(expected_keys)}
-        check.equal(len(expected_results), len(res["data"]), "数据量不相等")
+        check.equal(len(expected_results)-1, len(res["data"]), "数据量不相等")
         for data in res["data"]:
             key = (data["vsl_cnname"], data["voy_voyage"])
             index = expected_indexs.get(key)

@@ -1,6 +1,5 @@
 import json
 from pytest_check import check
-import pytest
 from BTOSLJ.Controls.BTOS_requests import ExcelHandler, RequestMain
 from BTOSLJ.Controls.BTOS_db import GetPg
 from BTOSLJ.Controls.BTOS_data import BtosTempData, BtosCustomData
@@ -14,14 +13,25 @@ class UnshipN(RequestMain):
         # print("实例对象创建: UnshipN", id(self))
         self.env = BtosTempData(os.path.join(os.path.dirname(__file__) + r"\Excel\test_env_i.txt"))
         self.handler = ExcelHandler(os.path.join(os.path.dirname(__file__) + r"\Excel\mainflow.xlsx"))
-        self.sheet = self.handler.read_sheet("卸船")
+        self.sheet = self.handler.read_sheet("卸船提货")
         self.cus = BtosCustomData()
         self.db = GetPg("10.166.0.137")
 
     def set_values(self):
+        self.env.term_cd = 'L'
         gtypecd, pktype = self.cus.get_pktype
         self.env.gtypecd = gtypecd
+        self.env.gname = \
+            self.db.select_from_table("select pck_kind_name "
+                                      "from pub_cargo_kind "
+                                      "where pck_kind_code='{gtypecd}'"
+                                      .format(gtypecd=self.env.gtypecd)).loc[0, 'pck_kind_name']
         self.env.pktype = pktype
+        self.env.pkname = \
+            self.db.select_from_table("select pkg_cnname "
+                                      "from pub_package "
+                                      "where pkg_code='{pktype}' "
+                                      .format(pktype=self.env.pktype)).loc[0, 'pkg_cnname']
         self.env.voyage = self.cus.get_Ivoyage
         self.env.trade_type = 'N'
         self.env.gtwg = self.cus.get_gtwg
@@ -30,16 +40,24 @@ class UnshipN(RequestMain):
         self.env.iefg = 'I'
         self.env.shift = '2'
         self.env.opproc_dc = '014'  # 船=>场
-        self.env.opprc_pk = '008'  # 场=>车
+        self.env.opproc_pk = '008'  # 场=>车
         self.env.ygc_no = 'A02/00'
+        self.env.ygc_id = \
+            self.db.select_from_table("select ygc_id "
+                                      "from pub_yard_goods_location "
+                                      "where ygc_no='{ygc_no}' "
+                                      .format(ygc_no=self.env.ygc_no)).loc[0, 'ygc_id']
+        self.env.optype_pk = 'PK'
+        self.env.optype_dc = 'DC'
 
     def add_vessel(self):
         s = self.sheet[0]
         res = self.request_main(method=s["method"], url=s["path"], json=json.loads(s["payload"]))
         data = res.json()
         if check.equal(int(data["status"]), int(s["expected_res"])):
-            self.handler.write_sheet('卸船', s['case_id'] + 1, 8, data["status"])
             self.env.vsl_id = data["data"]["vslId"]
+        else:
+            self.logger.error("新增船舶失败")
         '''
             if not check.any_failures():
                 self.env.vsl_id = data["data"]["vslId"]
@@ -69,20 +87,20 @@ class UnshipN(RequestMain):
         payload["scdIton"] = self.env.gtwg
         res = self.request_main(s["method"], s["path"], json=payload)
         data = res.json()
-        check.equal(int(data["status"]), int(s["expected_res"]))
-        self.handler.write_sheet('卸船', s['case_id'] + 1, 8, data["status"])
-        self.env.scd_id = data["data"]["scdId"]
-        self.env.voy_id = \
-            self.db.select_from_table("select voy_id from bps_voyage "
-                                      "where voy_scd_id='{scd_id}' and voy_voyage='{voyage}' "
-                                      .format(scd_id=self.env.scd_id, voyage=self.env.voyage)).loc[0, 'voy_id']
+        if check.equal(int(data["status"]), int(s["expected_res"])):
+            self.env.scd_id = data["data"]["scdId"]
+            self.env.voy_id = \
+                self.db.select_from_table("select voy_id from bps_voyage "
+                                          "where voy_scd_id='{scd_id}' and voy_voyage='{voyage}' "
+                                          .format(scd_id=self.env.scd_id, voyage=self.env.voyage)).loc[0, 'voy_id']
+        else:
+            self.logger.error("新增船期失败")
 
     def delete_schedule(self):
         s = self.sheet[3]
         res = self.request_main(s["method"], s["path"].format(scd_id=self.env.scd_id))
         data = res.json()
         check.equal(int(data["status"]), int(s["expected_res"]))
-        self.handler.write_sheet('卸船', s['case_id'] + 1, 8, data["status"])
 
     def confirm_report(self):
         s = self.sheet[4]
@@ -91,7 +109,6 @@ class UnshipN(RequestMain):
         res = self.request_main(s["method"], s["path"], json=payload)
         data = res.json()
         check.equal(int(data["status"]), int(s["expected_res"]))
-        self.handler.write_sheet('卸船', s['case_id'] + 1, 8, data["status"])
 
     def confirm_report_cancel(self):
         s = self.sheet[5]
@@ -100,7 +117,6 @@ class UnshipN(RequestMain):
         res = self.request_main(s["method"], s["path"], json=payload)
         data = res.json()
         check.equal(int(data["status"]), int(s["expected_res"]))
-        self.handler.write_sheet('卸船', s['case_id'] + 1, 8, data["status"])
 
     def subarea(self):
         s = self.sheet[6]
@@ -109,7 +125,6 @@ class UnshipN(RequestMain):
         res = self.request_main(s["method"], s["path"], json=payload)
         data = res.json()
         check.equal(int(data["status"]), int(s["expected_res"]))
-        self.handler.write_sheet('卸船', s['case_id'] + 1, 8, data["status"])
 
     def subarea_cancel(self):
         s = self.sheet[7]
@@ -118,7 +133,6 @@ class UnshipN(RequestMain):
         res = self.request_main(s["method"], s["path"], json=payload)
         data = res.json()
         check.equal(int(data["status"]), int(s["expected_res"]))
-        self.handler.write_sheet('卸船', s['case_id'] + 1, 8, data["status"])
 
     def add_berth_plan(self):
         s = self.sheet[8]
@@ -131,7 +145,6 @@ class UnshipN(RequestMain):
         res = self.request_main(s["method"], s["path"], json=payload)
         data = res.json()
         check.equal(int(data["status"]), int(s["expected_res"]))
-        self.handler.write_sheet('卸船', s['case_id'] + 1, 8, data["status"])
 
     def add_ship_plan(self):
         s = self.sheet[9]
@@ -154,7 +167,6 @@ class UnshipN(RequestMain):
         res = self.request_main(s["method"], s["path"], json=payload)
         data = res.json()
         if check.equal(int(data["status"]), int(s["expected_res"])):
-            self.handler.write_sheet('卸船', s['case_id'] + 1, 8, data["status"])
             self.env.dvp_id = data["data"]["dvpId"]
             self.env.dc_route_id = data["data"]["dtsVesselRouteEntityList"][1]["dtsRouteMachinesEntityList"][0][
                 "drmRouteId"]
@@ -166,17 +178,12 @@ class UnshipN(RequestMain):
         res = self.request_main(s["method"], s["path"].format(dvp_id=self.env.dvp_id))
         data = res.json()
         check.equal(int(data["status"]), int(s["expected_res"]))
-        self.handler.write_sheet('卸船', s['case_id'] + 1, 8, data["status"])
 
     def add_bill(self):
         s = self.sheet[11]
         self.env.bill_no = self.cus.get_bill
         self.env.mark_no = self.cus.get_mark
         self.env.bill_type = "G"
-        self.env.gname = self.db.select_from_table("select pck_kind_name "
-                                                   "from pub_cargo_kind "
-                                                   "where pck_kind_code='{gtypecd}'"
-                                                   .format(gtypecd=self.env.gtypecd)).loc[0, 'pck_kind_name']
         payload = json.loads(s["payload"])
         payload["bilBillNbr"] = self.env.bill_no
         payload["bilBillTrade"] = self.env.trade_type
@@ -195,6 +202,11 @@ class UnshipN(RequestMain):
         data = res.json()
         if check.equal(int(data["status"]), int(s["expected_res"])):
             self.env.bil_id = data["data"]["bilId"]
+            self.env.gds_id = \
+                self.db.select_from_table("select gds_id "
+                                          "from bus_goods "
+                                          "where gds_bil_id='{bil_id}'"
+                                          .format(bil_id=self.env.bil_id)).loc[0, 'gds_id']
         else:
             self.logger.error("新增舱单失败")
 
@@ -203,9 +215,8 @@ class UnshipN(RequestMain):
         res = self.request_main(s["method"], s["path"].format(bil_id=self.env.bil_id))
         data = res.json()
         check.equal(int(data["status"]), int(s["expected_res"]))
-        self.handler.write_sheet('卸船', s['case_id'] + 1, 8, data["status"])
 
-    def add_shift_task(self, task_type):
+    def add_shift_task_dc(self):
         s = self.sheet[13]
         self.env.dst_type_dc = 'V'
         self.env.optype_dc = 'DC'
@@ -264,24 +275,29 @@ class UnshipN(RequestMain):
         data = res.json()
         check.equal(int(data["status"]), int(s["expected_res"]))
 
-    def tally_arrange(self):
+    def tally_arrange(self, task_type):
         s = self.sheet[16]
+        dst_id = self.env.dc_dst_id if task_type == 'dc' else self.env.pk_dst_id
         payload = json.loads(s["payload"])
-        payload["dtsShiftTaskTallyEntityList"][0]["sttDstId"] = self.env.dc_dst_id
+        payload["dtsShiftTaskTallyEntityList"][0]["sttDstId"] = dst_id
         payload["dtsShiftTaskTallyEntityList"][0]["sttUserId"] = self.env.user_id
         payload["dtsShiftTaskTallyEntityList"][0]["sttUserNm"] = self.env.user_cnname
         payload["dtsShiftTaskTallyEntityList"][0]["sttNunber"] = self.env.emp_no
         res = self.request_main(s["method"], s["path"], json=payload)
         data = res.json()
         if check.equal(int(data["status"]), int(s["expected_res"])):
-            self.env.dc_stt_id = data["data"]["dtsShiftTaskTallyEntityList"][0]["sttId"]
+            if task_type == 'dc':
+                self.env.dc_stt_id = data["data"]["dtsShiftTaskTallyEntityList"][0]["sttId"]
+            else:
+                self.env.pk_stt_id = data["data"]["dtsShiftTaskTallyEntityList"][0]["sttId"]
         else:
             self.logger.error("理货员安排失败")
 
-    def tally_arrange_remove(self):
+    def tally_arrange_remove(self, task_type):
         s = self.sheet[17]
+        stt_id = self.env.dc_stt_id if task_type == 'dc' else self.env.pk_stt_id
         payload = json.loads(s["payload"])
-        payload["sttIds"] = [self.env.dc_stt_id]
+        payload["sttIds"] = [stt_id]
         res = self.request_main(s["method"], s["path"], json=payload)
         data = res.json()
         check.equal(int(data["status"]), int(s["expected_res"]))
@@ -391,22 +407,36 @@ class UnshipN(RequestMain):
         data = res.json()
         check.equal(int(data["status"]), int(s["expected_res"]))
 
-    def workgroup_arrange(self):
+    def workgroup_arrange(self, task_type):
         s = self.sheet[24]
         payload = json.loads(s["payload"])
         payload["dtsShiftTaskWkgroupList"][0]["createTime"] = self.cus.get_datetime_now
-        payload["dtsShiftTaskWkgroupList"][0]["stwId"] = self.env.dc_stw_id
-        payload["dtsShiftTaskWkgroupList"][0]["stwDstId"] = self.env.dc_dst_id
-        payload["dtsShiftTaskWkgroupList"][0]["dtsShiftTaskConfigMacusrEntity"]["tcmStcId"] = self.env.instructor_config
+        if task_type == 'dc':
+            payload["dtsShiftTaskWkgroupList"][0]["stwId"] = self.env.dc_stw_id
+            payload["dtsShiftTaskWkgroupList"][0]["stwDstId"] = self.env.dc_dst_id
+            payload["dtsShiftTaskWkgroupList"][0]["dtsShiftTaskConfigMacusrEntity"]["tcmStcId"] = self.env.instructor_config
+        elif task_type == 'pk':
+            self.env.tally_config = \
+                self.db.select_from_table("select stc_id "
+                                          "from dts_shift_task_config "
+                                          "where stc_dts_id='{dst_id}' and stc_type='1'"
+                                          .format(dst_id=self.env.pk_dst_id)).loc[0, 'stc_id']
+            payload["dtsShiftTaskWkgroupList"][0]["stwId"] = self.env.pk_stw_id
+            payload["dtsShiftTaskWkgroupList"][0]["stwDstId"] = self.env.pk_dst_id
+            payload["dtsShiftTaskWkgroupList"][0]["dtsShiftTaskConfigMacusrEntity"]["tcmStcId"] = self.env.tally_config
         res = self.request_main(s["method"], s["path"], json=payload)
         data = res.json()
         check.equal(int(data["status"]), int(s["expected_res"]))
 
-    def workgroup_arrange_delete(self):
+    def workgroup_arrange_delete(self, task_type):
         s = self.sheet[25]
         payload = json.loads(s["payload"])
-        payload["stwIds"] = [self.env.dc_stw_id]
-        payload["tcmStcIds"] = [self.env.instructor_config]
+        if task_type == 'dc':
+            payload["stwIds"] = [self.env.dc_stw_id]
+            payload["tcmStcIds"] = [self.env.instructor_config]
+        elif task_type == 'pk':
+            payload["stwIds"] = [self.env.pk_stw_id]
+            payload["tcmStcIds"] = [self.env.tally_config]
         res = self.request_main(s["method"], s["path"], json=payload)
         data = res.json()
         check.equal(int(data["status"]), int(s["expected_res"]))
@@ -430,16 +460,12 @@ class UnshipN(RequestMain):
 
     def dc_tally_report(self):
         s = self.sheet[27]
+        self.env.little_loc = '15'
         self.env.dc_barcode = \
             self.db.select_from_table("select gds_bar_code "
                                       "from bus_goods "
                                       "where gds_bil_id = '{bil_id}' "
                                       .format(bil_id=self.env.bil_id)).loc[0, 'gds_bar_code']
-        self.env.location = \
-            self.db.select_from_table("select ygc_id "
-                                      "from pub_yard_goods_location "
-                                      "where ygc_no = '{ygc_no}' "
-                                      .format(ygc_no=self.env.ygc_no)).loc[0, 'ygc_id']
         payload = json.loads(s["payload"])
         payload["barCode"] = self.env.dc_barcode
         payload["billNo"] = self.env.bill_no
@@ -448,7 +474,8 @@ class UnshipN(RequestMain):
         payload["zdConfig"] = self.env.instructor_config
         payload["taskId"] = self.env.dc_dst_id
         payload["shift"] = self.env.shift
-        payload["location"] = self.env.location
+        payload["location"] = self.env.ygc_id
+        payload["dynamicLoc"] = self.env.little_loc
         payload["pieces"] = self.env.gtpks
         payload["pkgType"] = self.env.pktype
         payload["opproc"] = self.env.opproc_dc
@@ -492,11 +519,10 @@ class UnshipN(RequestMain):
         data = res.json()
         check.equal(int(data["status"]), int(s["expected_res"]))
 
-    def task_audit(self, task_type):
+    def dc_task_audit(self):
         s = self.sheet[31]
-        dst_id = self.env.dc_dst_id if task_type == 'dc' else self.env.pk_dst_id
         payload = json.loads(s["payload"])
-        payload["staDstId"] = dst_id
+        payload["staDstId"] = self.env.dc_dst_id
         res = self.request_main(s["method"], s["path"], json=payload)
         data = res.json()
         check.equal(int(data["status"]), int(s["expected_res"]))
@@ -532,8 +558,8 @@ class UnshipN(RequestMain):
 
     def worksheet_machine_generate(self, task_type):
         s = self.sheet[34]
-        pws_id = self.env.dc_dst_id if task_type == 'dc' else self.env.pk_dst_id
-        res = self.request_main(s["method"], s["path"].format(pws_id=self.env.dc_pws_id))
+        pws_id = self.env.dc_pws_id if task_type == 'dc' else self.env.pk_pws_id
+        res = self.request_main(s["method"], s["path"].format(pws_id=pws_id))
         data = res.json()
         check.equal(int(data["status"]), int(s["expected_res"]))
 
@@ -592,7 +618,6 @@ class UnshipN(RequestMain):
         res = self.request_main(s["method"], s["path"], params=payload)
         data = res.json()
         if check.equal(int(data["status"]), int(s["expected_res"])):
-            self.handler.write_sheet('卸船', s['case_id'] + 1, 8, data["status"])
             self.env.user_id = data["data"]["records"][0]["id"]
             self.env.user_enname = data["data"]["records"][0]["account"]
             self.env.user_cnname = data["data"]["records"][0]["name"]

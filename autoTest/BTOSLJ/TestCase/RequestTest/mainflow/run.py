@@ -5,8 +5,8 @@ import platform
 from Commons import allurechange
 
 if __name__ == '__main__':
-    #pytest.main(['-sv','--alluredir', 'Report/result'])
-    pytest.main(['-sv','--alluredir', 'Report/result', "--clean-alluredir"])
+    # pytest.main(['-sv','--alluredir', 'Report/result'])
+    pytest.main(['-sv', '--alluredir', 'Report/result', "--clean-alluredir"])
 
     environment = {
         "device-name": platform.node(),

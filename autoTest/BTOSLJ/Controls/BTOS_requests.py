@@ -60,7 +60,7 @@ class RequestMain:
 
     # 格式化json
     def format(self, res):
-        if type(res) != type(dict()):
+        if not isinstance(res, dict):
             res = json.loads(res)
         return json.dumps(res, indent=4, ensure_ascii=False)
 
@@ -103,7 +103,7 @@ class RequestMain:
 
     def save_schema(self, data: dict, path: str):
         try:
-            if isinstance(data, dict):
+            if not isinstance(data, dict):
                 data = json.loads(data)
             schema = self.generate_schema(data)
             with open(path, 'w', encoding='utf-8') as f:
@@ -124,9 +124,9 @@ class RequestMain:
 
     def check_json(self, res_json: dict, schema: dict):
         try:
-            if isinstance(res_json, dict):
+            if not isinstance(res_json, dict):
                 res_json = json.loads(res_json)
-            if isinstance(schema, dict):
+            if not isinstance(schema, dict):
                 schema = json.loads(schema)
             validate(instance=res_json, schema=schema)
         except SchemaError:
