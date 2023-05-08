@@ -92,10 +92,10 @@ def testStockpiling_Planning_out(driver, input):
 
 # @pytest.mark.skipif
 @allure.story('1.驳船流程功能准备')
-@allure.title('6、吊桥分配')
+@allure.title('6、靠泊吊桥开工')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '01_DataProcess', 'immediata_plan.yaml')))
 def testShip_operation(driver, input):
-    """无结构靠泊、吊桥分配"""
+    """靠泊吊桥开工"""
     menu = GtosMenu(driver)
     menu.select_level_Menu("船舶监控,无结构船舶监控")
     nostructure = NO_Structure_Monitoring(driver)
