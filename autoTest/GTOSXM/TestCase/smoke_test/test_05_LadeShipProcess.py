@@ -48,7 +48,7 @@ def testCharge_Car(driver, input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("机械控制,内集卡控制")
     inset_car = Inset_Car(driver)
-    inset_car.choice_job('ALL')
+    inset_car.choice_job('AUT')
     inset_car.choice_cars('作业步骤', '等待装车')
     Tag(driver).closeTagGtos('内集卡控制')
 
@@ -84,9 +84,3 @@ def testship_order(driver, input):
     work.send_box(input)
     work.LadeShip_confirm(input)
     Tag(driver).closeTagGtos('作业指令监控')
-
-
-if __name__ == '__main__':
-    # pytest.main(['-vs'])
-    pytest.main(['-s', '-v', 'test_EnterBoxProcess.py', '--html=../report/report.html', '--alluredir',
-                 '../report/allure-results'])

@@ -20,7 +20,7 @@ def testShip_operation(driver):
     menu.select_level_Menu("船舶监控,无结构船舶监控")
     nostructure = NO_Structure_Monitoring(driver)
     nostructure.Retrieve()
-    nostructure.over_drawbridge("Q002")
+    nostructure.over_drawbridge("AUTO")
     nostructure.unberthing(config.importNumber)
     Tag(driver).closeTagGtos('无结构船舶监控')
     menu.select_level_Menu("资料管理,航次关闭")

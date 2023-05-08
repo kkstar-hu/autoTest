@@ -78,7 +78,7 @@ def testCharge_Car(driver, input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("机械控制,内集卡控制")
     inset_car = Inset_Car(driver)
-    inset_car.choice_job('ALL')
+    inset_car.choice_job('AUT')
     inset_car.choice_cars('作业步骤', '等待装车')
     Tag(driver).closeTagGtos('内集卡控制')
 
