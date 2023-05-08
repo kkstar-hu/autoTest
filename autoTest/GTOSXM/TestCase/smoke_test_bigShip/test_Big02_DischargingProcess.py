@@ -23,6 +23,7 @@ def testManifest(driver, input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("资料管理,进口资料,舱单")
     manifest = Manifest(driver)
+    manifest.search()
     manifest.AddManifest(input, config.boxNumber)
     manifest.AddBox(input, config.boxNumber)
     manifest.choice_ship()

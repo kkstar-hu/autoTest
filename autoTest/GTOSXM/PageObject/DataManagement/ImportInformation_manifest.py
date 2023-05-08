@@ -127,6 +127,7 @@ class Manifest(BasePage):
         """
         self.logger.info('舱单-转船图箱,整船操作')
         self.click('xpath', "//span[text()='转船图箱']")
+        self.waitloading()
         time.sleep(1)
         self.click('xpath', "//span[text()='整船']")
         self.click('xpath', "//span[contains(text(),'确定')]")
