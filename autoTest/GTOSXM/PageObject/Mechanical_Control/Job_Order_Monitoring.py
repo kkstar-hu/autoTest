@@ -236,7 +236,7 @@ class Job_Order_Monitoring(BasePage):
         textclick.select_by_label("桥吊司机：", input["桥吊司机"])
         textclick.select_by_label("特殊：", input["特殊"])
         textclick.click('xpath', "//span[text()='保 存']")
-        self.check_alert('作业完成')
+        self.check_alert(input['alert'])
 
     def closed_box(self, input):
         """

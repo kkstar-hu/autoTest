@@ -78,7 +78,7 @@ class Structure_Monitoring(BasePage):
         if boxnumber == config.outBoxNumber or boxnumber == config.boxNumber:
             self.left_click('x', "//input[@readonly='readonly']")
             time.sleep(1)
-            self.left_click('x', "//span[text()='Q002']")
+            self.left_click('x', "//span[text()='AUTO']")
             self.click('x', "//span[text()='发 箱']")
             self.check_alert('发箱成功')
             self.close_alert('发箱成功')

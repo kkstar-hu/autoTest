@@ -68,8 +68,6 @@ def testShip_sendbox(driver, input):
     Tag(driver).closeTagGtos('有结构船舶监控')
 
 
-# @pytest.mark.skipif
-# @pytest.mark.parametrize("input", read_yaml('discharging_process.yaml'))
 @allure.story('2.大船卸船流程')
 @allure.title('4、内集卡控制')
 @pytest.mark.parametrize("input",
@@ -84,8 +82,6 @@ def testCharge_Car(driver, input):
     Tag(driver).closeTagGtos('内集卡控制')
 
 
-# @pytest.mark.skipif
-# @pytest.mark.parametrize("input", read_yaml('discharging_process.yaml'))
 @allure.story('2.大船卸船流程')
 @allure.title('5、工作指令操作')
 @pytest.mark.parametrize("input",
