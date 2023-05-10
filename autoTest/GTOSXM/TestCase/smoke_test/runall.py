@@ -22,7 +22,7 @@ if __name__ == '__main__':
     '''
     #urllib3.disable_warnings()
     os.system('allure generate ../../report/result -o ../../report/html --clean')
-    allurechange.set_windos_title('阳逻港GTOS自动化测试')
-    report_title = allurechange.get_json_data("阳逻港GTOS测试报告")
-    allurechange.write_json_data(report_title)
+    #allurechange.set_windos_title('阳逻港GTOS自动化测试')
+    # report_title = allurechange.get_json_data("阳逻港GTOS测试报告")
+    # allurechange.write_json_data(report_title)
 
