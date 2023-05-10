@@ -185,8 +185,7 @@ class Structure_Monitoring(BasePage):
         self.click('x', "//span[@class='el-checkbox__inner']")
         self.click('x', "//span[text()='完工']")
         check.equal(tablecheck1.Big_get_value('状态'), '完工')
-        self.check_alert('Q002 完工成功')
-        self.close_alert('Q002 完工成功')
+        self.check_alert_and_close('AUTO 完工成功')
         self.click('x', "//i[@class='el-dialog__close el-icon el-icon-close']")
         time.sleep(1)
 

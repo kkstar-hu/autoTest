@@ -12,7 +12,7 @@ from GTOSXM.PageObject.Control_Ship.Structure_Monitoring import Structure_Monito
 
 # @pytest.mark.skipif
 @allure.story('8.离泊确认,航次关闭')
-@allure.title('6、靠泊确认和吊桥分配')
+@allure.title('1、靠泊确认和吊桥分配')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '01_DataProcess', 'immediata_plan.yaml')))
 def testShip_operation(driver, input):
     """有结构离泊离港、吊桥完工"""
