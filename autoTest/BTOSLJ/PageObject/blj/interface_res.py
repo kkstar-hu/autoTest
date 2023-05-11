@@ -40,7 +40,6 @@ class InterfaceRes(RequestMain):
         check.equal(res.status_code, 200)
         check.equal(self.check_json(data, schema), True)
         self.logger.info("昼夜工时表(DAYNIGHTWORKHOUR/DAY)-接口返回值\n参数: {}\n".format(params) + str(self.format(data)))
-        print(data)
         return data
 
     def test_import_n(self, schema, starttm: str, endtm: str):

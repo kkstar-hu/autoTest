@@ -1,0 +1,78 @@
+agent_id: cce348184f6cac1b3e79a2517944a6f3
+agent_name: 上海沪马物流有限公司
+barcode_de: '10000070'
+bill_no: CD20230511LJ254
+bth_no: L13
+bth_startpst: 0.0
+craft_de: JINHUO
+craft_ld: ''
+daw_id: af0794c56a870743c979af0c38faa439
+dst_id_de: d5f0a94c99d8c7be1063dd634240d019
+dst_opdate: '2023-05-11 00:00:00'
+dwp_id: 37ecc20c0425953f9f399463b2316de9
+dwp_opedtm: '2023-05-12 18:00:00'
+dwp_opsttm: '2023-05-10 00:00:00'
+dwp_type: W
+dwr_id: 887c2ea2df4fb3cc695a25777b3ad2c3
+emp_no: '00001'
+filename: D:\CS\python\Automated Testing\autoTest\BTOSLJ\PageObject\request_lj\Excel\test_env_e_w.yaml
+flow_direct: AF
+gname: 钢板
+goa_id_de: 2d80a7904998784c4ae8e70b4d8025ef
+gtpks: 2438
+gtvol: 1627
+gtwg: 4602.939
+gtypecd: '041303'
+ht_no: HT20230511LJ254
+iefg: E
+mark_no: MT20230511LJ254
+opproc_de_b: B002
+opproc_de_w: '002'
+opproc_ld: '016'
+optype_de: DE
+optype_ld: LD
+otr_id: 346a9c8f26f2f55585441914bdab361c
+owner_id: 1fab112b5332d6ddc3ad48e3d5c5c553
+owner_name: 马士基
+pkname: 块
+pktype: '11'
+plg_id: a68113de9ebdf843568dedea4a69aeb9
+pln_id: 33af19d0cc40aa195c2a61a06040ed9f
+pln_no: 100199-001
+pln_opedtm: '2023-05-12 18:00:00'
+pln_opsttm: '2023-05-11 18:00:00'
+pws_id_de: db0f747b8784e2b6f581ebfebad16d69
+scd_eta: '2023-05-11 17:14:51'
+scd_etd: '2023-05-13 17:14:51'
+scd_id: be1009d1d4d670ff83b981d210cef9a4
+service_line: NZ
+shift: '1'
+spr_id: 053f938d1f7090f727da3c93f51d4237
+stt_id_de: e3b18415dc9f32efadd6ae4fd63af996
+stw_id_de: 124137a017b9ade6be04112b978b0252
+tad_edt: '2023-05-11 07:00:00'
+tad_stt: '2023-05-10 18:00:00'
+tally_config: 90a2406bf9ad672c244b4b6809621463
+term_cd: L
+trade_type: W
+truck_no: 辽IMZW59
+user_cnname: 罗泾管理员
+user_dept_id: 0f0e44b57d1e4069afce89f2fb9d9c4e
+user_dept_name: 仓储物流部
+user_enname: ljadmin
+user_id: f962e62d60e643a293eb35103b93cc58
+vagent_code: LHL
+vagent_id: f330b497604474fb09e7d99189c26879
+vagent_name: 豊華物流有限公司
+vbt_pbthdt: '2023-05-11 17:14:51'
+vbt_pdptdt: '2023-05-12 17:14:51'
+voy_id: 097c663c1cd9c396c687a84d62c28b80
+voyage: 05111714E
+vsl_cd: REQUEST TEST E
+vsl_cnname: 接口测试船E
+vsl_enname: REQUEST TEST E
+vsl_id: 97221ee105f519c7a43cf007489afff4
+vsl_loa: 150
+wsw_id_de: ff6f2cec4db45910630fcac3a577d422
+ygc_id: e6c090ad0cbf9e00b1508252b3009b11
+ygc_no: B02/00

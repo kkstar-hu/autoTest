@@ -16,7 +16,6 @@ class DataRes(GetPg):
                          .format(starttm, endtm) + self.to_json(res))
         return self.to_json_dict(res)
 
-
     def import_w(self, starttm: str, endtm: str):
         sql = self.load_sql(os.path.join(os.path.dirname(__file__), r"sql\import_W.sql")) \
             .format(starttm=starttm, endtm=endtm)
@@ -24,7 +23,6 @@ class DataRes(GetPg):
         self.logger.info('外贸进口船舶作业情况统计(import_W)-sql结果\n参数: starttm = {}, endtm = {}\n'
                          .format(starttm, endtm) + self.to_json(res))
         return self.to_json_dict(res)
-
 
     def export_w(self, starttm: str, endtm: str):
         sql = self.load_sql(os.path.join(os.path.dirname(__file__), r"sql\export_W.sql")) \
@@ -34,7 +32,6 @@ class DataRes(GetPg):
                          .format(starttm, endtm) + self.to_json(res))
         return self.to_json_dict(res)
 
-
     def quona_workpiece_ratio_count(self, start_date: str, end_date: str):
         sql = self.load_sql(os.path.join(os.path.dirname(__file__), r"sql\quona_workpiece_ratio_count.sql")) \
             .format(start_date=start_date, end_date=end_date)
@@ -43,14 +40,12 @@ class DataRes(GetPg):
                          .format(start_date, end_date) + self.to_json(res))
         return self.to_json_dict(res)
 
-
     def ioabygoodstype_day(self, work_date: str, ybk_name="全部"):
         sql = self.load_sql(os.path.join(os.path.dirname(__file__), r"sql\ioabygoodstype_day.sql")) \
             .format(workdate=work_date, ybkname=ybk_name)
         res = self.select_from_table(sql)
         self.logger.info('分货类进出存日报(ioabygoodstype_day)-sql结果\n参数: work_date = {}, ybk_name = {}\n'
                          .format(work_date, ybk_name) + self.to_json(res))
-
 
     def ioabygoodstype_month(self, work_date: str, ybk_name="全部"):
         sql = self.load_sql(os.path.join(os.path.dirname(__file__), r"sql\ioabygoodstype_month.sql")) \
@@ -59,13 +54,11 @@ class DataRes(GetPg):
         self.logger.info('分货类进出存月报(ioabygoodstype_month)-sql结果\n参数: work_date = {}, ybk_name = {}\n'
                          .format(work_date, ybk_name) + self.to_json(res))
 
-
     def bondedcase_day(self):
         sql = self.load_sql(os.path.join(os.path.dirname(__file__), r"sql\bondedcase_day.sql"))
         res = self.select_from_table(sql)
         self.logger.info('保税仓库库场情况(bondedcase_day)-sql结果\n参数: 无\n' + self.to_json(res))
         return self.to_json_dict(res)
-
 
     def bondedio_day(self, start_date, end_date, bod_no=None, billNbr=None, vslname=None):
         bod_no1 = "and res.料号='" + bod_no + "'" if bod_no != None else ""
@@ -78,7 +71,6 @@ class DataRes(GetPg):
                          'vslname={}\n'.format(start_date, end_date, bod_no, billNbr, vslname) + self.to_json(res))
         return self.to_json_dict(res)
 
-
     def shipworkhour_wk(self, start_date, end_date, pws_voy_id, route_sign=None):
         route_sign1 = "and wsw.wsw_route_sign='" + route_sign + "'" if route_sign != None else ""
         sql = self.load_sql(os.path.join(os.path.dirname(__file__), r"sql\shipworkhour_wk.sql")) \
@@ -86,7 +78,6 @@ class DataRes(GetPg):
         res = self.select_from_table(sql)
         self.logger.info('船舶工时表_装卸队(shipworkhour_wk)-sql结果\n参数: start_date = {}, end_date = {}, pws_voy_id={}, '
                          'route_sign={}\n'.format(start_date, end_date, pws_voy_id, route_sign) + self.to_json(res))
-
 
     def shipworkhour_machine(self, start_date, end_date, pws_voy_id, route_sign=None):
         route_sign1 = "and wsm.wsm_route_sign='" + route_sign + "'" if route_sign != None else ""
@@ -97,14 +88,12 @@ class DataRes(GetPg):
                          'route_sign={}\n'.format(start_date, end_date, pws_voy_id, route_sign) + self.to_json(res))
         return self.to_json_dict(res)
 
-
     def daynightworkhour_day(self, work_date: str):
         sql = self.load_sql(os.path.join(os.path.dirname(__file__), r"sql\daynightworkhour_day.sql")).format(
             workdate=work_date)
         res = self.select_from_table(sql)
         self.logger.info('昼夜工时表(daynightworkhour_day)-sql结果\n参数: workdate = {}\n'.format(work_date) + self.to_json(res))
         return self.to_json_dict(res)
-
 
     def daynightworksta_day(self, work_date: str):
         sql = self.load_sql(os.path.join(os.path.dirname(__file__), r"sql\daynightworksta_day.sql")).format(
@@ -114,7 +103,6 @@ class DataRes(GetPg):
             '昼夜作业情况统计表-分货类结存(daynightworksta)-sql结果\n参数: work_date = {}\n'.format(work_date) + self.to_json(res))
         return self.to_json_dict(res)
 
-
     def daynightworksta_store(self, work_date: str):
         sql = self.load_sql(os.path.join(os.path.dirname(__file__), r"sql\daynightworksta_store.sql")).format(
             workdate=work_date)
@@ -122,7 +110,6 @@ class DataRes(GetPg):
         self.logger.info(
             '昼夜作业情况统计表-堆存情况(daynightworksta)-sql结果\n参数: work_date = {}\n'.format(work_date) + self.to_json(res))
         return self.to_json_dict(res)
-
 
     def daynightworksta_zj(self, work_date: str):
         sql = self.load_sql(os.path.join(os.path.dirname(__file__), r"sql\daynightworksta_zj.sql")).format(
@@ -132,7 +119,6 @@ class DataRes(GetPg):
             '昼夜作业情况统计表-桩脚(daynightworksta)-sql结果\n参数: work_date = {}\n'.format(work_date) + self.to_json(res))
         return self.to_json_dict(res)
 
-
     def daynightworksta_paper(self, work_date: str):
         sql = self.load_sql(os.path.join(os.path.dirname(__file__), r"sql\daynightworksta_paper.sql")).format(
             workdate=work_date)
@@ -140,7 +126,6 @@ class DataRes(GetPg):
         self.logger.info(
             '昼夜作业情况统计表-本日纸浆提货情况(daynightworksta)-sql结果\n参数: work_date = {}\n'.format(work_date) + self.to_json(res))
         return self.to_json_dict(res)
-
 
     def daynightworksta_nin(self, work_date: str):
         sql = self.load_sql(os.path.join(os.path.dirname(__file__), r"sql\daynightworksta_nin.sql")).format(
@@ -150,7 +135,6 @@ class DataRes(GetPg):
             '昼夜作业情况统计表-本日内贸进场情况(daynightworksta)-sql结果\n参数: work_date = {}\n'.format(work_date) + self.to_json(res))
         return self.to_json_dict(res)
 
-
     def vagt_wgood(self, yyyy: str, mm: str):
         sql = self.load_sql(os.path.join(os.path.dirname(__file__), r"sql\vagt_wgood.sql")).format(
             workdate=yyyy + '-' + mm)
@@ -159,14 +143,12 @@ class DataRes(GetPg):
                          .format(yyyy, mm) + self.to_json(res))
         return self.to_json_dict(res)
 
-
     def voyage_count(self, yyyy: str):
-        sql = self.load_sql(os.path.join(os.path.dirname(__file__), r"sql\voyage_count.sql"))\
+        sql = self.load_sql(os.path.join(os.path.dirname(__file__), r"sql\voyage_count.sql")) \
             .format(yyyy1=yyyy, yyyy2=int(yyyy) - 1)
         res = self.select_from_table(sql)
         self.logger.info('航线统计表(voyage_count)-sql结果\n参数: yyyy = {}\n'
                          .format(yyyy) + self.to_json(res))
-
 
     def boatcompany_day(self, work_date: str):
         sql = self.load_sql(os.path.join(os.path.dirname(__file__), r"sql\boatcompany_day.sql")).format(
@@ -176,9 +158,8 @@ class DataRes(GetPg):
                          .format(work_date) + self.to_json(res))
         return self.to_json_dict(res)
 
-
     def maingoods_dclddtl(self, yyyy: str):
-        sql = self.load_sql(os.path.join(os.path.dirname(__file__), r"sql\maingoods_dclddtl.sql"))\
+        sql = self.load_sql(os.path.join(os.path.dirname(__file__), r"sql\maingoods_dclddtl.sql")) \
             .format(yyyy1=yyyy, yyyy2=int(yyyy) - 1)
         res = self.select_from_table(sql)
         self.logger.info('主要货种完成量(maingoods_dclddtl)-sql结果\n参数: yyyy = {}\n'

@@ -11,7 +11,7 @@ class UnshipN(RequestMain):
     def __init__(self, host, header):
         super().__init__(host, header)
         # print("实例对象创建: UnshipN", id(self))
-        self.env = BtosTempData(os.path.join(os.path.dirname(__file__) + r"\Excel\test_env_i.txt"))
+        self.env = BtosTempData(os.path.join(os.path.dirname(__file__) + r"\Excel\test_env_i_n.yaml"))
         self.handler = ExcelHandler(os.path.join(os.path.dirname(__file__) + r"\Excel\mainflow.xlsx"))
         self.sheet = self.handler.read_sheet("卸船提货")
         self.cus = BtosCustomData()
@@ -237,6 +237,7 @@ class UnshipN(RequestMain):
             self.env.dc_dst_id = data["data"][0]["dstId"]
             self.env.dc_stm_id = data["data"][0]["shiftTaskMactypeEntities"][0]["stmId"]
             self.env.dc_stw_id = data["data"][0]["shiftTaskWkgroupEntities"][0]["stwId"]
+            print(self.env.dc_dst_id)
         else:
             self.logger.error("新增当班任务失败")
 
@@ -563,7 +564,7 @@ class UnshipN(RequestMain):
         data = res.json()
         check.equal(int(data["status"]), int(s["expected_res"]))
 
-    def worksheet_wk_delete(self, task_type):
+    def worksheet_delete(self, task_type):
         s = self.sheet[35]
         pws_id = self.env.dc_pws_id if task_type == 'dc' else self.env.pk_pws_id
         self.env.dc_wsw_id = \
@@ -626,3 +627,28 @@ class UnshipN(RequestMain):
             self.env.user_dept_name = data["data"]["records"][0]["depts"][0]["deptName"]
         else:
             self.logger.error("获取用户信息失败")
+
+    def generate_worksheet(self, task_type):
+        s = self.sheet[44]
+        dst_id = self.env.dc_dst_id if task_type == 'dc' else self.env.pk_dst_id
+        res = self.request_main(s["method"], s["path"].format(dst_id=dst_id))
+        data = res.json()
+        check.equal(int(data["status"]), int(s["expected_res"]))
+
+    def unberth(self):
+        s = self.sheet[55]
+        self.env.vbt_id = \
+            self.db.select_from_table("select vbt_id "
+                                      "from bps_vessel_berthes "
+                                      "where vbt_scd_id = '{scd_id}'"
+                                      .format(scd_id=self.env.scd_id)).loc[0, 'vbt_id']
+        payload = json.loads(s["payload"])
+        payload["vbtScdId"] = self.env.scd_id
+        payload["vbtId"] = self.env.vbt_id
+        payload["vbtAdptdt"] = self.env.vbt_pdptdt
+        payload["vbtAbthdt"] = self.env.vbt_pbthdt
+        payload["scdRStartTime"] = self.env.dvp_opsttm
+        payload["scdREndTime"] = self.env.dvp_opedtm
+        res = self.request_main(s["method"], s["path"], json=payload)
+        data = res.json()
+        check.equal(int(data["status"]), int(s["expected_res"]))

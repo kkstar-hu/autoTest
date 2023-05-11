@@ -1,0 +1,79 @@
+bil_id: 7b0a582a62577bf4b3d77f42c649e08c
+bill_no: CD20230511LJ036
+bill_type: G
+dc_barcode: '40000254'
+dc_dst_id: dcf797e75320cde007e945644e1201a7
+dc_goa_id: 27b9b528b758d8a0d5f10e86244f706d
+dc_pws_id: 2e4c6add23ae08e01fb89e83f0b6286f
+dc_route_id: baf7f92f12dd2f091da4e850da2be8c9
+dc_stm_id: 916887db6e8c1a2bea8886376940a8fb
+dc_stt_id: c821b5abd251b0f9ea6b80b8665aa5ce
+dc_stw_id: 05a7b903d203e4be67e4c53aaa90ae4c
+dmc_edtm: '2023-05-11 18:00:00'
+dmc_sttm: '2023-05-11 06:00:00'
+dst_opdate: '2023-05-11 00:00:00'
+dst_type_dc: V
+dst_type_pk: W
+dvp_id: 34c9fa152935d7b21bd788da30e0ace6
+dvp_opdate: '2023-05-10 00:00:00'
+dvp_opedtm: '2023-05-12 13:56:40'
+dvp_opsttm: '2023-05-11 13:56:40'
+dwp_id: c27deb215a11f5ed762e01276e7c9b5f
+emp_no: '00001'
+filename: D:\CS\python\Automated Testing\autoTest\BTOSLJ\PageObject\request_lj\Excel\test_env_i_n.yaml
+fleet_tel: '14761638027'
+gds_id: b61e04a4bb060e9cdeb84cd2f86c8a5d
+gname: 卷钢
+gtpks: 1885
+gtvol: 1806
+gtwg: 7506.993
+gtypecd: '0417'
+iefg: I
+instructor_config: 201fa5f5d8a7e4f800b352b6f708dd0f
+little_loc: '15'
+mark_no: MT20230511LJ036
+opproc_dc: '014'
+opproc_pk: 008
+optype_dc: DC
+optype_pk: PK
+otr_id: ac48aa1cc6cd288f1f067e016453c674
+payer_tel: '14708505507'
+pk_barcode: '20000079'
+pk_dst_id: 26414691a21cf6e9dd048728e38bbef4
+pk_goa_id: 348904ef473906240460bc49dee2c87d
+pk_pws_id: 6b864293c5cafe9d4cbdc656ccee6391
+pk_route_id: 7d30c418653796f1baa5995726fbe9ef
+pk_stt_id: 2710a64ca957f520a672f55097017c90
+pk_stw_id: da717a3f884b192d7df812719a079dc2
+pkname: 卷
+pktype: '1'
+plg_id: 1b1234734aedd6244a52d5ed86b6c469
+pln_id: 1925ea329ce467faea3c6fb4410286dc
+pln_no: 100197-001
+pln_opedtm: '2023-05-12 18:00:00'
+pln_opsttm: '2023-05-11 18:00:00'
+scd_eta: '2023-05-11 13:26:39'
+scd_etd: '2023-05-13 13:26:39'
+scd_id: abf4c72fdbe0bb4cb22566a77b570e34
+shift: '2'
+sto_id: 80f9ffa233038cdb49b199f468209959
+tad_edt: '2023-05-11 18:00:00'
+tad_stt: '2023-05-11 07:00:00'
+tally_config: 9fd1178e1bdf605a9a63ab7923d1aee9
+term_cd: L
+trade_type: N
+truck_no: 港HWD44J
+user_cnname: 罗泾管理员
+user_dept_id: 0f0e44b57d1e4069afce89f2fb9d9c4e
+user_dept_name: 仓储物流部
+user_enname: ljadmin
+user_id: f962e62d60e643a293eb35103b93cc58
+vbt_id: 21e6994c4bcb82f0ada25c41ebc001c7
+vbt_pbthdt: '2023-05-11 13:26:40'
+vbt_pdptdt: '2023-05-12 13:26:40'
+voy_id: 7152f2a2c883e5d07f466b69fe78d976
+voyage: B0511I
+vsl_id: 1ad6a940e50d9d02b3eeb14adb5f4a8e
+ygc_id: 81be64026472124bd6e685638a0dd0cc
+ygc_no: A02/00
+yma_id: 54237466d2e447f4302df4d4ab5cdfcf

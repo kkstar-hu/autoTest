@@ -14,6 +14,9 @@ def header():
         "Authorization": 'Bearer ' + get_token()
     }
 
+def db_host():
+    return "10.166.0.137"
+
 
 def get_token():
     payload = {

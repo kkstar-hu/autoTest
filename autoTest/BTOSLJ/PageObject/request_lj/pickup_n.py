@@ -10,14 +10,13 @@ from BTOSLJ.Controls.BTOS_requests import ExcelHandler, RequestMain
 from BTOSLJ.Controls.BTOS_db import GetPg
 from BTOSLJ.Controls.BTOS_data import BtosTempData, BtosCustomData
 import os
-from unship_n import UnshipN
 
 
 class PickupN(RequestMain):
 
     def __init__(self, host, header):
         super().__init__(host, header)
-        self.env = BtosTempData(os.path.join(os.path.dirname(__file__) + r"\Excel\test_env_i.txt"))
+        self.env = BtosTempData(os.path.join(os.path.dirname(__file__) + r"\Excel\test_env_i_n.yaml"))
         self.handler = ExcelHandler(os.path.join(os.path.dirname(__file__) + r"\Excel\mainflow.xlsx"))
         self.sheet = self.handler.read_sheet("卸船提货")
         self.cus = BtosCustomData()
@@ -225,7 +224,7 @@ def get_token():
     res = r.request_main("POST", "/auth/saas/authorization/login/simple", headers=headers, json=payload)
     return json.loads(res.text)["data"]["access_token"]
 
-
+'''
 if __name__ == "__main__":
     host = "10.166.0.131:20000"
     header = {
@@ -250,7 +249,7 @@ if __name__ == "__main__":
     b.worksheet_machine_generate('pk')
     b.worksheet_control_audit('pk')
     b.worksheet_hr_audit('pk')
-    '''
+
     b.worksheet_hr_audit_cancel('pk')
     b.worksheet_control_audit_cancel('pk')
     b.task_audit_cancel('pk')
@@ -262,4 +261,4 @@ if __name__ == "__main__":
     b.delete_shift_task('pk')
     a.delete_warehouse_plan()
     a.delete_accept()
-    '''
+'''

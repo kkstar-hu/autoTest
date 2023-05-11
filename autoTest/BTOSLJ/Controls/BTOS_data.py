@@ -5,56 +5,64 @@ import string
 import time
 from datetime import datetime, timedelta
 
+import yaml
+
 
 class BtosTempData(object):
     _instance = None
 
-    # 单例模式
     def __new__(cls, *args, **kw):
         if cls._instance is None:
             cls._instance = object.__new__(cls)
         return cls._instance
 
     def __init__(self, filename=None):
-        self.file_w = None
-        # print("实例对象创建:Tempdata", id(self))
         atexit.register(self.record)
         self.filename = filename
-        self.file_obj = open(self.filename, mode='r', encoding='utf-8')
-        data = self.file_obj.read().splitlines()
-        self.file_obj.close()
-        d = dict()
-        for line in data:
-            l = line.split('=')
-            if len(l) == 2:
-                key, value = l
-                d[key] = value
-        self.__dict__.update(d)
+        with open(self.filename, encoding='utf-8') as f:
+            data = yaml.load(f.read(), Loader=yaml.FullLoader)
+            if data is not None:
+                self.__dict__.update(data)
 
-    # 获取属性
     def __getattribute__(self, item):
+        """
+        获取属性
+        :param item: 属性名称
+        :return: 值
+        """
         return object.__getattribute__(self, item)
 
-    # 定义属性
     def __setattr__(self, item, value):
+        """
+        定义属性
+        :param item: 名称
+        :param value: 值
+        :return:
+        """
         object.__setattr__(self, item, value)
 
-    # 删除属性
     def __delattr__(self, item):
+        """
+        删除属性
+        :param item: 属性名称
+        :return:
+        """
         object.__delattr__(self, item)
 
-    # 存储变量
     def record(self):
-        self.file_w = open(self.filename, mode='w', encoding='utf-8')
-        for (key, value) in self.__dict__.items():
-            if key != 'filename' and key != 'file_obj' and key != 'file_w':
-                self.file_w.write(str(key) + '=' + str(value) + '\n')
-        self.file_w.close()
-        # print("实例对象销毁:Tempdata", id(self))
+        """
+        存储属性
+        :return:
+        """
+        with open(self.filename, "w+", encoding='utf-8') as f:  # 写文件
+            yaml.safe_dump(data=self.__dict__, stream=f, allow_unicode=True)
 
-    # 打印变量
     @property
     def print_data(self):
+        """
+        打印变量
+        :return:
+        """
         print(vars(self))
         return 0
 
@@ -69,8 +77,7 @@ class BtosCustomData(object):
 
     def __init__(self):
         self.pktype = self.dict_pktype
-        self.billno = 1
-        self.markno = 1
+        self.no = random.randint(0, 1000)
 
     @property
     def dict_pktype(self):
@@ -97,11 +104,11 @@ class BtosCustomData(object):
     # 航次
     @property
     def get_Ivoyage(self):
-        return "B" + time.strftime('%m%d', time.localtime(time.time())) + "I"
+        return time.strftime('%m%d%H%M', time.localtime(time.time())) + "I"
 
     @property
     def get_Evoyage(self):
-        return "B" + time.strftime('%m%d', time.localtime(time.time())) + "E"
+        return time.strftime('%m%d%H%M', time.localtime(time.time())) + "E"
 
     # 车牌号
     @property
@@ -114,17 +121,15 @@ class BtosCustomData(object):
     # 舱单
     @property
     def get_bill(self):
-        try:
-            return "CD" + time.strftime('%Y%m%d', time.localtime(time.time())) + "LJ" + str(self.billno).zfill(2)
-        finally:
-            self.billno = self.billno + 1
+        return "CD" + time.strftime('%Y%m%d', time.localtime(time.time())) + "LJ" + str(self.no).zfill(3)
 
     @property
     def get_mark(self):
-        try:
-            return "MT" + time.strftime('%Y%m%d', time.localtime(time.time())) + "LJ" + str(self.markno).zfill(2)
-        finally:
-            self.markno = self.markno + 1
+        return "MT" + time.strftime('%Y%m%d', time.localtime(time.time())) + "LJ" + str(self.no).zfill(3)
+
+    @property
+    def get_ht(self):
+        return "HT" + time.strftime('%Y%m%d', time.localtime(time.time())) + "LJ" + str(self.no).zfill(3)
 
     @property
     def get_gtwg(self):
@@ -165,5 +170,3 @@ class BtosCustomData(object):
         for x in range(8):
             suffix = suffix + str(random.randint(0, 9))
         return "1{}{}{}".format(second, third, suffix)
-
-
