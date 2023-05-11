@@ -1,4 +1,3 @@
-import json
 import os
 import allure
 import pytest as pytest
@@ -57,7 +56,6 @@ def testship_stowage(driver, input):
     peizai = req.visit('post', url=configinterface.url+"/api/vesselload/Stowage",
                        json=peizaijson,
                        headers=configinterface.head)
-    check.equal
 
     stowage.mouse_job_once()
     stowage.send_box()
@@ -97,7 +95,7 @@ def testCharge_Car(driver, input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("机械控制,内集卡控制")
     inset_car = Inset_Car(driver)
-    inset_car.choice_job('ALL')
+    inset_car.choice_job('AUT')
     inset_car.choice_cars('作业步骤', '等待装车')
     Tag(driver).closeTagGtos('内集卡控制')
 

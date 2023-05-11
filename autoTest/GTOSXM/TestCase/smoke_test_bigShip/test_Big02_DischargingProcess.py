@@ -23,6 +23,7 @@ def testManifest(driver, input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("资料管理,进口资料,舱单")
     manifest = Manifest(driver)
+    manifest.search()
     manifest.AddManifest(input, config.boxNumber)
     manifest.AddBox(input, config.boxNumber)
     manifest.choice_ship()
@@ -67,8 +68,6 @@ def testShip_sendbox(driver, input):
     Tag(driver).closeTagGtos('有结构船舶监控')
 
 
-# @pytest.mark.skipif
-# @pytest.mark.parametrize("input", read_yaml('discharging_process.yaml'))
 @allure.story('2.大船卸船流程')
 @allure.title('4、内集卡控制')
 @pytest.mark.parametrize("input",
@@ -78,13 +77,11 @@ def testCharge_Car(driver, input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("机械控制,内集卡控制")
     inset_car = Inset_Car(driver)
-    inset_car.choice_job('ALL')
+    inset_car.choice_job('AUT')
     inset_car.choice_cars('作业步骤', '等待装车')
     Tag(driver).closeTagGtos('内集卡控制')
 
 
-# @pytest.mark.skipif
-# @pytest.mark.parametrize("input", read_yaml('discharging_process.yaml'))
 @allure.story('2.大船卸船流程')
 @allure.title('5、工作指令操作')
 @pytest.mark.parametrize("input",

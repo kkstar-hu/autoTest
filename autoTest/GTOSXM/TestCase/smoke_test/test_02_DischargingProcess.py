@@ -21,6 +21,7 @@ def testManifest(driver, input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("资料管理,进口资料,舱单")
     manifest = Manifest(driver)
+    manifest.search()
     manifest.AddManifest(input, config.boxNumber)
 
 
@@ -63,7 +64,7 @@ def testCharge_Car(driver, input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("机械控制,内集卡控制")
     inset_car = Inset_Car(driver)
-    inset_car.choice_job('ALL')
+    inset_car.choice_job('AUT')
     inset_car.choice_cars('作业步骤', '空车')
     Tag(driver).closeTagGtos('内集卡控制')
 
@@ -86,5 +87,3 @@ def testJob(driver, input):
     Tag(driver).closeTagGtos('作业指令监控')
 
 
-if __name__ == '__main__':
-    pytest.main(['-sv'])

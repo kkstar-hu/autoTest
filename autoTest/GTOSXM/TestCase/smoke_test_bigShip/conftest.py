@@ -3,11 +3,12 @@ import sys
 import allure
 from selenium import webdriver
 import pytest
+sys.path.append(os.path.join(os.getcwd(), "../"))
+sys.path.append(os.path.join(os.getcwd(), "../../../"))
 from GTOSXM.Config import config
 from GTOSXM.PageObject.login import Login
 
-sys.path.append(os.path.join(os.getcwd(), "../"))
-sys.path.append(os.path.join(os.getcwd(), "../../../"))
+
 
 
 driver = None

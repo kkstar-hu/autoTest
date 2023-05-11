@@ -113,7 +113,7 @@ class Job_Order_Monitoring(BasePage):
                 check.equal(tablecheck.get_value('拖运机械'), input['车牌'] + input['集卡编号'])
                 check.equal(tablecheck.get_value('当前位置'), config.boxPosition)
             elif input['操作过程'] == '船―车':
-                check.equal(tablecheck.get_value('起始位置'), 'Q002')
+                check.equal(tablecheck.get_value('起始位置'), 'AUTO')
                 check.equal(tablecheck.get_value('拖运机械'), input['车牌'] + input['集卡编号'])
                 check.equal(tablecheck.get_value('当前位置'), '')
             elif input['操作过程'] == '车―船':
@@ -236,7 +236,7 @@ class Job_Order_Monitoring(BasePage):
         textclick.select_by_label("桥吊司机：", input["桥吊司机"])
         textclick.select_by_label("特殊：", input["特殊"])
         textclick.click('xpath', "//span[text()='保 存']")
-        self.check_alert('作业完成')
+        self.check_alert(input['alert'])
 
     def closed_box(self, input):
         """

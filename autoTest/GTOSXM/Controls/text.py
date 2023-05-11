@@ -12,7 +12,7 @@ class Gtos_text(BasePage):
         """
         try:
             self.input_no_clear("xpath", f"//label[contains(text(),'{label}')]//following-sibling::div//input", value)
-            time.sleep(1)
+            time.sleep(1.5)
             self.click("xpath",
                        f"//div[starts-with(@class,'el-select-dropdown el-popper') and not (contains(@style,'display: none'))]//span[contains(text(),'{value}')]")
         except NoSuchElementException:
