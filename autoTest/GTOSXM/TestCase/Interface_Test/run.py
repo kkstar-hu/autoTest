@@ -2,7 +2,7 @@ import json
 import os
 
 from Base.baseinterface import RequestHandler
-from Commons.jsonread import read_json
+from Commons.operateJson import read_json
 from Commons.yamlread import read_yaml
 
 # a = read_yaml('interface.yaml')

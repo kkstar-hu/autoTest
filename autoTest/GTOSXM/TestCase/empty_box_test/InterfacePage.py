@@ -4,7 +4,7 @@ import re
 import pytest
 from Base.basepage import BasePage
 from Base.baseinterface import RequestHandler
-from Commons.jsonread import read_json
+from Commons.operateJson import read_json
 from Commons.yamlread import read_yaml
 from GTOSXM.Config import configinterface
 

@@ -27,5 +27,8 @@ def generate_yaml_gtos(driver,name,index=1):
     with open("./"+name+".yaml", "a",encoding='utf-8') as f:  # 写文件
         yaml.safe_dump(data=label, stream=f,allow_unicode=True)
 
-
+def get_api_info(api_name, file_path=''):
+    with open(file_path, 'r', encoding='utf-8') as f:
+        data = yaml.load(f.read(), Loader=yaml.SafeLoader)[api_name]
+        return data
 
