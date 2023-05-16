@@ -4,7 +4,7 @@ import pytest
 from pytest_check import check
 from Commons.operateJson import read_json
 import Commons.yamlread as yamlread
-from SLPTYL.PageObject.standardData.interface_req import InterfaceReq
+from SLPTHF.PageObject.standardData.interface_req import InterfaceReq
 
 @allure.story('一、标准化数据')
 @allure.title('1.新增船舶')

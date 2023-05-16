@@ -1,4 +1,4 @@
-from SLPTYL.Controls.SLPT_requests import RequestMain
+from SLPTHF.Controls.SLPT_requests import RequestMain
 from Commons.operateJson import operateJson
 import pytest_check as check
 

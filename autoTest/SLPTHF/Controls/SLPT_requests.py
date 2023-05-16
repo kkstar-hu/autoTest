@@ -3,7 +3,7 @@ import requests
 from Commons.log import getlogger
 from requests import exceptions
 from decimal import Decimal
-from SLPTYL.Config import config
+from SLPTHF.Config import config
 
 class RequestMain:
     def __init__(self, host=None, headers=None):
