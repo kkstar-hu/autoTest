@@ -2,7 +2,9 @@ import json
 import yaml
 
 #武汉测试环境
-yl_host = "10.166.0.190:9088"
+hf_host = "10.166.0.162:9088"
 
-username = "super"
-password = "Nuzar123456"
+# username = "super"
+# password = "Nuzar123456"
+username="DHY"
+password="autotest111"

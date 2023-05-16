@@ -8,7 +8,7 @@ class ConnectDb():
         try:
             if host=='10.166.0.156':
                 # 如果这一步报错就去oracle官网下载21版本的client，并将解压文件中所有后缀为dll的文件复制到本地python安装目录下
-                self.conn=oracle.connect('YLPTTEST/asuDf#aTESZ7@10.166.0.156:1521/ylpttest')
+                self.conn=oracle.connect('YLPTTEST/asuDf#aTESZ7@10.166.0.156:1521/ylpttest')#TODO
                 print(self.conn)
                 self.cursor=self.conn.cursor()
         except e1:
