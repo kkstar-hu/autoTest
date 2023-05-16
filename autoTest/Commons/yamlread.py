@@ -1,6 +1,5 @@
+import json
 import yaml
-
-
 from Base.basepage import BasePage
 
 
@@ -30,5 +29,5 @@ def generate_yaml_gtos(driver,name,index=1):
 def get_api_info(api_name, file_path=''):
     with open(file_path, 'r', encoding='utf-8') as f:
         data = yaml.load(f.read(), Loader=yaml.SafeLoader)[api_name]
+        data['request']=json.dumps(data['request'], ensure_ascii=False)
         return data
-

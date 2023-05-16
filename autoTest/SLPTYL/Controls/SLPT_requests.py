@@ -5,7 +5,6 @@ from requests import exceptions
 from decimal import Decimal
 from SLPTYL.Config import config
 
-
 class RequestMain:
     def __init__(self, host=None, headers=None):
         self.session = requests.session()
@@ -24,9 +23,10 @@ class RequestMain:
         :param kwargs: 若还有其他的参数，使用可变参数字典形式进行传递
         :return: 响应内容的文本
         """
+        data =data.encode('utf-8') if not data==None else None
         try:
             res = self.session.request(method, "http://" + self.host + url, params=params, data=data, json=json,
-                                       headers=self.header, **kwargs)
+                                       headers=headers, **kwargs)
         except exceptions.RequestException as e:
             self.logger.error("请求失败:", exc_info=True)
         else:
@@ -49,6 +49,12 @@ class RequestMain:
 
     def __del__(self):
         self.session.close()
+
+    # 格式化json
+    def format(self, res):
+        if not isinstance(res, dict):
+            res = json.loads(res)
+        return json.dumps(res, indent=4, ensure_ascii=False)
 
     def get_token(self):
         payload = {
