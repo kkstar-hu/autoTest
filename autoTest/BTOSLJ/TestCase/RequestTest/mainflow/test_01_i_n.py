@@ -26,6 +26,7 @@ class TestUnshipPickupN:
 
     @allure.title('船期维护')
     def test_02_schedule(self):
+        self.obj.logger.info("内贸进口流程-卸船")
         with allure.step("新增船期"):
             self.obj.add_schedule()
         with allure.step("确报"):
@@ -104,6 +105,7 @@ class TestUnshipPickupN:
 
     @allure.title('提货受理')
     def test_13_accept(self):
+        self.obj.logger.info("内贸进口流程-提货")
         with allure.step("新增提货受理"):
             self.pbj.add_accept()
 
@@ -156,7 +158,7 @@ class TestUnshipPickupN:
             self.obj.unberth()
 
     @allure.title('提货回退')
-    @pytest.mark.skip
+    # @pytest.mark.skip
     def test_20_rollback_pk(self):
         with allure.step("取消人事审核"):
             self.obj.worksheet_hr_audit_cancel('pk')
@@ -184,7 +186,7 @@ class TestUnshipPickupN:
             self.pbj.delete_accept()
 
     @allure.title('卸船回退')
-    @pytest.mark.skip
+    # @pytest.mark.skip
     def test_21_rollback_dc(self):
         with allure.step("取消人事审核"):
             self.obj.worksheet_hr_audit_cancel('dc')
@@ -218,9 +220,9 @@ class TestUnshipPickupN:
             self.obj.delete_ship_plan()
         with allure.step("删除内贸进口舱单"):
             self.obj.delete_bill()
+        '''
         with allure.step("删除船期"):
             self.obj.delete_schedule()
-        '''
         with allure.step("删除大船"):
             self.obj.delete_vessel()
             pass

@@ -100,10 +100,10 @@ class DeliverW(RequestMain):
                                               "where reg_cty_id<>'CN' and tenant_id='SIPGLJ'")
         self.env.flow_direct = flow_list.loc[random.randint(0, len(flow_list) - 1), "reg_code"]  # 流向
         self.env.craft_de = 'JINHUO'
-        self.env.craft_ld = ''
+        self.env.craft_ld = 'A0004'
 
     def get_user(self):
-        self.env.user_cnname = "罗泾管理员"
+        self.env.user_cnname = "罗管员"
         payload = {
             "orderItems": "createTime DESC",
             "name": self.env.user_cnname,
@@ -777,6 +777,7 @@ class DeliverW(RequestMain):
                                       "from pas_plan_goods "
                                       "where plg_id = '{plg_id}' "
                                       .format(plg_id=self.env.plg_id)).loc[0, 'plg_bar_code']
+        self.env.dynamic_loc = random.randint(0, 50)
         payload = {
             "barCode": self.env.barcode_de,
             "planNo": self.env.pln_no,
@@ -804,7 +805,7 @@ class DeliverW(RequestMain):
             "taskId": self.env.dst_id_de,
             "shift": self.env.shift,
             "location": self.env.ygc_id,
-            "dynamicLoc": "",
+            "dynamicLoc": self.env.dynamic_loc,
             "pieces": self.env.gtpks,
             "pkgType": self.env.pktype,
             "opproc": opproc_de,
@@ -967,68 +968,3 @@ class DeliverW(RequestMain):
         data = res.json()
         check.equal(int(data["status"]), 200)
 
-    def run(self):
-        self.set_values()
-        self.get_user()
-        self.add_schedule()
-        self.confirm_report()
-        self.subarea()
-        self.add_berth_plan()
-        self.add_accept_w()
-        self.add_warehouse_plan()
-        self.add_shift_task_de()
-        self.tally_attend()
-        self.tally_arrange('de')
-        self.workgroup_arrange('de')
-        self.add_stack_prerecording()
-        self.in_door_check()
-        self.add_stack_prerecording()
-        self.in_door_check()
-        self.in_door_pass()
-        self.tally_report_de('W')
-        self.out_door_pass()
-        self.tally_report_audit('de')
-        self.de_task_audit()
-        self.worksheet_wk_generate('de')
-        self.worksheet_machine_generate('de')
-        self.worksheet_control_audit('de')
-        self.worksheet_hr_audit('de')
-
-    def rollback(self):
-        self.worksheet_hr_audit_cancel('de')
-        self.worksheet_control_audit_cancel('de')
-        self.worksheet_delete('de')
-        self.task_audit_cancel('de')
-        self.tally_report_audit_cancel('de')
-        self.delete_tally_report('de')
-        self.workgroup_arrange_delete('de')
-        self.tally_arrange_remove('de')
-        self.tally_attend_cancel()
-        self.delete_shift_task('de')
-        self.delete_warehouse_plan()
-        self.delete_accept()
-        # self.subarea_cancel()
-        # self.confirm_report_cancel()
-        # self.delete_schedule()
-
-
-def get_token():
-    payload = {
-        "little_girl": "ljadmin",
-        "little_boy": "q1234567",
-        "verification": "xxx"
-    }
-    headers = {'Content-Type': 'application/json'}
-    r = RequestMain("10.166.0.131:20000", headers)
-    res = r.request_main("POST", "/auth/saas/authorization/login/simple", headers=headers, json=payload)
-    return json.loads(res.text)["data"]["access_token"]
-
-
-if __name__ == '__main__':
-    h1 = "10.166.0.131:20000"
-    h2 = {
-        'Content-Type': 'application/json',
-        "Authorization": 'Bearer ' + get_token()
-    }
-    a = DeliverW(h1, h2)
-    a.run()

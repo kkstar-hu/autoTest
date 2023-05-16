@@ -1,4 +1,6 @@
 import json
+import random
+
 from pytest_check import check
 from BTOSLJ.Controls.BTOS_requests import ExcelHandler, RequestMain
 from BTOSLJ.Controls.BTOS_db import GetPg
@@ -41,7 +43,10 @@ class UnshipN(RequestMain):
         self.env.shift = '2'
         self.env.opproc_dc = '014'  # 船=>场
         self.env.opproc_pk = '008'  # 场=>车
-        self.env.ygc_no = 'A02/00'
+        ygc_list = self.db.select_from_table("select ygc_no "
+                                             "from pub_yard_goods_location "
+                                             "where tenant_id = 'SIPGLJ'")
+        self.env.ygc_no = ygc_list.loc[random.randint(0, len(ygc_list) - 1), 'ygc_no']  # 货位名称
         self.env.ygc_id = \
             self.db.select_from_table("select ygc_id "
                                       "from pub_yard_goods_location "
@@ -615,7 +620,7 @@ class UnshipN(RequestMain):
     def get_user(self):
         s = self.sheet[40]
         payload = json.loads(s["payload"])
-        payload["name"] = "罗泾管理员"
+        payload["name"] = "罗管员"
         res = self.request_main(s["method"], s["path"], params=payload)
         data = res.json()
         if check.equal(int(data["status"]), int(s["expected_res"])):
