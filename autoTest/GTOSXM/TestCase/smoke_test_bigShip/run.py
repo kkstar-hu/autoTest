@@ -23,5 +23,5 @@ if __name__ == '__main__':
 
     os.system('allure generate ../../report/result -o ../../report/html --clean')
     allurechange.set_windos_title('厦门GTOS自动化测试')
-    report_title = allurechange.get_json_data("厦门大船流程测试报告")
+    report_title = allurechange.get_json_data("厦门GTOS大船测试报告")
     allurechange.write_json_data(report_title)

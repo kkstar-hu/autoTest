@@ -38,7 +38,7 @@ class Bridge_Crane_Distribution(BasePage):
         """
         勾选内容，分配桥吊
         """
-        self.logger.info('桥吊资源分配-勾选内容，分配桥吊Q002')
+        self.logger.info('桥吊资源分配-勾选内容，分配桥吊AUTO')
         tablecheck = Gtos_table(self.driver, 3)
         tablecheck.tick_off_box(1)
         tablecheck.click('x', "//span[text()='安排桥吊资源']")

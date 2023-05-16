@@ -35,7 +35,7 @@ class CheckOutBox(BasePage):
         self.click('xpath', "//li//span[text()=\"20'_2H\"]")
         self.click('xpath', "(//div[@class='export-cntr__buttons__right']//input)[3]")
         self.click('xpath', "//li//span[text()='G12']")
-        self.input_no_clear('xpath', "//input[@placeholder='请输入车架号']", '123')
+        self.input_no_clear('xpath', "//input[@placeholder='请输入车架号']", '闽D2296挂')
         self.waitloading()
         textInput.select_by_label('结算人', input['结算人'])
         self.element_wait_disappear("xpath", "//div[@role='alert']//p")

@@ -1,10 +1,9 @@
-import json
 import os
 import allure
 import pytest
+from pytest_check import check
 from Base.baseinterface import RequestHandler
 from Commons.Controls.tag import Tag
-import pytest_check as check
 from GTOSXM.Config import config, configinterface
 from GTOSXM.PageObject.Control_Ship.Structure_Monitoring import Structure_Monitoring
 from GTOSXM.PageObject.CrossingManagement.carOut import Car_Out
@@ -27,9 +26,13 @@ Authorization = 'Bearer ' + a
 configinterface.head['Authorization'] = a
 
 
+
+# @pytest.mark.skipif
+# @pytest.mark.parametrize("input", read_yaml('direct_loadingp_rocess.yaml'))
 @allure.story('7.大船直装流程')
 @allure.title('1、新建进场直装计划')
-@pytest.mark.parametrize("input",read_yaml(os.path.join(os.getcwd(), '07_DirectLoadingProcess', 'direct_loadingp_rocess.yaml')))
+@pytest.mark.parametrize("input",
+                         read_yaml(os.path.join(os.getcwd(), '07_DirectLoadingProcess', 'direct_loadingp_rocess.yaml')))
 def testAddPlan(driver, input):
     """新增进场直装计划"""
     menu = GtosMenu(driver)
@@ -43,6 +46,8 @@ def testAddPlan(driver, input):
     Tag(driver).closeTagGtos('进箱受理')
 
 
+# @pytest.mark.skipif
+# @pytest.mark.parametrize("input", read_yaml('direct_loadingp_rocess.yaml'))
 @allure.story('7.大船直装流程')
 @allure.title('2、码头人放行')
 @pytest.mark.parametrize("input",
@@ -86,21 +91,23 @@ def testship_stowage(driver, input):
     htps = Interface_Page(driver)
     boxid = htps.interface_getboxno(config.boxNumberThree)[0]
     voyid = htps.interface_getboxno(config.boxNumberThree)[1]
+    VLocation = '010382'  #修改配载位置
     peizaijson = {"LogID": 0, "VoyID": voyid, "StowageMode": "1", "Direction": "2",
                   "StowageLocs": [
-                      {"VoyID": voyid, "VLocation": "010382", "BigNo": "02", "SeqNo": 1, "HatchID": 143473}],
+                      {"VoyID": voyid, "VLocation": VLocation, "BigNo": "02", "SeqNo": 1, "HatchID": 143473}],
                   "StowageContainers": [{"ContainerID": boxid}]}
     peizai = req.visit('post', url=configinterface.url + "/api/vesselload/Stowage",
                        json=peizaijson,
                        headers=configinterface.head)
-    check.equal(peizai.status_code, 200)
-    #check.equal(peizai.json()['VoyID'], voyid)
-    print(peizai.json())
+    assert peizai.json()['result'] == 0
     stowage.mouse_job_once()
+    if 'xm' not in config.host:
+        stowage.job_confirm()
     stowage.send_box()
     Tag(driver).closeTagGtos('有结构船舶配载')
 
-
+# @pytest.mark.skipif
+# @pytest.mark.parametrize("input", read_yaml('direct_liftin_process.yaml'))
 @allure.story('7.大船直装流程')
 @allure.title('5、有结构船舶监控允许直装')
 @pytest.mark.parametrize("input",
@@ -128,6 +135,7 @@ def testLifting(driver, input):
 # @pytest.mark.skipif
 @allure.story('7.大船直装流程')
 @allure.title('6、工作指令操作')
+# @pytest.mark.parametrize("input", read_yaml('direct_loadingp_rocess.yaml'))
 @pytest.mark.parametrize("input",
                          read_yaml(os.path.join(os.getcwd(), '07_DirectLoadingProcess', 'direct_loadingp_rocess.yaml')))
 def testOrder(driver, input):
@@ -157,3 +165,5 @@ def testCar_Out(driver, input):
     Tag(driver).closeTagGtos('车辆出场')
 
 
+if __name__ == '__main__':
+    pytest.main(['-sv'])

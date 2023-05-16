@@ -48,7 +48,7 @@ class CheckInBox(BasePage):
         # 箱信息
         textInput.input_by_label("铅封号", input['铅封号'])
         textInput.select_by_label("箱状态", input['箱状态'])
-        textInput.select_by_label("贸易类型", input['贸易类型'])
+        textInput.select_by_label("贸易类型", input['贸易类型1'])
         textInput.select_by_label("尺寸", input['尺寸'])
         textInput.select_by_label("箱型", input['箱型1'])
         textInput.select_by_label("箱高", input['箱高'])

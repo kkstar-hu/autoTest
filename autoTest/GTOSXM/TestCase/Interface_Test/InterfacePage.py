@@ -22,7 +22,7 @@ class Interface_Page(BasePage):
     def interface_login(self):
         """登录接口获取token"""
         req = RequestHandler()
-        login_res = req.visit("post", url=configinterface.url, json=configinterface.BodyXRCT)
+        login_res = req.visit("post", url=configinterface.loginurl, json=configinterface.BodyXRCT)
         login_text = login_res.json()
         assert login_text['result'] == 0
         a = login_text['data']['Token']
@@ -67,7 +67,7 @@ class Interface_Page(BasePage):
         req = RequestHandler()
         response = req.visit('post', url=configinterface.url+"/api/generic/portal?nameSpace=SHB.Cloud.TOS.DMS.Contract.Query&className=IQuery&methodName=QueryCtnInOutHistories",
                               json=box_id_json, headers=configinterface.head)
-        print(response.json())
+        # print(response.json())
         boxid=response.json()['data'][0]['ContainerID']
         voyid=response.json()['data'][0]['ExportVoyageID']
         return boxid, voyid

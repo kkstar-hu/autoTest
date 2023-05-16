@@ -29,7 +29,6 @@ def testImmediatePlan(driver, input):
     plan.input_values('码头选箱', input)
     Tag(driver).closeTagGtos('安排空箱疏运计划')
 
-
 # @pytest.mark.skipif
 @allure.story('2.监控开启情况')
 @allure.title('1、空箱输运计划-换箱')
@@ -72,7 +71,6 @@ def testChangeBox(driver, input):
     incoming.check_second()
     incoming.refund_box()
     Tag(driver).closeTagGtos('进场作业列表')
-
 
 # @pytest.mark.skipif
 @allure.story('5.工作指令换箱，堆场操作')

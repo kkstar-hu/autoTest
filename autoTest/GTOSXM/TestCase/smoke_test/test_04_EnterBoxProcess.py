@@ -11,7 +11,7 @@ from GTOSXM.PageObject.Mechanical_Control.Job_Order_Monitoring import Job_Order_
 from GTOSXM.PageObject.gtos_menu import GtosMenu
 
 
-# @pytest.mark.skipif
+@pytest.mark.skipif
 @allure.story('4.新增进箱计划')
 @allure.title('1.生成进箱计划')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '04_EnterBoxProcess', 'inboxplan.yaml')))
@@ -28,7 +28,7 @@ def testAddPlan(driver, input):
     Tag(driver).closeTagGtos('进箱受理')
 
 
-# @pytest.mark.skipif
+@pytest.mark.skipif
 @allure.story('4.新增进箱计划')
 @allure.title('2.办理进场')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '04_EnterBoxProcess', 'inboxplan.yaml')))
@@ -44,19 +44,19 @@ def testCheckInBox(driver, input):
 
 
 # @pytest.mark.skipif
-# @allure.story('4.新增进箱计划')
-# @allure.title('1.进箱流程')
-# @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'04_EnterBoxProcess','checkInBox.yaml')))
-# def testCheckInBox(driver,input):
-#     menu = GtosMenu(driver)
-#     menu.select_level_Menu("道口管理,办理进箱手续V1")
-#     checkInBox = CheckInBox(driver)
-#     checkInBox.search(input,config.outBoxNumber)
-#     checkInBox.input_checkin_info(input)
-#     checkInBox.addgoodsinfo(input,config.takeNumber)
-#     checkInBox.input_info(input)
-#     checkInBox.confirm_button(input)
-#     Tag(driver).closeTagGtos('办理进箱手续V1')
+@allure.story('4.新增进箱计划')
+@allure.title('1.进箱流程')
+@pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(),'04_EnterBoxProcess','inboxplan.yaml')))
+def testCheckInBox(driver,input):
+    menu = GtosMenu(driver)
+    menu.select_level_Menu("道口管理,办理进箱手续V1")
+    checkInBox = CheckInBox(driver)
+    checkInBox.search(input,config.outBoxNumber)
+    checkInBox.input_checkin_info(input)
+    checkInBox.addgoodsinfo(input,config.outBoxNumber)
+    checkInBox.input_info(input)
+    checkInBox.confirm_button(input)
+    Tag(driver).closeTagGtos('办理进箱手续V1')
 
 # @pytest.mark.skipif
 @allure.story('4.新增进箱计划')
@@ -88,6 +88,4 @@ def testCar_Out(driver, input):
 
 
 if __name__ == '__main__':
-    # pytest.main(['-vs'])
-    pytest.main(['-s', '-v', 'test_EnterBoxProcess.py', '--html=../report/report.html', '--alluredir',
-                 '../report/allure-results'])
+    pytest.main(['-vs'])

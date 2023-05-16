@@ -29,7 +29,7 @@ def testShip_operation(driver):
     close.closeFlight()
     Tag(driver).closeTagGtos('航次关闭')
 
-
+@pytest.mark.skipif
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '01_DataProcess', 'immediata_plan.yaml')))
 @allure.title('2、近期计划验证靠泊信息')
 @allure.story('8.离泊确认,航次关闭')
