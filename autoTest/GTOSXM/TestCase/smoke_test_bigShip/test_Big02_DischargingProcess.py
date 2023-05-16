@@ -35,7 +35,7 @@ def testManifest(driver, input):
 @allure.title('2、箱校验安排箱位置')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '01_DataProcess', 'immediata_plan.yaml')))
 def testSImport_data_verification(driver, input):
-    """资料校验"""
+    """资料校验，安排箱位置"""
     menu = GtosMenu(driver)
     menu.select_level_Menu("资料管理,进口资料,进口资料校验")
     idv = Import_data_verification(driver)
@@ -73,7 +73,7 @@ def testShip_sendbox(driver, input):
 @pytest.mark.parametrize("input",
                          read_yaml(os.path.join(os.getcwd(), '02_DischargingProcess', 'discharging_process.yaml')))
 def testCharge_Car(driver, input):
-    """查看内集卡"""
+    """查看可用内集卡"""
     menu = GtosMenu(driver)
     menu.select_level_Menu("机械控制,内集卡控制")
     inset_car = Inset_Car(driver)
@@ -87,7 +87,7 @@ def testCharge_Car(driver, input):
 @pytest.mark.parametrize("input",
                          read_yaml(os.path.join(os.getcwd(), '02_DischargingProcess', 'discharging_process.yaml')))
 def testJob(driver, input):
-    """工作指令--改配集卡"""
+    """工作指令--改配集卡--堆场收箱"""
     menu = GtosMenu(driver)
     menu.select_level_Menu("机械控制,作业指令监控")
     charge_car = Job_Order_Monitoring(driver)

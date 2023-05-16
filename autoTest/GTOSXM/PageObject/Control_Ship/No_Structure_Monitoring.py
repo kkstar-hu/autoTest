@@ -189,10 +189,10 @@ class NO_Structure_Monitoring(BasePage):
         tablecheck.check("进口航次", number)
         self.click('x', "//span[text()='离泊/离港确认']")
         leaveTime = DataTime.Get_Current_Date() + " 00:00:00"
-        self.click('x', "//span[@class='el-checkbox__inner']")
         textInput = Gtos_text(self.driver)
         textInput.input_by_label('离泊时间', leaveTime)
         textInput.input_by_label('离泊吃水', '100')
+        self.click('x', "//span[@class='el-checkbox__input']")
         self.click('x', "//span[text()='提交']")
         if self.elementExist("x", "//div[@class='el-message-box__message']"):
             self.click("x", "//div[@class='el-message-box__btns']//span[text()=' 确定 ']")

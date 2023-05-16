@@ -61,7 +61,7 @@ def testSend_box(driver, input):
 @allure.title('4、车辆出场')
 @pytest.mark.parametrize("input", read_yaml(os.path.join(os.getcwd(), '03_PackingProcess', 'packing_process.yaml')))
 def testCar_Out(driver, input):
-    """工作指令-堆场发箱"""
+    """车辆出场"""
     menu = GtosMenu(driver)
     menu.select_level_Menu("道口管理,车辆出场")
     car_out = Car_Out(driver)

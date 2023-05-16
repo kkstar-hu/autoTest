@@ -24,7 +24,7 @@ def testImmediatePlan(driver, input):
     menu.select_level_Menu("堆场策划,空箱,安排空箱疏运计划")
     plan = Empty_Box_Dredge_Plan(driver)
     plan.addplan()
-    plan.input_values('码头选箱', input)
+    plan.input_values('指定选箱', input)
     Tag(driver).closeTagGtos('安排空箱疏运计划')
 
 

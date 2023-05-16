@@ -32,23 +32,24 @@ class Interface(BasePage):
         智能道口
         """
         t = 0
-        while t <= 2:
+        while t <= 6:
             self.logger.info('发送智能道口')
             req = RequestHandler()
             cross = req.visit('post', url=read_yaml(os.path.join('interface.yaml'))[0]['智能道口url'],
                               data=json.dumps(read_json(os.path.join(os.getcwd(), 'Intelligent_crossing.json'))),
                               headers=configinterface.head)
-            print(cross.json())
+            self.logger.info(cross.json())
             assert cross.json()['result'] == 0
             if cross.json()['data']['Msg'] != 0:
                 configinterface.boxNumber = cross.json()['data']['OutConNo1']
                 configinterface.boxPosition = cross.json()['data']['OutLocation1']
                 self.logger.info(f'箱号：{configinterface.boxNumber}')
                 self.logger.info(f'场位置: {configinterface.boxPosition}')
-                t += 3
+                t += 7
             else:
                 self.logger.info('智能道口存在延迟，再次请求')
                 t += 1
+                self.logger.info(print(t))
 
     @pytest.mark.skipif
     def RPSLogin(self):
@@ -57,7 +58,7 @@ class Interface(BasePage):
         """
         self.logger.info('RPS登录')
         req = RequestHandler()
-        rpslogin = req.visit('post', url=read_yaml(os.path.join('interface.yaml'))[0]['RPS登录url'],
+        rpslogin = req.visit('post', url=read_yaml(os.path.join('interface.yaml'))[0]['RPSurl'] + read_yaml(os.path.join('interface.yaml'))[0]['RPS登录'],
                              data=json.dumps(read_json(os.path.join(os.getcwd(), 'RPSLogin.json'))),
                              headers=configinterface.head)
         a = rpslogin.json()['message'].encode().replace(b'\x05', b'\n').replace(b'\x06', b'\t')
@@ -78,7 +79,7 @@ class Interface(BasePage):
             with open((os.path.join(os.getcwd(), 'RPSAreaBayList.json')), 'w') as s:
                 json.dump(file_f, s)
         req = RequestHandler()
-        rpslist = req.visit('post', url=read_yaml(os.path.join('interface.yaml'))[0]['RPS倍位列表url'],
+        rpslist = req.visit('post', url=read_yaml(os.path.join('interface.yaml'))[0]['RPSurl'] + read_yaml(os.path.join('interface.yaml'))[0]['RPS倍位列表'],
                             data=json.dumps(read_json(os.path.join(os.getcwd(), 'RPSAreaBayList.json'))),
                             headers=configinterface.head)
         a = rpslist.json()['message'].encode().replace(b'\x05', b'\n').replace(b'\x06', b'\t')
@@ -102,7 +103,7 @@ class Interface(BasePage):
         """
         self.logger.info('RPS获取内容，修改CntrId，Ylocation')
         req = RequestHandler()
-        rpsbody = req.visit('post', url=read_yaml(os.path.join('interface.yaml'))[0]['RPS倍位结构url'],
+        rpsbody = req.visit('post', url=read_yaml(os.path.join('interface.yaml'))[0]['RPSurl'] + read_yaml(os.path.join('interface.yaml'))[0]['RPS倍位结构'],
                             data=json.dumps(read_json(os.path.join(os.getcwd(), 'RPSBayInfo.json'))),
                             headers=configinterface.head)
         a = rpsbody.json()['message'].encode().replace(b'\x05', b'\n').replace(b'\x06', b'\t')
@@ -121,7 +122,7 @@ class Interface(BasePage):
         """
         self.logger.info('RPS发箱')
         req = RequestHandler()
-        rpssend = req.visit('post', url=read_yaml(os.path.join('interface.yaml'))[0]['RPS确认url'],
+        rpssend = req.visit('post', url=read_yaml(os.path.join('interface.yaml'))[0]['RPSurl'] + read_yaml(os.path.join('interface.yaml'))[0]['RPS确认'],
                             data=json.dumps(read_json(os.path.join(os.getcwd(), 'RPSSend.json'))),
                             headers=configinterface.head)
         self.logger.info(rpssend.json())
@@ -132,7 +133,7 @@ class Interface(BasePage):
         RPS倍位
         """
         req = RequestHandler()
-        rpsareano = req.visit('post', url=read_yaml(os.path.join('interface.yaml'))[0]['RPS倍位url'],
+        rpsareano = req.visit('post', url=read_yaml(os.path.join('interface.yaml'))[0]['RPSurl'] + read_yaml(os.path.join('interface.yaml'))[0]['RPS倍位'],
                               data=json.dumps(read_json(os.path.join(os.getcwd(), 'RPSareaNO.json'))),
                               headers=configinterface.head)
         a = rpsareano.json()['message'].encode().replace(b'\x05', b'\n').replace(b'\x06', b'\t')

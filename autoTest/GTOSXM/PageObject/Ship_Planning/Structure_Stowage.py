@@ -57,3 +57,14 @@ class Structure_Stowage(BasePage):
         """
         self.click('x', "//div[contains(text(),'箱列表')]")
         self.click('x', "//div[contains(text(),'场外箱')]")
+
+    def job_confirm(self):
+        """
+        配载查验
+        """
+        self.click('x', "//span[text()='配载安全检查']")
+        self.click('x', "//span[text()='检查类型']")
+        time.sleep(1)
+        self.click('x', "//span[text()='漏配检查']")
+        self.check_alert('漏箱检查结束')
+        self.close_alert('漏箱检查结束')

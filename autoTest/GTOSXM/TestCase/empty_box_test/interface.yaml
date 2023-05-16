@@ -1,12 +1,14 @@
 #智能道口
 - 智能道口url: http://apserver.cloudtos.com/api/gts/SmartGate/TruckInYard
+  #RPSurl
+  RPSurl: http://10.166.0.63:8093     #地址如果有变，只需要修改此行
   #RPS登录
-  RPS登录url: http://10.166.0.63:8093/api/ops/rps/GetOisByArea
+  RPS登录: /api/ops/rps/GetOisByArea
   #获取RPS倍位列表
-  RPS倍位列表url: http://10.166.0.63:8093/api/ops/rps/GetRPSAreaBayListByTaskID
+  RPS倍位列表: /api/ops/rps/GetRPSAreaBayListByTaskID
   #RPS进入倍位
-  RPS倍位url: http://10.166.0.63:8093/api/ops/rps/GetAreaBay
+  RPS倍位: /api/ops/rps/GetAreaBay
   #RPS倍位结构
-  RPS倍位结构url: http://10.166.0.63:8093/api/ops/rps/GetBayInfo
+  RPS倍位结构: /api/ops/rps/GetBayInfo
   #RPS确认
-  RPS确认url: http://10.166.0.63:8093/api/ops/rps/SendCntr
+  RPS确认: /api/ops/rps/SendCntr

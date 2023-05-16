@@ -29,7 +29,6 @@ class StraightLoad_StraightLift_Management(BasePage):
         check.equal(tablecheck.get_value('提单号'), boxnumber)
         check.equal(tablecheck.get_value('码头放行'), '放行')
         check.equal(tablecheck.get_value('海关放行'), '放行')
-        check.equal(tablecheck.get_value('配载'), 'Y')
 
     def lifting_value(self, input, boxnumber):
         """

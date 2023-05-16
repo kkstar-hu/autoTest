@@ -1,7 +1,6 @@
 import os
 import allure
 import pytest as pytest
-import pytest_check as check
 from Base.baseinterface import RequestHandler
 from Commons.Controls.tag import Tag
 from Commons.yamlread import read_yaml
@@ -21,7 +20,6 @@ assert login_text['result'] == 0
 a = login_text['data']['Token']
 Authorization = 'Bearer ' + a
 configinterface.head['Authorization'] = a
-
 
 # @pytest.mark.skip
 @allure.story('5.大船装船流程')
@@ -50,14 +48,16 @@ def testship_stowage(driver, input):
     # 配载接口
     boxid = htps.interface_getboxno(config.outBoxNumber)[0]
     voyid = htps.interface_getboxno(config.outBoxNumber)[1]
+    VLocation = '010582'  #修改配载位置!!!!!!!!!!
     peizaijson={"LogID": 0, "VoyID": voyid, "StowageMode": "1", "Direction": "2",
-     "StowageLocs": [{"VoyID": voyid, "VLocation": "010582", "BigNo": "02", "SeqNo": 1, "HatchID": 143473}],
+     "StowageLocs": [{"VoyID": voyid, "VLocation": VLocation, "BigNo": "02", "SeqNo": 1, "HatchID": 143473}],
      "StowageContainers": [{"ContainerID": boxid}]}
     peizai = req.visit('post', url=configinterface.url+"/api/vesselload/Stowage",
                        json=peizaijson,
                        headers=configinterface.head)
-
     stowage.mouse_job_once()
+    if 'xm' not in config.host:
+        stowage.job_confirm()
     stowage.send_box()
     Tag(driver).closeTagGtos('有结构船舶配载')
 
@@ -109,7 +109,7 @@ def testship_order(driver, input):
     menu = GtosMenu(driver)
     menu.select_level_Menu("机械控制,作业指令监控")
     work = Job_Order_Monitoring(driver)
-    work.Retrieve(input,shipname=None,boxnumber=config.outBoxNumber)
+    work.Retrieve(input, shipname=None, boxnumber=config.outBoxNumber)
     work.order_info_check(input, config.outBoxNumber)
     work.charge_car(input)
     work.send_box(input)
