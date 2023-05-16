@@ -1,5 +1,6 @@
 from Commons.RandomFunction import CommonGenerator
 
+#α、β环境切换host就可以，账号密码，接口地址会自动匹配
 # host = "http://web.cloudtos-xm.com/#/login"   #β环境
 host = "http://web.cloudtos.com/#/login"       #α环境
 
