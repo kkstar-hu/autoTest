@@ -1,8 +1,7 @@
 import os
 import allure
 import pytest
-from pytest_check import check
-from Base.baseinterface import RequestHandler
+from Commons.interface_request import RequestHandler
 from Commons.Controls.tag import Tag
 from GTOSXM.Config import config, configinterface
 from GTOSXM.PageObject.Control_Ship.Structure_Monitoring import Structure_Monitoring

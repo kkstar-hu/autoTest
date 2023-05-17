@@ -1,7 +1,7 @@
 import os
 import allure
 import pytest as pytest
-from Base.baseinterface import RequestHandler
+from Commons.interface_request import RequestHandler
 from Commons.Controls.tag import Tag
 from Commons.yamlread import read_yaml
 from GTOSXM.Config import config, configinterface

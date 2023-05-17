@@ -3,7 +3,7 @@ import os
 import re
 import pytest
 from Base.basepage import BasePage
-from Base.baseinterface import RequestHandler
+from Commons.interface_request import RequestHandler
 from Commons.operateJson import read_json
 from Commons.yamlread import read_yaml
 from GTOSXM.Config import configinterface
